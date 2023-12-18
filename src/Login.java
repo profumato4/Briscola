@@ -87,21 +87,19 @@ public class Login {
 					FileReader file = new FileReader("C:\\Users\\Utente\\Desktop\\codici\\java\\Briscola\\res\\Login\\Login.txt");
 				    BufferedReader reader = new BufferedReader(file);
 				    
-				    String str = "";
+				    String str;
 				    
 				    try {
 						while((str = reader.readLine()) != null) {
-							String split[] = str.split(";");
+							String[] split = str.split(";");
 							
 							if(userName.equals(split[0]) && password.equals(split[1])) {
 								logged = true;
-								break;
-							}
-
-							if(logged){
 								Briscola briscola = new Briscola();
 								briscola.getFrame().setVisible(true);
 								frame.dispose();
+								System.out.println(isLogged());
+								break;
 							}
 
 						}

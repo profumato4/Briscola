@@ -7,10 +7,10 @@ public class Carta {
 	private String nome;
 	private int valore;
 	private ImageIcon img;
-	private String[] semi = { "Spade", "Denara", "Coppe", "Bastoni" };
 
-	public Carta(String seme, String nome, Integer valore, ImageIcon img) {
-		for (String seme1 : semi) {
+    public Carta(String seme, String nome, Integer valore, ImageIcon img) {
+        String[] semi = {"Spade", "Denara", "Coppe", "Bastoni"};
+        for (String seme1 : semi) {
 			if (seme.equals(seme1)) {
 				this.seme = seme;
 				break;

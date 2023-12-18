@@ -26,7 +26,8 @@ public class StartMenu {
 	private boolean play = true;
 	private Clip clip;
 	private FloatControl volumeControl;
-	private Login login1 = new Login();
+	public Login login1 = new Login();
+	private JButton game;
 
 	public StartMenu(JFrame frame, JPanel panel) {
 		initialize(frame, panel);
@@ -44,8 +45,8 @@ public class StartMenu {
 		panel.setLayout(null);
 
 		JLabel background = new JLabel();
-		background.setIcon(new ImageIcon(
-				"C:/Users/Utente/Desktop/codici/java/Briscola/res/Background/background4.png"));
+		background
+				.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
 		panel.add(background);
 
@@ -70,10 +71,11 @@ public class StartMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				login1.getFrame().setVisible(true);
 				frame.dispose();
 			}
-			
+
 		});
 		panel.add(login);
 
@@ -83,8 +85,8 @@ public class StartMenu {
 		register.setBorderPainted(false);
 		register.setFocusPainted(false);
 		register.setBackground(Color.GRAY);
-		
-		register.addActionListener(new ActionListener(){
+
+		register.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -92,12 +94,22 @@ public class StartMenu {
 				register.getFrame().setVisible(true);
 				frame.dispose();
 			}
-			
+
 		});
-		
+
 		panel.add(register);
 		panel.setComponentZOrder(register, 0);
-
+			
+		game = new JButton("Star New Game");
+		game.setFont(new Font("Tahoma", Font.BOLD, 20));
+		game.setBounds(420, 410, 340, 27);
+		game.setBorderPainted(false);
+		game.setFocusPainted(false);
+		game.setBackground(Color.GRAY);
+		
+		panel.add(game);
+		
+		
 		musicTheme("C:/Users/Utente/Desktop/codici/java/Briscola/res/ThemeSong/Tetris.wav");
 
 		JButton audio = new JButton(
@@ -129,16 +141,8 @@ public class StartMenu {
 
 		panel.add(audio);
 
-		if(isLogged()) {
-			JButton game = new JButton("Start New Game");
-			game.setFont(new Font("Tahoma", Font.BOLD, 20));
-			game.setBounds(420, 400, 340, 27);
-			game.setBackground(Color.GRAY);
-			panel.add(game);
-		}
 
 		panel.repaint();
-		System.out.println(isLogged());
 	}
 
 	private JLabel calcolaCentro(JFrame frame, JLabel label) {
@@ -201,12 +205,9 @@ public class StartMenu {
 		}).start();
 
 	}
-
-	public boolean isLogged(){
-
-		return login1.isLogged();
+	
+	public JButton game() {
+		return game;
 	}
-	
-	
 	
 }

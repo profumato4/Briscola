@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public class Mazzo {
 	
-	private MyArrayList<Carta> mazzo = new MyArrayList<Carta>();
+	private final MyArrayList<Carta> mazzo = new MyArrayList<Carta>();
 	private JLabel carta;
     
 	public Mazzo(JPanel panel) {
@@ -70,11 +70,11 @@ public class Mazzo {
 	
 	public Carta briscola(JPanel panel) {
 		Collections.swap(mazzo, 0, 39);
-		carta = new JLabel(rotateCarta(this.mazzo.get(0)).getImg());
+		carta = new JLabel(rotateCarta(this.mazzo.getFirst()).getImg());
 		carta.setBounds(105, 155, 200, 168);
 		panel.add(carta);
 		panel.setComponentZOrder(carta, 1);
-		return this.mazzo.get(0);
+		return this.mazzo.getFirst();
 	}
 
 	public Carta rotateCarta(Carta carta) {
