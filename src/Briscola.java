@@ -4,10 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Briscola {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JLabel background;
 	private JLabel mazzo;
 	@SuppressWarnings("unused")
@@ -20,6 +22,14 @@ public class Briscola {
 				try {
 					Briscola window = new Briscola();
 					window.frame.setVisible(true);
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					try {
+						SwingUtilities.updateComponentTreeUI(frame);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,7 +51,12 @@ public class Briscola {
 		setBackground();
 		mazzo1 = new Mazzo(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		StartMenu m = new StartMenu(frame, panel);
+		
+	}
 
+	public static JFrame getFrame() {
+		return frame;
 	}
 
 	private void setBackground() {
