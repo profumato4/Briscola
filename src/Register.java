@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -19,26 +20,14 @@ public class Register {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Register window = new Register();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+
+	public Register(Login login) {
+		initialize(login);
 	}
 
 
-	public Register() {
-		initialize();
-	}
-
-
-	private void initialize() {
+	private void initialize(Login login) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,9 +98,14 @@ public class Register {
 		JButton btnRegister = new JButton("Back to login");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login login = new Login();
-				login.getFrame().setVisible(true);
-				frame.dispose();
+				if(login.isLogged()) {
+					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
+					login.getBriscolaFrame().setVisible(true);
+					frame.setVisible(false);
+				}else if(!login.isLogged()) {
+					login.getFrame().setVisible(true);
+					frame.setVisible(false);
+				}
 			}
 		});
 		btnRegister.setForeground(Color.BLUE);

@@ -13,12 +13,14 @@ public class Briscola {
 
 	private static JFrame frame;
     private JPanel panel;
+    private static Briscola window = new Briscola();
+    private Login login = new Login(window);
+    private Register register = new Register(login);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Briscola window = new Briscola();
 					window.frame.setVisible(true);
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					try {
@@ -46,12 +48,17 @@ public class Briscola {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		StartMenu m = new StartMenu(frame, panel);
+		StartMenu m = new StartMenu(frame, panel, login, register);
 		m.game().addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game();
+				if(login.isLogged()) {
+					game();
+				}else {
+					System.out.println("not logged");
+				}
+				
 			}
 			
 			

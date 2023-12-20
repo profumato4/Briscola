@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class StartMenu {
@@ -26,14 +27,13 @@ public class StartMenu {
 	private boolean play = true;
 	private Clip clip;
 	private FloatControl volumeControl;
-	public Login login1 = new Login();
 	private JButton game;
 
-	public StartMenu(JFrame frame, JPanel panel) {
-		initialize(frame, panel);
+	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
+		initialize(frame, panel, login1, register);
 	}
 
-	private void initialize(JFrame frame, JPanel panel) {
+	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
 
 		frame.setBounds(100, 100, 1178, 861);
@@ -71,9 +71,13 @@ public class StartMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (login1.isLogged()) {
+					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					login1.getFrame().setVisible(true);
+					frame.setVisible(false);
 
-				login1.getFrame().setVisible(true);
-				frame.dispose();
+				}
 			}
 
 		});
@@ -90,8 +94,7 @@ public class StartMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Register register = new Register();
-				register.getFrame().setVisible(true);
+				register1.getFrame().setVisible(true);
 				frame.dispose();
 			}
 
@@ -99,17 +102,16 @@ public class StartMenu {
 
 		panel.add(register);
 		panel.setComponentZOrder(register, 0);
-			
+
 		game = new JButton("Star New Game");
 		game.setFont(new Font("Tahoma", Font.BOLD, 20));
 		game.setBounds(420, 410, 340, 27);
 		game.setBorderPainted(false);
 		game.setFocusPainted(false);
 		game.setBackground(Color.GRAY);
-		
+
 		panel.add(game);
-		
-		
+
 		musicTheme("C:/Users/Utente/Desktop/codici/java/Briscola/res/ThemeSong/Tetris.wav");
 
 		JButton audio = new JButton(
@@ -140,7 +142,6 @@ public class StartMenu {
 		});
 
 		panel.add(audio);
-
 
 		panel.repaint();
 	}
@@ -205,9 +206,9 @@ public class StartMenu {
 		}).start();
 
 	}
-	
+
 	public JButton game() {
 		return game;
 	}
-	
+
 }

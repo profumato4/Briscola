@@ -70,11 +70,11 @@ public class Mazzo {
 	
 	public Carta briscola(JPanel panel) {
 		Collections.swap(mazzo, 0, 39);
-		carta = new JLabel(rotateCarta(this.mazzo.getFirst()).getImg());
+		carta = new JLabel(rotateCarta(this.mazzo.get(0)).getImg());
 		carta.setBounds(105, 155, 200, 168);
 		panel.add(carta);
 		panel.setComponentZOrder(carta, 1);
-		return this.mazzo.getFirst();
+		return this.mazzo.get(0);
 	}
 
 	public Carta rotateCarta(Carta carta) {
