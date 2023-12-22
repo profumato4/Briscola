@@ -1,15 +1,16 @@
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -17,9 +18,10 @@ public class Register {
 
 	private JFrame frame;
 	private JTextField txtCcc;
-	private JTextField textField;
-	private JTextField textField_1;
-
+	private JPasswordField textField;
+	private JPasswordField textField_1;
+	private boolean hide = true;
+	private boolean hide2 = true;
 
 
 	public Register(Login login) {
@@ -32,6 +34,50 @@ public class Register {
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JButton eye1 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+		eye1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (hide) {
+					eye1.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/view2.png"));
+					eye1.repaint();
+					textField.setEchoChar((char)0);
+					hide = false;
+				} else {
+					eye1.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+					eye1.repaint();
+					textField.setEchoChar('\u2022');
+					hide = true;
+				}
+
+			}
+		});
+		eye1.setBounds(280, 190, 20, 20);
+		eye1.setBorderPainted(false);
+		eye1.setContentAreaFilled(false);
+		frame.getContentPane().add(eye1);
+		
+		JButton eye2 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+		eye2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (hide2) {
+					eye2.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/view2.png"));
+					eye2.repaint();
+					textField_1.setEchoChar((char)0);
+					hide2 = false;
+				} else {
+					eye2.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+					eye2.repaint();
+					textField_1.setEchoChar('\u2022');
+					hide2 = true;
+				}
+
+			}
+		});
+		eye2.setBounds(280, 245, 20, 20);
+		eye2.setBorderPainted(false);
+		eye2.setContentAreaFilled(false);
+		frame.getContentPane().add(eye2);
 		
 		JLabel lblNewLabel = new JLabel("Register");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -51,7 +97,7 @@ public class Register {
 		lblNewLabel_1.setBounds(78, 107, 68, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
+		textField = new JPasswordField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField.setColumns(10);
 		textField.setBorder(new LineBorder(Color.CYAN));
@@ -66,9 +112,11 @@ public class Register {
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String userName = txtCcc.getText() + ";";				
-				String password1 = textField.getText();
-				String password2 = textField_1.getText();
+				String userName = txtCcc.getText() + ";";
+				char[] chars1 = textField.getPassword();
+				String password1 = new String(chars1);
+				char[] chars2 = textField_1.getPassword();
+				String password2 = new String(chars2);
 				
 				if(password1.equals(password2)) {
 					try {
@@ -79,13 +127,15 @@ public class Register {
 						file.close();
 						System.out.println("fatto");
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
 					txtCcc.setText("");
 					textField.setText("");
 					textField_1.setText("");
+				}else {
+					JOptionPane.showMessageDialog(frame, "Le password non coincidono", "Register",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 			}
@@ -118,7 +168,7 @@ public class Register {
 		btnRegister.setFocusPainted(false);
 		frame.getContentPane().add(btnRegister);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_1.setColumns(10);
 		textField_1.setBorder(new LineBorder(Color.CYAN));

@@ -43,7 +43,36 @@ public class StartMenu {
 		panel.setBounds(0, 0, 1162, 822);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		JButton audio = new JButton(
+				new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
+		audio.setBounds(550, 600, 50, 50);
+		audio.setBorderPainted(false);
+		audio.setContentAreaFilled(false);
+		audio.setFocusPainted(false);
 
+		audio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (play) {
+					play = false;
+					volumeControl.setValue(volumeControl.getMinimum());
+					audio.setIcon(new ImageIcon(
+							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_off50.png"));
+					audio.repaint();
+				} else {
+					play = true;
+					volumeControl.setValue(volumeControl.getMaximum());
+					audio.setIcon(new ImageIcon(
+							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
+					audio.repaint();
+				}
+
+			}
+		});
+
+		panel.add(audio);
+		
 		JLabel background = new JLabel();
 		background
 				.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Background/background4.png"));
@@ -114,34 +143,6 @@ public class StartMenu {
 
 		musicTheme("C:/Users/Utente/Desktop/codici/java/Briscola/res/ThemeSong/Tetris.wav");
 
-		JButton audio = new JButton(
-				new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
-		audio.setBounds(550, 600, 50, 50);
-		audio.setBorderPainted(false);
-		audio.setContentAreaFilled(true);
-		audio.setFocusPainted(false);
-
-		audio.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (play) {
-					play = false;
-					volumeControl.setValue(volumeControl.getMinimum());
-					audio.setIcon(new ImageIcon(
-							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_off50.png"));
-					audio.repaint();
-				} else {
-					play = true;
-					volumeControl.setValue(volumeControl.getMaximum());
-					audio.setIcon(new ImageIcon(
-							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
-					audio.repaint();
-				}
-
-			}
-		});
-
-		panel.add(audio);
 
 		panel.repaint();
 	}

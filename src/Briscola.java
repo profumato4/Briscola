@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -19,6 +20,7 @@ public class Briscola {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("static-access")
 			public void run() {
 				try {
 					window.frame.setVisible(true);
@@ -56,9 +58,8 @@ public class Briscola {
 				if(login.isLogged()) {
 					game();
 				}else {
-					System.out.println("not logged");
+					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
 				}
-				
 			}
 			
 			
@@ -91,7 +92,8 @@ public class Briscola {
 	
 	public void game() {
 		setBackground();
-        Mazzo mazzo1 = new Mazzo(panel);
+        @SuppressWarnings("unused")
+		Mazzo mazzo1 = new Mazzo(panel);
 	}
 	
 }

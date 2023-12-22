@@ -2,3 +2,5 @@ Username; passowrd;
 Lenny;127caratteri
 Fabrizio;FabrizioTarducci
 L9 Draven;LeagueOfDraven
+admin;admin
+bossetti;bossetti123
