@@ -36,6 +36,9 @@ public class Register {
 		frame.getContentPane().setLayout(null);
 		
 		JButton eye1 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+		eye1.setBorderPainted(false);
+		eye1.setContentAreaFilled(false);
+		eye1.setFocusPainted(false);
 		eye1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hide) {
@@ -53,9 +56,8 @@ public class Register {
 			}
 		});
 		eye1.setBounds(280, 190, 20, 20);
-		eye1.setBorderPainted(false);
-		eye1.setContentAreaFilled(false);
 		frame.getContentPane().add(eye1);
+		frame.getContentPane().setComponentZOrder(eye1, 0);
 		
 		JButton eye2 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
 		eye2.addActionListener(new ActionListener() {
@@ -77,7 +79,9 @@ public class Register {
 		eye2.setBounds(280, 245, 20, 20);
 		eye2.setBorderPainted(false);
 		eye2.setContentAreaFilled(false);
+		eye2.setFocusPainted(false);
 		frame.getContentPane().add(eye2);
+		frame.getContentPane().setComponentZOrder(eye2, 0);
 		
 		JLabel lblNewLabel = new JLabel("Register");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -143,6 +147,7 @@ public class Register {
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.setBounds(78, 300, 229, 23);
+		btnNewButton.setFocusPainted(false);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnRegister = new JButton("Back to login");

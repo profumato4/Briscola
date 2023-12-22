@@ -140,6 +140,7 @@ public class StartMenu {
 		game.setBackground(Color.GRAY);
 
 		panel.add(game);
+		panel.setComponentZOrder(game, 0);
 
 		musicTheme("C:/Users/Utente/Desktop/codici/java/Briscola/res/ThemeSong/Tetris.wav");
 

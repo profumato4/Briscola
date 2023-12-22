@@ -1,6 +1,7 @@
 import java.util.Collections;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -8,9 +9,11 @@ public class Mazzo {
 	
 	private final MyArrayList<Carta> mazzo = new MyArrayList<Carta>();
 	private JLabel carta;
+	private JPanel panel;
+	private int indice = 1; //indice carte da pescare
     
 	public Mazzo(JPanel panel) {
-		
+		this.panel = panel;
 		addCarte();
 		mescola();
 		briscola(panel);
@@ -178,6 +181,30 @@ public class Mazzo {
 		return carta;
 	}
 	
-
+	
+	public void distribuisci(Giocatore g1, Giocatore g2) {
+		int x = 418;
+		int y = 600;
+		int x2 = 418;
+		int y2 = 0;
+		for(int i = 0;i < 3;i++) {
+			g1.getMano().add(this.mazzo.get(this.indice++));
+			g2.getMano().add(this.mazzo.get(this.indice++));
+			JButton label = new JButton(g1.getMano().get(i).getImg());
+			JLabel label2 = new JLabel(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Cards/back.png"));
+			label.setBounds(x, y, 89, 168);
+			label.setBorderPainted(false);
+			label.setContentAreaFilled(false);
+			label.setFocusPainted(false);
+			x += 130;
+			label2.setBounds(x2, y2, 89, 168);
+			x2 += 130;
+			panel.add(label);
+			panel.add(label2);
+			panel.setComponentZOrder(label, 0);
+			panel.setComponentZOrder(label2, 0);
+		}
+	}
+	
 }
 

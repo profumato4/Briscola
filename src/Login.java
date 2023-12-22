@@ -26,6 +26,7 @@ public class Login {
 	private boolean logged = false;
 	Register register = new Register(this);
 	private boolean hide = true;
+	private String userName;
 
 	public Login(Briscola briscola) {
 		this.briscola = briscola;
@@ -39,6 +40,9 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 
 		JButton eye = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+		eye.setBorderPainted(false);
+		eye.setContentAreaFilled(false);
+		eye.setFocusPainted(false);
 		eye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hide) {
@@ -56,9 +60,8 @@ public class Login {
 			}
 		});
 		eye.setBounds(280, 208, 20, 20);
-		eye.setBorderPainted(false);
-		eye.setContentAreaFilled(false);
 		frame.getContentPane().add(eye);
+		frame.getContentPane().setComponentZOrder(eye, 0);
 
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setBounds(148, 11, 105, 69);
@@ -94,7 +97,7 @@ public class Login {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				if (!logged) {
-					String userName = txtCcc.getText();
+					userName = txtCcc.getText();
 					char[] chars = textField.getPassword();
 					String password = new String(chars);
 
@@ -143,6 +146,7 @@ public class Login {
 		});
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton.setFocusPainted(false);
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnRegister = new JButton("Register now");
@@ -176,5 +180,7 @@ public class Login {
 		return Briscola.getFrame();
 	}
 	
-	
+	public String getUserName() {
+		return userName;
+	}
 }
