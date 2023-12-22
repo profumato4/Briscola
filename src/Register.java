@@ -23,31 +23,29 @@ public class Register {
 	private boolean hide = true;
 	private boolean hide2 = true;
 
-
 	public Register(Login login) {
 		initialize(login);
 	}
-
 
 	private void initialize(Login login) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JButton eye1 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+
+		JButton eye1 = new JButton(new ImageIcon("res/Login/hide2.png"));
 		eye1.setBorderPainted(false);
 		eye1.setContentAreaFilled(false);
 		eye1.setFocusPainted(false);
 		eye1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hide) {
-					eye1.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/view2.png"));
+					eye1.setIcon(new ImageIcon("res/Login/view2.png"));
 					eye1.repaint();
-					textField.setEchoChar((char)0);
+					textField.setEchoChar((char) 0);
 					hide = false;
 				} else {
-					eye1.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+					eye1.setIcon(new ImageIcon("res/Login/hide2.png"));
 					eye1.repaint();
 					textField.setEchoChar('\u2022');
 					hide = true;
@@ -58,17 +56,17 @@ public class Register {
 		eye1.setBounds(280, 190, 20, 20);
 		frame.getContentPane().add(eye1);
 		frame.getContentPane().setComponentZOrder(eye1, 0);
-		
-		JButton eye2 = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+
+		JButton eye2 = new JButton(new ImageIcon("res/Login/hide2.png"));
 		eye2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hide2) {
-					eye2.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/view2.png"));
+					eye2.setIcon(new ImageIcon("res/Login/view2.png"));
 					eye2.repaint();
-					textField_1.setEchoChar((char)0);
+					textField_1.setEchoChar((char) 0);
 					hide2 = false;
 				} else {
-					eye2.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+					eye2.setIcon(new ImageIcon("res/Login/hide2.png"));
 					eye2.repaint();
 					textField_1.setEchoChar('\u2022');
 					hide2 = true;
@@ -82,12 +80,12 @@ public class Register {
 		eye2.setFocusPainted(false);
 		frame.getContentPane().add(eye2);
 		frame.getContentPane().setComponentZOrder(eye2, 0);
-		
+
 		JLabel lblNewLabel = new JLabel("Register");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setBounds(123, 11, 159, 69);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		txtCcc = new JTextField();
 		txtCcc.setBackground(new Color(255, 255, 255));
 		txtCcc.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -95,12 +93,11 @@ public class Register {
 		txtCcc.setColumns(10);
 		txtCcc.setBorder(new LineBorder(Color.CYAN));
 		frame.getContentPane().add(txtCcc);
-		
-		
+
 		JLabel lblNewLabel_1 = new JLabel("UserName");
 		lblNewLabel_1.setBounds(78, 107, 68, 14);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		textField = new JPasswordField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField.setColumns(10);
@@ -108,11 +105,11 @@ public class Register {
 		textField.setBackground(Color.WHITE);
 		textField.setBounds(78, 187, 229, 26);
 		frame.getContentPane().add(textField);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setBounds(78, 168, 68, 14);
 		frame.getContentPane().add(lblNewLabel_1_1);
-		
+
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,10 +118,10 @@ public class Register {
 				String password1 = new String(chars1);
 				char[] chars2 = textField_1.getPassword();
 				String password2 = new String(chars2);
-				
-				if(password1.equals(password2)) {
+
+				if (password1.equals(password2)) {
 					try {
-						FileWriter  file = new FileWriter("C:\\Users\\Utente\\Desktop\\codici\\java\\Briscola\\res\\Login\\Login.txt", true);
+						FileWriter file = new FileWriter("res\\Login\\Login.txt", true);
 						file.append(userName);
 						file.append(password1);
 						file.append("\n");
@@ -133,15 +130,15 @@ public class Register {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-					
+
 					txtCcc.setText("");
 					textField.setText("");
 					textField_1.setText("");
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(frame, "Le password non coincidono", "Register",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-				
+
 			}
 		});
 		btnNewButton.setBackground(Color.CYAN);
@@ -149,15 +146,16 @@ public class Register {
 		btnNewButton.setBounds(78, 300, 229, 23);
 		btnNewButton.setFocusPainted(false);
 		frame.getContentPane().add(btnNewButton);
-		
+
 		JButton btnRegister = new JButton("Back to login");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(login.isLogged()) {
-					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
+				if (login.isLogged()) {
+					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+							JOptionPane.INFORMATION_MESSAGE);
 					login.getBriscolaFrame().setVisible(true);
 					frame.setVisible(false);
-				}else if(!login.isLogged()) {
+				} else if (!login.isLogged()) {
 					login.getFrame().setVisible(true);
 					frame.setVisible(false);
 				}
@@ -172,7 +170,7 @@ public class Register {
 		btnRegister.setContentAreaFilled(true);
 		btnRegister.setFocusPainted(false);
 		frame.getContentPane().add(btnRegister);
-		
+
 		textField_1 = new JPasswordField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_1.setColumns(10);
@@ -180,17 +178,14 @@ public class Register {
 		textField_1.setBackground(Color.WHITE);
 		textField_1.setBounds(78, 242, 229, 26);
 		frame.getContentPane().add(textField_1);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("Confirm password");
 		lblNewLabel_1_1_1.setBounds(78, 224, 159, 14);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 	}
 
-
 	public JFrame getFrame() {
 		return frame;
 	}
-	
-	
-	
+
 }

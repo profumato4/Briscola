@@ -13,10 +13,10 @@ import javax.swing.UIManager;
 public class Briscola {
 
 	private static JFrame frame;
-    private JPanel panel;
-    private static Briscola window = new Briscola();
-    private Login login = new Login(window);
-    private Register register = new Register(login);
+	private JPanel panel;
+	private static Briscola window = new Briscola();
+	private Login login = new Login(window);
+	private Register register = new Register(login);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,20 +51,20 @@ public class Briscola {
 		panel.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		StartMenu m = new StartMenu(frame, panel, login, register);
-		m.game().addActionListener(new ActionListener(){
+		m.game().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(login.isLogged()) {
+				if (login.isLogged()) {
 					game();
-				}else {
-					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-			
-			
+
 		});
-		
+
 	}
 
 	public static JFrame getFrame() {
@@ -72,32 +72,31 @@ public class Briscola {
 	}
 
 	private void setBackground() {
-		
+
 		panel.removeAll();
 
-        JLabel background = new JLabel(
-                new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Background/background7.jpg"));
+		JLabel background = new JLabel(new ImageIcon("res/Background/background7.jpg"));
 		background.setBounds(0, 0, 1162, 822);
 
-        JLabel mazzo = new JLabel(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Cards/back.png"));
+		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
 
 		panel.add(background);
 		panel.add(mazzo);
 		panel.setComponentZOrder(mazzo, 0);
-		
+
 		panel.repaint();
-		
+
 	}
-	
+
 	public void game() {
 		setBackground();
 		Mazzo mazzo1 = new Mazzo(panel);
-        Giocatore giocatore = new Giocatore(login.getUserName());
-        Giocatore giocatore2 = new Giocatore("n");
-        mazzo1.distribuisci(giocatore, giocatore2);
-        System.out.println(giocatore.getMano());
-        System.out.println(giocatore2.getMano());
+		Giocatore giocatore = new Giocatore(login.getUserName());
+		Giocatore giocatore2 = new Giocatore("n");
+		mazzo1.distribuisci(giocatore, giocatore2);
+		System.out.println(giocatore.getMano());
+		System.out.println(giocatore2.getMano());
 	}
-	
+
 }

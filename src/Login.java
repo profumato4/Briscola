@@ -5,7 +5,12 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.JCheckBox;
 
 public class Login {
 
@@ -27,6 +33,7 @@ public class Login {
 	Register register = new Register(this);
 	private boolean hide = true;
 	private String userName;
+	private boolean macAddressFound = false;
 
 	public Login(Briscola briscola) {
 		this.briscola = briscola;
@@ -38,21 +45,28 @@ public class Login {
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
-		JButton eye = new JButton(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+		
+		checkMacAddress();
+		if(macAddressFound) {
+			logged = true;
+		}
+		
+		JButton eye = new JButton(new ImageIcon("res/Login/hide2.png"));
 		eye.setBorderPainted(false);
 		eye.setContentAreaFilled(false);
 		eye.setFocusPainted(false);
 		eye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hide) {
-					eye.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/view2.png"));
+					eye.setIcon(new ImageIcon("res/Login/view2.png"));
 					eye.repaint();
-					textField.setEchoChar((char)0);
+					eye.validate();
+					textField.setEchoChar((char) 0);
 					hide = false;
 				} else {
-					eye.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Login/hide2.png"));
+					eye.setIcon(new ImageIcon("res/Login/hide2.png"));
 					eye.repaint();
+					eye.validate();
 					textField.setEchoChar('\u2022');
 					hide = true;
 				}
@@ -102,8 +116,7 @@ public class Login {
 					String password = new String(chars);
 
 					try {
-						FileReader file = new FileReader(
-								"C:\\Users\\Utente\\Desktop\\codici\\java\\Briscola\\res\\Login\\Login.txt");
+						FileReader file = new FileReader("res\\Login\\Login.txt");
 						BufferedReader reader = new BufferedReader(file);
 
 						String str;
@@ -166,6 +179,17 @@ public class Login {
 		btnRegister.setFocusPainted(false);
 		frame.getContentPane().add(btnRegister);
 
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Ricorda");
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxNewCheckBox.isSelected()) {
+					checkMacAddress();
+				}
+			}
+		});
+		chckbxNewCheckBox.setBounds(78, 237, 97, 23);
+		frame.getContentPane().add(chckbxNewCheckBox);
+
 	}
 
 	public JFrame getFrame() {
@@ -179,8 +203,63 @@ public class Login {
 	public JFrame getBriscolaFrame() {
 		return Briscola.getFrame();
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
+
+	private String getMacAddress() {
+		StringBuilder macAddress = new StringBuilder();
+		try {
+			InetAddress localhost = InetAddress.getLocalHost();
+			NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localhost);
+
+			byte[] macAddressBytes = networkInterface.getHardwareAddress();
+
+			for (int i = 0; i < macAddressBytes.length; i++) {
+				macAddress.append(
+						String.format("%02X%s", macAddressBytes[i], (i < macAddressBytes.length - 1) ? "-" : ""));
+			}
+
+		} catch (UnknownHostException | SocketException e) {
+			e.printStackTrace();
+		}
+
+		return macAddress.toString();
+	}
+	
+	private void checkMacAddress() {
+		try {
+			FileReader file = new FileReader("res\\Login\\MacAddress.txt");
+			BufferedReader reader = new BufferedReader(file);
+
+			String currentMacAddress = getMacAddress();
+
+			String str;
+			while ((str = reader.readLine()) != null) {
+				String storedMacAddress = str.trim();
+
+				if (currentMacAddress.equals(storedMacAddress)) {
+					macAddressFound = true;
+					break;
+				}
+			}
+
+			reader.close();
+
+			if (!macAddressFound) {
+				FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
+				file2.append(currentMacAddress);
+				file2.append("\n");
+				file2.close();
+				System.out.println("Scritto");
+			}
+
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 }

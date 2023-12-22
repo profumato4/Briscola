@@ -43,9 +43,8 @@ public class StartMenu {
 		panel.setBounds(0, 0, 1162, 822);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		JButton audio = new JButton(
-				new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
+
+		JButton audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 		audio.setBounds(550, 600, 50, 50);
 		audio.setBorderPainted(false);
 		audio.setContentAreaFilled(false);
@@ -57,14 +56,12 @@ public class StartMenu {
 				if (play) {
 					play = false;
 					volumeControl.setValue(volumeControl.getMinimum());
-					audio.setIcon(new ImageIcon(
-							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_off50.png"));
+					audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
 					audio.repaint();
 				} else {
 					play = true;
 					volumeControl.setValue(volumeControl.getMaximum());
-					audio.setIcon(new ImageIcon(
-							"C:/Users/Utente/Desktop/codici/java/Briscola/res/AudioSymbols/audio_on50.png"));
+					audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 					audio.repaint();
 				}
 
@@ -72,10 +69,9 @@ public class StartMenu {
 		});
 
 		panel.add(audio);
-		
+
 		JLabel background = new JLabel();
-		background
-				.setIcon(new ImageIcon("C:/Users/Utente/Desktop/codici/java/Briscola/res/Background/background4.png"));
+		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
 		panel.add(background);
 
@@ -101,7 +97,8 @@ public class StartMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (login1.isLogged()) {
-					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					login1.getFrame().setVisible(true);
 					frame.setVisible(false);
@@ -142,8 +139,7 @@ public class StartMenu {
 		panel.add(game);
 		panel.setComponentZOrder(game, 0);
 
-		musicTheme("C:/Users/Utente/Desktop/codici/java/Briscola/res/ThemeSong/Tetris.wav");
-
+		musicTheme("res/ThemeSong/FRENESIA.wav");
 
 		panel.repaint();
 	}

@@ -15,6 +15,10 @@ public class Giocatore {
 	public ArrayList<Carta> getMano() {
 		return mano;
 	}
+
+	public String getNickName() {
+		return nickName;
+	}
 	
 	
 }
