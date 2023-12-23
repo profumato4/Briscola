@@ -93,6 +93,7 @@ public class Briscola {
 		setBackground();
 		Mazzo mazzo1 = new Mazzo(panel);
 		Giocatore giocatore = new Giocatore(login.getUserName());
+		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new Giocatore("n");
 		mazzo1.distribuisci(giocatore, giocatore2);
 		System.out.println(giocatore.getMano());

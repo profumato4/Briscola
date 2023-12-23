@@ -34,6 +34,8 @@ public class Login {
 	private boolean hide = true;
 	private String userName;
 	private boolean macAddressFound = false;
+	private JCheckBox chckbxNewCheckBox;
+	private String currentMacAddress;
 
 	public Login(Briscola briscola) {
 		this.briscola = briscola;
@@ -45,12 +47,14 @@ public class Login {
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		checkMacAddress();
-		if(macAddressFound) {
+		if (macAddressFound) {
 			logged = true;
+			
+			this.userName = getUserNameByMacAddress();
 		}
-		
+
 		JButton eye = new JButton(new ImageIcon("res/Login/hide2.png"));
 		eye.setBorderPainted(false);
 		eye.setContentAreaFilled(false);
@@ -154,6 +158,22 @@ public class Login {
 					briscola.getFrame().setVisible(true);
 					frame.setVisible(false);
 				}
+
+				if (chckbxNewCheckBox.isSelected()) {
+					checkMacAddress();
+					if (!macAddressFound) {
+						try {
+							FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
+							file2.append(currentMacAddress + ";");
+							file2.append(txtCcc.getText());
+							file2.append("\n");
+							file2.close();
+							System.out.println("Scritto");
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
 			}
 
 		});
@@ -179,14 +199,7 @@ public class Login {
 		btnRegister.setFocusPainted(false);
 		frame.getContentPane().add(btnRegister);
 
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Ricorda");
-		chckbxNewCheckBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (chckbxNewCheckBox.isSelected()) {
-					checkMacAddress();
-				}
-			}
-		});
+		chckbxNewCheckBox = new JCheckBox("Ricorda");
 		chckbxNewCheckBox.setBounds(78, 237, 97, 23);
 		frame.getContentPane().add(chckbxNewCheckBox);
 
@@ -227,19 +240,19 @@ public class Login {
 
 		return macAddress.toString();
 	}
-	
+
 	private void checkMacAddress() {
 		try {
 			FileReader file = new FileReader("res\\Login\\MacAddress.txt");
 			BufferedReader reader = new BufferedReader(file);
 
-			String currentMacAddress = getMacAddress();
+			currentMacAddress = getMacAddress();
 
 			String str;
 			while ((str = reader.readLine()) != null) {
-				String storedMacAddress = str.trim();
+				String storedMacAddress[] = str.trim().split(";");
 
-				if (currentMacAddress.equals(storedMacAddress)) {
+				if (currentMacAddress.equals(storedMacAddress[0])) {
 					macAddressFound = true;
 					break;
 				}
@@ -247,19 +260,41 @@ public class Login {
 
 			reader.close();
 
-			if (!macAddressFound) {
-				FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
-				file2.append(currentMacAddress);
-				file2.append("\n");
-				file2.close();
-				System.out.println("Scritto");
-			}
-
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	private String getUserNameByMacAddress() {
+		String username = "";
+		try {
+			FileReader file = new FileReader("res\\Login\\MacAddress.txt");
+			BufferedReader reader = new BufferedReader(file);
+			
+			currentMacAddress = getMacAddress();
+
+			String str;
+			while ((str = reader.readLine()) != null) {
+				String storedMacAddress[] = str.trim().split(";");
+
+				if (currentMacAddress.equals(storedMacAddress[0])) {
+					macAddressFound = true;
+					username = storedMacAddress[1];
+					break;
+				}
+			}
+
+			reader.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return username;
 	}
 	
 }
