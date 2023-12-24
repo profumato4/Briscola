@@ -121,7 +121,7 @@ public class StartMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				register1.getFrame().setVisible(true);
-				frame.dispose();
+				frame.setVisible(false);
 			}
 
 		});
@@ -138,7 +138,35 @@ public class StartMenu {
 
 		panel.add(game);
 		panel.setComponentZOrder(game, 0);
+		
+		JButton logout = new JButton("Logout");
+		logout.setFont(new Font("Tahoma", Font.BOLD, 20));
+		logout.setBounds(420, 465, 340, 27);
+		logout.setBorderPainted(false);
+		logout.setFocusPainted(false);
+		logout.setBackground(Color.GRAY);
+		
+		logout.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(login1.isLogged()) {
+					int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma", JOptionPane.YES_NO_OPTION);
+					if(conferma == JOptionPane.YES_OPTION) {
+						login1.setLogged(false);
+					}else {
+						login1.setLogged(true);
+					}
+				}else {
+					JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+
+		});
+		
+		panel.add(logout);
+		panel.setComponentZOrder(logout, 0);
+		
 		musicTheme("res/ThemeSong/FRENESIA.wav");
 
 		panel.repaint();

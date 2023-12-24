@@ -296,5 +296,11 @@ public class Login {
 		
 		return username;
 	}
+
+	public void setLogged(boolean logged) {
+		this.logged = logged;
+	}
+	
+	
 	
 }
