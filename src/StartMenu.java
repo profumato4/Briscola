@@ -3,8 +3,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import javax.sound.sampled.AudioInputStream;
@@ -20,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.apache.commons.io.FileUtils;
 
 public class StartMenu {
 
@@ -138,35 +144,58 @@ public class StartMenu {
 
 		panel.add(game);
 		panel.setComponentZOrder(game, 0);
-		
+
 		JButton logout = new JButton("Logout");
 		logout.setFont(new Font("Tahoma", Font.BOLD, 20));
 		logout.setBounds(420, 465, 340, 27);
 		logout.setBorderPainted(false);
 		logout.setFocusPainted(false);
 		logout.setBackground(Color.GRAY);
-		
+
 		logout.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(login1.isLogged()) {
-					int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma", JOptionPane.YES_NO_OPTION);
-					if(conferma == JOptionPane.YES_OPTION) {
+				if (login1.isLogged()) {
+					int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
+							JOptionPane.YES_NO_OPTION);
+					if (conferma == JOptionPane.YES_OPTION) {
 						login1.setLogged(false);
-					}else {
+
+						try {
+							File file = new File("res\\Login\\MacAddress.txt");
+							List<String> righe = FileUtils.readLines(file, "UTF-8");
+							
+							List<String> righeDaMantenere = new ArrayList<String>();
+							
+							for(String str: righe) {
+								if(!str.contains(login1.getMacAddress())) {
+									righeDaMantenere.add(str);
+								}
+							}
+														
+							FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
+							
+							
+							
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+
+					} else {
 						login1.setLogged(true);
 					}
-				}else {
-					JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 
 		});
-		
+
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
-		
+
 		musicTheme("res/ThemeSong/FRENESIA.wav");
 
 		panel.repaint();

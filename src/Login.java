@@ -221,7 +221,7 @@ public class Login {
 		return userName;
 	}
 
-	private String getMacAddress() {
+	public String getMacAddress() {
 		StringBuilder macAddress = new StringBuilder();
 		try {
 			InetAddress localhost = InetAddress.getLocalHost();
