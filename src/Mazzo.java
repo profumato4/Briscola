@@ -188,44 +188,44 @@ public class Mazzo {
 		int y = 600;
 		int x2 = 418;
 		int y2 = 0;
+		
 		for (int i = 0; i < 3; i++) {
 			g1.getMano().add(this.mazzo.get(this.indice++));
 			g2.getMano().add(this.mazzo.get(this.indice++));
-			JButton label = new JButton(g1.getMano().get(i).getImg());
-			JLabel label2 = new JLabel(new ImageIcon("res/Cards/back.png"));
-			label.setBounds(x, y, 89, 168);
-			label.setBorderPainted(false);
-			label.setContentAreaFilled(false);
-			label.setFocusPainted(false);
-			label.addActionListener(new ActionListener() {
+			JButton button = new JButton(g1.getMano().get(i).getImg());
+			JButton button2 = new JButton(new ImageIcon("res/Cards/back.png"));
+			button.setBounds(x, y, 89, 168);
+			button.setBorderPainted(false);
+			button.setContentAreaFilled(false);
+			button.setFocusPainted(false);
+			button.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
-					label.setBounds(548, 300, 89, 168);
-					label.repaint();
+
+					g1.lancia(button, g1);
+					g2.lancia(button2, g2);
 				}
-				
+
 			});
 			x += 130;
-			label2.setBounds(x2, y2, 89, 168);
+			button2.setBorderPainted(false);
+			button2.setContentAreaFilled(false);
+			button2.setFocusPainted(false);
+			button2.setBounds(x2, y2, 89, 168);	
 			x2 += 130;
-			panel.add(label);
-			panel.add(label2);
-			panel.setComponentZOrder(label, 0);
-			panel.setComponentZOrder(label2, 0);
+			panel.add(button);
+			panel.add(button2);
+			panel.setComponentZOrder(button, 0);
+			panel.setComponentZOrder(button2, 0);
+		}
+	
+	}
+
+	public void distribuisci(Giocatore g) {
+		if (this.indice < this.mazzo.size()) {
+			g.getMano().add(this.mazzo.get(this.indice++));
 		}
 	}
-	
-	public void distribuisci(Giocatore g){
-	    if(this.indice<this.mazzo.size()){
-	    	if(g.getNickName().equals("CPU")) {
-	    		g.getMano().add(this.mazzo.get(this.indice++));
-	    		JLabel label2 = new JLabel(new ImageIcon("res/Cards/back.png"));
-	    		label2.setBounds(418, 0, 89, 168);
-	    		panel.add(label2);
-	    	}
-	    }
-	  }
-	
+
 }
