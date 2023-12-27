@@ -51,8 +51,11 @@ public class Carta {
 	public void setImg(ImageIcon img) {
 		this.img = img;
 	}
-
-
+	
+	public Carta getCarta() {
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		return "[seme:" + seme + ", nome:" + nome + ", valore:" + valore + "]";

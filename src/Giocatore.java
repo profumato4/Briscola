@@ -26,7 +26,7 @@ public class Giocatore {
 	}
 
 	public void lancia(JButton button, Giocatore giocatore) {
-		Timer timer = new Timer(15, new ActionListener() {
+		Timer timer = new Timer(10, new ActionListener() {
 			private int y = button.getLocation().y;
 			private int x = button.getLocation().x;
 			@Override
@@ -56,6 +56,7 @@ public class Giocatore {
 		});
 
 		timer.start();
-
+		giocatore.getMano().remove(button);
+		System.out.println(giocatore.getMano());
 	}
 }

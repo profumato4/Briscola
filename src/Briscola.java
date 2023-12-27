@@ -98,9 +98,6 @@ public class Briscola {
 		mazzo1.distribuisci(giocatore, giocatore2);
 		System.out.println(giocatore.getMano());
 		System.out.println(giocatore2.getMano());
-		mazzo1.distribuisci(giocatore);
-		mazzo1.distribuisci(giocatore2);
-		System.out.println(giocatore.getMano());
 	}
 
 }

@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.Timer;
@@ -13,10 +14,12 @@ public class CPU extends Giocatore{
 	@Override
 	public void lancia(JButton button, Giocatore giocatore) {
 		
-		button.setIcon(giocatore.getMano().get(0).getImg());
+		int r = new Random().nextInt(0, 2);
+		
+		button.setIcon(giocatore.getMano().get(r).getImg());
 		button.repaint();
 		
-		Timer timer = new Timer(15, new ActionListener() {
+		Timer timer = new Timer(10, new ActionListener() {
 			private int y = button.getLocation().y;
 			private int x = button.getLocation().x;
 			@Override
@@ -43,7 +46,7 @@ public class CPU extends Giocatore{
 		});
 
 		timer.start();
-		giocatore.getMano().remove(0);
+		giocatore.getMano().remove(r);
 	}
 	
 }
