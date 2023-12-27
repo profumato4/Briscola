@@ -12,11 +12,9 @@ public class CPU extends Giocatore{
 	}
 	
 	@Override
-	public void lancia(JButton button, Giocatore giocatore) {
+	public void lancia(JButton button, Giocatore giocatore, Carta carta) {
 		
-		int r = new Random().nextInt(0, 2);
-		
-		button.setIcon(giocatore.getMano().get(r).getImg());
+		button.setIcon(carta.getImg());
 		button.repaint();
 		
 		Timer timer = new Timer(10, new ActionListener() {
@@ -46,7 +44,7 @@ public class CPU extends Giocatore{
 		});
 
 		timer.start();
-		giocatore.getMano().remove(r);
+		giocatore.getMano().remove(carta);
 	}
 	
 }

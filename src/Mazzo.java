@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -229,8 +230,9 @@ public class Mazzo {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				g1.lancia(card0, g1);
-				g2.lancia(selectCard(backs), g2);
+				g1.lancia(card0, g1, g1.getMano().get(0).getCarta());
+				int r = selectCard();
+				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 			}
 
 		});
@@ -240,8 +242,9 @@ public class Mazzo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				g1.lancia(card1, g1);
-				g2.lancia(selectCard(backs), g2);
+				g1.lancia(card1, g1, g1.getMano().get(1).getCarta());
+				int r = selectCard();
+				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 			}
 
 		});
@@ -251,8 +254,9 @@ public class Mazzo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				g1.lancia(card2, g1);
-				g2.lancia(selectCard(backs), g2);
+				g1.lancia(card2, g1, g1.getMano().get(1).getCarta());
+				int r = selectCard();
+				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 			}
 
 		});
@@ -304,9 +308,9 @@ public class Mazzo {
 		panel.setComponentZOrder(button, 0);
 	}
 	
-	private JButton selectCard(ArrayList<JButton> backs) {
-		Collections.shuffle(backs);
-		return backs.get(0);
+	private int selectCard() {
+		int r = new Random().nextInt(0, 3);
+		return r;
 	}
 	
 	private void distribuisciAnimation(JButton card, ImageIcon img, int x1) {

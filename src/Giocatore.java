@@ -25,7 +25,7 @@ public class Giocatore {
 		return nickName;
 	}
 
-	public void lancia(JButton button, Giocatore giocatore) {
+	public void lancia(JButton button, Giocatore giocatore, Carta carta) {
 		Timer timer = new Timer(10, new ActionListener() {
 			private int y = button.getLocation().y;
 			private int x = button.getLocation().x;
@@ -56,7 +56,7 @@ public class Giocatore {
 		});
 
 		timer.start();
-		giocatore.getMano().remove(button);
+		giocatore.getMano().remove(carta);
 		System.out.println(giocatore.getMano());
 	}
 }
