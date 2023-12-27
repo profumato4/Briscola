@@ -38,13 +38,11 @@ public class CPU extends Giocatore{
 						button.setBounds(x, y, 89, 168);
 						button.repaint();
 					}
-					System.out.println(button.getLocation().x);
 				}
 			}
 		});
 
 		timer.start();
-		giocatore.getMano().remove(carta);
 	}
 	
 }

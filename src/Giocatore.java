@@ -29,34 +29,36 @@ public class Giocatore {
 		Timer timer = new Timer(10, new ActionListener() {
 			private int y = button.getLocation().y;
 			private int x = button.getLocation().x;
+			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (y > 300) {
-					if(button.getLocation().x > 548) {
-						y -= 10;
+					y -= 20;
+					button.setBounds(x, y, 89, 168);
+					button.repaint();
+				}
+				
+				if(y == 300) {
+					if (button.getLocation().x > 548) {
 						x -= 10;
 						button.setBounds(x, y, 89, 168);
 						button.repaint();
-					}else if(button.getLocation().x < 548) {
-						y -= 10;
+					} else if (button.getLocation().x < 548) {
 						x += 10;
 						button.setBounds(x, y, 89, 168);
 						button.repaint();
-					}else if(button.getLocation().x == 548) {
-						y -= 10;
-						button.setBounds(x, y, 89, 168);
-						button.repaint();
+					} else if (button.getLocation().x == 548 && button.getLocation().y == 300) {
+
+						((Timer) e.getSource()).stop();
+
 					}
-					
-					//System.out.println(button.getLocation().x);
-				} else {
-					((Timer) e.getSource()).stop();
+					System.out.println(button.getLocation().y + "x" + button.getLocation().x);
 				}
+				
 			}
 		});
 
 		timer.start();
-		giocatore.getMano().remove(carta);
-		System.out.println(giocatore.getMano());
 	}
 }

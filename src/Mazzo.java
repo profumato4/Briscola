@@ -17,6 +17,7 @@ public class Mazzo {
 	private JPanel panel;
 	private int indice = 1; // indice carte da pescare
 	private ArrayList<JButton> backs = new ArrayList<JButton>(); // carte avversario
+	private String briscola;
 
 	public Mazzo(JPanel panel) {
 		this.panel = panel;
@@ -83,6 +84,7 @@ public class Mazzo {
 		carta.setBounds(105, 155, 200, 168);
 		panel.add(carta);
 		panel.setComponentZOrder(carta, 1);
+		this.briscola = this.mazzo.get(0).getSeme();
 		return this.mazzo.get(0);
 	}
 
@@ -192,40 +194,40 @@ public class Mazzo {
 		int y = 600;
 		int x2 = 418;
 		int y2 = 0;
-		
-		for(int i = 0;i < 3; i++) {
+
+		for (int i = 0; i < 3; i++) {
 			g1.getMano().add(this.mazzo.get(this.indice++));
 			g2.getMano().add(this.mazzo.get(this.indice++));
 		}
-		
+
 		JButton card0 = new JButton(new ImageIcon("res/Cards/back.png"));
 		JButton card1 = new JButton(new ImageIcon("res/Cards/back.png"));
 		JButton card2 = new JButton(new ImageIcon("res/Cards/back.png"));
-		
+
 		JButton back0 = new JButton(new ImageIcon("res/Cards/back.png"));
 		JButton back1 = new JButton(new ImageIcon("res/Cards/back.png"));
 		JButton back2 = new JButton(new ImageIcon("res/Cards/back.png"));
-		
+
 		distribuisciAnimation(card0, g1.getMano().get(0).getImg(), 418);
 		distribuisciAnimation(card1, g1.getMano().get(1).getImg(), 548);
 		distribuisciAnimation(card2, g1.getMano().get(2).getImg(), 678);
-		
+
 		distribuisciAnimationBack(back0, 418);
 		distribuisciAnimationBack(back1, 548);
 		distribuisciAnimationBack(back2, 678);
-		
+
 		setUpButton(card0);
 		setUpButton(card1);
 		setUpButton(card2);
-		
+
 		setUpButton(back0);
 		setUpButton(back1);
 		setUpButton(back2);
-		
+
 		backs.add(back0);
 		backs.add(back1);
 		backs.add(back2);
-		
+
 		card0.addActionListener(new ActionListener() {
 
 			@Override
@@ -233,10 +235,28 @@ public class Mazzo {
 				g1.lancia(card0, g1, g1.getMano().get(0).getCarta());
 				int r = selectCard();
 				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+				System.out.println(briscola);
+				Timer timer = new Timer(500, new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	if (g1.getMano().get(0).getCarta().comparaCarte(g1.getMano().get(0).getCarta(),
+								g2.getMano().get(r).getCarta(), briscola)) {
+							g1.getMano().remove(0);
+							g2.getMano().remove(r);
+							System.out.println(card0.getLocation().x + "x" + card0.getLocation().y);
+							presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"));
+							// System.out.println(g1.getMano());
+							// card0.setIcon(new ImageIcon("res/Cards/back.png"));
+							// distribuisciAnimation(card0, distribuisci(g1).getImg(), 418);
+						}
+		            }
+		        });
+				timer.start();
+				
 			}
 
 		});
-		
+
 		card1.addActionListener(new ActionListener() {
 
 			@Override
@@ -248,7 +268,7 @@ public class Mazzo {
 			}
 
 		});
-		
+
 		card2.addActionListener(new ActionListener() {
 
 			@Override
@@ -260,46 +280,34 @@ public class Mazzo {
 			}
 
 		});
-		
-	/*	for (int i = 0; i < 3; i++) {
-			g1.getMano().add(this.mazzo.get(this.indice++));
-			g2.getMano().add(this.mazzo.get(this.indice++));
-			JButton button = new JButton(g1.getMano().get(i).getImg());
-			JButton button2 = new JButton(new ImageIcon("res/Cards/back.png"));
-			button.setBounds(x, y, 89, 168);
-			button.setBorderPainted(false);
-			button.setContentAreaFilled(false);
-			button.setFocusPainted(false);
-			button.addActionListener(new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-
-					g1.lancia(button, g1);
-					g2.lancia(button2, g2);
-				}
-
-			});
-			x += 130;
-			button2.setBorderPainted(false);
-			button2.setContentAreaFilled(false);
-			button2.setFocusPainted(false);
-			button2.setBounds(x2, y2, 89, 168);	
-			x2 += 130;
-			panel.add(button);
-			panel.add(button2);
-			panel.setComponentZOrder(button, 0);
-			panel.setComponentZOrder(button2, 0);
-		}
-	*/
+		/*
+		 * for (int i = 0; i < 3; i++) {
+		 * g1.getMano().add(this.mazzo.get(this.indice++));
+		 * g2.getMano().add(this.mazzo.get(this.indice++)); JButton button = new
+		 * JButton(g1.getMano().get(i).getImg()); JButton button2 = new JButton(new
+		 * ImageIcon("res/Cards/back.png")); button.setBounds(x, y, 89, 168);
+		 * button.setBorderPainted(false); button.setContentAreaFilled(false);
+		 * button.setFocusPainted(false); button.addActionListener(new ActionListener()
+		 * {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) {
+		 * 
+		 * g1.lancia(button, g1); g2.lancia(button2, g2); }
+		 * 
+		 * }); x += 130; button2.setBorderPainted(false);
+		 * button2.setContentAreaFilled(false); button2.setFocusPainted(false);
+		 * button2.setBounds(x2, y2, 89, 168); x2 += 130; panel.add(button);
+		 * panel.add(button2); panel.setComponentZOrder(button, 0);
+		 * panel.setComponentZOrder(button2, 0); }
+		 */
 	}
 
-	public void distribuisci(Giocatore g) {
-		if (this.indice < this.mazzo.size()) {
-			g.getMano().add(this.mazzo.get(this.indice++));
-		}
+	public Carta distribuisci(Giocatore g) {
+		g.getMano().add(this.mazzo.get(indice++));
+		return g.getMano().get(2);
 	}
-	
+
 	private void setUpButton(JButton button) {
 		button.setBorderPainted(false);
 		button.setContentAreaFilled(false);
@@ -307,26 +315,27 @@ public class Mazzo {
 		panel.add(button);
 		panel.setComponentZOrder(button, 0);
 	}
-	
+
 	private int selectCard() {
 		int r = new Random().nextInt(0, 3);
 		return r;
 	}
-	
+
 	private void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
 		Timer timer = new Timer(5, new ActionListener() {
 			private int y = 90;
 			private int x = 158;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(x == x1 && y == 600) {
+				if (x == x1 && y == 600) {
 					card.setIcon(img);
 				}
 				if (y < 600) {
 					y = Math.min(y + 20, 600);
 					card.setBounds(x, y, 89, 168);
 					card.repaint();
-					if(card.getLocation().x < x1) {
+					if (card.getLocation().x < x1) {
 						x = Math.min(x + 20, x1);
 						card.setBounds(x, y, 89, 168);
 						card.repaint();
@@ -338,38 +347,84 @@ public class Mazzo {
 		});
 
 		timer.start();
-		
+
 	}
-	
-	
+
 	private void distribuisciAnimationBack(JButton card, int x1) {
 		Timer timer = new Timer(5, new ActionListener() {
 			private int y = 90;
 			private int x = 158;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(card.getLocation().x < x1) {
+
+				if (card.getLocation().x < x1) {
 					x = Math.min(x + 20, x1);
 					card.setBounds(x, y, 89, 168);
 					card.repaint();
 				}
-				
+
 				if (y > 0) {
 					y = Math.min(y - 20, 0);
 					card.setBounds(x, y, 89, 168);
 					card.repaint();
 				}
-				
-				if(y == 0 && x == x1) {
+
+				if (y == 0 && x == x1) {
 					((Timer) e.getSource()).stop();
+				}
+
+			}
+		});
+
+		timer.start();
+
+	}
+
+	private void presaAnimation(JButton card, JButton card2, ImageIcon img) {
+		Timer timer = new Timer(30, new ActionListener() {
+			private int y1 = card.getLocation().y;
+			private int x1 = card.getLocation().x;
+			private int y2 = card2.getLocation().y;
+			private int x2 = card2.getLocation().x;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (x1 == 950 && y1 == 300) {
+					card.setBounds(x1, y1, 168, 89);
+					card.setIcon(img);
+					card.repaint();
+				}
+				if (y1 > 300) {
+					y1 = Math.min(y1 - 20, 300);
+					card.setBounds(x1, y1, 89, 168);
+					card.repaint();
+				}
+				if (card.getLocation().x < 950) {
+					x1 = Math.min(x1 + 25, 950);
+					card.setBounds(x1, y1, 89, 168);
+					card.repaint();
+				}
+				
+				if (x2 == 950 && y2 == 300) {
+					card2.setBounds(x2, y2, 168, 89);
+					card2.setIcon(img);
+					card2.repaint();
+				}
+				if (y2 < 300) {
+					y2 = Math.min(y2 + 20, 300);
+					card2.setBounds(x2, y2, 89, 168);
+					card2.repaint();
+				}
+				if (card2.getLocation().x < 950) {
+					x2 = Math.min(x2 + 25, 950);
+					card2.setBounds(x2, y2, 89, 168);
+					card2.repaint();
 				}
 				
 			}
 		});
 
 		timer.start();
-		
 	}
-	
+
 }
