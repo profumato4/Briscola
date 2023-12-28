@@ -1,8 +1,11 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +24,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,6 +38,7 @@ public class StartMenu {
 	private Clip clip;
 	private FloatControl volumeControl;
 	private JButton game;
+	private String carte = "Piacentine";
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
@@ -75,7 +80,33 @@ public class StartMenu {
 		});
 
 		panel.add(audio);
-
+		
+		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
+		cards.setBounds(640, 585, 90, 80);
+		cards.setBorderPainted(false);
+		cards.setContentAreaFilled(false);
+		cards.setFocusPainted(false);
+		
+		cards.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				CustomDialog card = new CustomDialog(frame);
+				card.addWindowListener(new WindowAdapter() {
+	                @Override
+	                public void windowClosed(WindowEvent e) {
+	                    carte = card.getCarteType();
+	                    System.out.println("Valore di carte dopo il dialogo: " + carte);
+	                    System.out.println(getCarteType());
+	                }
+	            });
+	            card.setVisible(true);
+			}
+		});
+		
+		panel.add(cards);
+		
 		JLabel background = new JLabel();
 		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
@@ -265,5 +296,8 @@ public class StartMenu {
 	public JButton game() {
 		return game;
 	}
-
+	
+	public String getCarteType() {
+		return carte;
+	}
 }

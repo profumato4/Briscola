@@ -17,6 +17,7 @@ public class Briscola {
 	private static Briscola window = new Briscola();
 	private Login login = new Login(window);
 	private Register register = new Register(login);
+	private String carte = "Napoletane";
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,6 +57,8 @@ public class Briscola {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (login.isLogged()) {
+					carte = m.getCarteType();
+					System.out.println(carte);
 					game();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
@@ -91,7 +94,7 @@ public class Briscola {
 
 	public void game() {
 		setBackground();
-		Mazzo mazzo1 = new Mazzo(panel);
+		Mazzo mazzo1 = new Mazzo(panel, carte);
 		Giocatore giocatore = new Giocatore(login.getUserName());
 		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
