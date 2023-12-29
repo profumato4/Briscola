@@ -20,7 +20,11 @@ class CustomDialog extends JDialog {
 
 	private int i = 1;
 	private String carte;
-
+	
+	public CustomDialog() {
+		
+	}
+	
 	public CustomDialog(JFrame parent) {
 		super(parent, true);
 		
@@ -146,7 +150,7 @@ class CustomDialog extends JDialog {
 		file.close();
 	}
 	
-	private String readCardType(){
+	public String readCardType(){
 		try {
 			FileReader file = new FileReader("res/CardsType/cardsType.txt");
 			BufferedReader reader = new BufferedReader(file);

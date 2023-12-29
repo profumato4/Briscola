@@ -17,7 +17,7 @@ public class Briscola {
 	private static Briscola window = new Briscola();
 	private Login login = new Login(window);
 	private Register register = new Register(login);
-	private String carte = "Napoletane";
+	private String carte;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
