@@ -83,11 +83,19 @@ public class Briscola {
 
 		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
-
+		
+		CerchioLabel carteRimanenti = new CerchioLabel();
+		carteRimanenti.setNumero(34);
+		carteRimanenti.setSize(60,60);
+		carteRimanenti.calcolaCentro(carteRimanenti, mazzo);
+		
+		panel.add(carteRimanenti);
 		panel.add(background);
 		panel.add(mazzo);
-		panel.setComponentZOrder(mazzo, 0);
-
+		
+		panel.setComponentZOrder(mazzo, 1);
+		panel.setComponentZOrder(carteRimanenti, 0);
+		
 		panel.repaint();
 
 	}
@@ -102,5 +110,6 @@ public class Briscola {
 		System.out.println(giocatore.getMano());
 		System.out.println(giocatore2.getMano());
 	}
-
+	
+	
 }
