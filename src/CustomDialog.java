@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicArrowButton;
 
 class CustomDialog extends JDialog {
 
@@ -47,7 +45,7 @@ class CustomDialog extends JDialog {
 			imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
 			i = 1;
 		}
-		
+
 		JButton left = new JButton(new ImageIcon("res/Arrows/left2.png"));
 		left.setBounds(10, 120, 120, 120);
 		left.setBorderPainted(false);
@@ -139,7 +137,7 @@ class CustomDialog extends JDialog {
 
 		setLocationRelativeTo(parent);
 	}
-	
+
 	public String getCarteType() {
 		return carte;
 	}

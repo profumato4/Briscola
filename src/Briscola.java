@@ -18,6 +18,7 @@ public class Briscola {
 	private Login login = new Login(window);
 	private Register register = new Register(login);
 	private String carte;
+	private CerchioLabel carteRimanenti;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -84,8 +85,7 @@ public class Briscola {
 		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
 		
-		CerchioLabel carteRimanenti = new CerchioLabel();
-		carteRimanenti.setNumero(34);
+		carteRimanenti = new CerchioLabel();
 		carteRimanenti.setSize(60,60);
 		carteRimanenti.calcolaCentro(carteRimanenti, mazzo);
 		
@@ -102,13 +102,14 @@ public class Briscola {
 
 	public void game() {
 		setBackground();
-		Mazzo mazzo1 = new Mazzo(panel, carte);
+		Mazzo mazzo1 = new Mazzo(panel, carte, carteRimanenti);
 		Giocatore giocatore = new Giocatore(login.getUserName());
 		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
 		mazzo1.distribuisci(giocatore, giocatore2);
 		System.out.println(giocatore.getMano());
 		System.out.println(giocatore2.getMano());
+		carteRimanenti.setNumero(40 - (mazzo1.getIndice()-1));
 	}
 	
 	

@@ -18,9 +18,12 @@ public class Mazzo {
 	private int indice = 1; // indice carte da pescare
 	private ArrayList<JButton> backs = new ArrayList<JButton>(); // carte avversario
 	private String briscola;
+	private Timer timer;
+	private CerchioLabel carteRimanenti;
 
-	public Mazzo(JPanel panel, String cartaType) {
+	public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
 		this.panel = panel;
+		this.carteRimanenti = carteRimanenti;
 		addCarte(cartaType);
 		mescola();
 		briscola(panel, cartaType);
@@ -337,10 +340,6 @@ public class Mazzo {
 	}
 
 	public void distribuisci(Giocatore g1, Giocatore g2) {
-		int x = 418;
-		int y = 600;
-		int x2 = 418;
-		int y2 = 0;
 
 		for (int i = 0; i < 3; i++) {
 			g1.getMano().add(this.mazzo.get(this.indice++));
@@ -383,21 +382,28 @@ public class Mazzo {
 				int r = selectCard();
 				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 				System.out.println(briscola);
-				Timer timer = new Timer(500, new ActionListener() {
+				timer = new Timer(1000, new ActionListener() {
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
+
 						if (g1.getMano().get(0).getCarta().comparaCarte(g1.getMano().get(0).getCarta(),
 								g2.getMano().get(r).getCarta(), briscola)) {
+							System.out.println(card0.getLocation().x + "x" + card0.getLocation().y);
 							g1.getMano().remove(0);
 							g2.getMano().remove(r);
-							System.out.println(card0.getLocation().x + "x" + card0.getLocation().y);
-							presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"));
-							// System.out.println(g1.getMano());
+							System.out.println(g1.getMano());
+							presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+
+							pescata(card0, g1, r, g2, 0);
 							// card0.setIcon(new ImageIcon("res/Cards/back.png"));
 							// distribuisciAnimation(card0, distribuisci(g1).getImg(), 418);
 						}
+
 					}
+
 				});
+				timer.setRepeats(false);
 				timer.start();
 
 			}
@@ -412,6 +418,27 @@ public class Mazzo {
 				g1.lancia(card1, g1, g1.getMano().get(1).getCarta());
 				int r = selectCard();
 				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+				Timer timer = new Timer(500, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (g1.getMano().get(1).getCarta().comparaCarte(g1.getMano().get(1).getCarta(),
+								g2.getMano().get(r).getCarta(), briscola)) {
+							g1.getMano().remove(1);
+							g2.getMano().remove(r);
+							System.out.println(g1.getMano());
+							System.out.println(g2.getMano());
+							System.out.println(card1.getLocation().x + "x" + card0.getLocation().y);
+							presaAnimation(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+
+							pescata(card0, g1, r, g2, 1);
+
+							// System.out.println(g1.getMano());
+							// card0.setIcon(new ImageIcon("res/Cards/back.png"));
+							// distribuisciAnimation(card0, distribuisci(g1).getImg(), 418);
+						}
+					}
+				});
+				timer.start();
 			}
 
 		});
@@ -421,9 +448,27 @@ public class Mazzo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				g1.lancia(card2, g1, g1.getMano().get(1).getCarta());
+				g1.lancia(card2, g1, g1.getMano().get(2).getCarta());
 				int r = selectCard();
 				g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+				Timer timer = new Timer(500, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (g1.getMano().get(2).getCarta().comparaCarte(g1.getMano().get(2).getCarta(),
+								g2.getMano().get(r).getCarta(), briscola)) {
+							g1.getMano().remove(2);
+							g2.getMano().remove(r);
+							System.out.println(card2.getLocation().x + "x" + card0.getLocation().y);
+							presaAnimation(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+							pescata(card0, g1, r, g2, 2);
+							// System.out.println(g1.getMano());
+							// card0.setIcon(new ImageIcon("res/Cards/back.png"));
+							// distribuisciAnimation(card0, distribuisci(g1).getImg(), 418);
+						}
+					}
+				});
+				timer.start();
+
 			}
 
 		});
@@ -450,8 +495,39 @@ public class Mazzo {
 		 */
 	}
 
+	private void pescata(JButton card0, Giocatore g1, int r, Giocatore g2, int n) {
+		Timer timer2 = new Timer(1000, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(n == 0){
+					pescataAnimation(card0, distribuisci(g1), 418);
+				}else if(n == 1){
+					pescataAnimation(card0, distribuisci(g1), 548);
+				}else if(n == 2){
+					pescataAnimation(card0, distribuisci(g1), 678);
+				}
+
+
+				if (r == 0) {
+					pescataAnimationBack(backs.get(r), distribuisci(g2), 418);
+				} else if (r == 1) {
+					pescataAnimationBack(backs.get(r), distribuisci(g2), 548);
+				} else if (r == 2) {
+					pescataAnimationBack(backs.get(r), distribuisci(g2), 678);
+				}
+
+			}
+
+		});
+		timer2.setRepeats(false);
+		timer2.start();
+	}
+
 	public Carta distribuisci(Giocatore g) {
-		g.getMano().add(this.mazzo.get(indice++));
+		g.getMano().add(this.mazzo.get(this.indice++));
+		System.out.println("d" + g.getMano());
+		carteRimanenti.setNumero(40 - (indice - 1));
 		return g.getMano().get(2);
 	}
 
@@ -464,7 +540,7 @@ public class Mazzo {
 	}
 
 	private int selectCard() {
-		int r = new Random().nextInt(0, 3);
+		int r = new Random().nextInt( 3);
 		return r;
 	}
 
@@ -528,42 +604,68 @@ public class Mazzo {
 
 	}
 
-	private void presaAnimation(JButton card, JButton card2, ImageIcon img) {
-		Timer timer = new Timer(30, new ActionListener() {
+	private void presaAnimation(JButton card, JButton card2, ImageIcon img, Giocatore g1) {
+		Timer timer = new Timer(1, new ActionListener() {
 			private int y1 = card.getLocation().y;
 			private int x1 = card.getLocation().x;
 			private int y2 = card2.getLocation().y;
 			private int x2 = card2.getLocation().x;
+			private int i = 0;
+			private int j = 0;
+			private int k = 0;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (x1 == 950 && y1 == 300) {
-					card.setBounds(x1, y1, 168, 89);
-					card.setIcon(img);
-					card.repaint();
+					if (i == 0) {
+						i = 1;
+						card.setBounds(x2, y2, 168, 89);
+						card.setIcon(img);
+						card.repaint();
+					}
+
+					if (k == 0) {
+						k = 1;
+						JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
+						label.setBounds(950, 300, 168, 89);
+						panel.add(label);
+					}
+
 				}
+				
+				if(k == 1) {
+					JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
+					label.setBounds(950, 300, 168, 89);
+					panel.add(label);
+					panel.setComponentZOrder(label, 0);
+				}
+				
 				if (y1 > 300) {
 					y1 = Math.min(y1 - 20, 300);
 					card.setBounds(x1, y1, 89, 168);
 					card.repaint();
 				}
-				if (card.getLocation().x < 950) {
+				if (x1 < 950) {
 					x1 = Math.min(x1 + 25, 950);
 					card.setBounds(x1, y1, 89, 168);
 					card.repaint();
 				}
 
 				if (x2 == 950 && y2 == 300) {
-					card2.setBounds(x2, y2, 168, 89);
-					card2.setIcon(img);
-					card2.repaint();
+					if (j == 0) {
+						j = 1;
+						card2.setBounds(x2, y2, 168, 89);
+						card2.setIcon(img);
+						card2.repaint();
+					}
+
 				}
 				if (y2 < 300) {
 					y2 = Math.min(y2 + 20, 300);
 					card2.setBounds(x2, y2, 89, 168);
 					card2.repaint();
 				}
-				if (card2.getLocation().x < 950) {
+				if (x2 < 950) {
 					x2 = Math.min(x2 + 25, 950);
 					card2.setBounds(x2, y2, 89, 168);
 					card2.repaint();
@@ -573,6 +675,78 @@ public class Mazzo {
 		});
 
 		timer.start();
+	}
+
+	private void pescataAnimation(JButton card, Carta carta, int x1) {
+		Timer timer = new Timer(1, new ActionListener() {
+			private int y = 90;
+			private int x = 158;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (y == 90 && x == 158) {
+					card.setIcon(new ImageIcon("res/Cards/back.png"));
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+				if (x == x1 && y == 600) {
+					card.setIcon(carta.getImg());
+				}
+
+				if (y < 600) {
+					y = Math.min(y + 20, 600);
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+				if (card.getLocation().x < x1) {
+					x = Math.min(x + 20, x1);
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+			}
+		});
+
+		timer.start();
+	}
+
+	private void pescataAnimationBack(JButton card, Carta carta, int x1) {
+		Timer timer = new Timer(1, new ActionListener() {
+			private int y = 90;
+			private int x = 158;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (y == 90 && x == 158) {
+					card.setIcon(new ImageIcon("res/Cards/back.png"));
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+				if (y > 0) {
+					y = Math.min(y - 30, 0);
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+				if (card.getLocation().x < x1) {
+					x = Math.min(x + 30, x1);
+					card.setBounds(x, y, 89, 168);
+					card.repaint();
+				}
+
+			}
+		});
+
+		timer.start();
+	}
+
+	public int getIndice() {
+		return indice;
 	}
 
 }
