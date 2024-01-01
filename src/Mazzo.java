@@ -20,6 +20,7 @@ public class Mazzo {
     private String briscola;
     private Timer timer;
     private CerchioLabel carteRimanenti;
+    private Animation animation = new Animation();
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
         this.panel = panel;
@@ -354,13 +355,13 @@ public class Mazzo {
         JButton back1 = new JButton(new ImageIcon("res/Cards/back.png"));
         JButton back2 = new JButton(new ImageIcon("res/Cards/back.png"));
 
-        distribuisciAnimation(card0, g1.getMano().get(0).getImg(), 418);
-        distribuisciAnimation(card1, g1.getMano().get(1).getImg(), 548);
-        distribuisciAnimation(card2, g1.getMano().get(2).getImg(), 678);
+        animation.distribuisciAnimation(card0, g1.getMano().get(0).getImg(), 418);
+        animation.distribuisciAnimation(card1, g1.getMano().get(1).getImg(), 548);
+        animation.distribuisciAnimation(card2, g1.getMano().get(2).getImg(), 678);
 
-        distribuisciAnimationBack(back0, 418);
-        distribuisciAnimationBack(back1, 548);
-        distribuisciAnimationBack(back2, 678);
+        animation.distribuisciAnimationBack(back0, 418);
+        animation.distribuisciAnimationBack(back1, 548);
+        animation.distribuisciAnimationBack(back2, 678);
 
         setUpButton(card0);
         setUpButton(card1);
@@ -391,12 +392,19 @@ public class Mazzo {
                                 g2.getMano().get(r).getCarta(), briscola)) {
                             System.out.println(card0.getLocation().x + "x" + card0.getLocation().y);
 
-                            presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+                            animation.presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
                             g1.getMano().remove(0);
                             g2.getMano().remove(r);
                             System.out.println(g1.getMano());
                             pescata(card0, g1, r, g2, 0);
 
+                        } else {
+
+                            animation.presaAnimationBack(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                            g1.getMano().remove(0);
+                            g2.getMano().remove(r);
+
+                            pescataBack(card0, g1, r, g2, 0);
                         }
 
                     }
@@ -417,14 +425,14 @@ public class Mazzo {
                 g1.lancia(card1, g1, g1.getMano().get(1).getCarta());
                 int r = selectCard();
                 g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-                Timer timer = new Timer(500, new ActionListener() {
+                timer = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (g1.getMano().get(1).getCarta().comparaCarte(g1.getMano().get(1).getCarta(),
                                 g2.getMano().get(r).getCarta(), briscola)) {
 
                             System.out.println(card1.getLocation().x + "x" + card1.getLocation().y);
-                            presaAnimation(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+                            animation.presaAnimation(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
 
                             g1.getMano().remove(1);
                             g2.getMano().remove(r);
@@ -433,6 +441,12 @@ public class Mazzo {
 
                             pescata(card1, g1, r, g2, 1);
 
+                        } else {
+                            animation.presaAnimationBack(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                            g1.getMano().remove(1);
+                            g2.getMano().remove(r);
+
+                            pescataBack(card1, g1, r, g2, 1);
                         }
                     }
                 });
@@ -449,20 +463,26 @@ public class Mazzo {
                 g1.lancia(card2, g1, g1.getMano().get(2).getCarta());
                 int r = selectCard();
                 g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-                Timer timer = new Timer(500, new ActionListener() {
+                timer = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (g1.getMano().get(2).getCarta().comparaCarte(g1.getMano().get(2).getCarta(),
                                 g2.getMano().get(r).getCarta(), briscola)) {
 
                             System.out.println(card2.getLocation().x + "x" + card2.getLocation().y);
-                            presaAnimation(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), g1);
+                            animation.presaAnimation(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
 
                             g1.getMano().remove(2);
                             g2.getMano().remove(r);
 
                             pescata(card2, g1, r, g2, 2);
 
+                        } else {
+                            animation.presaAnimationBack(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                            g1.getMano().remove(2);
+                            g2.getMano().remove(r);
+
+                            pescataBack(card2, g1, r, g2, 0);
                         }
                     }
                 });
@@ -495,32 +515,52 @@ public class Mazzo {
     }
 
     private void pescata(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
-        Timer timer2 = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (n == 0) {
-                    pescataAnimation(card, distribuisci(g1), 418);
-                } else if (n == 1) {
-                    pescataAnimation(card, distribuisci(g1), 548);
-                } else if (n == 2) {
-                    pescataAnimation(card, distribuisci(g1), 678);
-                }
 
-
-                if (r == 0) {
-                    pescataAnimationBack(backs.get(r), distribuisci(g2), 418);
-                } else if (r == 1) {
-                    pescataAnimationBack(backs.get(r), distribuisci(g2), 548);
-                } else if (r == 2) {
-                    pescataAnimationBack(backs.get(r), distribuisci(g2), 678);
-                }
+                controllo(card, n, g1);
+                controllo2(r, g2);
 
             }
 
         });
-        timer2.setRepeats(false);
-        timer2.start();
+        timer.setRepeats(false);
+        timer.start();
+    }
+
+    private void pescataBack(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controllo2(r, g2);
+                controllo(card, n, g1);
+            }
+        });
+
+        timer.start();
+
+    }
+
+    private void controllo(JButton card, int n, Giocatore g1){
+        if (n == 0) {
+            animation.pescataAnimation(card, distribuisci(g1), 418);
+        } else if (n == 1) {
+            animation.pescataAnimation(card, distribuisci(g1), 548);
+        } else if (n == 2) {
+            animation.pescataAnimation(card, distribuisci(g1), 678);
+        }
+    }
+
+    private void controllo2(int r, Giocatore g2) {
+        if (r == 0) {
+            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 418);
+        } else if (r == 1) {
+            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 548);
+        } else if (r == 2) {
+            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 678);
+        }
     }
 
     public Carta distribuisci(Giocatore g) {
@@ -542,206 +582,7 @@ public class Mazzo {
         return new Random().nextInt(3);
     }
 
-    private void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
-        Timer timer = new Timer(5, new ActionListener() {
-            private int y = 90;
-            private int x = 158;
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (x == x1 && y == 600) {
-                    card.setIcon(img);
-                }
-                if (y < 600) {
-                    y = Math.min(y + 20, 600);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                    if (card.getLocation().x < x1) {
-                        x = Math.min(x + 20, x1);
-                        card.setBounds(x, y, 89, 168);
-                        card.repaint();
-                    }
-                } else {
-                    ((Timer) e.getSource()).stop();
-                }
-            }
-        });
-
-        timer.start();
-
-    }
-
-    private void distribuisciAnimationBack(JButton card, int x1) {
-        Timer timer = new Timer(5, new ActionListener() {
-            private int y = 90;
-            private int x = 158;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (card.getLocation().x < x1) {
-                    x = Math.min(x + 20, x1);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (y > 0) {
-                    y = Math.min(y - 20, 0);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (y == 0 && x == x1) {
-                    ((Timer) e.getSource()).stop();
-                }
-
-            }
-        });
-
-        timer.start();
-
-    }
-
-    private void presaAnimation(JButton card, JButton card2, ImageIcon img, Giocatore g1) {
-        Timer timer = new Timer(1, new ActionListener() {
-            private int y1 = card.getLocation().y;
-            private int x1 = card.getLocation().x;
-            private int y2 = card2.getLocation().y;
-            private int x2 = card2.getLocation().x;
-            private int i = 0;
-            private int j = 0;
-            private int k = 0;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (x1 == 950 && y1 == 300) {
-                    if (i == 0) {
-                        i = 1;
-                        card.setBounds(x2, y2, 168, 89);
-                        card.setIcon(img);
-                        card.repaint();
-                    }
-
-                    if (k == 0) {
-                        k = 1;
-                        JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-                        label.setBounds(950, 300, 168, 89);
-                        panel.add(label);
-                    }
-
-                }
-
-                if (k == 1) {
-                    JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-                    label.setBounds(950, 300, 168, 89);
-                    panel.add(label);
-                    panel.setComponentZOrder(label, 0);
-                }
-
-                if (y1 > 300) {
-                    y1 = Math.min(y1 - 20, 300);
-                    card.setBounds(x1, y1, 89, 168);
-                    card.repaint();
-                }
-                if (x1 < 950) {
-                    x1 = Math.min(x1 + 25, 950);
-                    card.setBounds(x1, y1, 89, 168);
-                    card.repaint();
-                }
-
-                if (x2 == 950 && y2 == 300) {
-                    if (j == 0) {
-                        j = 1;
-                        card2.setBounds(x2, y2, 168, 89);
-                        card2.setIcon(img);
-                        card2.repaint();
-                    }
-
-                }
-                if (y2 < 300) {
-                    y2 = Math.min(y2 + 20, 300);
-                    card2.setBounds(x2, y2, 89, 168);
-                    card2.repaint();
-                }
-                if (x2 < 950) {
-                    x2 = Math.min(x2 + 25, 950);
-                    card2.setBounds(x2, y2, 89, 168);
-                    card2.repaint();
-                }
-
-            }
-        });
-
-        timer.start();
-    }
-
-    private void pescataAnimation(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(1, new ActionListener() {
-            private int y = 90;
-            private int x = 158;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (y == 90 && x == 158) {
-                    card.setIcon(new ImageIcon("res/Cards/back.png"));
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (x == x1 && y == 600) {
-                    card.setIcon(carta.getImg());
-                }
-
-                if (y < 600) {
-                    y = Math.min(y + 20, 600);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (card.getLocation().x < x1) {
-                    x = Math.min(x + 20, x1);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-            }
-        });
-
-        timer.start();
-    }
-
-    private void pescataAnimationBack(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(1, new ActionListener() {
-            private int y = 90;
-            private int x = 158;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (y == 90 && x == 158) {
-                    card.setIcon(new ImageIcon("res/Cards/back.png"));
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (y > 0) {
-                    y = Math.min(y - 30, 0);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-                if (card.getLocation().x < x1) {
-                    x = Math.min(x + 30, x1);
-                    card.setBounds(x, y, 89, 168);
-                    card.repaint();
-                }
-
-            }
-        });
-
-        timer.start();
-    }
 
     public int getIndice() {
         return indice;

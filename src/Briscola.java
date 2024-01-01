@@ -61,6 +61,7 @@ public class Briscola {
 					carte = m.getCarteType();
 					System.out.println(carte);
 					game();
+					System.out.println(frame.getSize());
 				} else {
 					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
 							JOptionPane.INFORMATION_MESSAGE);
