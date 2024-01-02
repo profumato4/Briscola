@@ -5,3 +5,4 @@ L9 Draven;LeagueOfDraven
 admin;admin
 bossetti;bossetti123
 blind;blind
+register;register
