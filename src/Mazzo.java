@@ -374,30 +374,32 @@ public class Mazzo {
             int r = selectCard();
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
             System.out.println(briscola);
-            Timer timer = new Timer(1000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    if (g1.getMano().get(0).getCarta().comparaCarte(g1.getMano().get(0).getCarta(),
-                            g2.getMano().get(r).getCarta(), briscola)) {
+            Timer timer = new Timer(1000, actionEvent -> {
+                if (g1.getMano().get(0).getCarta().comparaCarte(g1.getMano().get(0).getCarta(),
+                        g2.getMano().get(r).getCarta(), briscola)) {
 
 
-                        animation.presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                        pescata(card0, g1, r, g2, 0);
-                        g1.getMano().remove(0);
-                        g2.getMano().remove(r);
+                    animation.presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
 
 
-                    } else {
+                    pescata(card0, g1, r, g2, 0);
 
-                        animation.presaAnimationBack(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-                        pescataBack(card0, g1, r, g2, 0);
-
-                        g1.getMano().remove(0);
-                        g2.getMano().remove(r);
+                    g1.getMano().remove(0);
+                    g2.getMano().remove(r);
 
 
-                    }
+                } else {
+
+                    animation.presaAnimationBack(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+
+
+                    pescataBack(card0, g1, r, g2, 0);
+
+
+                    g1.getMano().remove(0);
+                    g2.getMano().remove(r);
+
+
                 }
             });
 
@@ -415,17 +417,25 @@ public class Mazzo {
                 if (g1.getMano().get(1).getCarta().comparaCarte(g1.getMano().get(1).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
 
+
                     animation.presaAnimation(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
 
+
+
                     pescata(card1, g1, r, g2, 1);
+
 
                     g1.getMano().remove(1);
                     g2.getMano().remove(r);
 
                 } else {
+
+
                     animation.presaAnimationBack(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
 
+
                     pescataBack(card1, g1, r, g2, 1);
+
 
                     g1.getMano().remove(1);
                     g2.getMano().remove(r);
@@ -445,7 +455,9 @@ public class Mazzo {
                 if (g1.getMano().get(2).getCarta().comparaCarte(g1.getMano().get(2).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
 
+
                     animation.presaAnimation(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+
 
                     pescata(card2, g1, r, g2, 2);
 
