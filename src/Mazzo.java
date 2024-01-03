@@ -515,14 +515,12 @@ public class Mazzo {
     }
 
     private void pescataBack(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                controllo2(r, g2);
-                controllo(card, n, g1);
-            }
+        Timer timer = new Timer(1000, actionEvent -> {
+            controllo2(r, g2);
+            controllo(card, n, g1);
         });
-
+        timer.setRepeats(false);
+        timer.start();
 
     }
 
