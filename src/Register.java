@@ -155,7 +155,7 @@ public class Register {
 							JOptionPane.INFORMATION_MESSAGE);
 					login.getBriscolaFrame().setVisible(true);
 					frame.setVisible(false);
-				} else if (!login.isLogged()) {
+				} else{
 					login.getFrame().setVisible(true);
 					frame.setVisible(false);
 				}

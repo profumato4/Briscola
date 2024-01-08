@@ -369,145 +369,16 @@ public class Mazzo {
         backs.add(back1);
         backs.add(back2);
 
-        card0.addActionListener(e -> {
-            g1.lancia(card0, g1, g1.getMano().get(0).getCarta());
-            int r = selectCard();
-            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-            System.out.println(briscola);
-            Timer timer = new Timer(1000, actionEvent -> {
-                if (g1.getMano().get(0).getCarta().comparaCarte(g1.getMano().get(0).getCarta(),
-                        g2.getMano().get(r).getCarta(), briscola)) {
+        cardActionListner(card0, g1, g2, 0);
+        cardActionListner(card1, g1, g2, 1);
+        cardActionListner(card2, g1, g2, 2);
 
-
-                    animation.presaAnimation(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-
-                    pescata(card0, g1, r, g2, 0);
-
-                    g1.getMano().remove(0);
-                    g2.getMano().remove(r);
-
-
-                } else {
-
-                    animation.presaAnimationBack(card0, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-
-                    pescataBack(card0, g1, r, g2, 0);
-
-
-                    g1.getMano().remove(0);
-                    g2.getMano().remove(r);
-
-
-                }
-            });
-
-            timer.setRepeats(false);
-            timer.start();
-
-        });
-
-        card1.addActionListener(e -> {
-
-            g1.lancia(card1, g1, g1.getMano().get(1).getCarta());
-            int r = selectCard();
-            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-            Timer timer = new Timer(500, e12 -> {
-                if (g1.getMano().get(1).getCarta().comparaCarte(g1.getMano().get(1).getCarta(),
-                        g2.getMano().get(r).getCarta(), briscola)) {
-
-
-                    animation.presaAnimation(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-
-
-                    pescata(card1, g1, r, g2, 1);
-
-
-                    g1.getMano().remove(1);
-                    g2.getMano().remove(r);
-
-                } else {
-
-
-                    animation.presaAnimationBack(card1, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-
-                    pescataBack(card1, g1, r, g2, 1);
-
-
-                    g1.getMano().remove(1);
-                    g2.getMano().remove(r);
-
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
-        });
-
-        card2.addActionListener(e -> {
-
-            g1.lancia(card2, g1, g1.getMano().get(2).getCarta());
-            int r = selectCard();
-            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-            Timer timer = new Timer(500, e13 -> {
-                if (g1.getMano().get(2).getCarta().comparaCarte(g1.getMano().get(2).getCarta(),
-                        g2.getMano().get(r).getCarta(), briscola)) {
-
-
-                    animation.presaAnimation(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-
-                    pescata(card2, g1, r, g2, 2);
-
-                    g1.getMano().remove(2);
-                    g2.getMano().remove(r);
-
-                } else {
-                    animation.presaAnimationBack(card2, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-
-                    pescataBack(card2, g1, r, g2, 0);
-
-                    g1.getMano().remove(2);
-                    g2.getMano().remove(r);
-
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
-
-        });
-
-        /*
-         * for (int i = 0; i < 3; i++) {
-         * g1.getMano().add(this.mazzo.get(this.indice++));
-         * g2.getMano().add(this.mazzo.get(this.indice++)); JButton button = new
-         * JButton(g1.getMano().get(i).getImg()); JButton button2 = new JButton(new
-         * ImageIcon("res/Cards/back.png")); button.setBounds(x, y, 89, 168);
-         * button.setBorderPainted(false); button.setContentAreaFilled(false);
-         * button.setFocusPainted(false); button.addActionListener(new ActionListener()
-         * {
-         *
-         * @Override public void actionPerformed(ActionEvent e) {
-         *
-         * g1.lancia(button, g1); g2.lancia(button2, g2); }
-         *
-         * }); x += 130; button2.setBorderPainted(false);
-         * button2.setContentAreaFilled(false); button2.setFocusPainted(false);
-         * button2.setBounds(x2, y2, 89, 168); x2 += 130; panel.add(button);
-         * panel.add(button2); panel.setComponentZOrder(button, 0);
-         * panel.setComponentZOrder(button2, 0); }
-         */
     }
 
     private void pescata(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                controllo(card, n, g1);
-                controllo2(r, g2);
-            }
+        Timer timer = new Timer(1000, actionEvent -> {
+            controllo(card, n, g1);
+            controllo2(r, g2);
         });
         timer.setRepeats(false);
         timer.start();
@@ -567,5 +438,32 @@ public class Mazzo {
     public int getIndice() {
         return indice;
     }
+
+    private void cardActionListner(JButton card, Giocatore g1, Giocatore g2, int n) {
+        card.addActionListener(e -> {
+            g1.lancia(card, g1, g1.getMano().get(n).getCarta());
+            int r = selectCard();
+            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+
+            Timer timer = new Timer(1000, actionEvent -> {
+                if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
+                        g2.getMano().get(r).getCarta(), briscola)) {
+                    animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                    pescata(card, g1, r, g2, n);
+                    g1.getMano().remove(n);
+                    g2.getMano().remove(r);
+                } else {
+                    animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                    pescataBack(card, g1, r, g2, n);
+                    g1.getMano().remove(n);
+                    g2.getMano().remove(r);
+                }
+            });
+
+            timer.setRepeats(false);
+            timer.start();
+        });
+    }
+
 
 }

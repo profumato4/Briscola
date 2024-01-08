@@ -21,23 +21,20 @@ public class Briscola {
 	private CerchioLabel carteRimanenti;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@SuppressWarnings("static-access")
-			public void run() {
-				try {
-					window.frame.setVisible(true);
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					try {
-						SwingUtilities.updateComponentTreeUI(frame);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+		EventQueue.invokeLater(() -> {
+            try {
+                window.frame.setVisible(true);
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                try {
+                    SwingUtilities.updateComponentTreeUI(frame);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 	}
 
 	public Briscola() {
@@ -53,22 +50,17 @@ public class Briscola {
 		panel.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		StartMenu m = new StartMenu(frame, panel, login, register);
-		m.game().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (login.isLogged()) {
-					carte = m.getCarteType();
-					System.out.println(carte);
-					game();
-					System.out.println(frame.getSize());
-				} else {
-					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-
-		});
+		m.game().addActionListener(e -> {
+            if (login.isLogged()) {
+                carte = m.getCarteType();
+                System.out.println(carte);
+                game();
+                System.out.println(frame.getSize());
+            } else {
+                JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
 	}
 

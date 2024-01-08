@@ -68,7 +68,7 @@ public class Animation {
     public void presaAnimation(JButton card, JButton card2, ImageIcon img, JPanel panel) {
 
 
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -104,7 +104,7 @@ public class Animation {
                 }
 
                 if (y1 > 215) {
-                    y1 = Math.min(y1 - 20, 215);
+                    y1 = Math.min(y1 - 25, 215);
                     card.setBounds(x1, y1, 89, 168);
                     card.repaint();
                 }
@@ -124,7 +124,7 @@ public class Animation {
 
                 }
                 if (y2 < 215) {
-                    y2 = Math.min(y2 + 20, 215);
+                    y2 = Math.min(y2 + 25, 215);
                     card2.setBounds(x2, y2, 89, 168);
                     card2.repaint();
                 }
@@ -143,7 +143,7 @@ public class Animation {
     }
 
     public void presaAnimationBack(JButton card, JButton card2, ImageIcon img, JPanel panel) {
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -179,7 +179,7 @@ public class Animation {
                 }
 
                 if (y1 < 430) {
-                    y1 = Math.min(y1 + 20, 430);
+                    y1 = Math.min(y1 + 25, 430);
                     card.setBounds(x1, y1, 89, 168);
                     card.repaint();
                 }
@@ -199,7 +199,7 @@ public class Animation {
 
                 }
                 if (y2 < 430) {
-                    y2 = Math.min(y2 + 20, 430);
+                    y2 = Math.min(y2 + 25, 430);
                     card2.setBounds(x2, y2, 89, 168);
                     card2.repaint();
                 }
@@ -216,7 +216,7 @@ public class Animation {
     }
 
     public void pescataAnimation(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -234,13 +234,13 @@ public class Animation {
                 }
 
                 if (y < 600) {
-                    y = Math.min(y + 20, 600);
+                    y = Math.min(y + 25, 600);
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }
 
                 if (card.getLocation().x < x1) {
-                    x = Math.min(x + 20, x1);
+                    x = Math.min(x + 25, x1);
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }
@@ -252,7 +252,7 @@ public class Animation {
     }
 
     public void pescataAnimationBack(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -267,13 +267,13 @@ public class Animation {
 
 
                 if (y > 0) {
-                    y = Math.min(y - 20, 0);
+                    y = Math.min(y - 25, 0);
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }
 
                 if (card.getLocation().x < x1) {
-                    x = Math.min(x + 20, x1);
+                    x = Math.min(x + 25, x1);
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }

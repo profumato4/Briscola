@@ -164,9 +164,7 @@ public class Login {
 					if (!macAddressFound) {
 						try {
 							FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
-							file2.append(currentMacAddress + ";");
-							file2.append(txtCcc.getText());
-							file2.append("\n");
+							file2.append(currentMacAddress).append(";").append(txtCcc.getText()).append("\n");
 							file2.close();
 							System.out.println("Scritto");
 						} catch (IOException e1) {
