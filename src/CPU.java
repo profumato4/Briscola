@@ -37,6 +37,11 @@ public class CPU extends Giocatore{
 						button.repaint();
 					}
 				}
+
+				if(y == 200 && x == 598){
+					((Timer) e.getSource()).stop();
+				}
+
 			}
 		});
 

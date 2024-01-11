@@ -4,8 +4,16 @@ import java.awt.event.ActionListener;
 
 public class Animation {
 
+    private Timer timerDistribuisci;
+    private Timer timerDistribuisciBack;
+    private Timer timerPresa;
+    private Timer timerPresaBack;
+    private Timer timerPescata;
+    private Timer timerPescataBack;
+
+
     public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
-        Timer timer = new Timer(5, new ActionListener() {
+        timerDistribuisci = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -13,7 +21,9 @@ public class Animation {
             public void actionPerformed(ActionEvent e) {
                 if (x == x1 && y == 600) {
                     card.setIcon(img);
+                    ((Timer) e.getSource()).stop();
                 }
+
 
                 if (y < 600) {
                     y = Math.min(y + 20, 600);
@@ -24,23 +34,23 @@ public class Animation {
                         card.setBounds(x, y, 89, 168);
                         card.repaint();
                     }
-                } else {
-                    ((Timer) e.getSource()).stop();
                 }
+
             }
         });
 
-        timer.start();
+        timerDistribuisci.start();
 
     }
 
     public void distribuisciAnimationBack(JButton card, int x1) {
-        Timer timer = new Timer(5, new ActionListener() {
+        timerDistribuisciBack = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
 
                 if (card.getLocation().x < x1) {
                     x = Math.min(x + 20, x1);
@@ -61,14 +71,14 @@ public class Animation {
             }
         });
 
-        timer.start();
+        timerDistribuisciBack.start();
 
     }
 
-    public void presaAnimation(JButton card, JButton card2, ImageIcon img, JPanel panel) {
+    public void presaAnimationBack(JButton card, JButton card2, ImageIcon img, JPanel panel) {
 
 
-        Timer timer = new Timer(10, new ActionListener() {
+        timerPresaBack = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -135,15 +145,19 @@ public class Animation {
                 }
 
 
+                if(x1 == 950 && y1 == 215 && x2 == 950 && y2 == 215 && j == 1 && i == 1){
+                    ((Timer) e.getSource()).stop();
+                }
+
             }
 
         });
 
-        timer.start();
+        timerPresaBack.start();
     }
 
-    public void presaAnimationBack(JButton card, JButton card2, ImageIcon img, JPanel panel) {
-        Timer timer = new Timer(10, new ActionListener() {
+    public void presaAnimation(JButton card, JButton card2, ImageIcon img, JPanel panel) {
+        timerPresa = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -209,14 +223,19 @@ public class Animation {
                     card2.repaint();
                 }
 
+
+                if (x1 == 950 && y1 == 430 && x2 == 950 && y2 == 430 && m == 1 && n == 1){
+                    ((Timer) e.getSource()).stop();
+                }
+
             }
         });
 
-        timer.start();
+        timerPresa.start();
     }
 
     public void pescataAnimation(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(10, new ActionListener() {
+        timerPescata = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -231,6 +250,7 @@ public class Animation {
 
                 if (x == x1 && y == 600) {
                     card.setIcon(carta.getImg());
+                    ((Timer) e.getSource()).stop();
                 }
 
                 if (y < 600) {
@@ -248,11 +268,11 @@ public class Animation {
             }
         });
 
-        timer.start();
+        timerPescata.start();
     }
 
     public void pescataAnimationBack(JButton card, Carta carta, int x1) {
-        Timer timer = new Timer(10, new ActionListener() {
+        timerPescataBack = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -278,10 +298,14 @@ public class Animation {
                     card.repaint();
                 }
 
+                if( y == 0 && x == x1){
+                    ((Timer) e.getSource()).stop();
+                }
+
             }
         });
 
-        timer.start();
+        timerPescataBack.start();
     }
 
 

@@ -445,7 +445,7 @@ public class Mazzo {
             int r = selectCard();
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 
-            Timer timer = new Timer(1000, actionEvent -> {
+            Timer timer = new Timer(1500, actionEvent -> {
                 if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
                     animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
