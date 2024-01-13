@@ -57,6 +57,7 @@ public class CerchioLabel extends JLabel {
 
         int xCentro = xPadre + (larghezzaPadre - larghezzaFiglio) / 2;
         int yCentro = yPadre + (altezzaPadre - altezzaFiglio) / 2;
+        System.out.println(xCentro + " x" + yCentro);
 
         figlio.setLocation(xCentro, yCentro);
 	}

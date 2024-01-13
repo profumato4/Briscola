@@ -53,12 +53,19 @@ public class Giocatore {
 						((Timer) e.getSource()).stop();
 
 					}
-					System.out.println(button.getLocation().y + "x" + button.getLocation().x);
 				}
 				
 			}
 		});
 
 		timer.start();
+	}
+
+	public void setPunteggio(int punteggio){
+		this.punteggio = punteggio;
+	}
+
+	public int getPunteggio(){
+		return  punteggio;
 	}
 }

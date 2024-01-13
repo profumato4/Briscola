@@ -8,7 +8,7 @@ public class Carta {
 	private int valore;
 	private ImageIcon img;
 
-    public Carta(String seme, String nome, Integer valore, ImageIcon img) {
+    public Carta(String seme, String nome, int valore, ImageIcon img) {
         String[] semi = {"Spade", "Denara", "Coppe", "Bastoni"};
         for (String seme1 : semi) {
 			if (seme.equals(seme1)) {

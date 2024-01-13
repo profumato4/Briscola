@@ -10,7 +10,13 @@ public class Animation {
     private Timer timerPresaBack;
     private Timer timerPescata;
     private Timer timerPescataBack;
+    private JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
+    private JLabel label2 = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
 
+    public Animation(){
+        label.setBounds(950, 430, 168, 89);
+        label2.setBounds(950, 215, 168, 89);
+    }
 
     public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
         timerDistribuisci = new Timer(5, new ActionListener() {
@@ -99,18 +105,11 @@ public class Animation {
 
                     if (k == 0) {
                         k = 1;
-                        JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-                        label.setBounds(950, 215, 168, 89);
-                        panel.add(label);
+                        label2.setBounds(950, 215, 168, 89);
+                        panel.add(label2);
+                        panel.setComponentZOrder(label2, 1);
                     }
 
-                }
-
-                if (k == 1) {
-                    JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-                    label.setBounds(950, 215, 168, 89);
-                    panel.add(label);
-                    panel.setComponentZOrder(label, 0);
                 }
 
                 if (y1 > 215) {
@@ -178,18 +177,11 @@ public class Animation {
 
                     if (n == 0) {
                         n = 1;
-                        JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
                         label.setBounds(950, 430, 168, 89);
                         panel.add(label);
+                        panel.setComponentZOrder(label, 1);
                     }
 
-                }
-
-                if (n == 1) {
-                    JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-                    label.setBounds(950, 430, 168, 89);
-                    panel.add(label);
-                    panel.setComponentZOrder(label, 0);
                 }
 
                 if (y1 < 430) {
@@ -308,5 +300,12 @@ public class Animation {
         timerPescataBack.start();
     }
 
+    public JLabel getLabel(){
+        return  label;
+    }
+
+    public JLabel getLabel2(){
+        return label2;
+    }
 
 }

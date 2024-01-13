@@ -1,9 +1,8 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Mazzo {
 
@@ -15,6 +14,11 @@ public class Mazzo {
     private String briscola;
     private CerchioLabel carteRimanenti;
     private Animation animation = new Animation();
+
+    private AtomicInteger punteggio = new AtomicInteger(0);
+    private AtomicInteger punteggio2 = new AtomicInteger(0);
+    private CerchioLabel punti1 = new CerchioLabel();
+    private CerchioLabel punti2 = new CerchioLabel();
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
         this.panel = panel;
@@ -397,28 +401,36 @@ public class Mazzo {
 
     private void controllo(JButton card, int n, Giocatore g1){
         if (n == 0) {
-            animation.pescataAnimation(card, distribuisci(g1), 418);
+            animation.pescataAnimation(card, distribuisci(g1, n), 418);
         } else if (n == 1) {
-            animation.pescataAnimation(card, distribuisci(g1), 548);
+            animation.pescataAnimation(card, distribuisci(g1, n), 548);
         } else if (n == 2) {
-            animation.pescataAnimation(card, distribuisci(g1), 678);
+            animation.pescataAnimation(card, distribuisci(g1, n), 678);
         }
     }
 
     private void controllo2(int r, Giocatore g2) {
         if (r == 0) {
-            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 418);
+            animation.pescataAnimationBack(backs.get(r), distribuiscir(g2, r), 418);
         } else if (r == 1) {
-            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 548);
+            animation.pescataAnimationBack(backs.get(r), distribuiscir(g2, r), 548);
         } else if (r == 2) {
-            animation.pescataAnimationBack(backs.get(r), distribuisci(g2), 678);
+            animation.pescataAnimationBack(backs.get(r), distribuiscir(g2, r), 678);
         }
     }
 
-    public Carta distribuisci(Giocatore g) {
-        g.getMano().add(this.mazzo.get(this.indice++));
+    public Carta distribuisci(Giocatore g, int n) {
+        g.getMano().set(n, this.mazzo.get(this.indice++));
+        //g.getMano().add(this.mazzo.get(this.indice++));
         carteRimanenti.setNumero(40 - (indice - 1));
-        return g.getMano().get(2);
+        return g.getMano().get(n);
+    }
+
+    public Carta distribuiscir(Giocatore g, int r) {
+        g.getMano().set(r, this.mazzo.get(this.indice++));
+        //g.getMano().add(this.mazzo.get(this.indice++));
+        carteRimanenti.setNumero(40 - (indice - 1));
+        return g.getMano().get(r);
     }
 
     private void setUpButton(JButton button) {
@@ -445,24 +457,51 @@ public class Mazzo {
             int r = selectCard();
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
 
+            System.out.println(g1.getMano().get(n).getCarta().getNome() + " g1");
+            System.out.println(g2.getMano().get(r).getCarta().getNome() + " g2");
+
+            System.out.println(g1.getMano());
+
             Timer timer = new Timer(1500, actionEvent -> {
+
                 if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
                     animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
                     pescata(card, g1, r, g2, n);
-                    g1.getMano().remove(n);
-                    g2.getMano().remove(r);
+                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
                 } else {
                     animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
                     pescataBack(card, g1, r, g2, n);
-                    g1.getMano().remove(n);
-                    g2.getMano().remove(r);
+                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
                 }
             });
 
             timer.setRepeats(false);
             timer.start();
         });
+    }
+
+    private void calcoloPunteggio(Giocatore g1, Giocatore g2, int r, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
+        if (b){
+            punteggio.addAndGet(g1.getMano().get(n).getCarta().getValore());
+            g1.setPunteggio(punteggio.get());
+            punti1.setSize(60,60);
+            punti1.calcolaCentro(punti1, animation.getLabel());
+            punti1.setNumero(g1.getPunteggio());
+            panel.add(punti1);
+            panel.setComponentZOrder(punti1, 0);
+            panel.repaint();
+        }else {
+            punteggio.addAndGet(g2.getMano().get(r).getCarta().getValore());
+            g2.setPunteggio(punteggio2.get());
+            punti2.setSize(60,60);
+            punti2.calcolaCentro(punti2, animation.getLabel2());
+            punti2.setNumero(g2.getPunteggio());
+            panel.add(punti2);
+            panel.setComponentZOrder(punti2, 0);
+            panel.repaint();
+        }
+
     }
 
 
