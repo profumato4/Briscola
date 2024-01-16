@@ -467,12 +467,12 @@ public class Mazzo {
                 if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
                     animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    pescata(card, g1, r, g2, n);
                     calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
+                    pescata(card, g1, r, g2, n);
                 } else {
                     animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    pescataBack(card, g1, r, g2, n);
                     calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
+                    pescataBack(card, g1, r, g2, n);
                 }
             });
 
@@ -484,6 +484,7 @@ public class Mazzo {
     private void calcoloPunteggio(Giocatore g1, Giocatore g2, int r, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
         if (b){
             punteggio.addAndGet(g1.getMano().get(n).getCarta().getValore());
+            punteggio.addAndGet(g2.getMano().get(r).getCarta().getValore());
             g1.setPunteggio(punteggio.get());
             punti1.setSize(60,60);
             punti1.calcolaCentro(punti1, animation.getLabel());
@@ -491,8 +492,10 @@ public class Mazzo {
             panel.add(punti1);
             panel.setComponentZOrder(punti1, 0);
             panel.repaint();
+            punti1.repaint();
         }else {
-            punteggio.addAndGet(g2.getMano().get(r).getCarta().getValore());
+            punteggio2.addAndGet(g2.getMano().get(r).getCarta().getValore());
+            punteggio2.addAndGet(g1.getMano().get(n).getCarta().getValore());
             g2.setPunteggio(punteggio2.get());
             punti2.setSize(60,60);
             punti2.calcolaCentro(punti2, animation.getLabel2());
@@ -500,6 +503,7 @@ public class Mazzo {
             panel.add(punti2);
             panel.setComponentZOrder(punti2, 0);
             panel.repaint();
+            punti2.repaint();
         }
 
     }
