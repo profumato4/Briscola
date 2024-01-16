@@ -6,11 +6,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Mazzo {
 
-    private final MyArrayList<Carta> mazzo = new MyArrayList<Carta>();
+    private final MyArrayList<Carta> mazzo = new MyArrayList<>();
     private JLabel carta;
     private JPanel panel;
     private int indice = 1; // indice carte da pescare
-    private ArrayList<JButton> backs = new ArrayList<JButton>(); // carte avversario
+    private ArrayList<JButton> backs = new ArrayList<>(); // carte avversario
     private String briscola;
     private CerchioLabel carteRimanenti;
     private Animation animation = new Animation();
