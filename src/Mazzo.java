@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -19,6 +20,8 @@ public class Mazzo {
     private AtomicInteger punteggio2 = new AtomicInteger(0);
     private CerchioLabel punti1 = new CerchioLabel();
     private CerchioLabel punti2 = new CerchioLabel();
+    private boolean flags[] = new boolean[3];
+    private int r;
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
         this.panel = panel;
         this.carteRimanenti = carteRimanenti;
@@ -453,9 +456,9 @@ public class Mazzo {
 
     private void cardActionListner(JButton card, Giocatore g1, Giocatore g2, int n) {
         card.addActionListener(e -> {
-            int r = selectCard();
             g1.lancia(card, g1, g1.getMano().get(n).getCarta());
-            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+
+            lancioBack(g2);
 
             azioniPartita(card, g1, g2, n, r);
         });
@@ -470,10 +473,14 @@ public class Mazzo {
                 animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
                 calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
                 pescata(card, g1, r, g2, n);
-            } else {
+            } else if(g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
+                    g1.getMano().get(n).getCarta(), briscola)){
                 animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
                 calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
                 pescataBack(card, g1, r, g2, n);
+                Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
+                t.setRepeats(false);
+                t.start();
             }
         });
 
@@ -509,5 +516,30 @@ public class Mazzo {
 
     }
 
+    private void lancioBack(Giocatore g2){
+        int i = 0;
+        int x = 0;
+        for(JButton card: backs){
+            if(card.getLocation().x == 598 && card.getLocation().y == 200){
+                flags[i] = true;
+                i++;
+            }
+        }
 
+        for (boolean flag: flags){
+            if(flag){
+                x = 1;
+                break;
+            }
+        }
+
+        if(x == 0){
+            r = selectCard();
+            g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
+            flags[0] = false;
+            flags[1] = false;
+            flags[2] = false;
+        }
+
+    }
 }
