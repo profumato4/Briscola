@@ -444,8 +444,8 @@ public class Mazzo {
         panel.setComponentZOrder(button, 0);
     }
 
-    private int selectCard() {
-        return new Random().nextInt(3);
+    private int selectCard(Giocatore g2) {
+        return new Random().nextInt(g2.getMano().size());
     }
 
 
@@ -468,25 +468,47 @@ public class Mazzo {
 
     private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n, int r) {
         Timer timer = new Timer(1500, actionEvent -> {
-            if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
-                    g2.getMano().get(r).getCarta(), briscola)) {
-                animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
-                pescata(card, g1, r, g2, n);
-            } else if(g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
-                    g1.getMano().get(n).getCarta(), briscola)){
-                animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
-                pescataBack(card, g1, r, g2, n);
-                Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
-                t.setRepeats(false);
-                t.start();
+
+            if(!flags[0] && !flags[1] && !flags[2]){
+                if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
+                        g2.getMano().get(r).getCarta(), briscola)) {
+                    animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
+                    pescata(card, g1, r, g2, n);
+                }else{
+                    azioniBack(card, g1, g2, n, r);
+                }
+
+            } else {
+                if(g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
+                        g1.getMano().get(n).getCarta(), briscola)){
+                    azioniBack(card, g1, g2, n, r);
+                    flags[0] = false;
+                    flags[1] = false;
+                    flags[2] = false;
+                }else{
+                    animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
+                    pescata(card, g1, r, g2, n);
+                    flags[0] = false;
+                    flags[1] = false;
+                    flags[2] = false;
+                }
             }
         });
 
         timer.setRepeats(false);
         timer.start();
 
+    }
+
+    private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n, int r) {
+        animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+        calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
+        pescataBack(card, g1, r, g2, n);
+        Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
+        t.setRepeats(false);
+        t.start();
     }
 
     private void calcoloPunteggio(Giocatore g1, Giocatore g2, int r, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
@@ -534,11 +556,8 @@ public class Mazzo {
         }
 
         if(x == 0){
-            r = selectCard();
+            r = selectCard(g2);
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
-            flags[0] = false;
-            flags[1] = false;
-            flags[2] = false;
         }
 
     }
