@@ -1,3 +1,5 @@
+package Main;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,7 @@ public class Animation {
                 if (x == x1 && y == 600) {
                     card.setIcon(img);
                     ((Timer) e.getSource()).stop();
+                    System.out.println("Timer stoppato");
                 }
 
 
@@ -72,6 +75,7 @@ public class Animation {
 
                 if (y == 0 && x == x1) {
                     ((Timer) e.getSource()).stop();
+                    System.out.println("timer stoppato2");
                 }
 
             }

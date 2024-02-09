@@ -1,49 +1,26 @@
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package Main;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 public class Briscola {
 
 	private static JFrame frame;
 	private JPanel panel;
-	private static Briscola window = new Briscola();
+	private static Briscola window;
 	private Login login = new Login(window);
 	private Register register = new Register(login);
 	private String carte;
 	private CerchioLabel carteRimanenti;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
-            try {
-                window.frame.setVisible(true);
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                try {
-                    SwingUtilities.updateComponentTreeUI(frame);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-	}
-
 	public Briscola() {
 		initialize();
 	}
 
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1178, 861);
+		frame.setVisible(true);
 		panel = new JPanel();
 		panel.setBounds(0, 0, 1040, 667);
 		frame.getContentPane().add(panel);
@@ -76,18 +53,18 @@ public class Briscola {
 
 		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
-		
+
 		carteRimanenti = new CerchioLabel();
 		carteRimanenti.setSize(60,60);
 		carteRimanenti.calcolaCentro(carteRimanenti, mazzo);
-		
+
 		panel.add(carteRimanenti);
 		panel.add(background);
 		panel.add(mazzo);
-		
+
 		panel.setComponentZOrder(mazzo, 1);
 		panel.setComponentZOrder(carteRimanenti, 0);
-		
+
 		panel.repaint();
 
 	}
@@ -103,6 +80,6 @@ public class Briscola {
 		System.out.println(giocatore2.getMano());
 		carteRimanenti.setNumero(40 - (mazzo1.getIndice()-1));
 	}
-	
-	
+
+
 }

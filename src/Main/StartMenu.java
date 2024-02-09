@@ -1,3 +1,5 @@
+package Main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -57,23 +59,20 @@ public class StartMenu {
 		audio.setContentAreaFilled(false);
 		audio.setFocusPainted(false);
 
-		audio.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (play) {
-					play = false;
-					volumeControl.setValue(volumeControl.getMinimum());
-					audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
-					audio.repaint();
-				} else {
-					play = true;
-					volumeControl.setValue(volumeControl.getMaximum());
-					audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-					audio.repaint();
-				}
+		audio.addActionListener(e -> {
+            if (play) {
+                play = false;
+                volumeControl.setValue(volumeControl.getMinimum());
+                audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
+                audio.repaint();
+            } else {
+                play = true;
+                volumeControl.setValue(volumeControl.getMaximum());
+                audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+                audio.repaint();
+            }
 
-			}
-		});
+        });
 
 		panel.add(audio);
 		
@@ -179,46 +178,41 @@ public class StartMenu {
 		logout.setFocusPainted(false);
 		logout.setBackground(Color.GRAY);
 
-		logout.addActionListener(new ActionListener() {
+		logout.addActionListener(e -> {
+            if (login1.isLogged()) {
+                int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
+                        JOptionPane.YES_NO_OPTION);
+                if (conferma == JOptionPane.YES_OPTION) {
+                    login1.setLogged(false);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (login1.isLogged()) {
-					int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
-							JOptionPane.YES_NO_OPTION);
-					if (conferma == JOptionPane.YES_OPTION) {
-						login1.setLogged(false);
+                    try {
+                        File file = new File("res\\Login\\MacAddress.txt");
+                        List<String> righe = FileUtils.readLines(file, "UTF-8");
 
-						try {
-							File file = new File("res\\Login\\MacAddress.txt");
-							List<String> righe = FileUtils.readLines(file, "UTF-8");
-							
-							List<String> righeDaMantenere = new ArrayList<String>();
-							
-							for(String str: righe) {
-								if(!str.contains(login1.getMacAddress())) {
-									righeDaMantenere.add(str);
-								}
-							}
-														
-							FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
-							
-							
-							
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+                        List<String> righeDaMantenere = new ArrayList<String>();
 
-					} else {
-						login1.setLogged(true);
-					}
-				} else {
-					JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
+                        for(String str: righe) {
+                            if(!str.contains(login1.getMacAddress())) {
+                                righeDaMantenere.add(str);
+                            }
+                        }
 
-		});
+                        FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
+
+
+
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                } else {
+                    login1.setLogged(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
@@ -273,11 +267,6 @@ public class StartMenu {
 							clip.close();
 						}
 
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 					}
 
 				}

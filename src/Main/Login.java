@@ -1,3 +1,5 @@
+package Main;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -59,24 +61,22 @@ public class Login {
 		eye.setBorderPainted(false);
 		eye.setContentAreaFilled(false);
 		eye.setFocusPainted(false);
-		eye.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (hide) {
-					eye.setIcon(new ImageIcon("res/Login/view2.png"));
-					eye.repaint();
-					eye.validate();
-					textField.setEchoChar((char) 0);
-					hide = false;
-				} else {
-					eye.setIcon(new ImageIcon("res/Login/hide2.png"));
-					eye.repaint();
-					eye.validate();
-					textField.setEchoChar('\u2022');
-					hide = true;
-				}
+		eye.addActionListener(e -> {
+            if (hide) {
+                eye.setIcon(new ImageIcon("res/Login/view2.png"));
+                eye.repaint();
+                eye.validate();
+                textField.setEchoChar((char) 0);
+                hide = false;
+            } else {
+                eye.setIcon(new ImageIcon("res/Login/hide2.png"));
+                eye.repaint();
+                eye.validate();
+                textField.setEchoChar('\u2022');
+                hide = true;
+            }
 
-			}
-		});
+        });
 		eye.setBounds(280, 208, 20, 20);
 		frame.getContentPane().add(eye);
 		frame.getContentPane().setComponentZOrder(eye, 0);
