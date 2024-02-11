@@ -17,17 +17,20 @@ public class Main extends javax.swing.JFrame {
             new SplashScreen(null, true).setVisible(true);
         });
         Thread.sleep(11500);
-        try {
-            Briscola b = new Briscola();
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        java.awt.EventQueue.invokeLater(() -> {
             try {
-                SwingUtilities.updateComponentTreeUI(b.getFrame());
-            } catch (Exception e) {
+                Briscola b = new Briscola();
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                try {
+                    SwingUtilities.updateComponentTreeUI(b.getFrame());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }catch(Exception e){
                 e.printStackTrace();
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        });
+
     }
 
 

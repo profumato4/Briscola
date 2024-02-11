@@ -447,6 +447,7 @@ public class Mazzo {
     }
 
     private int selectCard(Giocatore g2) {
+        System.out.println(g2.getMano().size());
         return new Random().nextInt(g2.getMano().size());
     }
 

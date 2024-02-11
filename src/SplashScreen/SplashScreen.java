@@ -5,7 +5,11 @@
  */
 package SplashScreen;
 
-import java.awt.Color;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -20,6 +24,7 @@ public class SplashScreen extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbStatus;
     private ProgressBarCustom pro;
+    private ImageLoading il;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -44,6 +49,7 @@ public class SplashScreen extends javax.swing.JDialog {
 
         curvesPanel1 = new CurvesPanel();
         jLabel1 = new javax.swing.JLabel();
+        il = new ImageLoading();
         pro = new ProgressBarCustom();
         lbStatus = new javax.swing.JLabel();
 
@@ -55,8 +61,7 @@ public class SplashScreen extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new ImageIcon("C:\\Users\\Utente\\Desktop\\codici\\java\\Briscola\\src\\LoadingScreen\\logo.png")); // NOI18N
+        il.ImageLoading(jLabel1);
 
         lbStatus.setForeground(new java.awt.Color(200, 200, 200));
         lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -138,42 +143,7 @@ public class SplashScreen extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SplashScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(() -> {
-            SplashScreen dialog = new SplashScreen(new JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
-        });
-    }
 
 
 }
