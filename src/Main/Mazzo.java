@@ -1,7 +1,6 @@
 package Main;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -425,17 +424,27 @@ public class Mazzo {
     }
 
     public Carta distribuisci(Giocatore g, int n) {
-        g.getMano().set(n, this.mazzo.get(this.indice++));
-        //g.getMano().add(this.mazzo.get(this.indice++));
-        carteRimanenti.setNumero(40 - (indice - 1));
+
+        pescaUltimaCarta(g, n);
+
         return g.getMano().get(n);
     }
 
     public Carta distribuiscir(Giocatore g, int r) {
-        g.getMano().set(r, this.mazzo.get(this.indice++));
-        //g.getMano().add(this.mazzo.get(this.indice++));
-        carteRimanenti.setNumero(40 - (indice - 1));
+        pescaUltimaCarta(g, r);
         return g.getMano().get(r);
+    }
+
+    private void pescaUltimaCarta(Giocatore g, int r) {
+        System.out.println(indice);
+        if(indice == 40){
+            g.getMano().set(r, this.mazzo.get(0));
+            this.indice++;
+            carteRimanenti.setNumero(40 - (indice - 1));
+        }else if(indice <= 39){
+            g.getMano().set(r, this.mazzo.get(this.indice++));
+            carteRimanenti.setNumero(40 - (indice - 1));
+        }
     }
 
     private void setUpButton(JButton button) {
@@ -447,7 +456,6 @@ public class Mazzo {
     }
 
     private int selectCard(Giocatore g2) {
-        System.out.println(g2.getMano().size());
         return new Random().nextInt(g2.getMano().size());
     }
 
@@ -560,6 +568,7 @@ public class Mazzo {
 
         if(x == 0){
             r = selectCard(g2);
+            System.out.println(r);
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
         }
 

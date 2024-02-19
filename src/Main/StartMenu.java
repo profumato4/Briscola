@@ -62,13 +62,15 @@ public class StartMenu {
 		audio.addActionListener(e -> {
             if (play) {
                 play = false;
-                volumeControl.setValue(volumeControl.getMinimum());
+				volumeControl.setValue((float) -80.0);
+				System.out.println(volumeControl.getValue());
                 audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
                 audio.repaint();
             } else {
                 play = true;
-                volumeControl.setValue(volumeControl.getMaximum());
-                audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+				volumeControl.setValue((float) 0.0);
+				System.out.println(volumeControl.getValue());
+				audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
                 audio.repaint();
             }
 
@@ -81,24 +83,21 @@ public class StartMenu {
 		cards.setBorderPainted(false);
 		cards.setContentAreaFilled(false);
 		cards.setFocusPainted(false);
-		
-		cards.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				card = new CustomDialog(frame);
-				card.addWindowListener(new WindowAdapter() {
-	                @Override
-	                public void windowClosed(WindowEvent e) {
-	                    carte = card.getCarteType();
-	                    System.out.println("Valore di carte dopo il dialogo: " + carte);
-	                    System.out.println(getCarteType());
-	                }
-	            });
-	            card.setVisible(true);
-			}
-		});
+
+		cards.addActionListener(e -> {
+
+
+            card = new CustomDialog(frame);
+            card.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    carte = card.getCarteType();
+                    System.out.println("Valore di carte dopo il dialogo: " + carte);
+                    System.out.println(getCarteType());
+                }
+            });
+            card.setVisible(true);
+        });
 				
 		panel.add(cards);
 		
@@ -124,21 +123,16 @@ public class StartMenu {
 		login.setBorderPainted(false);
 		login.setFocusPainted(false);
 		login.setBackground(Color.GRAY);
-		login.addActionListener(new ActionListener() {
+		login.addActionListener(e -> {
+            if (login1.isLogged()) {
+                JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                login1.getFrame().setVisible(true);
+                frame.setVisible(false);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (login1.isLogged()) {
-					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
-							JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					login1.getFrame().setVisible(true);
-					frame.setVisible(false);
-
-				}
-			}
-
-		});
+            }
+        });
 		panel.add(login);
 
 		JButton register = new JButton("Register");
@@ -148,15 +142,10 @@ public class StartMenu {
 		register.setFocusPainted(false);
 		register.setBackground(Color.GRAY);
 
-		register.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				register1.getFrame().setVisible(true);
-				frame.setVisible(false);
-			}
-
-		});
+		register.addActionListener(e -> {
+            register1.getFrame().setVisible(true);
+            frame.setVisible(false);
+        });
 
 		panel.add(register);
 		panel.setComponentZOrder(register, 0);
@@ -246,6 +235,8 @@ public class StartMenu {
 						clip.open(audioIn);
 
 						volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+						volumeControl.setValue((float)0.0);
 
 						clip.start();
 

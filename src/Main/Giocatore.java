@@ -15,7 +15,7 @@ public class Giocatore {
 
 	public Giocatore(String nickName) {
 		this.nickName = nickName;
-		this.mano = new ArrayList<Carta>();
+		this.mano = new ArrayList<>();
 		this.punteggio = 0;
 	}
 
