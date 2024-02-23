@@ -65,6 +65,8 @@ public class Briscola {
 		panel.setComponentZOrder(mazzo, 1);
 		panel.setComponentZOrder(carteRimanenti, 0);
 
+		System.out.println(carteRimanenti.getX() + System.lineSeparator() + carteRimanenti.getY());
+
 		panel.repaint();
 
 	}

@@ -1,6 +1,7 @@
 package Main;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -642,6 +643,7 @@ public class Mazzo {
             g.getMano().set(r, rotateBriscola(this.mazzo.get(0), cartaType));
             this.indice++;
             carteRimanenti.setNumero(40 - (indice - 1));
+            removeMazzo();
         } else if (indice <= 39) {
             g.getMano().set(r, this.mazzo.get(this.indice++));
             carteRimanenti.setNumero(40 - (indice - 1));
@@ -780,4 +782,22 @@ public class Mazzo {
         }
 
     }
+
+    private void removeMazzo(){
+        Component component = panel.getComponentAt(80, 155);
+        Component component2 = panel.getComponentAt(119, 209);
+        removeComponent(component);
+        removeComponent(component2);
+        removeComponent(carta);
+    }
+
+    private void removeComponent(Component component){
+        if (component instanceof JLabel) {
+            System.out.println("Component found: JLabel");
+            panel.remove(component);
+            panel.revalidate();
+            panel.repaint();
+        }
+    }
+
 }
