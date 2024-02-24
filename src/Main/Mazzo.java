@@ -23,7 +23,7 @@ public class Mazzo {
     private CerchioLabel punti1 = new CerchioLabel();
     private CerchioLabel punti2 = new CerchioLabel();
     private boolean flags[] = new boolean[3];
-    private int r;
+    private int r = new Random().nextInt(2);
     private String cartaType;
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
@@ -673,38 +673,38 @@ public class Mazzo {
 
             lancioBack(g2);
 
-            azioniPartita(card, g1, g2, n, r);
+            azioniPartita(card, g1, g2, n);
         });
 
     }
 
 
-    private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n, int r) {
+    private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n) {
         Timer timer = new Timer(1500, actionEvent -> {
-
+            System.out.println("Il valore di r: "+r);
             if (!flags[0] && !flags[1] && !flags[2]) {
                 if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
                     animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
+                    calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
                     if(indice <= 40){
                         pescata(card, g1, r, g2, n);
                     }
 
                 } else {
-                    azioniBack(card, g1, g2, n, r);
+                    azioniBack(card, g1, g2, n);
                 }
 
             } else {
                 if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
                         g1.getMano().get(n).getCarta(), briscola)) {
-                    azioniBack(card, g1, g2, n, r);
+                    azioniBack(card, g1, g2, n);
                     flags[0] = false;
                     flags[1] = false;
                     flags[2] = false;
                 } else {
                     animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, true);
+                    calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
                     if(indice <= 40){
                         pescata(card, g1, r, g2, n);
                     }
@@ -720,18 +720,23 @@ public class Mazzo {
 
     }
 
-    private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n, int r) {
+    private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n) {
         animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-        calcoloPunteggio(g1, g2, r, n, punteggio2, punteggio, punti1, punti2, false);
+        calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, false);
         if(indice <= 40){
             pescataBack(card, g1, r, g2, n);
         }
+        if(indice > 40){
+            System.out.println(g2.getMano());
+            g2.getMano().remove(r);
+        }
+        r = selectCard(g2);
         Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
         t.setRepeats(false);
         t.start();
     }
 
-    private void calcoloPunteggio(Giocatore g1, Giocatore g2, int r, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
+    private void calcoloPunteggio(Giocatore g1, Giocatore g2, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
         if (b) {
             punteggio.addAndGet(g1.getMano().get(n).getCarta().getValore());
             punteggio.addAndGet(g2.getMano().get(r).getCarta().getValore());
@@ -761,13 +766,16 @@ public class Mazzo {
     private void lancioBack(Giocatore g2) {
         int i = 0;
         int x = 0;
+
+        // controllo se è stata gia lanciata una carta
         for (JButton card : backs) {
             if (card.getLocation().x == 598 && card.getLocation().y == 200) {
                 flags[i] = true;
-                i++;
             }
+            i++;
         }
 
+        // se è stata gia lanciata una carta la x viene impostata su 1 cosi da non lanciarne altre
         for (boolean flag : flags) {
             if (flag) {
                 x = 1;
