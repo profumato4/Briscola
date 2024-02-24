@@ -54,22 +54,19 @@ class CustomDialog extends JDialog {
 		left.setContentAreaFilled(false);
 		left.setFocusPainted(false);
 
-		left.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		left.addActionListener(e -> {
 
-				if (i == 0) {
-					text.setText("Piacentine");
-					imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
-					i = 1;
-				} else if (i == 1) {
-					text.setText("Napoletane");
-					imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
-					i = 0;
-				}
+            if (i == 0) {
+                text.setText("Piacentine");
+                imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
+                i = 1;
+            } else if (i == 1) {
+                text.setText("Napoletane");
+                imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
+                i = 0;
+            }
 
-			}
-		});
+        });
 
 		JButton right = new JButton(new ImageIcon("res/Arrows/right2.png"));
 		right.setBounds(260, 120, 120, 120);
