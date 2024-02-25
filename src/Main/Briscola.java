@@ -1,15 +1,14 @@
 package Main;
 
 import javax.swing.*;
-import java.io.File;
 
 public class Briscola {
 
 	private static JFrame frame;
 	private JPanel panel;
 	private static Briscola window;
-	private Login login = new Login(window);
-	private Register register = new Register(login);
+	private final Login login = new Login(window);
+	private final Register register = new Register(login);
 	private String carte;
 	private CerchioLabel carteRimanenti;
 
