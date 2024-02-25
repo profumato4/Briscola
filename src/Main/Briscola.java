@@ -7,8 +7,8 @@ public class Briscola {
 	private static JFrame frame;
 	private JPanel panel;
 	private static Briscola window;
-	private final Login login = new Login(window);
-	private final Register register = new Register(login);
+	private Login login = new Login(window);
+	private Register register = new Register(login);
 	private String carte;
 	private CerchioLabel carteRimanenti;
 
