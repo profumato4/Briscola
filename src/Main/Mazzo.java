@@ -47,7 +47,7 @@ public class Mazzo {
             mazzo.add(new Carta("Spade", "5", 0, new ImageIcon("res/Cards/35.png")));
             mazzo.add(new Carta("Spade", "6", 0, new ImageIcon("res/Cards/36.png")));
             mazzo.add(new Carta("Spade", "7", 0, new ImageIcon("res/Cards/37.png")));
-            mazzo.add(new Carta("Spade", "Fante", 2, new ImageIcon("res/Cards/38.png")));
+            mazzo.add(new Carta("Spade", "Fante", 2, new ImageIcon("res/Cards/38.p  ng")));
             mazzo.add(new Carta("Spade", "Cavallo", 3, new ImageIcon("res/Cards/39.png")));
             mazzo.add(new Carta("Spade", "Re", 4, new ImageIcon("res/Cards/40.png")));
             // coppe
@@ -83,7 +83,52 @@ public class Mazzo {
             mazzo.add(new Carta("Bastoni", "Fante", 2, new ImageIcon("res/Cards/8.png")));
             mazzo.add(new Carta("Bastoni", "Cavallo", 3, new ImageIcon("res/Cards/9.png")));
             mazzo.add(new Carta("Bastoni", "Re", 4, new ImageIcon("res/Cards/10.png")));
-        } else if (str.equals("Napoletane")) {
+        } else if (str.equals("Siciliane")) {
+            // spade
+            mazzo.add(new Carta("Spade", "Asso", 11, new ImageIcon("res/Cards/Siciliane/carta_31.png")));
+            mazzo.add(new Carta("Spade", "2", 0, new ImageIcon("res/Cards/Siciliane/carta_32.png")));
+            mazzo.add(new Carta("Spade", "3", 10, new ImageIcon("res/Cards/Siciliane/carta_33.png")));
+            mazzo.add(new Carta("Spade", "4", 0, new ImageIcon("res/Cards/Siciliane/carta_34.png")));
+            mazzo.add(new Carta("Spade", "5", 0, new ImageIcon("res/Cards/Siciliane/carta_35.png")));
+            mazzo.add(new Carta("Spade", "6", 0, new ImageIcon("res/Cards/Siciliane/carta_36.png")));
+            mazzo.add(new Carta("Spade", "7", 0, new ImageIcon("res/Cards/Siciliane/carta_37.png")));
+            mazzo.add(new Carta("Spade", "Fante", 2, new ImageIcon("res/Cards/Siciliane/carta_38.png")));
+            mazzo.add(new Carta("Spade", "Cavallo", 3, new ImageIcon("res/Cards/Siciliane/carta_39.png")));
+            mazzo.add(new Carta("Spade", "Re", 4, new ImageIcon("res/Cards/Siciliane/carta_40.png")));
+            // coppe
+            mazzo.add(new Carta("Coppe", "Asso", 11, new ImageIcon("res/Cards/Siciliane/carta_1.png")));
+            mazzo.add(new Carta("Coppe", "2", 0, new ImageIcon("res/Cards/Siciliane/carta_2.png")));
+            mazzo.add(new Carta("Coppe", "3", 10, new ImageIcon("res/Cards/Siciliane/carta_3.png")));
+            mazzo.add(new Carta("Coppe", "4", 0, new ImageIcon("res/Cards/Siciliane/carta_4.png")));
+            mazzo.add(new Carta("Coppe", "5", 0, new ImageIcon("res/Cards/Siciliane/carta_5.png")));
+            mazzo.add(new Carta("Coppe", "6", 0, new ImageIcon("res/Cards/Siciliane/carta_6.png")));
+            mazzo.add(new Carta("Coppe", "7", 0, new ImageIcon("res/Cards/Siciliane/carta_7.png")));
+            mazzo.add(new Carta("Coppe", "Fante", 2, new ImageIcon("res/Cards/Siciliane/carta_8.png")));
+            mazzo.add(new Carta("Coppe", "Cavallo", 3, new ImageIcon("res/Cards/Siciliane/carta_9.png")));
+            mazzo.add(new Carta("Coppe", "Re", 4, new ImageIcon("res/Cards/Siciliane/carta_10.png")));
+            // denara
+            mazzo.add(new Carta("Denara", "Asso", 11, new ImageIcon("res/Cards/Siciliane/11.png")));
+            mazzo.add(new Carta("Denara", "2", 0, new ImageIcon("res/Cards/Siciliane/carta_12.png")));
+            mazzo.add(new Carta("Denara", "3", 10, new ImageIcon("res/Cards/Siciliane/carta_13.png")));
+            mazzo.add(new Carta("Denara", "4", 0, new ImageIcon("res/Cards/Siciliane/carta_14.png")));
+            mazzo.add(new Carta("Denara", "5", 0, new ImageIcon("res/Cards/Siciliane/carta_15.png")));
+            mazzo.add(new Carta("Denara", "6", 0, new ImageIcon("res/Cards/Siciliane/carta_16.png")));
+            mazzo.add(new Carta("Denara", "7", 0, new ImageIcon("res/Cards/Siciliane/carta_17.png")));
+            mazzo.add(new Carta("Denara", "Fante", 2, new ImageIcon("res/Cards/Siciliane/carta_18.png")));
+            mazzo.add(new Carta("Denara", "Cavallo", 3, new ImageIcon("res/Cards/Siciliane/carta_19.png")));
+            mazzo.add(new Carta("Denara", "Re", 4, new ImageIcon("res/Cards/Siciliane/carta_20.png")));
+            // bastoni
+            mazzo.add(new Carta("Bastoni", "Asso", 11, new ImageIcon("res/Cards/Siciliane/carta_21.png")));
+            mazzo.add(new Carta("Bastoni", "2", 0, new ImageIcon("res/Cards/Siciliane/carta_22.png")));
+            mazzo.add(new Carta("Bastoni", "3", 10, new ImageIcon("res/Cards/Siciliane/carta_23.png")));
+            mazzo.add(new Carta("Bastoni", "4", 0, new ImageIcon("res/Cards/Siciliane/carta_24.png")));
+            mazzo.add(new Carta("Bastoni", "5", 0, new ImageIcon("res/Cards/Siciliane/carta_25.png")));
+            mazzo.add(new Carta("Bastoni", "6", 0, new ImageIcon("res/Cards/Siciliane/carta_26.png")));
+            mazzo.add(new Carta("Bastoni", "7", 0, new ImageIcon("res/Cards/Siciliane/carta_27.png")));
+            mazzo.add(new Carta("Bastoni", "Fante", 2, new ImageIcon("res/Cards/Siciliane/carta_28.png")));
+            mazzo.add(new Carta("Bastoni", "Cavallo", 3, new ImageIcon("res/Cards/Siciliane/carta_29.png")));
+            mazzo.add(new Carta("Bastoni", "Re", 4, new ImageIcon("res/Cards/Siciliane/carta_30.png")));
+        }else if (str.equals("Napoletane")) {
             // spade
             mazzo.add(new Carta("Spade", "Asso", 11, new ImageIcon("res/Cards/Napoletane/2/00.png")));
             mazzo.add(new Carta("Spade", "2", 0, new ImageIcon("res/Cards/Napoletane/2/10.png")));
@@ -446,97 +491,97 @@ public class Mazzo {
             // spade
 
             if (carta.getNome().equals("Asso") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/00.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/00.png"));
             } else if (carta.getNome().equals("2") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/10.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/10.png"));
             } else if (carta.getNome().equals("3") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/20.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/20.png"));
             } else if (carta.getNome().equals("4") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/30.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/30.png"));
             } else if (carta.getNome().equals("5") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/40.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/40.png"));
             } else if (carta.getNome().equals("6") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/50.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/50.png"));
             } else if (carta.getNome().equals("7") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/60.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/60.png"));
             } else if (carta.getNome().equals("Fante") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/100.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/100.png"));
             } else if (carta.getNome().equals("Cavallo") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/110.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/110.png"));
             } else if (carta.getNome().equals("Re") && carta.getSeme().equals("Spade")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/120.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/120.png"));
             }
 
             // coppe
 
             else if (carta.getNome().equals("Asso") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/02.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/02.png"));
             } else if (carta.getNome().equals("2") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/12.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/12.png"));
             } else if (carta.getNome().equals("3") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/22.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/22.png"));
             } else if (carta.getNome().equals("4") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/32.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/32.png"));
             } else if (carta.getNome().equals("5") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/42.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/42.png"));
             } else if (carta.getNome().equals("6") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/52.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/52.png"));
             } else if (carta.getNome().equals("7") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/62.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/62.png"));
             } else if (carta.getNome().equals("Fante") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/102.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/102.png"));
             } else if (carta.getNome().equals("Cavallo") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/112.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/112.png"));
             } else if (carta.getNome().equals("Re") && carta.getSeme().equals("Coppe")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/122.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/122.png"));
             }
 
             // denara
 
             else if (carta.getNome().equals("Asso") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/01.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/01.png"));
             } else if (carta.getNome().equals("2") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/11.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/11.png"));
             } else if (carta.getNome().equals("3") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/21.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/21.png"));
             } else if (carta.getNome().equals("4") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/31.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/31.png"));
             } else if (carta.getNome().equals("5") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/41.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/41.png"));
             } else if (carta.getNome().equals("6") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/51.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/51.png"));
             } else if (carta.getNome().equals("7") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/61.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/61.png"));
             } else if (carta.getNome().equals("Fante") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/101.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/101.png"));
             } else if (carta.getNome().equals("Cavallo") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/111.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/111.png"));
             } else if (carta.getNome().equals("Re") && carta.getSeme().equals("Denara")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/121.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/121.png"));
             }
 
             // bastoni
 
             else if (carta.getNome().equals("Asso") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/03.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/03.png"));
             } else if (carta.getNome().equals("2") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/13.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/13.png"));
             } else if (carta.getNome().equals("3") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/23.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/23.png"));
             } else if (carta.getNome().equals("4") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/33.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/33.png"));
             } else if (carta.getNome().equals("5") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/43.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/43.png"));
             } else if (carta.getNome().equals("6") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/53.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/53.png"));
             } else if (carta.getNome().equals("7") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/63.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/63.png"));
             } else if (carta.getNome().equals("Fante") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/103.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/103.png"));
             } else if (carta.getNome().equals("Cavallo") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/113.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/113.png"));
             } else if (carta.getNome().equals("Re") && carta.getSeme().equals("Bastoni")) {
-                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/rotate/123.png"));
+                carta.setImg(new ImageIcon("res/Cards/Napoletane/2/123.png"));
             }
         }
 
@@ -694,15 +739,12 @@ public class Mazzo {
                 if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
                         g1.getMano().get(n).getCarta(), briscola)) {
                     azioniBack(card, g1, g2, n);
-                    flags[0] = false;
-                    flags[1] = false;
-                    flags[2] = false;
                 } else {
                     azioniGiocatore1(card, g1, g2, n);
-                    flags[0] = false;
-                    flags[1] = false;
-                    flags[2] = false;
                 }
+                flags[0] = false;
+                flags[1] = false;
+                flags[2] = false;
             }
         });
 
