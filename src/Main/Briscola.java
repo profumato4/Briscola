@@ -1,6 +1,7 @@
 package Main;
 
 import javax.swing.*;
+import java.io.File;
 
 public class Briscola {
 
@@ -21,6 +22,8 @@ public class Briscola {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setVisible(true);
+		frame.setIconImage(new ImageIcon("src/LoadingScreen/logo.png").getImage());
+		frame.setTitle("JBriscola");
 		panel = new JPanel();
 		panel.setBounds(0, 0, 1040, 667);
 		frame.getContentPane().add(panel);
