@@ -685,12 +685,7 @@ public class Mazzo {
             if (!flags[0] && !flags[1] && !flags[2]) {
                 if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
                         g2.getMano().get(r).getCarta(), briscola)) {
-                    animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
-                    if(indice <= 40){
-                        pescata(card, g1, r, g2, n);
-                    }
-
+                    azioniGiocatore1(card, g1, g2, n);
                 } else {
                     azioniBack(card, g1, g2, n);
                 }
@@ -703,11 +698,7 @@ public class Mazzo {
                     flags[1] = false;
                     flags[2] = false;
                 } else {
-                    animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-                    calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
-                    if(indice <= 40){
-                        pescata(card, g1, r, g2, n);
-                    }
+                    azioniGiocatore1(card, g1, g2, n);
                     flags[0] = false;
                     flags[1] = false;
                     flags[2] = false;
@@ -720,6 +711,17 @@ public class Mazzo {
 
     }
 
+    private void azioniGiocatore1(JButton card, Giocatore g1, Giocatore g2, int n) {
+        animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+        calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
+        if(indice <= 40){
+            pescata(card, g1, r, g2, n);
+        }
+        if(indice > 40){
+            removeCard(g2);
+        }
+    }
+
     private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n) {
         animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
         calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, false);
@@ -727,8 +729,7 @@ public class Mazzo {
             pescataBack(card, g1, r, g2, n);
         }
         if(indice > 40){
-            System.out.println(g2.getMano());
-            g2.getMano().remove(r);
+            removeCard(g2);
         }
         r = selectCard(g2);
         Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
@@ -806,6 +807,12 @@ public class Mazzo {
             panel.revalidate();
             panel.repaint();
         }
+    }
+
+    private void removeCard(Giocatore g2){
+        System.out.println(g2.getMano());
+        g2.getMano().remove(r);
+        backs.remove(r);
     }
 
 }
