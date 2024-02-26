@@ -28,11 +28,11 @@ public class GradientPanel extends JPanel {
         g2.setPaint(painter);
         g2.fill(g2.getClip());
         painter = new GradientPaint(0, 0, gradientEnd,
-                0, height / 2, gradientStart);
+                0, (float) height / 2, gradientStart);
         g2.setPaint(painter);
         g2.fill(g2.getClip());
 
-        painter = new GradientPaint(0, height / 2, gradientStart,
+        painter = new GradientPaint(0, (float) height / 2, gradientStart,
                 0, height, gradientEnd);
         g2.setPaint(painter);
         g2.fill(g2.getClip());
