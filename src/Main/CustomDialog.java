@@ -2,8 +2,6 @@ package Main;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,7 +16,6 @@ import javax.swing.JPanel;
 
 class CustomDialog extends JDialog {
 
-	private int i = 1;
 	private String carte;
 	
 	public CustomDialog() {
@@ -39,14 +36,16 @@ class CustomDialog extends JDialog {
 		imageLabel.setBounds(200, 200, 100, 172);
 		
 		if(readCardType().equals("Napoletane")) {
-			i = 0;
 			text.setText("Napoletane");
 			imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
 		}else if(readCardType().equals("Piacentine")) {
 			text.setText("Piacentine");
 			imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
-			i = 1;
+		}else if(readCardType().equals("Siciliane")){
+			text.setText("Siciliane");
+			imageLabel.setIcon(new ImageIcon("res/Cards/card3.jpg"));
 		}
+
 
 		JButton left = new JButton(new ImageIcon("res/Arrows/left2.png"));
 		left.setBounds(10, 120, 120, 120);
@@ -56,15 +55,16 @@ class CustomDialog extends JDialog {
 
 		left.addActionListener(e -> {
 
-            if (i == 0) {
-                text.setText("Piacentine");
-                imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
-                i = 1;
-            } else if (i == 1) {
-                text.setText("Napoletane");
-                imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
-                i = 0;
-            }
+			if (text.getText().equals("Siciliane")) {
+				text.setText("Napoletane");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
+			} else if (text.getText().equals("Napoletane")) {
+				text.setText("Piacentine");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
+			}else if(text.getText().equals("Piacentine")){
+				text.setText("Siciliane");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card3.jpg"));
+			}
 
         });
 
@@ -74,21 +74,17 @@ class CustomDialog extends JDialog {
 		right.setContentAreaFilled(false);
 		right.setFocusPainted(false);
 
-		right.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		right.addActionListener(e -> {
 
-				if (i == 0) {
-					text.setText("Piacentine");
-					imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
-
-					i = 1;
-				} else if (i == 1) {
-					text.setText("Napoletane");
-					imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
-					i = 0;
-				}
-
+			if (text.getText().equals("Siciliane")) {
+				text.setText("Piacentine");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card2.jpg"));
+			} else if (text.getText().equals("Piacentine")) {
+				text.setText("Napoletane");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card1.jpg"));
+			}else if(text.getText().equals("Napoletane")){
+				text.setText("Siciliane");
+				imageLabel.setIcon(new ImageIcon("res/Cards/card3.jpg"));
 			}
 		});
 		
@@ -97,32 +93,24 @@ class CustomDialog extends JDialog {
 		conferma.setBounds(190, 320, 180, 40);
 		conferma.setFocusPainted(false);
 		
-		conferma.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		conferma.addActionListener(e -> {
 
-				carte = text.getText();
-				System.out.println(carte);
-				try {
-					writeCardType(carte);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				dispose();
-			}
-		});
+            carte = text.getText();
+            System.out.println(carte);
+            try {
+                writeCardType(carte);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            dispose();
+        });
 		
 		JButton annulla = new JButton("Annulla");
 		annulla.setFont(new Font("Arial", Font.BOLD, 26));
 		annulla.setBounds(10, 320, 180, 40);
 		annulla.setFocusPainted(false);
 		
-		annulla.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+		annulla.addActionListener(e -> dispose());
 		
 		panel.add(annulla);
 		panel.add(conferma);
