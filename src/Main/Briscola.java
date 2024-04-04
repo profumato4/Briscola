@@ -8,7 +8,7 @@ public class Briscola {
 	private JPanel panel;
 	private static Briscola window;
 	private Login login = new Login(window);
-	private Register register = new Register(login);
+	private Register register = new Register(login, login.getDb());
 	private String carte;
 	private CerchioLabel carteRimanenti;
 

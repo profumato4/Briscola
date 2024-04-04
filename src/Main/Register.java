@@ -6,6 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,13 +29,15 @@ public class Register {
 	private JPasswordField textField_1;
 	private boolean hide = true;
 	private boolean hide2 = true;
+	private Database db;
 
-	public Register(Login login) {
+	public Register(Login login, Database db) {
+		this.db = db;
 		initialize(login);
 	}
 
 	private void initialize(Login login) {
-		frame = new JFrame();
+        frame = new JFrame();
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -39,43 +46,39 @@ public class Register {
 		eye1.setBorderPainted(false);
 		eye1.setContentAreaFilled(false);
 		eye1.setFocusPainted(false);
-		eye1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (hide) {
-					eye1.setIcon(new ImageIcon("res/Login/view2.png"));
-					eye1.repaint();
-					textField.setEchoChar((char) 0);
-					hide = false;
-				} else {
-					eye1.setIcon(new ImageIcon("res/Login/hide2.png"));
-					eye1.repaint();
-					textField.setEchoChar('\u2022');
-					hide = true;
-				}
+		eye1.addActionListener(e -> {
+            if (hide) {
+                eye1.setIcon(new ImageIcon("res/Login/view2.png"));
+                eye1.repaint();
+                textField.setEchoChar((char) 0);
+                hide = false;
+            } else {
+                eye1.setIcon(new ImageIcon("res/Login/hide2.png"));
+                eye1.repaint();
+                textField.setEchoChar('\u2022');
+                hide = true;
+            }
 
-			}
-		});
+        });
 		eye1.setBounds(280, 190, 20, 20);
 		frame.getContentPane().add(eye1);
 		frame.getContentPane().setComponentZOrder(eye1, 0);
 
 		JButton eye2 = new JButton(new ImageIcon("res/Login/hide2.png"));
-		eye2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (hide2) {
-					eye2.setIcon(new ImageIcon("res/Login/view2.png"));
-					eye2.repaint();
-					textField_1.setEchoChar((char) 0);
-					hide2 = false;
-				} else {
-					eye2.setIcon(new ImageIcon("res/Login/hide2.png"));
-					eye2.repaint();
-					textField_1.setEchoChar('\u2022');
-					hide2 = true;
-				}
+		eye2.addActionListener(e -> {
+            if (hide2) {
+                eye2.setIcon(new ImageIcon("res/Login/view2.png"));
+                eye2.repaint();
+                textField_1.setEchoChar((char) 0);
+                hide2 = false;
+            } else {
+                eye2.setIcon(new ImageIcon("res/Login/hide2.png"));
+                eye2.repaint();
+                textField_1.setEchoChar('\u2022');
+                hide2 = true;
+            }
 
-			}
-		});
+        });
 		eye2.setBounds(280, 245, 20, 20);
 		eye2.setBorderPainted(false);
 		eye2.setContentAreaFilled(false);
@@ -113,36 +116,24 @@ public class Register {
 		frame.getContentPane().add(lblNewLabel_1_1);
 
 		JButton btnNewButton = new JButton("Register");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String userName = txtCcc.getText() + ";";
-				char[] chars1 = textField.getPassword();
-				String password1 = new String(chars1);
-				char[] chars2 = textField_1.getPassword();
-				String password2 = new String(chars2);
+		btnNewButton.addActionListener(e -> {
+            String username = txtCcc.getText();
+            char[] chars1 = textField.getPassword();
+            String password1 = new String(chars1);
+            char[] chars2 = textField_1.getPassword();
+            String password2 = new String(chars2);
 
-				if (password1.equals(password2)) {
-					try {
-						FileWriter file = new FileWriter("res\\Login\\Login.txt", true);
-						file.append(userName);
-						file.append(password1);
-						file.append("\n");
-						file.close();
-						System.out.println("fatto");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+            if (password1.equals(password2)) {
+                db.registerUser(username, password1);
+                txtCcc.setText("");
+                textField.setText("");
+                textField_1.setText("");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Le password non coincidono", "Register",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
 
-					txtCcc.setText("");
-					textField.setText("");
-					textField_1.setText("");
-				} else {
-					JOptionPane.showMessageDialog(frame, "Le password non coincidono", "Register",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-
-			}
-		});
+        });
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.setBounds(78, 300, 229, 23);
@@ -150,19 +141,17 @@ public class Register {
 		frame.getContentPane().add(btnNewButton);
 
 		JButton btnRegister = new JButton("Back to login");
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (login.isLogged()) {
-					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
-							JOptionPane.INFORMATION_MESSAGE);
-					login.getBriscolaFrame().setVisible(true);
-					frame.setVisible(false);
-				} else{
-					login.getFrame().setVisible(true);
-					frame.setVisible(false);
-				}
-			}
-		});
+		btnRegister.addActionListener(e -> {
+            if (login.isLogged()) {
+                JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+                        JOptionPane.INFORMATION_MESSAGE);
+                login.getBriscolaFrame().setVisible(true);
+                frame.setVisible(false);
+            } else{
+                login.getFrame().setVisible(true);
+                frame.setVisible(false);
+            }
+        });
 		btnRegister.setForeground(Color.BLUE);
 		btnRegister.setContentAreaFilled(false);
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -189,5 +178,6 @@ public class Register {
 	public JFrame getFrame() {
 		return frame;
 	}
+
 
 }

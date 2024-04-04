@@ -1,28 +1,16 @@
 package Main;
 
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.JCheckBox;
+import java.sql.SQLException;
 
 public class Login {
 
@@ -32,7 +20,19 @@ public class Login {
 	@SuppressWarnings("unused")
 	private Briscola briscola;
 	private boolean logged = false;
-	Register register = new Register(this);
+	private Database db;
+
+	{
+		try {
+			db = new Database(frame);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	Register register = new Register(this, db);
 	private boolean hide = true;
 	private String userName;
 	private boolean macAddressFound = false;
@@ -103,6 +103,12 @@ public class Login {
 		textField.setColumns(10);
 		textField.setBorder(new LineBorder(Color.CYAN));
 		textField.setBackground(Color.WHITE);
+
+		textField.addActionListener(e -> {
+            frame.repaint();
+            frame.revalidate();
+        });
+
 		frame.getContentPane().add(textField);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
@@ -111,69 +117,53 @@ public class Login {
 
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(78, 269, 229, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			@SuppressWarnings("static-access")
-			public void actionPerformed(ActionEvent e) {
-				if (!logged) {
-					userName = txtCcc.getText();
-					char[] chars = textField.getPassword();
-					String password = new String(chars);
+		btnNewButton.addActionListener(e -> {
+			if (!logged) {
+				String username = txtCcc.getText();
+				char[] chars = textField.getPassword();
+				String password = new String(chars);
 
-					try {
-						FileReader file = new FileReader("res\\Login\\Login.txt");
-						BufferedReader reader = new BufferedReader(file);
+                try {
+                    if(db.loginUser(username, password)){
+						logged = true;
+						briscola.getFrame().setVisible(true);
+						briscola.getFrame().repaint();
+						briscola.getFrame().revalidate();
+						frame.setVisible(false);
+						System.out.println(isLogged());
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
-						String str;
-
-						try {
-							while ((str = reader.readLine()) != null) {
-								String[] split = str.split(";");
-
-								if (userName.equals(split[0]) && password.equals(split[1])) {
-									logged = true;
-									briscola.getFrame().setVisible(true);
-									frame.setVisible(false);
-									System.out.println(isLogged());
-									break;
-								}
-
-							}
-
-							if (!logged) {
-								JOptionPane.showMessageDialog(frame, "Utente non registrato", "Login",
-										JOptionPane.INFORMATION_MESSAGE);
-							}
-
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-
-					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					}
-
-				} else {
-					JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+                if (!logged) {
+					JOptionPane.showMessageDialog(frame, "Utente non registrato", "Login",
 							JOptionPane.INFORMATION_MESSAGE);
-					briscola.getFrame().setVisible(true);
-					frame.setVisible(false);
 				}
 
-				if (chckbxNewCheckBox.isSelected()) {
-					checkMacAddress();
-					if (!macAddressFound) {
-						try {
-							FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
-							file2.append(currentMacAddress).append(";").append(txtCcc.getText()).append("\n");
-							file2.close();
-							System.out.println("Scritto");
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+
+			} else {
+				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+						JOptionPane.INFORMATION_MESSAGE);
+				briscola.getFrame().setVisible(true);
+				briscola.getFrame().repaint();
+				briscola.getFrame().revalidate();
+				frame.setVisible(false);
+			}
+
+			if (chckbxNewCheckBox.isSelected()) {
+				checkMacAddress();
+				if (!macAddressFound) {
+					try {
+						FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
+						file2.append(currentMacAddress).append(";").append(txtCcc.getText()).append("\n");
+						file2.close();
+						System.out.println("Scritto");
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
 				}
 			}
-
 		});
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -182,11 +172,9 @@ public class Login {
 
 		JButton btnRegister = new JButton("Register now");
 		btnRegister.setBounds(67, 332, 229, 23);
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				register.getFrame().setVisible(true);
-				frame.setVisible(false);
-			}
+		btnRegister.addActionListener(e -> {
+			register.getFrame().setVisible(true);
+			frame.setVisible(false);
 		});
 		btnRegister.setForeground(Color.BLUE);
 		btnRegister.setContentAreaFilled(false);
@@ -200,7 +188,6 @@ public class Login {
 		chckbxNewCheckBox = new JCheckBox("Ricorda");
 		chckbxNewCheckBox.setBounds(78, 237, 97, 23);
 		frame.getContentPane().add(chckbxNewCheckBox);
-
 	}
 
 	public JFrame getFrame() {
@@ -298,7 +285,9 @@ public class Login {
 	public void setLogged(boolean logged) {
 		this.logged = logged;
 	}
-	
-	
+
+	public Database getDb() {
+		return db;
+	}
 	
 }

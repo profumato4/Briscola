@@ -60,24 +60,24 @@ public class StartMenu {
 		audio.setFocusPainted(false);
 
 		audio.addActionListener(e -> {
-            if (play) {
-                play = false;
+			if (play) {
+				play = false;
 				volumeControl.setValue((float) -80.0);
 				System.out.println(volumeControl.getValue());
-                audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
-                audio.repaint();
-            } else {
-                play = true;
+				audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
+				audio.repaint();
+			} else {
+				play = true;
 				volumeControl.setValue((float) 0.0);
 				System.out.println(volumeControl.getValue());
 				audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-                audio.repaint();
-            }
+				audio.repaint();
+			}
 
-        });
+		});
 
 		panel.add(audio);
-		
+
 		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
 		cards.setBounds(640, 585, 90, 80);
 		cards.setBorderPainted(false);
@@ -86,21 +86,20 @@ public class StartMenu {
 
 		cards.addActionListener(e -> {
 
+			card = new CustomDialog(frame);
+			card.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosed(WindowEvent e) {
+					carte = card.getCarteType();
+					System.out.println("Valore di carte dopo il dialogo: " + carte);
+					System.out.println(getCarteType());
+				}
+			});
+			card.setVisible(true);
+		});
 
-            card = new CustomDialog(frame);
-            card.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    carte = card.getCarteType();
-                    System.out.println("Valore di carte dopo il dialogo: " + carte);
-                    System.out.println(getCarteType());
-                }
-            });
-            card.setVisible(true);
-        });
-				
 		panel.add(cards);
-		
+
 		JLabel background = new JLabel();
 		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
@@ -120,40 +119,40 @@ public class StartMenu {
 		JButton login = new JButton("Login");
 		login.setFont(new Font("Tahoma", Font.BOLD, 20));
 		login.setBounds(420, 300, 340, 27);
-		login.setBorderPainted(false);
+		login.setBorderPainted(true);
 		login.setFocusPainted(false);
 		login.setBackground(Color.GRAY);
 		login.addActionListener(e -> {
-            if (login1.isLogged()) {
-                JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                login1.getFrame().setVisible(true);
-                frame.setVisible(false);
+			if (login1.isLogged()) {
+				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
+						JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				login1.getFrame().setVisible(true);
+				frame.setVisible(false);
 
-            }
-        });
+			}
+		});
 		panel.add(login);
 
 		JButton register = new JButton("Register");
 		register.setFont(new Font("Tahoma", Font.BOLD, 20));
 		register.setBounds(420, 355, 340, 27);
-		register.setBorderPainted(false);
+		register.setBorderPainted(true);
 		register.setFocusPainted(false);
 		register.setBackground(Color.GRAY);
 
 		register.addActionListener(e -> {
-            register1.getFrame().setVisible(true);
-            frame.setVisible(false);
-        });
+			register1.getFrame().setVisible(true);
+			frame.setVisible(false);
+		});
 
 		panel.add(register);
 		panel.setComponentZOrder(register, 0);
 
-		game = new JButton("Star New Game");
+		game = new JButton("Start New Game");
 		game.setFont(new Font("Tahoma", Font.BOLD, 20));
 		game.setBounds(420, 410, 340, 27);
-		game.setBorderPainted(false);
+		game.setBorderPainted(true);
 		game.setFocusPainted(false);
 		game.setBackground(Color.GRAY);
 
@@ -163,45 +162,43 @@ public class StartMenu {
 		JButton logout = new JButton("Logout");
 		logout.setFont(new Font("Tahoma", Font.BOLD, 20));
 		logout.setBounds(420, 465, 340, 27);
-		logout.setBorderPainted(false);
+		logout.setBorderPainted(true);
 		logout.setFocusPainted(false);
 		logout.setBackground(Color.GRAY);
 
 		logout.addActionListener(e -> {
-            if (login1.isLogged()) {
-                int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
-                        JOptionPane.YES_NO_OPTION);
-                if (conferma == JOptionPane.YES_OPTION) {
-                    login1.setLogged(false);
+			if (login1.isLogged()) {
+				int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
+						JOptionPane.YES_NO_OPTION);
+				if (conferma == JOptionPane.YES_OPTION) {
+					login1.setLogged(false);
 
-                    try {
-                        File file = new File("res\\Login\\MacAddress.txt");
-                        List<String> righe = FileUtils.readLines(file, "UTF-8");
+					try {
+						File file = new File("res\\Login\\MacAddress.txt");
+						List<String> righe = FileUtils.readLines(file, "UTF-8");
 
-                        List<String> righeDaMantenere = new ArrayList<String>();
+						List<String> righeDaMantenere = new ArrayList<String>();
 
-                        for(String str: righe) {
-                            if(!str.contains(login1.getMacAddress())) {
-                                righeDaMantenere.add(str);
-                            }
-                        }
+						for (String str : righe) {
+							if (!str.contains(login1.getMacAddress())) {
+								righeDaMantenere.add(str);
+							}
+						}
 
-                        FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
+						FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
 
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 
-
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-
-                } else {
-                    login1.setLogged(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
+				} else {
+					login1.setLogged(true);
+				}
+			} else {
+				JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
@@ -236,7 +233,7 @@ public class StartMenu {
 
 						volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
-						volumeControl.setValue((float)0.0);
+						volumeControl.setValue((float) 0.0);
 
 						clip.start();
 
@@ -272,7 +269,7 @@ public class StartMenu {
 	public JButton game() {
 		return game;
 	}
-	
+
 	public String getCarteType() {
 		carte = new CustomDialog().readCardType();
 		return carte;
