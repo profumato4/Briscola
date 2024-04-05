@@ -124,7 +124,11 @@ public class Register {
             String password2 = new String(chars2);
 
             if (password1.equals(password2)) {
-                db.registerUser(username, password1);
+                try {
+                    db.registerUser(username, password1);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
                 txtCcc.setText("");
                 textField.setText("");
                 textField_1.setText("");

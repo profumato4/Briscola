@@ -15,12 +15,18 @@ public class SplashScreen extends javax.swing.JDialog {
     private ImageLoading il;
 
 
-    public SplashScreen(java.awt.Frame parent, boolean modal) {
+    public SplashScreen(java.awt.Frame parent, boolean modal) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(parent, modal);
         initComponents();
         getContentPane().setBackground(new Color(221, 221, 221));
         //  To disable key Alt+F4 to close dialog
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        try {
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

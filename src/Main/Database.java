@@ -22,7 +22,7 @@ public class Database {
         conn = DriverManager.getConnection(url, username, password);
     }
 
-    public void registerUser(String username, String password){
+    public void registerUser(String username, String password) throws SQLException {
         String sql = "INSERT INTO Giocatori(nomeUtente, password) VALUES (?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, username);
@@ -47,6 +47,10 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         }
+    }
+
+    public void disconnect() throws SQLException {
+        conn.close();
     }
 
 }

@@ -1,6 +1,7 @@
 package Main;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class Briscola {
 
@@ -20,26 +21,38 @@ public class Briscola {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1178, 861);
-		frame.setVisible(true);
+		frame.setVisible(false);
 		frame.setIconImage(new ImageIcon("src/LoadingScreen/logo.png").getImage());
 		frame.setTitle("JBriscola");
-		panel = new JPanel();
-		panel.setBounds(0, 0, 1040, 667);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		StartMenu m = new StartMenu(frame, panel, login, register);
-		m.game().addActionListener(e -> {
-            if (login.isLogged()) {
-                carte = m.getCarteType();
-                System.out.println(carte);
-                game();
-            } else {
-                JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
 
+	}
+
+	public void inizialize2(){
+		if(frame.isVisible()){
+			panel = new JPanel();
+			panel.setBounds(0, 0, 1040, 667);
+			frame.getContentPane().add(panel);
+			panel.setLayout(null);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			StartMenu m = new StartMenu(frame, panel, login, register);
+			m.game().addActionListener(e -> {
+				if (login.isLogged()) {
+                    try {
+                        login.getDb().disconnect();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    carte = m.getCarteType();
+					System.out.println(carte);
+					game();
+				} else {
+					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+		}else{
+
+		}
 	}
 
 	public static JFrame getFrame() {

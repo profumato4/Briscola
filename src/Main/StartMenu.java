@@ -133,6 +133,7 @@ public class StartMenu {
 			}
 		});
 		panel.add(login);
+		panel.setComponentZOrder(login, 0);
 
 		JButton register = new JButton("Register");
 		register.setFont(new Font("Tahoma", Font.BOLD, 20));
