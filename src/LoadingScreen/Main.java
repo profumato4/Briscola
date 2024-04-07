@@ -44,12 +44,6 @@ public class Main extends javax.swing.JFrame {
 
         try {
             db = new Database(b.getFrame());
-        }catch (RuntimeException e){
-            JOptionPane.showMessageDialog(null ,"Troppe connessioni", "Connection",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLSyntaxErrorException e){
-            JOptionPane.showMessageDialog(null ,"Troppe connessioni", "Connection",
-                    JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
