@@ -6,15 +6,15 @@ import java.sql.*;
 public class Database {
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    private String username = "avnadmin";
-    private String password = "AVNS_V0tyRfXgvYWgLcsCShd";
-    private String hostname = "mysql-3da9912-briscola.a.aivencloud.com";
-    private String port = "12661";
-    private String database = "defaultdb";
-    private String url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);;
+    private final String username = "avnadmin";
+    private final String password = "AVNS_V0tyRfXgvYWgLcsCShd";
+    private final String hostname = "mysql-3da9912-briscola.a.aivencloud.com";
+    private final String port = "12661";
+    private final String database = "defaultdb";
+    private final String url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
 
-    private Connection conn;
-    private JFrame frame;
+    private final Connection conn;
+    private final JFrame frame;
 
     public Database(JFrame frame) throws SQLException, ClassNotFoundException {
         this.frame = frame;
