@@ -6,11 +6,11 @@ import java.sql.*;
 public class Database {
 
     private static final String driver = "com.mysql.jdbc.Driver";
-    private String username = "briscola_coatdecide";
-    private String password = "0beb0a15c71792f79477d657570b96b79aaebc46";
-    private String hostname = "z0d.h.filess.io";
-    private String port = "3307";
-    private String database = "briscola_coatdecide";
+    private String username = "avnadmin";
+    private String password = "AVNS_V0tyRfXgvYWgLcsCShd";
+    private String hostname = "mysql-3da9912-briscola.a.aivencloud.com";
+    private String port = "12661";
+    private String database = "defaultdb";
     private String url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);;
 
     private Connection conn;
@@ -29,6 +29,8 @@ public class Database {
             statement.setString(2, password);
             try{
                 statement.executeUpdate();
+                JOptionPane.showMessageDialog(frame ,"Utente registrato con successo", "Register",
+                        JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Utente registrato con successo.");
             }catch (SQLIntegrityConstraintViolationException e){
                 JOptionPane.showMessageDialog(frame ,"Utente già registrato", "Register",
