@@ -54,7 +54,7 @@ public class Login {
 		if (macAddressFound) {
 			logged = true;
 			
-			this.userName = getUserNameByMacAddress();
+			this.userName = db.getUsername();
 		}
 
 		JButton eye = new JButton(new ImageIcon("res/Login/hide2.png"));
@@ -252,35 +252,6 @@ public class Login {
 		}
 	}
 	
-	private String getUserNameByMacAddress() {
-		String username = "";
-		try {
-			FileReader file = new FileReader("res\\Login\\MacAddress.txt");
-			BufferedReader reader = new BufferedReader(file);
-			
-			currentMacAddress = getMacAddress();
-
-			String str;
-			while ((str = reader.readLine()) != null) {
-				String storedMacAddress[] = str.trim().split(";");
-
-				if (currentMacAddress.equals(storedMacAddress[0])) {
-					macAddressFound = true;
-					username = storedMacAddress[1];
-					break;
-				}
-			}
-
-			reader.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return username;
-	}
 
 	public void setLogged(boolean logged) {
 		this.logged = logged;

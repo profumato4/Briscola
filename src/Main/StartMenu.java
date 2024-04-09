@@ -48,6 +48,8 @@ public class StartMenu {
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
 		
+		System.out.println(play);
+		
 		try {
 			audioIn = AudioSystem.getAudioInputStream(new File("res/ThemeSong/FRENESIA.wav"));
 			clip = AudioSystem.getClip();
@@ -252,7 +254,7 @@ public class StartMenu {
 		return false;
 	}
 	
-	public void checkPlayButton() {
+	private void checkPlayButton() {
 		if (play) {
 			play = false;
 			writePlay();
@@ -265,6 +267,18 @@ public class StartMenu {
 			writePlay();
 			volumeControl.setValue((float) 0.0);
 			System.out.println(volumeControl.getValue());
+			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+			audio.repaint();
+		}
+	}
+	
+	public void checkPlayButton2() {
+		if (!play) {
+			play = false;
+			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
+			audio.repaint();
+		} else {
+			play = true;
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 			audio.repaint();
 		}

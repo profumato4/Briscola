@@ -45,7 +45,7 @@ public class Briscola {
 			panel.setLayout(null);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			StartMenu m = new StartMenu(frame, panel, login, register);
-			m.checkPlayButton();
+			m.checkPlayButton2();
 			m.game().addActionListener(e -> {
 				if (login.isLogged()) {
                     try {
@@ -100,7 +100,7 @@ public class Briscola {
 	public void game() {
 		temp = 0;
 		setBackground();
-		mazzo1 = new Mazzo(panel, carte, carteRimanenti);
+		mazzo1 = new Mazzo(panel, carte, carteRimanenti, login.getDb());
 		Giocatore giocatore = new Giocatore(login.getUserName());
 		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();

@@ -27,11 +27,15 @@ public class Mazzo {
     private String cartaType;
     private Setup setup = new Setup();
     private JButton [] cardsButton = new JButton[3];
+    private GameOverPanel g;
+    private int turno = 0;
+    private Database db;
 
-    public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
+    public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db) {
         this.panel = panel;
         this.carteRimanenti = carteRimanenti;
         this.cartaType = cartaType;
+        this.db = db;
         addCarte(cartaType);
         mescola();
         briscola(panel, cartaType);
@@ -210,38 +214,59 @@ public class Mazzo {
     }
 
 
-    private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n) {
-        Timer timer = new Timer(1500, actionEvent -> {
-            System.out.println("Il valore di r: "+r);
-            if (!flags[0] && !flags[1] && !flags[2]) {
-                if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
-                        g2.getMano().get(r).getCarta(), briscola)) {
-                    azioniGiocatore1(card, g1, g2, n);
-                } else {
-                    azioniBack(card, g1, g2, n);
-                }
+	private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n) {
+		Timer timer = new Timer(1500, actionEvent -> {
+			System.out.println("Il valore di r: " + r);
+			System.out.println("g1 size: " + g1.getMano().size());
+			System.out.println("g2 size: " + g2.getMano().size());
+			turno++;
+			System.out.println(turno);
+			if (turno == 20) {
+				if (punteggio.get() + punteggio2.get() == 120) {
+					g = new GameOverPanel();
+					if (punteggio.get() > punteggio2.get()) {
+						g.wins();
+						db.vittoria();
+					} else {
+						g.lose();
+                        db.sconfitta();
+					}
+					panel.add(g, BorderLayout.CENTER);
+					panel.setComponentZOrder(g, 0);
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+			if (!flags[0] && !flags[1] && !flags[2]) {
+				if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
+						g2.getMano().get(r).getCarta(), briscola)) {
+					azioniGiocatore1(card, g1, g2, n);
+				} else {
+					azioniBack(card, g1, g2, n);
+				}
 
-            } else {
-                if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
-                        g1.getMano().get(n).getCarta(), briscola)) {
-                    azioniBack(card, g1, g2, n);
-                } else {
-                    azioniGiocatore1(card, g1, g2, n);
-                }
-                flags[0] = false;
-                flags[1] = false;
-                flags[2] = false;
-            }
-        });
+			} else {
+				if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
+						g1.getMano().get(n).getCarta(), briscola)) {
+					azioniBack(card, g1, g2, n);
+				} else {
+					azioniGiocatore1(card, g1, g2, n);
+				}
+				flags[0] = false;
+				flags[1] = false;
+				flags[2] = false;
+			}
+			
+		});
 
-        timer.setRepeats(false);
-        timer.start();
+		timer.setRepeats(false);
+		timer.start();
 
-    }
+	}
 
     private void azioniGiocatore1(JButton card, Giocatore g1, Giocatore g2, int n) {
+    	calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
         animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-        calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
         if(indice <= 40){
             pescata(card, g1, r, g2, n);
         }
@@ -250,20 +275,20 @@ public class Mazzo {
         }
     }
 
-    private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n) {
-        animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
-        calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, false);
-        if(indice <= 40){
-            pescataBack(card, g1, r, g2, n);
-        }
-        if(indice > 40){
-            removeCard(g2);
-        }
-        r = selectCard(g2);
-        Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
-        t.setRepeats(false);
-        t.start();
-    }
+	private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n) {
+		calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, false);
+		animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+		if (indice <= 40) {
+			pescataBack(card, g1, r, g2, n);
+		}
+		if (indice > 40) {
+			removeCard(g2);
+		}
+		r = selectCard(g2);
+		Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
+		t.setRepeats(false);
+		t.start();
+	}
 
     private void calcoloPunteggio(Giocatore g1, Giocatore g2, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {
         if (b) {
@@ -289,7 +314,9 @@ public class Mazzo {
             panel.repaint();
             punti2.repaint();
         }
-
+        
+        
+        
     }
 
     private void lancioBack(Giocatore g2) {
