@@ -126,9 +126,9 @@ public class Login {
                 try {
                     if(db.loginUser(username, password)){
 						logged = true;
-						briscola.getFrame().setVisible(true);
-						briscola.getFrame().repaint();
-						briscola.getFrame().revalidate();
+						Briscola.getFrame().setVisible(true);
+						Briscola.getFrame().repaint();
+						Briscola.getFrame().revalidate();
 						frame.setVisible(false);
 						System.out.println(isLogged());
                     }
@@ -145,9 +145,9 @@ public class Login {
 			} else {
 				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
 						JOptionPane.INFORMATION_MESSAGE);
-				briscola.getFrame().setVisible(true);
-				briscola.getFrame().repaint();
-				briscola.getFrame().revalidate();
+				Briscola.getFrame().setVisible(true);
+				Briscola.getFrame().repaint();
+				Briscola.getFrame().revalidate();
 				frame.setVisible(false);
 			}
 

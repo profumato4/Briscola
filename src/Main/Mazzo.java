@@ -26,6 +26,7 @@ public class Mazzo {
     private int r = new Random().nextInt(2);
     private String cartaType;
     private Setup setup = new Setup();
+    private JButton [] cardsButton = new JButton[3];
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti) {
         this.panel = panel;
@@ -108,7 +109,11 @@ public class Mazzo {
         cardActionListner(card0, g1, g2, 0);
         cardActionListner(card1, g1, g2, 1);
         cardActionListner(card2, g1, g2, 2);
-
+        
+        cardsButton[0] = card0;
+        cardsButton[1] = card1;
+        cardsButton[2] = card2;
+        
     }
 
     private void pescata(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
@@ -338,4 +343,8 @@ public class Mazzo {
         backs.remove(r);
     }
 
+    public JButton[] getCardButtons() {
+    	return cardsButton;
+    }
+    
 }

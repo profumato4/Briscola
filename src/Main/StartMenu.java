@@ -3,11 +3,13 @@ package Main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +33,13 @@ import org.apache.commons.io.FileUtils;
 public class StartMenu {
 
 	private AudioInputStream audioIn;
-	private boolean play = true;
+	private boolean play = checkPlay();
 	private Clip clip;
 	private FloatControl volumeControl;
 	private JButton game;
 	private String carte;
 	private CustomDialog card;
+	private JButton audio;
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
@@ -44,7 +47,21 @@ public class StartMenu {
 
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
+		
+		try {
+			audioIn = AudioSystem.getAudioInputStream(new File("res/ThemeSong/FRENESIA.wav"));
+			clip = AudioSystem.getClip();
+			clip.open(audioIn);
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
+		volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+		volumeControl.setValue((float) 0.0);
+		
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -52,32 +69,23 @@ public class StartMenu {
 		panel.setBounds(0, 0, 1162, 822);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-
-		JButton audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-		audio.setBounds(550, 600, 50, 50);
-		audio.setBorderPainted(false);
-		audio.setContentAreaFilled(false);
-		audio.setFocusPainted(false);
-
-		audio.addActionListener(e -> {
-			if (play) {
-				play = false;
-				volumeControl.setValue((float) -80.0);
-				System.out.println(volumeControl.getValue());
-				audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
-				audio.repaint();
-			} else {
-				play = true;
-				volumeControl.setValue((float) 0.0);
-				System.out.println(volumeControl.getValue());
-				audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-				audio.repaint();
-			}
-
+		
+		
+		this.audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+		this.audio.setBounds(550, 600, 50, 50);
+		this.audio.setBorderPainted(false);
+		this.audio.setContentAreaFilled(false);
+		this.audio.setFocusPainted(false);
+		
+		this.audio.addActionListener(e -> {
+			play = checkPlay();
+			checkPlayButton();
+			
 		});
 
-		panel.add(audio);
-
+		panel.add(this.audio);
+		
+		
 		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
 		cards.setBounds(640, 585, 90, 80);
 		cards.setBorderPainted(false);
@@ -107,6 +115,7 @@ public class StartMenu {
 
 		JLabel jBriscola = new JLabel("JBriscola");
 		jBriscola.setFont(new Font("Tahoma", Font.PLAIN, 90));
+		jBriscola.setSize(200,130);
 		panel.add(calcolaCentro(frame, jBriscola));
 		panel.setComponentZOrder(jBriscola, 0);
 
@@ -203,12 +212,64 @@ public class StartMenu {
 
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
-
+		
 		musicTheme("res/ThemeSong/FRENESIA.wav");
-
+		
 		panel.repaint();
+		
 	}
+	
+	private void writePlay() {
+		FileWriter file2;
+		try {
+			file2 = new FileWriter("res\\ThemeSong\\playOn.txt", false);
+			file2.append(String.valueOf(play));
+			file2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		
+	}
+	
+	private boolean checkPlay() {
+		try {
+			FileReader fr = new FileReader("res\\ThemeSong\\playOn.txt");
+			try (BufferedReader reader = new BufferedReader(fr)) {
+				String str;
+				while ((str = reader.readLine()) != null) {
+					return Boolean.valueOf(str);
+				}
 
+				reader.close();
+			}
+
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void checkPlayButton() {
+		if (play) {
+			play = false;
+			writePlay();
+			volumeControl.setValue((float) -80.0);
+			System.out.println(volumeControl.getValue());
+			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
+			audio.repaint();
+		} else {
+			play = true;
+			writePlay();
+			volumeControl.setValue((float) 0.0);
+			System.out.println(volumeControl.getValue());
+			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+			audio.repaint();
+		}
+	}
+	
 	private JLabel calcolaCentro(JFrame frame, JLabel label) {
 		Dimension size = frame.getSize();
 
@@ -256,6 +317,8 @@ public class StartMenu {
 							clip.close();
 						}
 
+					}else {
+						
 					}
 
 				}
