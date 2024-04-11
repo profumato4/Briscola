@@ -40,6 +40,7 @@ public class StartMenu {
 	private String carte;
 	private CustomDialog card;
 	private JButton audio;
+	private float maxVolume = (float) -15.0;
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
@@ -62,7 +63,7 @@ public class StartMenu {
 
 		volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
-		volumeControl.setValue((float) 0.0);
+		volumeControl.setValue(maxVolume);
 		
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,13 +81,13 @@ public class StartMenu {
 		this.audio.setFocusPainted(false);
 		
 		this.audio.addActionListener(e -> {
-			play = checkPlay();
 			checkPlayButton();
 			
 		});
 
 		panel.add(this.audio);
 		
+		checkPlayButton2();
 		
 		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
 		cards.setBounds(640, 585, 90, 80);
@@ -215,7 +216,9 @@ public class StartMenu {
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
 		
+		
 		musicTheme("res/ThemeSong/FRENESIA.wav");
+		
 		
 		panel.repaint();
 		
@@ -262,17 +265,19 @@ public class StartMenu {
 			System.out.println(volumeControl.getValue());
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
 			audio.repaint();
+			System.out.println(play);
 		} else {
 			play = true;
 			writePlay();
-			volumeControl.setValue((float) 0.0);
+			volumeControl.setValue(maxVolume);
 			System.out.println(volumeControl.getValue());
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 			audio.repaint();
+			System.out.println(play);
 		}
 	}
 	
-	public void checkPlayButton2() {
+	private void checkPlayButton2() {
 		if (!play) {
 			play = false;
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
@@ -302,37 +307,37 @@ public class StartMenu {
 		new Thread(() -> {
 			try {
 				while (true) {
+
+					audioIn = AudioSystem.getAudioInputStream(new File(path));
+					clip = AudioSystem.getClip();
+					clip.open(audioIn);
+
+					volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
 					if (play) {
-						audioIn = AudioSystem.getAudioInputStream(new File(path));
-						clip = AudioSystem.getClip();
-						clip.open(audioIn);
+						volumeControl.setValue(maxVolume);
+					} else {
+						volumeControl.setValue((float) -80.0);
+					}
 
-						volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+					clip.start();
 
-						volumeControl.setValue((float) 0.0);
+					System.out.println("started");
 
-						clip.start();
-
-						System.out.println("started");
-
-						CountDownLatch latch = new CountDownLatch(1);
-						clip.addLineListener(event -> {
-							if (event.getType() == LineEvent.Type.STOP) {
-								clip.setMicrosecondPosition(0);
-								latch.countDown();
-							}
-						});
-
-						try {
-							latch.await();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						} finally {
-							clip.close();
+					CountDownLatch latch = new CountDownLatch(1);
+					clip.addLineListener(event -> {
+						if (event.getType() == LineEvent.Type.STOP) {
+							clip.setMicrosecondPosition(0);
+							latch.countDown();
 						}
+					});
 
-					}else {
-						
+					try {
+						latch.await();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} finally {
+						clip.close();
 					}
 
 				}

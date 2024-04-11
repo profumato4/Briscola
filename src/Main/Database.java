@@ -5,22 +5,30 @@ import java.sql.*;
 
 public class Database {
 
+	private Crypt c = new Crypt();
 	private static final String driver = "com.mysql.jdbc.Driver";
-	private final String username = "avnadmin";
-	private final String password = "AVNS_V0tyRfXgvYWgLcsCShd";
-	private final String hostname = "mysql-3da9912-briscola.a.aivencloud.com";
+	private final String username;
+	private final String password;
+	private final String hostname;
 	private final String port = "12661";
 	private final String database = "defaultdb";
-	private final String url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
+	private final String url;
 
 	private final Connection conn;
 	private final JFrame frame;
 	private String nomeUtente;
 
-	public Database(JFrame frame) throws SQLException, ClassNotFoundException {
+	public Database(JFrame frame) throws Exception {
 		this.frame = frame;
+
+		this.password = c.decrypt("Ft61L1/hv+oVs/tRf3KUUZq8c8UYggsilRE3+HNqxTs=");
+		this.hostname = c.decrypt("NifeemfRIuvbIyGb5nXEHKaQf15IZTTn8wn9ZD+11YYScFG78W2E1Cm4PTdy2ddB");
+		this.username = c.decrypt("iE9Rh3KbaByAWipHE6Pb9w==");
+
+		this.url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
+
 		Class.forName(Database.driver);
-		conn = DriverManager.getConnection(url, username, password);
+		conn = DriverManager.getConnection(this.url, this.username, this.password);
 	}
 
 	public void registerUser(String username, String password) throws SQLException {
@@ -53,20 +61,16 @@ public class Database {
 		}
 	}
 
-	public void disconnect() throws SQLException {
-		conn.close();
-	}
-
 	public void vittoria() {
-	    String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
-	    String sqlUpdate = "UPDATE Giocatori SET partiteVinte = partiteVinte + 1 WHERE nomeUtente = ? ";
+		String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
+		String sqlUpdate = "UPDATE Giocatori SET partiteVinte = partiteVinte + 1 WHERE nomeUtente = ? ";
 
 		partita(sqlSelect, sqlUpdate);
 	}
 
 	private void partita(String sqlSelect, String sqlUpdate) {
 		try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
-			 PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
+				PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
 
 			selectStatement.setString(1, nomeUtente);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -89,9 +93,9 @@ public class Database {
 
 		partita(sqlSelect, sqlUpdate);
 	}
-	
+
 	public String getUsername() {
 		return nomeUtente;
 	}
-	
+
 }

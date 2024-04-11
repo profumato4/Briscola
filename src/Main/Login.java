@@ -29,7 +29,10 @@ public class Login {
 			throw new RuntimeException(e);
 		} catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        }
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	Register register = new Register(this, db);
