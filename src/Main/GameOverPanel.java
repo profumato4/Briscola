@@ -4,6 +4,8 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GameOverPanel extends JPanel {
 
@@ -12,12 +14,20 @@ public class GameOverPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GameOverPanel() {
+	public GameOverPanel(Briscola b) {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				b.getPanel().removeAll();
+				b.inizialize2();
+				b.getPanel().repaint();
+			}
+		});
 		setSize(1178, 861);
 		setLayout(null);
 		setOpaque(false);
 				
-		lose();
+		
 	}
 	
 	public void wins() {
@@ -60,4 +70,23 @@ public class GameOverPanel extends JPanel {
 		add(text2);
 	}
 	
+	public void tie() {
+		JLabel text = new JLabel("Pareggiato");
+		text.setOpaque(false);
+		text.setFont(new Font("Maiandra GD", Font.PLAIN, 130));
+		text.setBounds(90, 322, 836, 199);
+		add(text);
+		
+		JLabel emoji = new JLabel("\uD83D\uDE0A");
+		emoji.setOpaque(false);
+		emoji.setFont(new Font("Dialog", Font.PLAIN, 130));
+		emoji.setBounds(730, 322, 271, 199);
+		add(emoji);
+		
+		JLabel text2 = new JLabel("Avete");
+		text2.setOpaque(false);
+		text2.setFont(new Font("Maiandra GD", Font.PLAIN, 130));
+		text2.setBounds(262, 165, 607, 199);
+		add(text2);
+	}
 }

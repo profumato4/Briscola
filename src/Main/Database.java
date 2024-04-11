@@ -68,6 +68,20 @@ public class Database {
 		partita(sqlSelect, sqlUpdate);
 	}
 
+	public void pareggio() {
+		String sqlSelect = "SELECT partitePareggiate FROM Giocatori WHERE nomeUtente = ? ";
+		String sqlUpdate = "UPDATE Giocatori SET partitePareggiate = partitePareggiate + 1 WHERE nomeUtente = ? ";
+
+		partita(sqlSelect, sqlUpdate);
+	}
+
+	public void sconfitta() {
+		String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
+		String sqlUpdate = "UPDATE Giocatori SET partitePerse = partitePerse + 1 WHERE nomeUtente = ? ";
+
+		partita(sqlSelect, sqlUpdate);
+	}
+	
 	private void partita(String sqlSelect, String sqlUpdate) {
 		try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
 				PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
@@ -86,14 +100,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
-	public void sconfitta() {
-		String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
-		String sqlUpdate = "UPDATE Giocatori SET partitePerse = partitePerse + 1 WHERE nomeUtente = ? ";
-
-		partita(sqlSelect, sqlUpdate);
-	}
-
+	
 	public String getUsername() {
 		return nomeUtente;
 	}

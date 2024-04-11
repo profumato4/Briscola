@@ -30,12 +30,15 @@ public class Mazzo {
     private GameOverPanel g;
     private int turno = 0;
     private Database db;
+    private Briscola b;
 
-    public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db) {
+    public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db, Briscola b) {
         this.panel = panel;
         this.carteRimanenti = carteRimanenti;
         this.cartaType = cartaType;
         this.db = db;
+        this.b = b;
+        
         addCarte(cartaType);
         mescola();
         briscola(panel, cartaType);
@@ -221,22 +224,7 @@ public class Mazzo {
 			System.out.println("g2 size: " + g2.getMano().size());
 			turno++;
 			System.out.println(turno);
-			if (turno == 20) {
-				if (punteggio.get() + punteggio2.get() == 120) {
-					g = new GameOverPanel();
-					if (punteggio.get() > punteggio2.get()) {
-						g.wins();
-						db.vittoria();
-					} else {
-						g.lose();
-                        db.sconfitta();
-					}
-					panel.add(g, BorderLayout.CENTER);
-					panel.setComponentZOrder(g, 0);
-					panel.repaint();
-					panel.revalidate();
-				}
-			}
+
 			if (!flags[0] && !flags[1] && !flags[2]) {
 				if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
 						g2.getMano().get(r).getCarta(), briscola)) {
@@ -256,7 +244,31 @@ public class Mazzo {
 				flags[1] = false;
 				flags[2] = false;
 			}
-			
+
+			if (turno == 20) {
+				System.out.println("ok");
+				if (punteggio.get() + punteggio2.get() == 120) {
+					g = new GameOverPanel(b);
+					if (punteggio.get() == punteggio2.get()) {
+						g.tie();
+						db.pareggio();
+						System.out.println("pareggio");
+					} else if(punteggio.get() < punteggio2.get()){
+						g.lose();
+						db.sconfitta();
+						System.out.println("perso");
+					}else if(punteggio.get() > punteggio2.get()) {
+						g.wins();
+						db.vittoria();
+						System.out.println("vinto");
+					}
+					panel.add(g, BorderLayout.CENTER);
+					panel.setComponentZOrder(g, 0);
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+
 		});
 
 		timer.setRepeats(false);
@@ -284,10 +296,13 @@ public class Mazzo {
 		if (indice > 40) {
 			removeCard(g2);
 		}
-		r = selectCard(g2);
-		Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
-		t.setRepeats(false);
-		t.start();
+		if(g2.getMano().size() > 0) {
+			r = selectCard(g2);
+			Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
+			t.setRepeats(false);
+			t.start();
+		}
+		
 	}
 
     private void calcoloPunteggio(Giocatore g1, Giocatore g2, int n, AtomicInteger punteggio2, AtomicInteger punteggio, CerchioLabel punti1, CerchioLabel punti2, boolean b) {

@@ -92,7 +92,7 @@ public class Briscola {
 	public void game() {
 		temp = 0;
 		setBackground();
-		mazzo1 = new Mazzo(panel, carte, carteRimanenti, login.getDb());
+		mazzo1 = new Mazzo(panel, carte, carteRimanenti, login.getDb(), b);
 		Giocatore giocatore = new Giocatore(login.getUserName());
 		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
