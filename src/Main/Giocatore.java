@@ -12,6 +12,7 @@ public class Giocatore {
 	private final String nickName;
 	private ArrayList<Carta> mano;
 	private int punteggio;
+	private boolean lanciata = false;
 
 	public Giocatore(String nickName) {
 		this.nickName = nickName;
@@ -35,6 +36,7 @@ public class Giocatore {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lanciata = true;
 				if (y > 300) {
 					y -= 20;
 					button.setBounds(x, y, 89, 168);
@@ -70,4 +72,13 @@ public class Giocatore {
 	public int getPunteggio(){
 		return  punteggio;
 	}
+	
+	public boolean isLanciata() {
+		return lanciata;
+	}
+	
+	public void setLanciata(boolean lanciata) {
+		this.lanciata = lanciata;
+	}
+	
 }

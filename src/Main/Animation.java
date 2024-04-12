@@ -304,7 +304,8 @@ public class Animation {
 
         timerPescataBack.start();
     }
-
+    
+    
     public JLabel getLabel(){
         return  label;
     }

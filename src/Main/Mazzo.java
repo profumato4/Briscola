@@ -31,6 +31,7 @@ public class Mazzo {
     private int turno = 0;
     private Database db;
     private Briscola b;
+    private Timer timer;
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db, Briscola b) {
         this.panel = panel;
@@ -207,18 +208,23 @@ public class Mazzo {
 
     private void cardActionListner(JButton card, Giocatore g1, Giocatore g2, int n) {
         card.addActionListener(e -> {
-            g1.lancia(card, g1, g1.getMano().get(n).getCarta());
+        	if(!g1.isLanciata()) {
+        		g1.lancia(card, g1, g1.getMano().get(n).getCarta());
 
-            lancioBack(g2);
+                lancioBack(g2);
 
-            azioniPartita(card, g1, g2, n);
+                azioniPartita(card, g1, g2, n);
+        	}else {
+        		
+        	}
+            
         });
 
     }
 
 
 	private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n) {
-		Timer timer = new Timer(1500, actionEvent -> {
+		timer = new Timer(1500, actionEvent -> {
 			System.out.println("Il valore di r: " + r);
 			System.out.println("g1 size: " + g1.getMano().size());
 			System.out.println("g2 size: " + g2.getMano().size());
@@ -229,16 +235,20 @@ public class Mazzo {
 				if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
 						g2.getMano().get(r).getCarta(), briscola)) {
 					azioniGiocatore1(card, g1, g2, n);
+					g1.setLanciata(false);
 				} else {
 					azioniBack(card, g1, g2, n);
+					g1.setLanciata(false);
 				}
 
 			} else {
 				if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
 						g1.getMano().get(n).getCarta(), briscola)) {
 					azioniBack(card, g1, g2, n);
+					g1.setLanciata(false);
 				} else {
 					azioniGiocatore1(card, g1, g2, n);
+					g1.setLanciata(false);
 				}
 				flags[0] = false;
 				flags[1] = false;
@@ -253,11 +263,11 @@ public class Mazzo {
 						g.tie();
 						db.pareggio();
 						System.out.println("pareggio");
-					} else if(punteggio.get() < punteggio2.get()){
+					} else if (punteggio.get() < punteggio2.get()) {
 						g.lose();
 						db.sconfitta();
 						System.out.println("perso");
-					}else if(punteggio.get() > punteggio2.get()) {
+					} else if (punteggio.get() > punteggio2.get()) {
 						g.wins();
 						db.vittoria();
 						System.out.println("vinto");
@@ -266,6 +276,7 @@ public class Mazzo {
 					panel.setComponentZOrder(g, 0);
 					panel.repaint();
 					panel.revalidate();
+					timer.stop();
 				}
 			}
 
