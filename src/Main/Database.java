@@ -1,7 +1,16 @@
 package Main;
 
-import javax.swing.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Database {
 
@@ -52,12 +61,19 @@ public class Database {
 
 	public boolean loginUser(String username, String password) throws SQLException {
 		String sql = "SELECT * FROM Giocatori WHERE nomeUtente = ? AND password = ?";
-		try (PreparedStatement statement = conn.prepareStatement(sql)) {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		try {
+			statement = conn.prepareStatement(sql);
 			statement.setString(1, username);
 			statement.setString(2, password);
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			nomeUtente = username;
 			return resultSet.next();
+		}finally {
+			resultSet.close();
+			statement.close();
+			conn.close();
 		}
 	}
 
@@ -101,8 +117,35 @@ public class Database {
 		}
 	}
 	
+	public ArrayList<String> topPlayers(){
+		ArrayList<String> nomi = new ArrayList<>();
+		String sql = "SELECT nomeUtente, partiteVinte FROM Giocatori WHERE nomeUtente != 'admin' ORDER BY partiteVinte DESC LIMIT 5";
+
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				String username = resultSet.getString("nomeUtente");
+				nomi.add(username);
+				int gamesWon = resultSet.getInt("partiteVinte");
+			}
+
+			resultSet.close();
+			statement.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return nomi;
+	}
+	
 	public String getUsername() {
 		return nomeUtente;
 	}
-
+	
 }

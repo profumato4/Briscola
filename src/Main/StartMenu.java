@@ -42,10 +42,11 @@ public class StartMenu {
 	private CustomDialog card;
 	private JButton audio;
 	private float maxVolume = (float) -15.0;
-	private PodioPanel pp = new PodioPanel();
+	private PodioPanel pp;
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
+		pp = new PodioPanel(login1.getDb());
 		pp.setVisible(false);
 		frame.add(pp, BorderLayout.CENTER);
 	}
