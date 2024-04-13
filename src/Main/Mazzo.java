@@ -207,7 +207,7 @@ public class Mazzo {
 
     private void cardActionListner(JButton card, Giocatore g1, Giocatore g2, int n) {
         card.addActionListener(e -> {
-        	if(!g1.isLanciata()) {
+        	if(!g1.isLanciata() || g2.getMano().size() < 3) {
         		g1.lancia(card, g1, g1.getMano().get(n).getCarta());
 
                 lancioBack(g2);
