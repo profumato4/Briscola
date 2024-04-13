@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -41,9 +42,12 @@ public class StartMenu {
 	private CustomDialog card;
 	private JButton audio;
 	private float maxVolume = (float) -15.0;
+	private PodioPanel pp = new PodioPanel();
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
+		pp.setVisible(false);
+		frame.add(pp, BorderLayout.CENTER);
 	}
 
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
@@ -110,7 +114,20 @@ public class StartMenu {
 		});
 
 		panel.add(cards);
+		
+		JButton podio = new JButton(new ImageIcon("res/PODIO-ITALIA.png"));
+		podio.setBounds(400, 570, 120, 93);
+		podio.setBorderPainted(false);
+		podio.setContentAreaFilled(false);
+		podio.setFocusPainted(false);
 
+		podio.addActionListener(e -> {
+			panel.setVisible(false);
+			pp.setVisible(true);
+		});
+
+		panel.add(podio);
+		
 		JLabel background = new JLabel();
 		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
