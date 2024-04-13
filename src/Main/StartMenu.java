@@ -77,7 +77,12 @@ public class StartMenu {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		
+		JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
+		copyright.setFont(new Font("Serif", Font.PLAIN, 14));
+		copyright.setBounds(960, 793, 428, 30);
+		copyright.setForeground(new Color(51,51,51));
+		panel.add(copyright);
+			
 		this.audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 		this.audio.setBounds(550, 600, 50, 50);
 		this.audio.setBorderPainted(false);

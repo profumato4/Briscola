@@ -3,6 +3,8 @@ package Main;
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -71,6 +73,12 @@ public class Briscola {
 
 		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
+		
+		JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
+		copyright.setFont(new Font("Serif", Font.PLAIN, 14));
+		copyright.setBounds(960, 793, 428, 30);
+		copyright.setForeground(new Color(51,51,51));
+		
 
 		carteRimanenti = new CerchioLabel();
 		carteRimanenti.setSize(60, 60);
@@ -79,9 +87,11 @@ public class Briscola {
 		panel.add(carteRimanenti);
 		panel.add(background);
 		panel.add(mazzo);
+		panel.add(copyright);
 
 		panel.setComponentZOrder(mazzo, 1);
 		panel.setComponentZOrder(carteRimanenti, 0);
+		panel.setComponentZOrder(copyright, 0);
 
 		System.out.println(carteRimanenti.getX() + System.lineSeparator() + carteRimanenti.getY());
 

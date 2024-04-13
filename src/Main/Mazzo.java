@@ -61,7 +61,7 @@ public class Mazzo {
         carta = new JLabel(rotateCarta(this.mazzo.get(0), cartaType).getImg());
         carta.setBounds(105, 155, 200, 168);
         panel.add(carta);
-        panel.setComponentZOrder(carta, 2);
+        panel.setComponentZOrder(carta, 3);
         this.briscola = this.mazzo.get(0).getSeme();
         return this.mazzo.get(0);
     }
