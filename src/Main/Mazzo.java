@@ -131,7 +131,6 @@ public class Mazzo {
         });
         timer.setRepeats(false);
         timer.start();
-
     }
 
     private void pescataBack(JButton card, Giocatore g1, int r, Giocatore g2, int n) {
@@ -141,16 +140,16 @@ public class Mazzo {
         });
         timer.setRepeats(false);
         timer.start();
-
+        
     }
 
     private void controllo(JButton card, int n, Giocatore g1) {
         if (n == 0) {
-            animation.pescataAnimation(card, distribuisci(g1, n), 418);
+            animation.pescataAnimation(card, distribuisci(g1, n), 418, g1);
         } else if (n == 1) {
-            animation.pescataAnimation(card, distribuisci(g1, n), 548);
+            animation.pescataAnimation(card, distribuisci(g1, n), 548, g1);
         } else if (n == 2) {
-            animation.pescataAnimation(card, distribuisci(g1, n), 678);
+            animation.pescataAnimation(card, distribuisci(g1, n), 678, g1);
         }
     }
 
@@ -215,7 +214,7 @@ public class Mazzo {
 
                 azioniPartita(card, g1, g2, n);
         	}else {
-        		
+        		System.out.println("Aspetta la fine dell'animazione");
         	}
             
         });
@@ -235,20 +234,16 @@ public class Mazzo {
 				if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
 						g2.getMano().get(r).getCarta(), briscola)) {
 					azioniGiocatore1(card, g1, g2, n);
-					g1.setLanciata(false);
 				} else {
 					azioniBack(card, g1, g2, n);
-					g1.setLanciata(false);
 				}
 
 			} else {
 				if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
 						g1.getMano().get(n).getCarta(), briscola)) {
 					azioniBack(card, g1, g2, n);
-					g1.setLanciata(false);
 				} else {
 					azioniGiocatore1(card, g1, g2, n);
-					g1.setLanciata(false);
 				}
 				flags[0] = false;
 				flags[1] = false;

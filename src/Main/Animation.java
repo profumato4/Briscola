@@ -231,7 +231,7 @@ public class Animation {
         timerPresa.start();
     }
 
-    public void pescataAnimation(JButton card, Carta carta, int x1) {
+    public void pescataAnimation(JButton card, Carta carta, int x1, Giocatore g1) {
         timerPescata = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
@@ -247,6 +247,7 @@ public class Animation {
 
                 if (x == x1 && y == 600) {
                     card.setIcon(carta.getImg());
+                    g1.setLanciata(false);
                     ((Timer) e.getSource()).stop();
                 }
 
