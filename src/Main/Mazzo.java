@@ -239,6 +239,7 @@ public class Mazzo {
 				}
 
 			} else {
+				g1.setLanciata(true);
 				if (g2.getMano().get(r).getCarta().comparaCarte(g2.getMano().get(r).getCarta(),
 						g1.getMano().get(n).getCarta(), briscola)) {
 					azioniBack(card, g1, g2, n);

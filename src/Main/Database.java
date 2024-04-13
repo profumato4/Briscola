@@ -61,19 +61,12 @@ public class Database {
 
 	public boolean loginUser(String username, String password) throws SQLException {
 		String sql = "SELECT * FROM Giocatori WHERE nomeUtente = ? AND password = ?";
-		ResultSet resultSet = null;
-		PreparedStatement statement = null;
-		try {
-			statement = conn.prepareStatement(sql);
+		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, username);
 			statement.setString(2, password);
-			resultSet = statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			nomeUtente = username;
 			return resultSet.next();
-		}finally {
-			resultSet.close();
-			statement.close();
-			conn.close();
 		}
 	}
 
@@ -134,7 +127,6 @@ public class Database {
 
 			resultSet.close();
 			statement.close();
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
