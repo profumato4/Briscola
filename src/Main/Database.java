@@ -41,7 +41,13 @@ public class Database {
 	}
 
 	public void registerUser(String username, String password) throws SQLException {
-		String sql = "INSERT INTO Giocatori(nomeUtente, password) VALUES (?, ?)";
+		String sql = "";
+		try {
+			sql = c.decrypt("+dHZdZi3wTfu5JkSZBcDXSZtTgyRahoSCjYD9sOZKNXSnuYBWeVE6+RWaSj8jZYEBtTTj8aSwlGlvPkFuD3I1A==");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, username);
 			statement.setString(2, password);
@@ -60,7 +66,13 @@ public class Database {
 	}
 
 	public boolean loginUser(String username, String password) throws SQLException {
-		String sql = "SELECT * FROM Giocatori WHERE nomeUtente = ? AND password = ?";
+		String sql = "";
+		try {
+			sql = c.decrypt("V/oqa+p2HWbJ0/H/K9zFl9GL8lGLIEgBQ9fiAiYz1jUmJ8fjMMJ45T95n42Bh/Rjk/n52GI0wXbUTPUi2OnRYQ==");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, username);
 			statement.setString(2, password);
@@ -71,23 +83,44 @@ public class Database {
 	}
 
 	public void vittoria() {
-		String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
-		String sqlUpdate = "UPDATE Giocatori SET partiteVinte = partiteVinte + 1 WHERE nomeUtente = ? ";
-
+		
+		String sqlSelect = "";
+		String sqlUpdate = "";
+		try {
+			sqlSelect = c.decrypt("XYiNfUid34RXhoBal0waxryHHlV6sRxTcvmzKs1ETMqNjLJWeh/Kfr/DIkhdyI3CJgZA22Bj+wki2iEJ1/kj0g==");
+			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeN7lmbuva/9+nVI9MmDEaBTXyKryyRGfOApYAOtu1plBb83foWOORytGSdBu340s69l61npsrUQwedzOW5wN1ak=");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		partita(sqlSelect, sqlUpdate);
 	}
 
 	public void pareggio() {
-		String sqlSelect = "SELECT partitePareggiate FROM Giocatori WHERE nomeUtente = ? ";
-		String sqlUpdate = "UPDATE Giocatori SET partitePareggiate = partitePareggiate + 1 WHERE nomeUtente = ? ";
+		String sqlSelect = "";
+		String sqlUpdate = "";
+		try {
+			sqlSelect = c.decrypt("lVv2O/FhVbfQnHmebdmxh3XdTlrLwmeIV2Ms6+UlFibRi/JRiyBIAUPX4gImM9Y1R3KFt0mJ7jAqaY9qLqIUqw==");
+			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeGvDeaSNsF1j492acoaLkx3viRrLREdTYJ7ofvaeKDOwuuyUThq1+tDcD2cKa7KhWejXOUykrBxlSlpLwpb7oZVMWGpDDH+fjDEV+8I1exOs");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 
 		partita(sqlSelect, sqlUpdate);
 	}
 
 	public void sconfitta() {
-		String sqlSelect = "SELECT partiteVinte FROM Giocatori WHERE nomeUtente = ? ";
-		String sqlUpdate = "UPDATE Giocatori SET partitePerse = partitePerse + 1 WHERE nomeUtente = ? ";
-
+		
+		String sqlSelect = "";
+		String sqlUpdate = "";
+		try {
+			sqlSelect = c.decrypt("XYiNfUid34RXhoBal0waxryHHlV6sRxTcvmzKs1ETMqNjLJWeh/Kfr/DIkhdyI3CJgZA22Bj+wki2iEJ1/kj0g==");
+			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeHaH3DnnIN6hpjHWY/zLekhtQqXS4eYc3pepAd8uvnvQb83foWOORytGSdBu340s69l61npsrUQwedzOW5wN1ak=");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		partita(sqlSelect, sqlUpdate);
 	}
 	
@@ -112,7 +145,13 @@ public class Database {
 	
 	public ArrayList<String> topPlayers(){
 		ArrayList<String> nomi = new ArrayList<>();
-		String sql = "SELECT nomeUtente, partiteVinte FROM Giocatori WHERE nomeUtente != 'admin' ORDER BY partiteVinte DESC LIMIT 5";
+		String sql = "";
+		try {
+			sql = c.decrypt("CcLMli8Bzlglq3TWLC8/ptzrG33nmJMTw4VDmehZRdUVDCzncDQ7g3d9rKoQa6e46Nc5TKSsHGVKWkvClvuhlQMiCgFUCwEwaUg5G5eFwdUEeK5BMk8nVapCJNatKzpWWTBCSlmcH/2vztPZ1f7MZg==");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		PreparedStatement statement;
 		try {
