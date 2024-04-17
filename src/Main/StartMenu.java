@@ -46,7 +46,7 @@ public class StartMenu {
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
-		pp = new PodioPanel(login1.getDb());
+		pp = new PodioPanel(login1.getDb(), panel);
 		pp.setVisible(false);
 		frame.add(pp, BorderLayout.CENTER);
 	}
