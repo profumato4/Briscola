@@ -6,6 +6,7 @@
 	<artifactId>Briscola</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
+		<!-- Le tue dipendenze qui -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -19,6 +20,38 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<!-- 
+			<resource>
+				<directory>res</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/LoadingScreen</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/Main</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/SplashScreen</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+			-->
+		</resources>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
