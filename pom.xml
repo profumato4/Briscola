@@ -17,6 +17,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.26</version>
 		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>3.4.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -24,11 +29,8 @@
 			<!-- 
 			<resource>
 				<directory>res</directory>
-				<includes>
-					<include>**/*</include>
-				</includes>
 			</resource>
-
+			
 			<resource>
 				<directory>src/LoadingScreen</directory>
 				<includes>

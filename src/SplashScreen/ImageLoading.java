@@ -6,12 +6,12 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class ImageLoading{
+public class ImageLoading {
 
-    public void ImageLoading(JLabel jLabel1){
+    public void ImageLoading(JLabel jLabel1) {
         new Thread(() -> {
             try {
-                BufferedImage fullImage = ImageIO.read(new File("src/LoadingScreen/logo.png"));
+                BufferedImage fullImage = ImageIO.read(new File("res/logo.png"));
                 int width = fullImage.getWidth();
                 int height = fullImage.getHeight();
 
@@ -30,6 +30,5 @@ public class ImageLoading{
             }
         }).start();
     }
-
 
 }

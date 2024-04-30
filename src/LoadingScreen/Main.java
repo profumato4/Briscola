@@ -9,19 +9,23 @@ import java.sql.SQLException;
 
 import Main.Database;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 public class Main extends javax.swing.JFrame {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Database db;
+	private static  Database db;
     private static Briscola b;
 
     public static void main(String[] args) throws InterruptedException {
-        java.awt.EventQueue.invokeLater(() -> {
+    	FlatLightLaf.setup();
+
+    	java.awt.EventQueue.invokeLater(() -> {
             try {
                 b = new Briscola();
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                UIManager.setLookAndFeel(new FlatLightLaf());
                 try {
                     SwingUtilities.updateComponentTreeUI(Briscola.getFrame());
                 } catch (Exception e) {

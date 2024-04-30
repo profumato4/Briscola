@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Briscola:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10648fe7-9178-4458-a5db-624e0ddb2fef" name="Changes" comment="bug fix" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="PARALLEL_COMPILATION" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;profumato4&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="52147db2-f82e-4578-b65e-394bff1ccbee" />
+        <option name="url" value="https://github.com/profumato4/Briscola.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2ZiEeLZe9noufgQMDI8jXihE3Zs" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Briscola (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.Briscola.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.Briscola.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SplashScreen.executor&quot;: &quot;Run&quot;,
+    &quot;Application.prova.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Utente/Desktop/codici/java/Briscola&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Utente\Desktop\codici\java\Briscola\src\SplashScreen" />
+      <recent name="C:\Users\Utente\Desktop\codici\java\Briscola\src\LoadingScreen" />
+      <recent name="C:\Users\Utente\Desktop\codici\java\Briscola\res" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Briscola" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Briscola" />
+      <module name="Briscola" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LoadingScreen.Main" />
+      <module name="Briscola" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="LoadingScreen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main.Briscola" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Briscola" />
+      <module name="Briscola" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SplashScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SplashScreen.SplashScreen" />
+      <module name="Briscola" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SplashScreen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="prova" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LoadingScreen.prova" />
+      <module name="Briscola" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="LoadingScreen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.prova" />
+        <item itemvalue="Application.Main.Briscola" />
+        <item itemvalue="Application.Briscola" />
+        <item itemvalue="Application.SplashScreen" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
+        <option value="jdk-18.0.2-corretto-18.0.2-3183f394aec4-38982a12" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10648fe7-9178-4458-a5db-624e0ddb2fef" name="Changes" comment="" />
+      <created>1702896593659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702896593659</updated>
+      <workItem from="1702896594831" duration="12000" />
+      <workItem from="1702896676443" duration="1062000" />
+      <workItem from="1702917850876" duration="780000" />
+      <workItem from="1702918638795" duration="1281000" />
+      <workItem from="1702933344053" duration="900000" />
+      <workItem from="1703093841007" duration="594000" />
+      <workItem from="1703246947259" duration="96000" />
+      <workItem from="1703259352891" duration="812000" />
+      <workItem from="1703260254676" duration="45000" />
+      <workItem from="1703260348137" duration="256000" />
+      <workItem from="1703283724730" duration="3034000" />
+      <workItem from="1703286906356" duration="2867000" />
+      <workItem from="1703289867988" duration="700000" />
+      <workItem from="1703322670300" duration="2634000" />
+      <workItem from="1703325408301" duration="22000" />
+      <workItem from="1703326395545" duration="89000" />
+      <workItem from="1703455011882" duration="63000" />
+      <workItem from="1703537995738" duration="89000" />
+      <workItem from="1703613754737" duration="154000" />
+      <workItem from="1703637162904" duration="50000" />
+      <workItem from="1703641857715" duration="75000" />
+      <workItem from="1703697577329" duration="99000" />
+      <workItem from="1703773612712" duration="77000" />
+      <workItem from="1703773775474" duration="281000" />
+      <workItem from="1703861581112" duration="28000" />
+      <workItem from="1703867823205" duration="128000" />
+      <workItem from="1703869684658" duration="13000" />
+      <workItem from="1703869764687" duration="66000" />
+      <workItem from="1703972403110" duration="103000" />
+      <workItem from="1703972526214" duration="1076000" />
+      <workItem from="1703982775112" duration="21000" />
+      <workItem from="1703982799718" duration="4000" />
+      <workItem from="1703982829601" duration="77000" />
+      <workItem from="1703982957005" duration="964000" />
+      <workItem from="1704063587471" duration="405000" />
+      <workItem from="1704067892217" duration="2000" />
+      <workItem from="1704067920204" duration="4557000" />
+      <workItem from="1704072576121" duration="36000" />
+      <workItem from="1704151365782" duration="2494000" />
+      <workItem from="1704153879683" duration="1290000" />
+      <workItem from="1704156386130" duration="504000" />
+      <workItem from="1704156939922" duration="2000" />
+      <workItem from="1704156950959" duration="3000" />
+      <workItem from="1704157199058" duration="311000" />
+      <workItem from="1704157586671" duration="1623000" />
+      <workItem from="1704206828005" duration="3861000" />
+      <workItem from="1704210717864" duration="112000" />
+      <workItem from="1704211065055" duration="15000" />
+      <workItem from="1704313909229" duration="11000" />
+      <workItem from="1704313924481" duration="153000" />
+      <workItem from="1704314466136" duration="989000" />
+      <workItem from="1704462305797" duration="63000" />
+      <workItem from="1704487872797" duration="272000" />
+      <workItem from="1704668756102" duration="6000" />
+      <workItem from="1704727594062" duration="1129000" />
+      <workItem from="1704728735605" duration="991000" />
+      <workItem from="1704729823182" duration="235000" />
+      <workItem from="1704730482316" duration="78000" />
+      <workItem from="1704736022542" duration="3119000" />
+      <workItem from="1704739622343" duration="196000" />
+      <workItem from="1704830449735" duration="173000" />
+      <workItem from="1704999971778" duration="4563000" />
+      <workItem from="1705077303948" duration="1215000" />
+      <workItem from="1705154881876" duration="648000" />
+      <workItem from="1705179013410" duration="4701000" />
+      <workItem from="1705425390285" duration="1385000" />
+      <workItem from="1705574698335" duration="38000" />
+      <workItem from="1705762929149" duration="88000" />
+      <workItem from="1705768869923" duration="1125000" />
+      <workItem from="1705785140724" duration="4033000" />
+      <workItem from="1705938373288" duration="33000" />
+      <workItem from="1705938516031" duration="3022000" />
+      <workItem from="1705948297045" duration="1243000" />
+      <workItem from="1706392080334" duration="42000" />
+      <workItem from="1706455440865" duration="3000" />
+      <workItem from="1706721785399" duration="38000" />
+      <workItem from="1706965074703" duration="6000" />
+      <workItem from="1707050345813" duration="75000" />
+      <workItem from="1707050490079" duration="1506000" />
+      <workItem from="1707052015131" duration="1803000" />
+      <workItem from="1707053836328" duration="929000" />
+      <workItem from="1707055059165" duration="2748000" />
+      <workItem from="1707500775176" duration="1231000" />
+      <workItem from="1707511220562" duration="1240000" />
+      <workItem from="1707514645348" duration="4293000" />
+      <workItem from="1707571120151" duration="1156000" />
+      <workItem from="1707600298962" duration="51000" />
+      <workItem from="1707658835213" duration="2103000" />
+      <workItem from="1707661025752" duration="63000" />
+      <workItem from="1707683640260" duration="174000" />
+      <workItem from="1707932892949" duration="13000" />
+      <workItem from="1708094715242" duration="364000" />
+      <workItem from="1708168592462" duration="3386000" />
+      <workItem from="1708186298449" duration="1938000" />
+      <workItem from="1708208202532" duration="1656000" />
+      <workItem from="1708214604277" duration="290000" />
+      <workItem from="1708274161612" duration="1052000" />
+      <workItem from="1708357634649" duration="49000" />
+      <workItem from="1708357792897" duration="1643000" />
+      <workItem from="1708359786295" duration="686000" />
+      <workItem from="1708524705795" duration="2000" />
+      <workItem from="1708526808105" duration="1448000" />
+      <workItem from="1708623736768" duration="310000" />
+      <workItem from="1708696073701" duration="145000" />
+      <workItem from="1708696477569" duration="493000" />
+      <workItem from="1708699528044" duration="539000" />
+      <workItem from="1708700213480" duration="277000" />
+      <workItem from="1708700807972" duration="134000" />
+      <workItem from="1708706619003" duration="6000" />
+      <workItem from="1708778034860" duration="6646000" />
+      <workItem from="1708785315945" duration="1171000" />
+      <workItem from="1708786706152" duration="623000" />
+      <workItem from="1708787794130" duration="2000" />
+      <workItem from="1708788842743" duration="2000" />
+      <workItem from="1708860108384" duration="63000" />
+      <workItem from="1708860417162" duration="434000" />
+      <workItem from="1708860893601" duration="85000" />
+      <workItem from="1708861142688" duration="120000" />
+      <workItem from="1708868458354" duration="785000" />
+      <workItem from="1708869888552" duration="2749000" />
+      <workItem from="1708879728280" duration="2035000" />
+      <workItem from="1708884871593" duration="1205000" />
+      <workItem from="1708886090002" duration="72000" />
+      <workItem from="1708962602632" duration="2107000" />
+      <workItem from="1708970841483" duration="20000" />
+      <workItem from="1708970971404" duration="2000" />
+      <workItem from="1708970993176" duration="1885000" />
+      <workItem from="1709205282160" duration="45000" />
+      <workItem from="1709302204690" duration="2994000" />
+      <workItem from="1709316975330" duration="514000" />
+      <workItem from="1709416251116" duration="1042000" />
+      <workItem from="1710088852382" duration="117000" />
+      <workItem from="1710089232793" duration="1944000" />
+      <workItem from="1710091725220" duration="627000" />
+      <workItem from="1710602069461" duration="10000" />
+      <workItem from="1710602365520" duration="2000" />
+      <workItem from="1710602704662" duration="4000" />
+      <workItem from="1710604635756" duration="1000" />
+      <workItem from="1710628451475" duration="2000" />
+      <workItem from="1710691248084" duration="7000" />
+      <workItem from="1711967113305" duration="3031000" />
+      <workItem from="1711972585934" duration="374000" />
+      <workItem from="1711983045370" duration="380000" />
+      <workItem from="1712153408612" duration="8000" />
+      <workItem from="1712249503314" duration="2207000" />
+      <workItem from="1712261961503" duration="1374000" />
+      <workItem from="1712347303530" duration="4163000" />
+      <workItem from="1712488449424" duration="2729000" />
+      <workItem from="1712491590109" duration="761000" />
+      <workItem from="1712493022257" duration="4814000" />
+      <workItem from="1712587576384" duration="2041000" />
+      <workItem from="1712589680442" duration="37000" />
+      <workItem from="1712593900844" duration="239000" />
+      <workItem from="1712662334127" duration="34000" />
+      <workItem from="1712670119445" duration="6000" />
+      <workItem from="1712672072514" duration="645000" />
+      <workItem from="1712673095374" duration="609000" />
+      <workItem from="1712761771647" duration="3000" />
+      <workItem from="1712843589095" duration="620000" />
+      <workItem from="1712845006250" duration="210000" />
+      <workItem from="1712853826046" duration="66000" />
+      <workItem from="1712964041984" duration="37000" />
+      <workItem from="1712964130082" duration="41000" />
+      <workItem from="1712964178380" duration="110000" />
+      <workItem from="1713004892025" duration="175000" />
+      <workItem from="1713020922650" duration="129000" />
+      <workItem from="1713021201511" duration="41000" />
+      <workItem from="1713029678651" duration="51000" />
+      <workItem from="1713029996279" duration="29000" />
+      <workItem from="1713050671323" duration="87000" />
+      <workItem from="1713051215731" duration="171000" />
+      <workItem from="1713051645438" duration="52000" />
+      <workItem from="1713092925710" duration="104000" />
+      <workItem from="1713347495976" duration="74000" />
+      <workItem from="1713348691258" duration="2136000" />
+    </task>
+    <task id="LOCAL-00037" summary="update">
+      <option name="closed" value="true" />
+      <created>1704739723399</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1704739723399</updated>
+    </task>
+    <task id="LOCAL-00038" summary="lag animation problem solved">
+      <option name="closed" value="true" />
+      <created>1705003945535</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1705003945535</updated>
+    </task>
+    <task id="LOCAL-00039" summary="points system (not finish)">
+      <option name="closed" value="true" />
+      <created>1705183690343</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1705183690343</updated>
+    </task>
+    <task id="LOCAL-00040" summary="sistema punti funzionante">
+      <option name="closed" value="true" />
+      <created>1705426626154</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1705426626154</updated>
+    </task>
+    <task id="LOCAL-00041" summary="sistema punti funzionante">
+      <option name="closed" value="true" />
+      <created>1705426724263</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1705426724263</updated>
+    </task>
+    <task id="LOCAL-00042" summary="update">
+      <option name="closed" value="true" />
+      <created>1705788943931</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1705788943931</updated>
+    </task>
+    <task id="LOCAL-00043" summary="lancio back (it works but it doesnt work)">
+      <option name="closed" value="true" />
+      <created>1705941384468</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1705941384468</updated>
+    </task>
+    <task id="LOCAL-00044" summary="lancio back (it works but now)">
+      <option name="closed" value="true" />
+      <created>1705949476820</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1705949476821</updated>
+    </task>
+    <task id="LOCAL-00045" summary="loading">
+      <option name="closed" value="true" />
+      <created>1707518850888</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1707518850888</updated>
+    </task>
+    <task id="LOCAL-00046" summary="image loading">
+      <option name="closed" value="true" />
+      <created>1707661079459</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1707661079459</updated>
+    </task>
+    <task id="LOCAL-00047" summary="pesca ultima carta (work in progress)">
+      <option name="closed" value="true" />
+      <created>1708359870942</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1708359870943</updated>
+    </task>
+    <task id="LOCAL-00048" summary="complete">
+      <option name="closed" value="true" />
+      <created>1708696943873</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1708696943873</updated>
+    </task>
+    <task id="LOCAL-00049" summary="complete">
+      <option name="closed" value="true" />
+      <created>1708700932379</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1708700932379</updated>
+    </task>
+    <task id="LOCAL-00050" summary="update">
+      <option name="closed" value="true" />
+      <created>1708786720621</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1708786720621</updated>
+    </task>
+    <task id="LOCAL-00051" summary="update">
+      <option name="closed" value="true" />
+      <created>1708787143197</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1708787143197</updated>
+    </task>
+    <task id="LOCAL-00052" summary="update">
+      <option name="closed" value="true" />
+      <created>1708861154722</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1708861154722</updated>
+    </task>
+    <task id="LOCAL-00053" summary="update">
+      <option name="closed" value="true" />
+      <created>1708872401407</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1708872401407</updated>
+    </task>
+    <task id="LOCAL-00054" summary="update">
+      <option name="closed" value="true" />
+      <created>1708872590893</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1708872590893</updated>
+    </task>
+    <task id="LOCAL-00055" summary="update">
+      <option name="closed" value="true" />
+      <created>1708872641801</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1708872641801</updated>
+    </task>
+    <task id="LOCAL-00056" summary="aggiunte carte siciliane">
+      <option name="closed" value="true" />
+      <created>1708886119984</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1708886119985</updated>
+    </task>
+    <task id="LOCAL-00057" summary="aggiunte carte siciliane">
+      <option name="closed" value="true" />
+      <created>1708886128678</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1708886128678</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Update">
+      <option name="closed" value="true" />
+      <created>1708964705388</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1708964705388</updated>
+    </task>
+    <task id="LOCAL-00059" summary="CustomDialog update (carte siciliane e logica modifiata)">
+      <option name="closed" value="true" />
+      <created>1708972874347</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1708972874347</updated>
+    </task>
+    <task id="LOCAL-00060" summary="database for login and register">
+      <option name="closed" value="true" />
+      <created>1712262036061</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1712262036061</updated>
+    </task>
+    <task id="LOCAL-00061" summary="license">
+      <option name="closed" value="true" />
+      <created>1712262701802</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1712262701802</updated>
+    </task>
+    <task id="LOCAL-00062" summary="db">
+      <option name="closed" value="true" />
+      <created>1712358733352</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1712358733353</updated>
+    </task>
+    <task id="LOCAL-00063" summary="db update">
+      <option name="closed" value="true" />
+      <created>1712490454528</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1712490454528</updated>
+    </task>
+    <task id="LOCAL-00064" summary="db update">
+      <option name="closed" value="true" />
+      <created>1712491034944</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1712491034944</updated>
+    </task>
+    <task id="LOCAL-00065" summary="db update">
+      <option name="closed" value="true" />
+      <created>1712491143998</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1712491143998</updated>
+    </task>
+    <task id="LOCAL-00066" summary="db update">
+      <option name="closed" value="true" />
+      <created>1712493033455</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1712493033455</updated>
+    </task>
+    <task id="LOCAL-00067" summary="menu and audio bug fix and update">
+      <option name="closed" value="true" />
+      <created>1712662359623</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1712662359624</updated>
+    </task>
+    <task id="LOCAL-00068" summary="gestione vittoria e sconfitta (work in progress)">
+      <option name="closed" value="true" />
+      <created>1712672712041</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1712672712041</updated>
+    </task>
+    <task id="LOCAL-00069" summary="jar">
+      <option name="closed" value="true" />
+      <created>1712677669030</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1712677669031</updated>
+    </task>
+    <task id="LOCAL-00070" summary="update">
+      <option name="closed" value="true" />
+      <created>1712845074773</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1712845074773</updated>
+    </task>
+    <task id="LOCAL-00071" summary="gestione partite vinte perse e pareggiate">
+      <option name="closed" value="true" />
+      <created>1712853854791</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1712853854791</updated>
+    </task>
+    <task id="LOCAL-00072" summary="bug fix - wait end of the animation to play another card">
+      <option name="closed" value="true" />
+      <created>1712964246328</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1712964246328</updated>
+    </task>
+    <task id="LOCAL-00073" summary="bug fix - animation">
+      <option name="closed" value="true" />
+      <created>1713005057098</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1713005057099</updated>
+    </task>
+    <task id="LOCAL-00074" summary="classifica (work in progress)">
+      <option name="closed" value="true" />
+      <created>1713021003969</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1713021003969</updated>
+    </task>
+    <task id="LOCAL-00075" summary="classifica (work in progress)">
+      <option name="closed" value="true" />
+      <created>1713021233215</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1713021233215</updated>
+    </task>
+    <task id="LOCAL-00076" summary="copyright">
+      <option name="closed" value="true" />
+      <created>1713030015575</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1713030015575</updated>
+    </task>
+    <task id="LOCAL-00077" summary="classifica (work in progress)">
+      <option name="closed" value="true" />
+      <created>1713050709197</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1713050709197</updated>
+    </task>
+    <task id="LOCAL-00078" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713051266648</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1713051266648</updated>
+    </task>
+    <task id="LOCAL-00079" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713051665338</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1713051665338</updated>
+    </task>
+    <task id="LOCAL-00080" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713092941215</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1713092941216</updated>
+    </task>
+    <task id="LOCAL-00081" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713093022109</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1713093022109</updated>
+    </task>
+    <task id="LOCAL-00082" summary="bug fix - press esc to exit from PodioPanel">
+      <option name="closed" value="true" />
+      <created>1713347523231</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1713347523231</updated>
+    </task>
+    <task id="LOCAL-00083" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713348711262</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1713348711262</updated>
+    </task>
+    <task id="LOCAL-00084" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713348854320</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1713348854320</updated>
+    </task>
+    <task id="LOCAL-00085" summary="bug fix">
+      <option name="closed" value="true" />
+      <created>1713351690748</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1713351690748</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="lancio back" />
+    <MESSAGE value="lancio back (it works but it doesnt work)" />
+    <MESSAGE value="lancio back (it works but now)" />
+    <MESSAGE value="loading" />
+    <MESSAGE value="image loading" />
+    <MESSAGE value="pesca ultima carta (work in progress)" />
+    <MESSAGE value="complete" />
+    <MESSAGE value="aggiunte carte siciliane" />
+    <MESSAGE value="Update" />
+    <MESSAGE value="CustomDialog update (carte siciliane e logica modifiata)" />
+    <MESSAGE value="database for login and register" />
+    <MESSAGE value="license" />
+    <MESSAGE value="db" />
+    <MESSAGE value="db update" />
+    <MESSAGE value="menu and audio bug fix and update" />
+    <MESSAGE value="gestione vittoria e sconfitta (work in progress)" />
+    <MESSAGE value="jar" />
+    <MESSAGE value="update" />
+    <MESSAGE value="gestione partite vinte perse e pareggiate" />
+    <MESSAGE value="bug fix - wait end of the animation to play another card" />
+    <MESSAGE value="bug fix - animation" />
+    <MESSAGE value="copyright" />
+    <MESSAGE value="classifica (work in progress)" />
+    <MESSAGE value="bug fix - press esc to exit from PodioPanel" />
+    <MESSAGE value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLSyntaxErrorException" package="java.sql" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

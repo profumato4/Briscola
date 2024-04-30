@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,13 +15,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
@@ -30,18 +28,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.apache.commons.io.FileUtils;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
 public class StartMenu {
 
-	private AudioInputStream audioIn;
 	private boolean play = checkPlay();
 	private Clip clip;
-	private FloatControl volumeControl;
 	private JButton game;
 	private String carte;
 	private CustomDialog card;
 	private JButton audio;
-	private float maxVolume = (float) -15.0;
 	private PodioPanel pp;
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
@@ -53,23 +50,9 @@ public class StartMenu {
 
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
-		
+
 		System.out.println(play);
-		
-		try {
-			audioIn = AudioSystem.getAudioInputStream(new File("res/ThemeSong/FRENESIA.wav"));
-			clip = AudioSystem.getClip();
-			clip.open(audioIn);
-		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 
-		volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-
-		volumeControl.setValue(maxVolume);
-		
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -77,28 +60,27 @@ public class StartMenu {
 		panel.setBounds(0, 0, 1162, 822);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
 		copyright.setFont(new Font("Serif", Font.PLAIN, 14));
 		copyright.setBounds(960, 793, 428, 30);
-		copyright.setForeground(new Color(51,51,51));
+		copyright.setForeground(new Color(51, 51, 51));
 		panel.add(copyright);
-			
+
 		this.audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 		this.audio.setBounds(550, 600, 50, 50);
 		this.audio.setBorderPainted(false);
 		this.audio.setContentAreaFilled(false);
 		this.audio.setFocusPainted(false);
-		
+
 		this.audio.addActionListener(e -> {
 			checkPlayButton();
-			
+
 		});
 
 		panel.add(this.audio);
-		
-		checkPlayButton2();
-		
+
+
 		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
 		cards.setBounds(640, 585, 90, 80);
 		cards.setBorderPainted(false);
@@ -120,7 +102,7 @@ public class StartMenu {
 		});
 
 		panel.add(cards);
-		
+
 		JButton podio = new JButton(new ImageIcon("res/PODIO-ITALIA.png"));
 		podio.setBounds(400, 570, 120, 93);
 		podio.setBorderPainted(false);
@@ -133,7 +115,7 @@ public class StartMenu {
 		});
 
 		panel.add(podio);
-		
+
 		JLabel background = new JLabel();
 		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
@@ -141,7 +123,7 @@ public class StartMenu {
 
 		JLabel jBriscola = new JLabel("JBriscola");
 		jBriscola.setFont(new Font("Tahoma", Font.PLAIN, 90));
-		jBriscola.setSize(200,130);
+		jBriscola.setSize(200, 130);
 		panel.add(calcolaCentro(frame, jBriscola));
 		panel.setComponentZOrder(jBriscola, 0);
 
@@ -238,15 +220,12 @@ public class StartMenu {
 
 		panel.add(logout);
 		panel.setComponentZOrder(logout, 0);
-		
-		
+
 		musicTheme("res/ThemeSong/FRENESIA.wav");
-		
-		
 		panel.repaint();
-		
+
 	}
-	
+
 	private void writePlay() {
 		FileWriter file2;
 		try {
@@ -255,10 +234,10 @@ public class StartMenu {
 			file2.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
-	
+
 	private boolean checkPlay() {
 		try {
 			FileReader fr = new FileReader("res\\ThemeSong\\playOn.txt");
@@ -271,7 +250,6 @@ public class StartMenu {
 				reader.close();
 			}
 
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -279,39 +257,39 @@ public class StartMenu {
 		}
 		return false;
 	}
-	
+
 	private void checkPlayButton() {
 		if (play) {
 			play = false;
 			writePlay();
-			volumeControl.setValue((float) -80.0);
-			System.out.println(volumeControl.getValue());
+			clip.stop();
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
 			audio.repaint();
 			System.out.println(play);
 		} else {
 			play = true;
 			writePlay();
-			volumeControl.setValue(maxVolume);
-			System.out.println(volumeControl.getValue());
+			clip.start();
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 			audio.repaint();
 			System.out.println(play);
 		}
 	}
-	
+
 	private void checkPlayButton2() {
 		if (!play) {
 			play = false;
+			clip.stop();
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
 			audio.repaint();
 		} else {
 			play = true;
+			clip.start();
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 			audio.repaint();
 		}
 	}
-	
+
 	private JLabel calcolaCentro(JFrame frame, JLabel label) {
 		Dimension size = frame.getSize();
 
@@ -326,50 +304,34 @@ public class StartMenu {
 		return label;
 	}
 
+	private Clip prepareClip(String audioFile) {
+
+		try (AudioInputStream ais = AudioSystem
+				.getAudioInputStream(new BufferedInputStream(new FileInputStream(audioFile)))) {
+			Clip clip = AudioSystem.getClip();
+			clip.open(ais);
+			return clip;
+		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
+
 	private void musicTheme(String path) {
-		new Thread(() -> {
-			try {
-				while (true) {
-
-					audioIn = AudioSystem.getAudioInputStream(new File(path));
-					clip = AudioSystem.getClip();
-					clip.open(audioIn);
-
-					volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-
-					if (play) {
-						volumeControl.setValue(maxVolume);
-					} else {
-						volumeControl.setValue((float) -80.0);
-					}
-
-					clip.start();
-
-					System.out.println("started");
-
-					CountDownLatch latch = new CountDownLatch(1);
-					clip.addLineListener(event -> {
-						if (event.getType() == LineEvent.Type.STOP) {
-							clip.setMicrosecondPosition(0);
-							latch.countDown();
-						}
-					});
-
-					try {
-						latch.await();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					} finally {
-						clip.close();
-					}
-
-				}
-
-			} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
-				e1.printStackTrace();
+		Thread thread = new Thread(() -> {
+			clip = prepareClip(path);
+			if (clip != null) {
+				clip.loop(-1);
+				checkPlayButton2();
 			}
-		}).start();
+		});
+		thread.start();
 
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public JButton game() {
