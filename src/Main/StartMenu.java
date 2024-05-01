@@ -28,7 +28,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.apache.commons.io.FileUtils;
-import java.io.InputStream;
 import java.io.FileInputStream;
 
 public class StartMenu {
@@ -40,6 +39,7 @@ public class StartMenu {
 	private CustomDialog card;
 	private JButton audio;
 	private PodioPanel pp;
+	private BackgroundPanel bp;
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
@@ -50,23 +50,26 @@ public class StartMenu {
 
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
-
+		
+		bp = new BackgroundPanel();
+		panel.add(bp, BorderLayout.CENTER);
 		System.out.println(play);
 
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		panel.setBounds(0, 0, 1162, 822);
+		//panel.setBounds(0, 0, 1162, 822);
 		frame.getContentPane().add(panel);
+		panel.setSize(1178, 861);
 		panel.setLayout(null);
 
-		JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
+	/*	JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
 		copyright.setFont(new Font("Serif", Font.PLAIN, 14));
 		copyright.setBounds(960, 793, 428, 30);
 		copyright.setForeground(new Color(51, 51, 51));
 		panel.add(copyright);
-
+*/
 		this.audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 		this.audio.setBounds(550, 600, 50, 50);
 		this.audio.setBorderPainted(false);
@@ -78,7 +81,7 @@ public class StartMenu {
 
 		});
 
-		panel.add(this.audio);
+		bp.add(this.audio);
 
 
 		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
@@ -101,7 +104,7 @@ public class StartMenu {
 			card.setVisible(true);
 		});
 
-		panel.add(cards);
+		bp.add(cards);
 
 		JButton podio = new JButton(new ImageIcon("res/PODIO-ITALIA.png"));
 		podio.setBounds(400, 570, 120, 93);
@@ -114,24 +117,24 @@ public class StartMenu {
 			pp.setVisible(true);
 		});
 
-		panel.add(podio);
+		bp.add(podio);
 
-		JLabel background = new JLabel();
+	/*	JLabel background = new JLabel();
 		background.setIcon(new ImageIcon("res/Background/background4.png"));
 		background.setBounds(0, 0, 1162, 822);
-		panel.add(background);
-
+		panel.add(background, BorderLayout.CENTER);
+*/
 		JLabel jBriscola = new JLabel("JBriscola");
 		jBriscola.setFont(new Font("Tahoma", Font.PLAIN, 90));
 		jBriscola.setSize(200, 130);
-		panel.add(calcolaCentro(frame, jBriscola));
-		panel.setComponentZOrder(jBriscola, 0);
+		bp.add(calcolaCentro(frame, jBriscola));
+		bp.setComponentZOrder(jBriscola, 0);
 
 		JLabel label = new JLabel("(Clicca login se sei gia registrato)");
 		label.setFont(new Font("Tahoma", Font.BOLD, 20));
 		label.setBounds(420, 210, 342, 109);
-		panel.add(label);
-		panel.setComponentZOrder(label, 0);
+		bp.add(label);
+		bp.setComponentZOrder(label, 0);
 
 		JButton login = new JButton("Login");
 		login.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -149,8 +152,8 @@ public class StartMenu {
 
 			}
 		});
-		panel.add(login);
-		panel.setComponentZOrder(login, 0);
+		bp.add(login);
+		bp.setComponentZOrder(login, 0);
 
 		JButton register = new JButton("Register");
 		register.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -164,8 +167,8 @@ public class StartMenu {
 			frame.setVisible(false);
 		});
 
-		panel.add(register);
-		panel.setComponentZOrder(register, 0);
+		bp.add(register);
+		bp.setComponentZOrder(register, 0);
 
 		game = new JButton("Start New Game");
 		game.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -174,8 +177,8 @@ public class StartMenu {
 		game.setFocusPainted(false);
 		game.setBackground(Color.GRAY);
 
-		panel.add(game);
-		panel.setComponentZOrder(game, 0);
+		bp.add(game);
+		bp.setComponentZOrder(game, 0);
 
 		JButton logout = new JButton("Logout");
 		logout.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -218,11 +221,12 @@ public class StartMenu {
 			}
 		});
 
-		panel.add(logout);
-		panel.setComponentZOrder(logout, 0);
+		bp.add(logout);
+		bp.setComponentZOrder(logout, 0);
 
 		musicTheme("res/ThemeSong/FRENESIA.wav");
 		panel.repaint();
+		panel.revalidate();
 
 	}
 

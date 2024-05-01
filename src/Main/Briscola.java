@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -23,6 +24,7 @@ public class Briscola {
 	private Mazzo mazzo1;
 	private JButton[] cardButtons = new JButton[3];
 	private Briscola b = this;
+	
 
 	public Briscola() {
 		initialize();
@@ -32,17 +34,18 @@ public class Briscola {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setVisible(false);
-		frame.setIconImage(new ImageIcon("src/LoadingScreen/logo.png").getImage());
+		frame.setIconImage(new ImageIcon("res/logo.png").getImage());
 		frame.setTitle("JBriscola");
 		panel = new JPanel();
+		panel.setSize(1178, 861);
+		panel.setLayout(null);
 	}
 
 	public void inizialize2() {
-		if (frame.isVisible()) {
-
-			panel.setBounds(0, 0, 1040, 667);
-			frame.getContentPane().add(panel);
-			panel.setLayout(null);
+		if (frame.isVisible()) {			
+			
+			//panel.setBounds(0, 0, 1040, 667);
+			frame.getContentPane().add(panel, BorderLayout.CENTER);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			StartMenu m = new StartMenu(frame, panel, login, register);
 			m.game().addActionListener(e -> {
