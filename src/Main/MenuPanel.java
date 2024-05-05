@@ -60,7 +60,7 @@ public class MenuPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				b.getPanel().removeAll();
-				b.inizialize2();
+				b.inizialize2(b.getDb());
 				b.getPanel().repaint();
 			}
 		});

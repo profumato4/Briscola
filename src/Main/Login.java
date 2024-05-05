@@ -17,33 +17,18 @@ public class Login {
 	private JFrame frame;
 	private JTextField txtCcc;
 	private JPasswordField textField;
-	@SuppressWarnings("unused")
-	private Briscola briscola;
 	private boolean logged = false;
-	private Database db;
-
-	{
-		try {
-			db = new Database(frame);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-
-	Register register = new Register(this, db);
+	Register register;
 	private boolean hide = true;
 	private String userName;
 	private boolean macAddressFound = false;
 	private JCheckBox chckbxNewCheckBox;
 	private String currentMacAddress;
+	private Database db;
 
-	public Login(Briscola briscola) {
-		this.briscola = briscola;
+	public Login(Briscola briscola, Database db) {
+		this.db = db;
+		register = new Register(this, db);
 		initialize(briscola);
 	}
 

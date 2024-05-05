@@ -3,12 +3,17 @@ package SplashScreen;
 
 import java.awt.*;
 import javax.swing.*;
+import com.formdev.flatlaf.FlatLightLaf;
 
 
 public class SplashScreen extends javax.swing.JDialog {
 
 
-    private CurvesPanel curvesPanel1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private CurvesPanel curvesPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbStatus;
     private ProgressBarCustom pro;
@@ -17,11 +22,14 @@ public class SplashScreen extends javax.swing.JDialog {
 
     public SplashScreen(java.awt.Frame parent, boolean modal) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(parent, modal);
+        
+        FlatLightLaf.setup();
+        
         initComponents();
         getContentPane().setBackground(new Color(221, 221, 221));
         //  To disable key Alt+F4 to close dialog
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        UIManager.setLookAndFeel(new FlatLightLaf());
         try {
             SwingUtilities.updateComponentTreeUI(this);
         } catch (Exception e) {

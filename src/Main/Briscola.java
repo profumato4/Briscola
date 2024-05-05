@@ -4,8 +4,10 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -14,9 +16,8 @@ public class Briscola {
 
 	private static JFrame frame;
 	private JPanel panel;
-	private static Briscola window;
-	private Login login = new Login(window);
-	private Register register = new Register(login, login.getDb());
+	private Login login;
+	private Register register;
 	private String carte;
 	private CerchioLabel carteRimanenti;
 	private byte temp = 0;
@@ -24,6 +25,8 @@ public class Briscola {
 	private Mazzo mazzo1;
 	private JButton[] cardButtons = new JButton[3];
 	private Briscola b = this;
+	private BackgroundPanel bp;
+	private Database db;
 	
 
 	public Briscola() {
@@ -32,8 +35,10 @@ public class Briscola {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1178, 861);
+		frame.setSize(1178, 861);
+		centerFrame(frame);
 		frame.setVisible(false);
+		frame.setResizable(false);
 		frame.setIconImage(new ImageIcon("res/logo.png").getImage());
 		frame.setTitle("JBriscola");
 		panel = new JPanel();
@@ -41,8 +46,12 @@ public class Briscola {
 		panel.setLayout(null);
 	}
 
-	public void inizialize2() {
-		if (frame.isVisible()) {			
+	public void inizialize2(Database db) {
+		if (frame.isVisible()) {
+			
+			this.db = db;
+			login = new Login(this, db);
+			register = new Register(login, login.getDb());
 			
 			//panel.setBounds(0, 0, 1040, 667);
 			frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -70,42 +79,38 @@ public class Briscola {
 	private void setBackground() {
 
 		panel.removeAll();
-
-		JLabel background = new JLabel(new ImageIcon("res/Background/background7.jpg"));
-		background.setBounds(0, 0, 1162, 822);
+		
+		bp = new BackgroundPanel("res/Background/background9.jpg");
+		
+		panel.add(bp, BorderLayout.CENTER);
 
 		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
-		
-		JLabel copyright = new JLabel("Copyright (c) 2024 Leonardo Belli");
-		copyright.setFont(new Font("Serif", Font.PLAIN, 14));
-		copyright.setBounds(960, 793, 428, 30);
-		copyright.setForeground(new Color(51,51,51));
 		
 
 		carteRimanenti = new CerchioLabel();
 		carteRimanenti.setSize(60, 60);
 		carteRimanenti.calcolaCentro(carteRimanenti, mazzo);
 
-		panel.add(carteRimanenti);
-		panel.add(background);
-		panel.add(mazzo);
-		panel.add(copyright);
+		bp.add(carteRimanenti);
+		bp.add(mazzo);
 
-		panel.setComponentZOrder(mazzo, 1);
-		panel.setComponentZOrder(carteRimanenti, 0);
-		panel.setComponentZOrder(copyright, 0);
+		bp.setComponentZOrder(mazzo, 1);
+		bp.setComponentZOrder(carteRimanenti, 0);
 
 		System.out.println(carteRimanenti.getX() + System.lineSeparator() + carteRimanenti.getY());
 
 		panel.repaint();
+		bp.repaint();
+		panel.revalidate();
+		bp.revalidate();
 
 	}
 
 	public void game() {
 		temp = 0;
 		setBackground();
-		mazzo1 = new Mazzo(panel, carte, carteRimanenti, login.getDb(), b);
+		mazzo1 = new Mazzo(bp, carte, carteRimanenti, login.getDb(), b);
 		Giocatore giocatore = new Giocatore(login.getUserName());
 		System.out.println(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
@@ -157,5 +162,17 @@ public class Briscola {
 	public JPanel getPanel() {
 		return panel;
 	}
+	
+	private void centerFrame(JFrame f) {
+		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+		Dimension frameSize = f.getSize ();
 
+		f.setLocation ((screenSize.width - frameSize.width) / 2,
+		(screenSize.height - frameSize.height) / 2);
+	}
+	
+	public Database getDb() {
+		return db;
+	}
+	
 }

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
@@ -40,6 +42,7 @@ public class StartMenu {
 	private JButton audio;
 	private PodioPanel pp;
 	private BackgroundPanel bp;
+	private Color color = Color.decode("#7fc7c2");
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
@@ -51,7 +54,7 @@ public class StartMenu {
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
 		
-		bp = new BackgroundPanel();
+		bp = new BackgroundPanel("res/Background/background4.png");
 		panel.add(bp, BorderLayout.CENTER);
 		System.out.println(play);
 
@@ -141,7 +144,23 @@ public class StartMenu {
 		login.setBounds(420, 300, 340, 27);
 		login.setBorderPainted(true);
 		login.setFocusPainted(false);
-		login.setBackground(Color.GRAY);
+		login.setBackground(Color.white);
+		
+		login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				login.setBackground(color);
+				login.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				login.setBackground(Color.white);
+				login.repaint();
+			}
+
+		});
+		
 		login.addActionListener(e -> {
 			if (login1.isLogged()) {
 				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
@@ -160,7 +179,21 @@ public class StartMenu {
 		register.setBounds(420, 355, 340, 27);
 		register.setBorderPainted(true);
 		register.setFocusPainted(false);
-		register.setBackground(Color.GRAY);
+		register.setBackground(Color.white);
+		register.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				register.setBackground(color);
+				register.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				register.setBackground(Color.white);
+				register.repaint();
+			}
+
+		});
 
 		register.addActionListener(e -> {
 			register1.getFrame().setVisible(true);
@@ -175,7 +208,21 @@ public class StartMenu {
 		game.setBounds(420, 410, 340, 27);
 		game.setBorderPainted(true);
 		game.setFocusPainted(false);
-		game.setBackground(Color.GRAY);
+		game.setBackground(Color.white);
+		game.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				game.setBackground(color);
+				game.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				game.setBackground(Color.white);
+				game.repaint();
+			}
+
+		});
 
 		bp.add(game);
 		bp.setComponentZOrder(game, 0);
@@ -185,7 +232,21 @@ public class StartMenu {
 		logout.setBounds(420, 465, 340, 27);
 		logout.setBorderPainted(true);
 		logout.setFocusPainted(false);
-		logout.setBackground(Color.GRAY);
+		logout.setBackground(Color.white);
+		logout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				logout.setBackground(color);
+				logout.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				logout.setBackground(Color.white);
+				logout.repaint();
+			}
+
+		});
 
 		logout.addActionListener(e -> {
 			if (login1.isLogged()) {

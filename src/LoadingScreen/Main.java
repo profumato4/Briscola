@@ -35,6 +35,18 @@ public class Main extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         });
+    	
+    	try {
+            db = new Database(Briscola.getFrame());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new SplashScreen(null, true).setVisible(true);
@@ -49,20 +61,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        try {
-            db = new Database(Briscola.getFrame());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
 
         Thread.sleep(11500);
         Briscola.getFrame().setVisible(true);
-        b.inizialize2();
+        b.inizialize2(db);
         Briscola.getFrame().repaint();
         Briscola.getFrame().revalidate();
 

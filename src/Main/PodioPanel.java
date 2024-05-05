@@ -36,7 +36,7 @@ public class PodioPanel extends JPanel {
 		setSize(1178, 861);
 		setLayout(null);
 		
-		bp = new BackgroundPanel();
+		bp = new BackgroundPanel("res/Background/background4.png");
 		add(bp, BorderLayout.CENTER);
 		
 		players();

@@ -11,11 +11,14 @@ import javax.swing.JPanel;
 public class BackgroundPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private String path;
 
 	/**
 	 * Create the panel.
 	 */
-	public BackgroundPanel() {
+	public BackgroundPanel(String path ) {
+		
+		this.path = path;
 		
 		setSize(1178, 861);
 		setLayout(null);
@@ -31,7 +34,7 @@ public class BackgroundPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon("res/Background/background4.png").getImage(), 0, 0, null);
+		g.drawImage(new ImageIcon(path).getImage(), 0, 0, null);
 	}
 	
 }

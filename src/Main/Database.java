@@ -14,24 +14,29 @@ import javax.swing.JOptionPane;
 public class Database {
 
 	private Crypt c = new Crypt();
-	private static final String driver = "com.mysql.jdbc.Driver";
+	
+	private String[] str = c.getStr();
+	
+	private static final String driver = "com.mysql.cj.jdbc.Driver";
 	private final String username;
 	private final String password;
 	private final String hostname;
-	private final String port = "12661";
-	private final String database = "defaultdb";
+	private final String port = str[0];
+	private final String database = str[1];
 	private final String url;
-
+	
+	
 	private final Connection conn;
 	private final JFrame frame;
 	private String nomeUtente;
 
 	public Database(JFrame frame) throws Exception {
 		this.frame = frame;
-
-		this.password = c.decrypt("Ft61L1/hv+oVs/tRf3KUUZq8c8UYggsilRE3+HNqxTs=");
-		this.hostname = c.decrypt("NifeemfRIuvbIyGb5nXEHKaQf15IZTTn8wn9ZD+11YYScFG78W2E1Cm4PTdy2ddB");
-		this.username = c.decrypt("iE9Rh3KbaByAWipHE6Pb9w==");
+		
+		
+		this.password = c.decrypt(str[2]);
+		this.hostname = c.decrypt(str[3]);
+		this.username = c.decrypt(str[4]);
 
 		this.url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
 
@@ -42,7 +47,7 @@ public class Database {
 	public void registerUser(String username, String password) throws SQLException {
 		String sql = "";
 		try {
-			sql = c.decrypt("+dHZdZi3wTfu5JkSZBcDXSZtTgyRahoSCjYD9sOZKNXSnuYBWeVE6+RWaSj8jZYEBtTTj8aSwlGlvPkFuD3I1A==");
+			sql = c.decrypt(str[5]);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +72,7 @@ public class Database {
 	public boolean loginUser(String username, String password) throws SQLException {
 		String sql = "";
 		try {
-			sql = c.decrypt("V/oqa+p2HWbJ0/H/K9zFl9GL8lGLIEgBQ9fiAiYz1jUmJ8fjMMJ45T95n42Bh/Rjk/n52GI0wXbUTPUi2OnRYQ==");
+			sql = c.decrypt(str[6]);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,8 +91,8 @@ public class Database {
 		String sqlSelect = "";
 		String sqlUpdate = "";
 		try {
-			sqlSelect = c.decrypt("XYiNfUid34RXhoBal0waxryHHlV6sRxTcvmzKs1ETMqNjLJWeh/Kfr/DIkhdyI3CJgZA22Bj+wki2iEJ1/kj0g==");
-			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeN7lmbuva/9+nVI9MmDEaBTXyKryyRGfOApYAOtu1plBb83foWOORytGSdBu340s69l61npsrUQwedzOW5wN1ak=");
+			sqlSelect = c.decrypt(str[7]);
+			sqlUpdate = c.decrypt(str[8]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,8 +104,8 @@ public class Database {
 		String sqlSelect = "";
 		String sqlUpdate = "";
 		try {
-			sqlSelect = c.decrypt("lVv2O/FhVbfQnHmebdmxh3XdTlrLwmeIV2Ms6+UlFibRi/JRiyBIAUPX4gImM9Y1R3KFt0mJ7jAqaY9qLqIUqw==");
-			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeGvDeaSNsF1j492acoaLkx3viRrLREdTYJ7ofvaeKDOwuuyUThq1+tDcD2cKa7KhWejXOUykrBxlSlpLwpb7oZVMWGpDDH+fjDEV+8I1exOs");
+			sqlSelect = c.decrypt(str[9]);
+			sqlUpdate = c.decrypt(str[10]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,8 +119,8 @@ public class Database {
 		String sqlSelect = "";
 		String sqlUpdate = "";
 		try {
-			sqlSelect = c.decrypt("XYiNfUid34RXhoBal0waxryHHlV6sRxTcvmzKs1ETMqNjLJWeh/Kfr/DIkhdyI3CJgZA22Bj+wki2iEJ1/kj0g==");
-			sqlUpdate = c.decrypt("vj7LBgmyhCZau2N8VcyVeHaH3DnnIN6hpjHWY/zLekhtQqXS4eYc3pepAd8uvnvQb83foWOORytGSdBu340s69l61npsrUQwedzOW5wN1ak=");
+			sqlSelect = c.decrypt(str[11]);
+			sqlUpdate = c.decrypt(str[12]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,7 +151,7 @@ public class Database {
 		ArrayList<String> nomi = new ArrayList<>();
 		String sql = "";
 		try {
-			sql = c.decrypt("CcLMli8Bzlglq3TWLC8/ptzrG33nmJMTw4VDmehZRdUVDCzncDQ7g3d9rKoQa6e46Nc5TKSsHGVKWkvClvuhlQMiCgFUCwEwaUg5G5eFwdUEeK5BMk8nVapCJNatKzpWWTBCSlmcH/2vztPZ1f7MZg==");
+			sql = c.decrypt(str[13]);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
