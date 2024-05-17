@@ -154,7 +154,7 @@ Questo software è rilasciato sotto la licenza MIT. Consulta il file [LICENSE](h
 Se hai domande o riscontri problemi, utilizza [issue tracker](https://github.com/profumato4/Briscola/issues) nel repository per segnalarli.
 
 # Buon Divertimento!
-Ora che conosci i passaggi per iniziare, preparati a immergerti nell'emozionante mondo di JBriscola. Che la fortuna sia sempre dalla tua parte!
+Ora che sei pronto, non resta che giocare! Sfida i tuoi amici, migliora le tue abilità, e goditi ogni momento di gioco. Che le carte ti siano sempre favorevoli!
 
 
 # 🇬🇧
