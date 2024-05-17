@@ -2,7 +2,7 @@
 
 ## Index
 
-1. **[Italiano](#🇮🇹)**
+1. **[Italiano](#)**
     - **[Perché JBriscola?](#perchè-jbriscola)**
     - **[Cartteristiche Principali](#caratteristiche-principali)**
     - **[Tecnologie Utilizzate](#tecnologie-utilizzate)**
