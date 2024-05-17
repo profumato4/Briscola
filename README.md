@@ -15,7 +15,15 @@
     - **[Domande o Problemi](#domande-o-problemi)**
 2. **[English](#-1)**
     - **[Why JBriscola?](#why-jbriscola)**
-
+    - **[Main Features](#main-features)**
+    - **[Used Technologies](#used-technologies)**
+    - **[Configuration and Use](#configuration-and-use)**
+    - **[System requirements](#system-requirements)**
+    - **[Installation](#installation)**
+    - **[How to get started](#how-to-get-started)**
+    - **[DEMO Video](#demo-video)**
+    - **[License](#license)**
+    - **[Questions or problems?](#questions-or-problems)**
 # 🇮🇹 
 
 # Perchè JBriscola?
