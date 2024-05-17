@@ -3,7 +3,15 @@
 ## Index
 
 1. **[Italiano](#🇮🇹)**
-    1. **[Perché JBriscola?](#perchè-jbriscola)**
+    - **[Perché JBriscola?](#perchè-jbriscola)**
+    - **[Cartteristiche Principali](#caratteristiche-principali)**
+    - **[Tecnologie Utilizzate](#tecnologie-utilizzate)**
+    - **[Configurazione ed Uso](#configurazione-ed-uso)**
+    - **[Requisiti di Sistema](#requisiti-di-sistema)**
+    - **[Installazione](#installazione)**
+    - **[Come Iniziare](#come-iniziare)**
+    - **[Video Demo](#video-demo)**
+    - **[Licenza](#domande-o-problemi)**
 2. **[English](#🇬🇧)**
 
 # 🇮🇹
@@ -79,7 +87,28 @@ public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
 - __Gioca Contro il Computer__: JBriscola offre la possibilità di giocare contro un avversario controllato dal computer. Attualmente, il bot seleziona le carte casualmente durante la partita.
 
 
+# Tecnologie Utilizzate
+JBriscola è costruito utilizzando una varietà di tecnologie moderne per offrire un'esperienza di gioco fluida e coinvolgente. Ecco una panoramica delle principali tecnologie utilizzate:
+
+- __Java SE__: Linguaggio di programmazione principale utilizzato per lo sviluppo del gioco.
+- __Java Swing__: Utilizzato per la creazione dell'interfaccia grafica utente (GUI).
+- __FlatLaf__: Look and feel moderno per Java Swing che fornisce un design pulito e professionale.
+- __MySQL__: Database relazionale utilizzato per gestire i dati degli utenti, come le credenziali di login e le statistiche di gioco.
+- __JDBC (Java Database Connectivity)__: Utilizzato per la connessione e l'interazione con il database MySQL.
+
+
 # Configurazione ed Uso
+
+# Requisiti di Sistema
+
+- __Sistema Operativo__: Windows, macOS, Linux
+
+- __Java__: Versione 8 o successiva
+
+- __Spazio su Disco__: Almeno 400 MB di spazio libero
+
+- __RAM__: Almeno 512 MB di RAM
+
 # Installazione 
 
 Per poter giocare a JBriscola bisogna questi semplici passi: 
