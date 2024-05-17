@@ -12,7 +12,7 @@
     - **[Come Iniziare](#come-iniziare)**
     - **[Video Demo](#video-demo)**
     - **[Licenza](#domande-o-problemi)**
-2. **[English](#🇬🇧)**
+2. **[English](#-1)**
 
 # 🇮🇹
 
