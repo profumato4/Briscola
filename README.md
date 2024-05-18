@@ -1,6 +1,6 @@
 # JBriscola
 
-[![LICENSE](https://img.shields.io/badge/LICENSE-X?style=plastic)](https://github.com/profumato4/Briscola/blob/master/LICENSE.md)
+[![LICENSE](https://img.shields.io/badge/LICENSE-X)](https://github.com/profumato4/Briscola/blob/master/LICENSE.md)
 [![Download](https://img.shields.io/github/downloads/profumato4/Briscola/total)](https://github.com/profumato4/Briscola/releases)
 
 
