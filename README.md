@@ -1,5 +1,9 @@
 # JBriscola
 
+![Static Badge](https://img.shields.io/badge/LICENSE-2?style=plastic&link=https%3A%2F%2Fgithub.com%2Fprofumato4%2FBriscola%2Fblob%2Fmaster%2FLICENSE.md)
+
+
+
 ## Index
 
 1. **[Italiano](#)**
