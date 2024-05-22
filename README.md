@@ -126,7 +126,7 @@ Per poter giocare a JBriscola bisogna questi semplici passi:
 
 - Installare java sul proprio pc in caso non fosse gia installato seguire questo [link](https://www.java.com/it/download/help/windows_manual_download.html)
 
-- Clonare questa repository tramite il seguente comando (per eseguire il comando c'è bisogno di installare [git](https://git-scm.com/downloads) altrimenti usare la procedura standar ovvero cliccare su code e poi download file zip ed estrarre il contenuto): 
+- Installare l'ultima [reales qui](https://github.com/profumato4/Briscola/releases) altrimenti clonare questa repository tramite il seguente comando (per eseguire il comando c'è bisogno di installare [git](https://git-scm.com/downloads) altrimenti usare la procedura standar ovvero cliccare su code e poi download file zip ed estrarre il contenuto): 
 ```bash
 git clone https://github.com/profumato4/Briscola.git
 ```
