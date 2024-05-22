@@ -1,5 +1,14 @@
 # JBriscola
 
+[![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue?style=for-the-badge)](https://github.com/profumato4/Briscola/blob/master/LICENSE.md)
+[![Download](https://img.shields.io/github/downloads/profumato4/Briscola/total?style=for-the-badge)](https://github.com/profumato4/Briscola/releases)
+[![Stars](https://img.shields.io/github/stars/profumato4/Briscola?style=for-the-badge&logo=github)](https://github.com/profumato4/Briscola)
+
+
+
+
+
+
 ## Index
 
 1. **[Italiano](#)**
