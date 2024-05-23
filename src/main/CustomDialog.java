@@ -16,6 +16,10 @@ import javax.swing.JPanel;
 
 class CustomDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String carte;
 	
 	public CustomDialog() {

@@ -5,7 +5,11 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class CerchioLabel extends JLabel {
-    private int numero;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int numero;
 
     public CerchioLabel() {
         super();

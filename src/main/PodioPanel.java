@@ -1,9 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
-import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,7 +20,7 @@ public class PodioPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Database db;
-	private HashMap<String, Integer> nomi;
+	HashMap<String, Integer> nomi;
 	private int y = 200;
 	private JPanel panel;
 	private BackgroundPanel bp;
@@ -67,7 +64,7 @@ public class PodioPanel extends JPanel {
 	    for (Map.Entry<String, PlayerStats> entry : top5Players) {
 	        String nome = entry.getKey();
 	        int gamesWon = entry.getValue().getGamesWon();
-	        int gamesLost = entry.getValue().getGamesLost();
+	  //      int gamesLost = entry.getValue().getGamesLost();
 
 	        JLabel label = new JLabel(nome + " - " + gamesWon);
 	        label.setFont(new Font("Tahoma", Font.PLAIN, 50));

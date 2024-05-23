@@ -16,7 +16,8 @@ import javax.swing.Timer;
 
 public class CurvesPanel extends GradientPanel {
 
-    private RenderingHints hints;
+    private static final long serialVersionUID = 1L;
+	private RenderingHints hints;
     private int counter = 0;
     private Timer timer = new Timer(20, ae -> repaint());
 

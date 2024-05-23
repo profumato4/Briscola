@@ -9,7 +9,9 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class ProgressBarCustom extends JProgressBar {
     
-    public Color getColorString() {
+    private static final long serialVersionUID = 1L;
+
+	public Color getColorString() {
         return colorString;
     }
 

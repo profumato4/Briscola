@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 
 public class GradientPanel extends JPanel {
 
-    private final Color gradientStart;
+    private static final long serialVersionUID = 1L;
+	private final Color gradientStart;
     private final Color gradientEnd;
 
     public GradientPanel(Color gradientStart, Color gradientEnd) {

@@ -59,7 +59,7 @@ public class SplashScreen extends javax.swing.JDialog {
             }
         });
 
-        il.ImageLoading(jLabel1);
+        il.loadImage(jLabel1);
 
         lbStatus.setForeground(new java.awt.Color(200, 200, 200));
         lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

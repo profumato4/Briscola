@@ -12,7 +12,6 @@ public class Animation {
     private Timer timerPresaBack;
     private Timer timerPescata;
     private Timer timerPescataBack;
-    private Timer timerLastCard;
     private JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
     private JLabel label2 = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
 

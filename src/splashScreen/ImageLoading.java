@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class ImageLoading {
 
-    public void ImageLoading(JLabel jLabel1) {
+    public void loadImage(JLabel jLabel1) {
         new Thread(() -> {
             try {
                 BufferedImage fullImage = ImageIO.read(new File("res/logo.png"));
