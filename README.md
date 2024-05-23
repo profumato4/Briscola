@@ -25,7 +25,7 @@
 
 2. **[English](#-1)**
     - **[Why JBriscola?](#why-jbriscola)**
-    - **[Main Features](#main-features)**
+    - **[main Features](#main-features)**
     - **[Used Technologies](#used-technologies)**
     - **[Configuration and Use](#configuration-and-use)**
     - **[System requirements](#system-requirements)**
@@ -49,7 +49,7 @@ JBriscola offre una serie di caratteristiche uniche e interessanti che lo distin
 
 - __GUI__: Grazie all'utilizzo del framework Java Swing, JBriscola vanta un'interfaccia grafica utente intuitiva e user-friendly . Il design moderno, fornito dal look and feel FlatLightLaf, permette agli utenti di navigare agevolmente attraverso il gioco, assicurando un'esperienza di gioco fluida e piacevole.
 
-- __Animazioni__: Il software è provvisto di animazioni create tramite l'utilizzo dell'oggetto `Timer` fornito da `javax.swing`. Questo oggetto ci consente di programmare eventi che si verificano a intervalli regolari, il che è essenziale per creare animazioni fluide e controllate. Tutte le animazioni utilizzate in JBriscola sono implementate nella classe `Animation` come metodi. É possibile trovare la classe all'interno all'interno della directory `Main`. All'interno delle classi `CPU` e `Giocatore` è possibile trovare i metodi per l'animazione del lancio della carta strutturato nello modo. La logica dietro queste animazioni è abbastanza semplice ma efficace. Per esempio, nell'animazione di distribuzione di una carta, utilizziamo il Timer per aggiornare continuamente la posizione della carta finché non raggiunge la sua destinazione finale sul tavolo. Ciò viene fatto controllando le coordinate x e y della carta e aggiornandole gradualmente finché non raggiungono le coordinate desiderate. Una volta raggiunto il punto finale, il Timer viene interrotto e l'animazione viene completata. 
+- __Animazioni__: Il software è provvisto di animazioni create tramite l'utilizzo dell'oggetto `Timer` fornito da `javax.swing`. Questo oggetto ci consente di programmare eventi che si verificano a intervalli regolari, il che è essenziale per creare animazioni fluide e controllate. Tutte le animazioni utilizzate in JBriscola sono implementate nella classe `Animation` come metodi. É possibile trovare la classe all'interno all'interno della directory `main`. All'interno delle classi `CPU` e `Giocatore` è possibile trovare i metodi per l'animazione del lancio della carta strutturato nello modo. La logica dietro queste animazioni è abbastanza semplice ma efficace. Per esempio, nell'animazione di distribuzione di una carta, utilizziamo il Timer per aggiornare continuamente la posizione della carta finché non raggiunge la sua destinazione finale sul tavolo. Ciò viene fatto controllando le coordinate x e y della carta e aggiornandole gradualmente finché non raggiungono le coordinate desiderate. Una volta raggiunto il punto finale, il Timer viene interrotto e l'animazione viene completata. 
 ```java
 
 public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
@@ -86,7 +86,7 @@ public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
 
 ```
 
-- __Login & Register__: JBriscola implementa un robusto sistema di login e registrazione, consentendo agli utenti di creare e gestire i propri account personali. Questo sistema è integrato con un database MySQL online attivo 24 ore su 24, garantendo la sicurezza e l'accessibilità dei dati degli utenti. Il tutto gestitto dalle classi `Login`, `Register`, `Database` che sono accessibili sempre all'interno della directory `Main`.
+- __Login & Register__: JBriscola implementa un robusto sistema di login e registrazione, consentendo agli utenti di creare e gestire i propri account personali. Questo sistema è integrato con un database MySQL online attivo 24 ore su 24, garantendo la sicurezza e l'accessibilità dei dati degli utenti. Il tutto gestitto dalle classi `Login`, `Register`, `Database` che sono accessibili sempre all'interno della directory `main`.
 
 - __Classifica__: Per gli utenti competitivi, JBriscola offre una  semplice classifica con il nome dei 5 giocatori con più partite vinte, che tiene traccia dei migliori giocatori e delle loro prestazioni nel gioco. Questo aggiunge un elemento di competizione e sfida, incoraggiando gli utenti a migliorare le proprie abilità e scalare le classifiche.
 
@@ -186,12 +186,12 @@ This project was born with the aim of offering an engaging and fun gaming experi
 
 With a solid architecture and an intuitive interface, JBriscola aims to become the point of reference for anyone looking for a flawless card gaming experience on the Java platform. Whether you are a programming enthusiast eager to explore the potential of Java or simply a gamer looking for a new pastime, JBriscola is here to offer an unforgettable experience.
 
-# Main Features
+# main Features
 JBriscola offers a number of unique and interesting features that set it apart from other Java card games. Here is a preview of its most significant features:
 
 - __GUI__: Thanks to the use of the Java Swing framework, JBriscola boasts an intuitive and user-friendly graphical user interface. The modern design, provided by the FlatLightLaf look and feel, allows users to navigate smoothly through the game, ensuring a smooth and enjoyable gaming experience.
 
-- __Animations__: The software is equipped with animations created using the `Timer` object provided by `javax.swing`. This object allows us to schedule events that occur at regular intervals, which is essential for creating smooth, controlled animations. All animations used in JBriscola are implemented in the `Animation` class as methods. You can find the class inside the `Main` directory. Within the `CPU` and `Giocatore` classes you can find methods for animating structured card throwing in the way. The logic behind these animations is quite simple but effective. For example, in a card dealing animation, we use the Timer to continuously update the position of the card until it reaches its final destination on the table. This is done by checking the x and y coordinates of the chart and gradually updating them until they reach the desired coordinates. Once the end point is reached, the Timer is stopped and the animation is completed.
+- __Animations__: The software is equipped with animations created using the `Timer` object provided by `javax.swing`. This object allows us to schedule events that occur at regular intervals, which is essential for creating smooth, controlled animations. All animations used in JBriscola are implemented in the `Animation` class as methods. You can find the class inside the `main` directory. Within the `CPU` and `Giocatore` classes you can find methods for animating structured card throwing in the way. The logic behind these animations is quite simple but effective. For example, in a card dealing animation, we use the Timer to continuously update the position of the card until it reaches its final destination on the table. This is done by checking the x and y coordinates of the chart and gradually updating them until they reach the desired coordinates. Once the end point is reached, the Timer is stopped and the animation is completed.
 
 ```java
 
@@ -229,7 +229,7 @@ public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
 
 ```
 
-- __Login & Register__: JBriscola implements a robust login and registration system, allowing users to create and manage their personal accounts. This system is integrated with a 24-hour online MySQL database, ensuring the security and accessibility of user data. All managed by the `Login`, `Register`, `Database` classes which are always accessible within the `Main` directory.
+- __Login & Register__: JBriscola implements a robust login and registration system, allowing users to create and manage their personal accounts. This system is integrated with a 24-hour online MySQL database, ensuring the security and accessibility of user data. All managed by the `Login`, `Register`, `Database` classes which are always accessible within the `main` directory.
 
 - __Leaderboard__: For competitive users, JBriscola offers a simple leaderboard with the name of the 5 players with the most match wins, which tracks the best players and their performances in the game. This adds an element of competition and challenge, encouraging users to improve their skills and climb the leaderboards.
 
@@ -306,7 +306,7 @@ Welcome to JBriscola! To start playing, follow these simple steps:
 
 - __Play and Have Fun__: Once the game has started, enjoy the excitement of Briscola! Use the cards at your disposal to beat your opponent.
 
-- __Explore Features__: Don't forget to explore all the features offered by JBriscola, such as score management, customization options and more. You can also take a look at the leaderboard to see how you compare to other players. See the section [Main Features](#main-features)
+- __Explore Features__: Don't forget to explore all the features offered by JBriscola, such as score management, customization options and more. You can also take a look at the leaderboard to see how you compare to other players. See the section [main Features](#main-features)
 
 # DEMO Video
 https://www.youtube.com/watch?v=46mEq1oxnNQ

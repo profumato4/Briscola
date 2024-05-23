@@ -1,13 +1,12 @@
 
-package LoadingScreen;
+package loadingScreen;
 
-import SplashScreen.SplashScreen;
-import  Main.Briscola;
+import main.Briscola;
+import main.Database;
+import splashScreen.SplashScreen;
 
 import javax.swing.*;
 import java.sql.SQLException;
-
-import Main.Database;
 
 import com.formdev.flatlaf.FlatLightLaf;
 

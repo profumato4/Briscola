@@ -1,4 +1,4 @@
-package SplashScreen;
+package splashScreen;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;

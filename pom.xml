@@ -32,21 +32,21 @@
 			</resource>
 			
 			<resource>
-				<directory>src/LoadingScreen</directory>
+				<directory>src/loadingScreen</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>
 			</resource>
 
 			<resource>
-				<directory>src/Main</directory>
+				<directory>src/main</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>
 			</resource>
 
 			<resource>
-				<directory>src/SplashScreen</directory>
+				<directory>src/splashScreen</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>

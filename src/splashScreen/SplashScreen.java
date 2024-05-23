@@ -1,5 +1,5 @@
 
-package SplashScreen;
+package splashScreen;
 
 import java.awt.*;
 import javax.swing.*;
