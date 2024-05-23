@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -46,12 +47,13 @@ public class Database {
 
 	public void registerUser(String username, String password) throws SQLException {
 		String sql = "";
+		
 		try {
 			sql = c.decrypt(str[5]);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, username);
 			statement.setString(2, password);
@@ -71,12 +73,13 @@ public class Database {
 
 	public boolean loginUser(String username, String password) throws SQLException {
 		String sql = "";
+		
 		try {
 			sql = c.decrypt(str[6]);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, username);
 			statement.setString(2, password);
@@ -147,37 +150,40 @@ public class Database {
 		}
 	}
 	
-	public ArrayList<String> topPlayers(){
-		ArrayList<String> nomi = new ArrayList<>();
-		String sql = "";
-		try {
-			sql = c.decrypt(str[13]);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public HashMap<String, PlayerStats> topPlayers() {
+	    HashMap<String, PlayerStats> playerStats = new HashMap<>();
+	    String sql = "";
+	    try {
+	        sql = c.decrypt(str[13]);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 
-		PreparedStatement statement;
-		try {
-			statement = conn.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
+	    PreparedStatement statement;
+	    try {
+	        statement = conn.prepareStatement(sql);
+	        ResultSet resultSet = statement.executeQuery();
 
-			while (resultSet.next()) {
-				String username = resultSet.getString("nomeUtente");
-				nomi.add(username);
-				int gamesWon = resultSet.getInt("partiteVinte");
-			}
+	        while (resultSet.next()) {
+	            String username = resultSet.getString("nomeUtente");
+	            if (!username.equals("admin")) {
+	                int gamesWon = resultSet.getInt("partiteVinte");
+	                int gamesLost = resultSet.getInt("partitePerse");
+	                playerStats.put(username, new PlayerStats(gamesWon, gamesLost));
+	            }
+	        }
 
-			resultSet.close();
-			statement.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		return nomi;
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+
+	    return playerStats;
 	}
+
+
 	
 	public String getUsername() {
 		return nomeUtente;
