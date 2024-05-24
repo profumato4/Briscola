@@ -24,6 +24,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.io.FileInputStream;
 
+/**
+ * The StartMenu class represents the initial menu of the JBriscola game.
+ * It provides options to start a new game, login, logout, register,
+ * view the leaderboard, and control audio settings.
+ * <p>
+ * This class handles the initialization of the start menu interface,
+ * including buttons for various functionalities like login, logout, register, etc.
+ * It also manages audio playback for the game's theme song.
+ *
+ * @author profumato4
+ */
 public class StartMenu {
 
 	private FileManager fm = new FileManager("res/ThemeSong/play.txt");
@@ -37,6 +48,16 @@ public class StartMenu {
 	private BackgroundPanel bp;
 	private Color color = Color.decode("#7fc7c2");
 
+	/**
+	 * Constructs a new StartMenu object.
+	 * Initializes the start menu interface.
+	 *
+	 * @param frame the main JFrame of the application
+	 * @param panel the main JPanel of the application
+	 * @param login1 the instance of the Login class
+	 * @param register the instance of the Register class
+	 */
+
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 		initialize(frame, panel, login1, register);
 		pp = new PodioPanel(login1.getDb(), panel);
@@ -44,9 +65,18 @@ public class StartMenu {
 		frame.add(pp, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Initializes the start menu interface.
+	 *
+	 * @param frame the main JFrame of the application
+	 * @param panel the main JPanel of the application
+	 * @param login1 the instance of the Login class
+	 * @param register1 the instance of the Register class
+	 */
+
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
-		
+
 		bp = new BackgroundPanel("res/Background/background4.png");
 		panel.add(bp, BorderLayout.CENTER);
 		System.out.println(play);
@@ -138,7 +168,7 @@ public class StartMenu {
 		login.setBorderPainted(true);
 		login.setFocusPainted(false);
 		login.setBackground(Color.white);
-		
+
 		login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -153,7 +183,7 @@ public class StartMenu {
 			}
 
 		});
-		
+
 		login.addActionListener(e -> {
 			if (login1.isLogged()) {
 				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
@@ -262,11 +292,16 @@ public class StartMenu {
 		bp.add(logout);
 		bp.setComponentZOrder(logout, 0);
 
-		musicTheme("res/ThemeSong/FRENESIA.wav");
+		playMusic("res/ThemeSong/FRENESIA.wav");
 		panel.repaint();
 		panel.revalidate();
 
 	}
+
+	/**
+	 * Writes the current state of the audio playback (true or false) to a text file.
+	 * This method appends the boolean value of the 'play' variable to the specified file.
+	 */
 
 	private void writePlay() {
 
@@ -274,9 +309,22 @@ public class StartMenu {
 
 	}
 
+	/**
+	 * Checks the current state of the audio playback from the text file.
+	 * This method reads a boolean value from the specified file,
+	 * indicating whether the audio playback is active (true) or paused (false).
+	 * @return The boolean value indicating the current state of audio playback.
+	 */
+
 	private boolean checkPlay() {
 		return fm.readBoolean();
 	}
+
+	/**
+	 * Controls the audio playback based on the current state.
+	 * If the audio is currently playing, it stops the playback, updates the state, and adjusts the UI accordingly.
+	 * If the audio is currently paused, it starts the playback, updates the state, and adjusts the UI accordingly.
+	 */
 
 	private void checkPlayButton() {
 		if (play) {
@@ -296,6 +344,12 @@ public class StartMenu {
 		}
 	}
 
+	/**
+	 * Controls the audio playback based on the current state, but without writing to the file.
+	 * If the audio is currently paused, it stops the playback, updates the UI accordingly.
+	 * If the audio is currently playing, it starts the playback, updates the UI accordingly.
+	 */
+
 	private void checkPlayButton2() {
 		if (!play) {
 			play = false;
@@ -309,6 +363,14 @@ public class StartMenu {
 			audio.repaint();
 		}
 	}
+
+	/**
+	 * Calculates the center position of a JLabel relative to the specified JFrame.
+	 * The label will be positioned at the horizontal center of the frame and at a fixed vertical position.
+	 * @param frame The JFrame instance to which the label will be centered.
+	 * @param label The JLabel instance to be centered.
+	 * @return The centered JLabel.
+	 */
 
 	private JLabel calcolaCentro(JFrame frame, JLabel label) {
 		Dimension size = frame.getSize();
@@ -324,6 +386,13 @@ public class StartMenu {
 		return label;
 	}
 
+	/**
+	 * Prepares and returns a Clip object for the specified audio file.
+	 * This method reads the audio file, creates a BufferedInputStream and an AudioInputStream, and then opens a Clip.
+	 * @param audioFile The path to the audio file.
+	 * @return The prepared Clip object, or null if an error occurs.
+	 */
+
 	private Clip prepareClip(String audioFile) {
 
 		try (AudioInputStream ais = AudioSystem
@@ -337,7 +406,14 @@ public class StartMenu {
 		return null;
 	}
 
-	private void musicTheme(String path) {
+	/**
+	 * Plays the theme music specified by the given path in a separate thread.
+	 * This method prepares the clip for the specified audio file,
+	 * starts the playback in a loop, and controls the playback based on the current state.
+	 * @param path The path to the theme music audio file.
+	 */
+
+	private void playMusic(String path) {
 		Thread thread = new Thread(() -> {
 			clip = prepareClip(path);
 			if (clip != null) {
@@ -354,9 +430,21 @@ public class StartMenu {
 		}
 	}
 
+	/**
+	 * Retrieves the JButton instance associated with starting a new game.
+	 * @return The JButton instance for starting a new game.
+	 */
+
 	public JButton game() {
 		return game;
 	}
+
+	/**
+	 * Retrieves the type of cards selected by the user from a custom dialog.
+	 * This method opens a custom dialog to prompt the user to select a type of cards,
+	 * reads the selected type, and returns it as a string.
+	 * @return The type of cards selected by the user.
+	 */
 
 	public String getCarteType() {
 		carte = new CustomDialog().readCardType();

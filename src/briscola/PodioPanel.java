@@ -16,6 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+/**
+ * The PodioPanel class represents a panel displaying top players' statistics in a leaderboard format.
+ */
+
 public class PodioPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -24,7 +28,13 @@ public class PodioPanel extends JPanel {
 	private int y = 200;
 	private JPanel panel;
 	private BackgroundPanel bp;
-	
+
+	/**
+	 * Constructs a PodioPanel with the specified database and parent panel.
+	 *
+	 * @param db    the database containing player statistics
+	 * @param panel the parent panel to which this PodioPanel belongs
+	 */
 
 	public PodioPanel(Database db, JPanel panel) {
 		
@@ -40,9 +50,12 @@ public class PodioPanel extends JPanel {
 		players();
 		keyBindings();
 		
-	}	
+	}
 
-	
+	/**
+	 * Displays the top players and their statistics on the leaderboard.
+	 */
+
 	private void players() {
 	    HashMap<String, PlayerStats> playerStats = db.topPlayers();
 	    
@@ -72,7 +85,11 @@ public class PodioPanel extends JPanel {
 	    }
 	}
 
-	
+	/**
+	 * Registers the key bindings for keyboard shortcuts,
+	 * allowing the user to exit the PodioPanel by pressing the Escape key.
+	 */
+
 	private void keyBindings() {
 		InputMap inputMap = this.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap actionMap = this.getActionMap();

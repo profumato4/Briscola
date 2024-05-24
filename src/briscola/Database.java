@@ -33,6 +33,7 @@ public class Database {
 	private final Connection conn;
 	private final JFrame frame;
 	private String nomeUtente;
+	private String userPassword;
 
 	/**
 	 * Constructor for the Database class.
@@ -113,6 +114,7 @@ public class Database {
 			statement.setString(2, password);
 			ResultSet resultSet = statement.executeQuery();
 			nomeUtente = username;
+			userPassword = password;
 			return resultSet.next();
 		}
 	}
@@ -251,5 +253,15 @@ public class Database {
 	public String getUsername() {
 		return nomeUtente;
 	}
-	
+
+	/**
+	 * Retrieves the password of the currently logged-in user.
+	 *
+	 * @return The password of the logged-in user
+	 */
+
+	public String getPassword(){
+		return userPassword;
+	}
+
 }

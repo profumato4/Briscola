@@ -13,6 +13,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+/**
+ * The Register class represents the user registration interface.
+ * It allows users to register by providing a username and password.
+ */
+
 public class Register {
 
 	private JFrame frame;
@@ -23,10 +28,21 @@ public class Register {
 	private boolean hide2 = true;
 	private Database db;
 
+	/**
+	 * Constructs a new Register object.
+	 * @param login The login instance associated with the registration process.
+	 * @param db The database instance used for user registration.
+	 */
+
 	public Register(Login login, Database db) {
 		this.db = db;
 		initialize(login);
 	}
+
+	/**
+	 * Initializes the user registration interface.
+	 * @param login The login instance associated with the registration process.
+	 */
 
 	private void initialize(Login login) {
         frame = new JFrame();
@@ -170,6 +186,11 @@ public class Register {
 		lblNewLabel_1_1_1.setBounds(78, 224, 159, 14);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 	}
+
+	/**
+	 * Retrieves the frame associated with the registration interface.
+	 * @return The JFrame instance representing the registration interface.
+	 */
 
 	public JFrame getFrame() {
 		return frame;

@@ -7,6 +7,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+
+/**
+ * The main class responsible for managing the Briscola game application.
+ */
 
 public class Briscola {
 
@@ -23,11 +28,19 @@ public class Briscola {
 	private Briscola b = this;
 	private BackgroundPanel bp;
 	private Database db;
-	
+	private int n = 0;
+
+	/**
+	 * Constructs a new instance of the Briscola class and initializes the game.
+	 */
 
 	public Briscola() {
 		initialize();
 	}
+
+	/**
+	 * Initializes the JFrame and JPanel components for the game.
+	 */
 
 	private void initialize() {
 		frame = new JFrame();
@@ -42,13 +55,28 @@ public class Briscola {
 		panel.setLayout(null);
 	}
 
+	/**
+	 * Initializes the game components with the provided Database instance.
+	 *
+	 * @param db The Database instance to be used for the game.
+	 */
+
 	public void inizialize2(Database db) {
 		if (frame.isVisible()) {
 			
 			this.db = db;
 			login = new Login(this, db);
 			register = new Register(login, login.getDb());
-			
+
+			if(n == 10){
+                try {
+                    db.loginUser(db.getUsername(), db.getPassword());
+					login.setLogged(true);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
 			//panel.setBounds(0, 0, 1040, 667);
 			frame.getContentPane().add(panel, BorderLayout.CENTER);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +96,10 @@ public class Briscola {
 		}
 	}
 
-	public static JFrame getFrame() {
-		return frame;
-	}
+	/**
+	 * Sets the background of the game panel.
+	 */
+
 
 	private void setBackground() {
 
@@ -102,6 +131,10 @@ public class Briscola {
 		bp.revalidate();
 
 	}
+
+	/**
+	 * Starts the game by initializing game components and setting up key bindings.
+	 */
 
 	public void game() {
 		temp = 0;
@@ -155,20 +188,55 @@ public class Briscola {
 		});
 	}
 
-	public JPanel getPanel() {
-		return panel;
-	}
-	
-	private void centerFrame(JFrame f) {
-		Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
-		Dimension frameSize = f.getSize ();
 
-		f.setLocation ((screenSize.width - frameSize.width) / 2,
-		(screenSize.height - frameSize.height) / 2);
+	/**
+	 * Centers the provided JFrame on the screen.
+	 *
+	 * @param f The JFrame to be centered.
+	 */
+
+	private void centerFrame(JFrame f) {
+		f.setLocationRelativeTo(null);
 	}
-	
+
+	/**
+	 * Retrieves the Database instance used in the game.
+	 *
+	 * @return The Database instance.
+	 */
+
 	public Database getDb() {
 		return db;
 	}
-	
+
+	/**
+	 * Sets the value of 'n'.
+	 *
+	 * @param n The value to be set for 'n'.
+	 */
+
+	public void setN(int n){
+		this.n = n;
+	}
+
+	/**
+	 * Retrieves the main JFrame instance of the game.
+	 *
+	 * @return The main JFrame instance.
+	 */
+
+	public static JFrame getFrame() {
+		return frame;
+	}
+
+	/**
+	 * Retrieves the game panel.
+	 *
+	 * @return The game panel.
+	 */
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
 }

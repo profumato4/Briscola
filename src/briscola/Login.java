@@ -3,12 +3,12 @@ package briscola;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.io.*;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.sql.SQLException;
+
+/**
+ * The Login class represents the user login interface.
+ * It allows users to login with a username and password.
+ */
 
 public class Login {
 
@@ -23,11 +23,22 @@ public class Login {
 	private JCheckBox chckbxNewCheckBox;
 	private Database db;
 
+	/**
+	 * Constructs a new Login object.
+	 * @param briscola The Briscola instance associated with the login process.
+	 * @param db The database instance used for user login.
+	 */
+
 	public Login(Briscola briscola, Database db) {
 		this.db = db;
 		register = new Register(this, db);
 		initialize(briscola);
 	}
+
+	/**
+	 * Initializes the user login interface.
+	 * @param briscola The Briscola instance associated with the login process.
+	 */
 
 	private void initialize(Briscola briscola) {
 		frame = new JFrame();
@@ -166,21 +177,46 @@ public class Login {
 		frame.getContentPane().add(chckbxNewCheckBox);
 	}
 
+	/**
+	 * Retrieves the frame associated with the login interface.
+	 * @return The JFrame instance representing the login interface.
+	 */
+
 	public JFrame getFrame() {
 		return frame;
 	}
+
+	/**
+	 * Checks if the user is currently logged in.
+	 * @return true if the user is logged in, false otherwise.
+	 */
 
 	public boolean isLogged() {
 		return logged;
 	}
 
+	/**
+	 * Retrieves the frame associated with the Briscola game.
+	 * @return The JFrame instance representing the Briscola game interface.
+	 */
+
 	public JFrame getBriscolaFrame() {
 		return Briscola.getFrame();
 	}
 
+	/**
+	 * Retrieves the username of the currently logged in user.
+	 * @return The username of the currently logged in user.
+	 */
+
 	public String getUserName() {
 		return userName;
 	}
+
+	/**
+	 * Checks if the user was previously logged in.
+	 * @return true if the user was previously logged in, false otherwise.
+	 */
 
 	private boolean checkLogin() {
 		return fm.readBoolean();
@@ -192,13 +228,28 @@ public class Login {
 
 	}
 
+	/**
+	 * Sets the login status.
+	 * @param logged The boolean value representing the login status.
+	 */
+
 	public void setLogged(boolean logged) {
 		this.logged = logged;
 	}
 
+	/**
+	 * Retrieves the database instance associated with user login.
+	 * @return The Database instance.
+	 */
+
 	public Database getDb() {
 		return db;
 	}
+
+	/**
+	 * Retrieves the file manager instance used for managing login status.
+	 * @return The FileManager instance.
+	 */
 
 	public FileManager getFm(){
 		return  fm;

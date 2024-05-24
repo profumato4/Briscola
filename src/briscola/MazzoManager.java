@@ -2,7 +2,19 @@ package briscola;
 
 import javax.swing.*;
 
-public class Setup {
+/**
+ * The MazzoManager class manages the setup and rotation of cards in Italian regional card decks.
+ */
+
+public class MazzoManager {
+
+    /**
+     * Sets up a specified deck of cards based on the type of Italian regional cards.
+     * Supports Piacentine, Siciliane, and Napoletane.
+     *
+     * @param str  The type of deck to set up. Can be "Piacentine", "Siciliane", or "Napoletane".
+     * @param mazzo  The MyArrayList object that will contain the configured cards.
+     */
 
     public void setup(String str, MyArrayList<Carta> mazzo){
         if (str.equals("Piacentine")) {
