@@ -15,13 +15,11 @@ public class Login {
 	private JFrame frame;
 	private JTextField txtCcc;
 	private JPasswordField textField;
-	private boolean logged = false;
+	private boolean logged = checkLogin();
 	Register register;
 	private boolean hide = true;
 	private String userName;
-	private boolean macAddressFound = false;
 	private JCheckBox chckbxNewCheckBox;
-	private String currentMacAddress;
 	private Database db;
 
 	public Login(Briscola briscola, Database db) {
@@ -35,11 +33,8 @@ public class Login {
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
-		checkMacAddress();
-		if (macAddressFound) {
-			logged = true;
-			
+		
+		if(logged) {
 			this.userName = db.getUsername();
 		}
 
@@ -138,17 +133,11 @@ public class Login {
 			}
 
 			if (chckbxNewCheckBox.isSelected()) {
-				checkMacAddress();
-				if (!macAddressFound) {
-					try {
-						FileWriter file2 = new FileWriter("res\\Login\\MacAddress.txt", true);
-						file2.append(currentMacAddress).append(";").append(txtCcc.getText()).append("\n");
-						file2.close();
-						System.out.println("Scritto");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+				
+				writeLogin(true);
+				
+			}else {
+				writeLogin(false);
 			}
 		});
 		btnNewButton.setBackground(Color.CYAN);
@@ -192,52 +181,48 @@ public class Login {
 		return userName;
 	}
 
-	public String getMacAddress() {
-		StringBuilder macAddress = new StringBuilder();
+	private boolean checkLogin() {
+		BufferedReader br = null;
 		try {
-			InetAddress localhost = InetAddress.getLocalHost();
-			NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localhost);
-
-			byte[] macAddressBytes = networkInterface.getHardwareAddress();
-
-			for (int i = 0; i < macAddressBytes.length; i++) {
-				macAddress.append(
-						String.format("%02X%s", macAddressBytes[i], (i < macAddressBytes.length - 1) ? "-" : ""));
-			}
-
-		} catch (UnknownHostException | SocketException e) {
-			e.printStackTrace();
-		}
-
-		return macAddress.toString();
-	}
-
-	private void checkMacAddress() {
-		try {
-			FileReader file = new FileReader("res\\Login\\MacAddress.txt");
-			BufferedReader reader = new BufferedReader(file);
-
-			currentMacAddress = getMacAddress();
-
+			br = new BufferedReader(new FileReader("res/Login/remember.txt")); 
+			
 			String str;
-			while ((str = reader.readLine()) != null) {
-				String storedMacAddress[] = str.trim().split(";");
-
-				if (currentMacAddress.equals(storedMacAddress[0])) {
-					macAddressFound = true;
-					break;
-				}
+			
+			while((str = br.readLine()) != null) {
+				System.out.println(str + " " + Boolean.valueOf(br.readLine()));
+				return Boolean.valueOf(str);
 			}
-
-			reader.close();
-
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		return false;
 	}
-	
+
+	private void writeLogin(boolean value) {
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter("res/Login/remember.txt", false);
+			fw.append(String.valueOf(value));
+			System.out.println("scritto");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 	public void setLogged(boolean logged) {
 		this.logged = logged;

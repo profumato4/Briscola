@@ -254,23 +254,21 @@ public class StartMenu {
 						JOptionPane.YES_NO_OPTION);
 				if (conferma == JOptionPane.YES_OPTION) {
 					login1.setLogged(false);
-
+					
+					FileWriter fw = null;
 					try {
-						File file = new File("res\\Login\\MacAddress.txt");
-						List<String> righe = FileUtils.readLines(file, "UTF-8");
-
-						List<String> righeDaMantenere = new ArrayList<String>();
-
-						for (String str : righe) {
-							if (!str.contains(login1.getMacAddress())) {
-								righeDaMantenere.add(str);
-							}
-						}
-
-						FileUtils.writeLines(file, "UTF-8", righeDaMantenere);
-
+						fw = new FileWriter("res/Login/remember.txt", false);
+						fw.append(String.valueOf(false));
+						System.out.println("scritto");
 					} catch (IOException e1) {
 						e1.printStackTrace();
+					}finally {
+						try {
+							fw.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 
 				} else {

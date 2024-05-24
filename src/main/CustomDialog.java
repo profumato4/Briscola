@@ -1,7 +1,10 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,6 +24,7 @@ class CustomDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String carte;
+	private Color color = Color.decode("#7fc7c2");
 	
 	public CustomDialog() {
 		
@@ -97,6 +101,23 @@ class CustomDialog extends JDialog {
 		conferma.setBounds(190, 320, 180, 40);
 		conferma.setFocusPainted(false);
 		
+		conferma.setBackground(Color.white);
+		
+		conferma.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				conferma.setBackground(color);
+				conferma.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				conferma.setBackground(Color.white);
+				conferma.repaint();
+			}
+
+		});
+		
 		conferma.addActionListener(e -> {
 
             carte = text.getText();
@@ -113,6 +134,22 @@ class CustomDialog extends JDialog {
 		annulla.setFont(new Font("Arial", Font.BOLD, 26));
 		annulla.setBounds(10, 320, 180, 40);
 		annulla.setFocusPainted(false);
+		annulla.setBackground(Color.white);
+		
+		annulla.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				annulla.setBackground(color);
+				annulla.repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				annulla.setBackground(Color.white);
+				annulla.repaint();
+			}
+
+		});
 		
 		annulla.addActionListener(e -> dispose());
 		
