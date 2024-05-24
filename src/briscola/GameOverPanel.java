@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.Font;
 
@@ -7,19 +7,31 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Represents the panel displayed when the game is over, showing the result (win, lose, tie).
+ * It allows the user to restart the game by clicking on the panel.
+ */
+
 public class GameOverPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Create the panel.
+	 * Constructs a GameOverPanel object.
+	 *
+	 * @param b The Briscola object representing the game
 	 */
+
 	public GameOverPanel(Briscola b) {
+		// Add a mouse listener to the panel to handle restart when clicked
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Remove all components from the main panel
 				b.getPanel().removeAll();
+				// Initialize the game again
 				b.inizialize2(b.getDb());
+				// Repaint the main panel
 				b.getPanel().repaint();
 			}
 		});
@@ -29,7 +41,11 @@ public class GameOverPanel extends JPanel {
 				
 		
 	}
-	
+
+	/**
+	 * Displays the "Win" message and emoji.
+	 */
+
 	public void wins() {
 		JLabel text = new JLabel("Vinto");
 		text.setFont(new Font("Maiandra GD", Font.PLAIN, 180));
@@ -49,7 +65,11 @@ public class GameOverPanel extends JPanel {
 		text2.setBounds(337, 160, 430, 199);
 		add(text2);
 	}
-	
+
+	/**
+	 * Displays the "Lose" message and emoji.
+	 */
+
 	public void lose() {
 		JLabel text = new JLabel("Perso");
 		text.setFont(new Font("Maiandra GD", Font.PLAIN, 180));
@@ -69,7 +89,11 @@ public class GameOverPanel extends JPanel {
 		text2.setBounds(356, 160, 430, 199);
 		add(text2);
 	}
-	
+
+	/**
+	 * Displays the "Tie" message and emoji.
+	 */
+
 	public void tie() {
 		JLabel text = new JLabel("Pareggiato");
 		text.setOpaque(false);

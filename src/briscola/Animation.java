@@ -1,8 +1,12 @@
-package main;
+package briscola;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * Handles animations for card movements and transitions in the game.
+ */
 
 public class Animation {
 
@@ -15,10 +19,22 @@ public class Animation {
     private JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
     private JLabel label2 = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
 
+    /**
+     * Constructs an Animation object.
+     */
+
     public Animation(){
         label.setBounds(950, 430, 168, 89);
         label2.setBounds(950, 215, 168, 89);
     }
+
+    /**
+     * Initiates the animation for distributing a card to the player.
+     *
+     * @param card The JButton representing the card
+     * @param img The ImageIcon of the card
+     * @param x1 The final x-coordinate of the card
+     */
 
     public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
         timerDistribuisci = new Timer(5, new ActionListener() {
@@ -52,6 +68,13 @@ public class Animation {
 
     }
 
+    /**
+     * Initiates the animation for distributing a card to the CPU.
+     *
+     * @param card The JButton representing the card
+     * @param x1 The final x-coordinate of the card
+     */
+
     public void distribuisciAnimationBack(JButton card, int x1) {
         timerDistribuisciBack = new Timer(5, new ActionListener() {
             private int y = 90;
@@ -84,6 +107,15 @@ public class Animation {
         timerDistribuisciBack.start();
 
     }
+
+    /**
+     * Initiates the animation for taking cards from the table and placing them into the CPU's deck.
+     *
+     * @param card The JButton representing the CPU's card being taken
+     * @param card2 The JButton representing the card taken from the table
+     * @param img The ImageIcon of the card taken from the table
+     * @param panel The JPanel containing the cards and decks
+     */
 
     public void presaAnimationBack(JButton card, JButton card2, ImageIcon img, JPanel panel) {
 
@@ -159,6 +191,15 @@ public class Animation {
         timerPresaBack.start();
     }
 
+    /**
+     * Initiates the animation for taking cards from the player and placing them into the player's deck.
+     *
+     * @param card The JButton representing the player's card being taken
+     * @param card2 The JButton representing the card taken from the table
+     * @param img The ImageIcon of the card taken from the table
+     * @param panel The JPanel containing the cards and decks
+     */
+
     public void presaAnimation(JButton card, JButton card2, ImageIcon img, JPanel panel) {
         timerPresa = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
@@ -230,6 +271,15 @@ public class Animation {
         timerPresa.start();
     }
 
+    /**
+     * Initiates the animation for drawing a card from the deck and placing it into the player's hand.
+     *
+     * @param card The JButton representing the card drawn from the deck
+     * @param carta The card object representing the drawn card
+     * @param x1 The final x-coordinate of the card
+     * @param g1 The player object to which the drawn card belongs
+     */
+
     public void pescataAnimation(JButton card, Carta carta, int x1, Giocatore g1) {
         timerPescata = new Timer(10, new ActionListener() {
             private int y = 90;
@@ -268,6 +318,14 @@ public class Animation {
         timerPescata.start();
     }
 
+    /**
+     * Initiates the animation for drawing a card from the deck and placing it into the CPU's hand.
+     *
+     * @param card The JButton representing the card drawn from the deck
+     * @param carta The card object representing the drawn card
+     * @param x1 The final x-coordinate of the card
+     */
+
     public void pescataAnimationBack(JButton card, Carta carta, int x1) {
         timerPescataBack = new Timer(10, new ActionListener() {
             private int y = 90;
@@ -304,11 +362,22 @@ public class Animation {
 
         timerPescataBack.start();
     }
-    
-    
+
+    /**
+     * Retrieves the JLabel representing the deck of cards facing downwards for the player.
+     *
+     * @return The JLabel representing the player's deck
+     */
+
     public JLabel getLabel(){
         return  label;
     }
+
+    /**
+     * Retrieves the JLabel representing the deck of cards facing downwards for the CPU.
+     *
+     * @return The JLabel representing the CPU's deck
+     */
 
     public JLabel getLabel2(){
         return label2;

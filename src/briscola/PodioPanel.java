@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -25,9 +25,7 @@ public class PodioPanel extends JPanel {
 	private JPanel panel;
 	private BackgroundPanel bp;
 	
-	/**
-	 * Create the panel.
-	 */
+
 	public PodioPanel(Database db, JPanel panel) {
 		
 		this.db = db;

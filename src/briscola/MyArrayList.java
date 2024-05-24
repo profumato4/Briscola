@@ -1,11 +1,9 @@
-package main;
+package briscola;
 
 import java.util.ArrayList;
 
 public class MyArrayList<T> extends ArrayList<T>{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Override

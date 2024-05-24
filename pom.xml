@@ -32,14 +32,14 @@
 			</resource>
 			
 			<resource>
-				<directory>src/loadingScreen</directory>
+				<directory>src/main</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>
 			</resource>
 
 			<resource>
-				<directory>src/main</directory>
+				<directory>src/briscola</directory>
 				<includes>
 					<include>**/*.java</include>
 				</includes>

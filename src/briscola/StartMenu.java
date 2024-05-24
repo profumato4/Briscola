@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,14 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -29,11 +22,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.apache.commons.io.FileUtils;
 import java.io.FileInputStream;
 
 public class StartMenu {
 
+	private FileManager fm = new FileManager("res/ThemeSong/play.txt");
 	private boolean play = checkPlay();
 	private Clip clip;
 	private JButton game;
@@ -254,22 +247,8 @@ public class StartMenu {
 						JOptionPane.YES_NO_OPTION);
 				if (conferma == JOptionPane.YES_OPTION) {
 					login1.setLogged(false);
-					
-					FileWriter fw = null;
-					try {
-						fw = new FileWriter("res/Login/remember.txt", false);
-						fw.append(String.valueOf(false));
-						System.out.println("scritto");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}finally {
-						try {
-							fw.close();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
+
+					login1.getFm().append(false);
 
 				} else {
 					login1.setLogged(true);
@@ -290,35 +269,13 @@ public class StartMenu {
 	}
 
 	private void writePlay() {
-		FileWriter file2;
-		try {
-			file2 = new FileWriter("res\\ThemeSong\\playOn.txt", false);
-			file2.append(String.valueOf(play));
-			file2.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		fm.append(play);
 
 	}
 
 	private boolean checkPlay() {
-		try {
-			FileReader fr = new FileReader("res\\ThemeSong\\playOn.txt");
-			try (BufferedReader reader = new BufferedReader(fr)) {
-				String str;
-				while ((str = reader.readLine()) != null) {
-					return Boolean.valueOf(str);
-				}
-
-				reader.close();
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
+		return fm.readBoolean();
 	}
 
 	private void checkPlayButton() {

@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

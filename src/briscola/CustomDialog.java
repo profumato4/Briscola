@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,12 +19,11 @@ import javax.swing.JPanel;
 
 class CustomDialog extends JDialog {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private String carte;
 	private Color color = Color.decode("#7fc7c2");
+	private FileManager fm = new FileManager("res/CardsType/cardsType.txt");
 	
 	public CustomDialog() {
 		
@@ -171,20 +170,11 @@ class CustomDialog extends JDialog {
 	}
 	
 	private void writeCardType(String cardType) throws IOException {
-		FileWriter file = new FileWriter("res/CardsType/cardsType.txt");
-		file.append(cardType);
-		file.close();
+		fm.append(cardType);
 	}
 	
 	public String readCardType(){
-		try {
-			FileReader file = new FileReader("res/CardsType/cardsType.txt");
-			BufferedReader reader = new BufferedReader(file);
-			carte = reader.readLine();
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		carte = fm.readString();
 		
 		return carte;
 	}

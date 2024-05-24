@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class Login {
 
 	private JFrame frame;
+	private FileManager fm = new FileManager("res/Login/remember.txt");
 	private JTextField txtCcc;
 	private JPasswordField textField;
 	private boolean logged = checkLogin();
@@ -182,46 +183,13 @@ public class Login {
 	}
 
 	private boolean checkLogin() {
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader("res/Login/remember.txt")); 
-			
-			String str;
-			
-			while((str = br.readLine()) != null) {
-				System.out.println(str + " " + Boolean.valueOf(br.readLine()));
-				return Boolean.valueOf(str);
-			}
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
+		return fm.readBoolean();
 	}
 
 	private void writeLogin(boolean value) {
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter("res/Login/remember.txt", false);
-			fw.append(String.valueOf(value));
-			System.out.println("scritto");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
+
+		fm.append(value);
+
 	}
 
 	public void setLogged(boolean logged) {
@@ -231,5 +199,9 @@ public class Login {
 	public Database getDb() {
 		return db;
 	}
-	
+
+	public FileManager getFm(){
+		return  fm;
+	}
+
 }

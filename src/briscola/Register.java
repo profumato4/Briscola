@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.awt.Color;
 import java.awt.Font;

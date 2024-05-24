@@ -1,4 +1,4 @@
-package main;
+package briscola;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +10,10 @@ import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+/**
+ * This class handles database operations for user registration, login, and game statistics.
+ */
 
 public class Database {
 
@@ -30,6 +34,14 @@ public class Database {
 	private final JFrame frame;
 	private String nomeUtente;
 
+	/**
+	 * Constructor for the Database class.
+	 * Initializes the database connection.
+	 *
+	 * @param frame The JFrame used for displaying dialog messages
+	 * @throws Exception If an error occurs while connecting to the database
+	 */
+
 	public Database(JFrame frame) throws Exception {
 		this.frame = frame;
 		
@@ -43,6 +55,14 @@ public class Database {
 		Class.forName(Database.driver);
 		conn = DriverManager.getConnection(this.url, this.username, this.password);
 	}
+
+	/**
+	 * Registers a new user in the database.
+	 *
+	 * @param username The username of the user
+	 * @param password The password of the user
+	 * @throws SQLException If an error occurs during database operation
+	 */
 
 	public void registerUser(String username, String password) throws SQLException {
 		String sql = "";
@@ -70,6 +90,15 @@ public class Database {
 		}
 	}
 
+	/**
+	 * Logs in a user with the specified username and password.
+	 *
+	 * @param username The username of the user
+	 * @param password The password of the user
+	 * @return True if login is successful, false otherwise
+	 * @throws SQLException If an error occurs during database operation
+	 */
+
 	public boolean loginUser(String username, String password) throws SQLException {
 		String sql = "";
 		
@@ -88,6 +117,10 @@ public class Database {
 		}
 	}
 
+	/**
+	 * Updates user statistics for a won game.
+	 */
+
 	public void vittoria() {
 		
 		String sqlSelect = "";
@@ -98,9 +131,13 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		partita(sqlSelect, sqlUpdate);
+
+		updateGameStatistics(sqlSelect, sqlUpdate);
 	}
+
+	/**
+	 * Updates user statistics for a drawn game.
+	 */
 
 	public void pareggio() {
 		String sqlSelect = "";
@@ -111,10 +148,14 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
-		partita(sqlSelect, sqlUpdate);
+
+		updateGameStatistics(sqlSelect, sqlUpdate);
 	}
+
+	/**
+	 * Updates user statistics for a lost game.
+	 */
 
 	public void sconfitta() {
 		
@@ -126,29 +167,48 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		partita(sqlSelect, sqlUpdate);
-	}
-	
-	private void partita(String sqlSelect, String sqlUpdate) {
-		try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
-				PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
 
+		updateGameStatistics(sqlSelect, sqlUpdate);
+	}
+
+	/**
+	 * Updates user statistics for a game based on the provided SQL queries.
+	 *
+	 * @param sqlSelect The SQL query for selecting user statistics
+	 * @param sqlUpdate The SQL query for updating user statistics
+	 */
+	private void updateGameStatistics(String sqlSelect, String sqlUpdate) {
+		try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
+			 PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
+
+			// Set the username parameter for the select statement
 			selectStatement.setString(1, nomeUtente);
+
+			// Execute the select statement to retrieve user statistics
 			ResultSet resultSet = selectStatement.executeQuery();
 
+			// If the user statistics exist
 			if (resultSet.next()) {
+				// Update the user statistics with the username parameter
 				updateStatement.setString(1, nomeUtente);
 				updateStatement.executeUpdate();
-				System.out.println("Partita vinta aggiornata per l'utente " + nomeUtente);
+				System.out.println("User's game statistics updated for " + nomeUtente);
 			} else {
-				System.out.println("Nessun utente trovato con le credenziali specificate");
+				// If no user statistics found for the provided username
+				System.out.println("No user found with the specified credentials");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+	/**
+	 * Retrieves statistics for top players from the database.
+	 *
+	 * @return A HashMap containing player usernames and their respective statistics
+	 */
+
 	public HashMap<String, PlayerStats> topPlayers() {
 	    HashMap<String, PlayerStats> playerStats = new HashMap<>();
 	    String sql = "";
@@ -182,7 +242,11 @@ public class Database {
 	    return playerStats;
 	}
 
-
+	/**
+	 * Retrieves the username of the currently logged-in user.
+	 *
+	 * @return The username of the logged-in user
+	 */
 	
 	public String getUsername() {
 		return nomeUtente;

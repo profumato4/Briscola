@@ -1,14 +1,15 @@
 
-package loadingScreen;
+package main;
 
-import main.Briscola;
-import main.Database;
 import splashScreen.SplashScreen;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import briscola.Briscola;
+import briscola.Database;
 
 public class Main extends javax.swing.JFrame {
     /**
