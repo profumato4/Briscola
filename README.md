@@ -135,11 +135,17 @@ Per poter giocare a JBriscola bisogna questi semplici passi:
 
 - Installare java sul proprio pc in caso non fosse gia installato seguire questo [link](https://www.java.com/it/download/help/windows_manual_download.html)
 
-- Installare l'ultima [reales qui](https://github.com/profumato4/Briscola/releases) altrimenti clonare questa repository tramite il seguente comando (per eseguire il comando c'è bisogno di installare [git](https://git-scm.com/downloads) altrimenti usare la procedura standar ovvero cliccare su code e poi download file zip ed estrarre il contenuto): 
+- Installare l'ultima [reales qui](https://github.com/profumato4/Briscola/releases) 
+    - Una volta scaricato file zip estrarre il contenuto.
+    - Dopo l'estrazione avrete un file .jar e una cartella, fare doppio click sul file .jar e si inzierà ad aprire JBriscola
+    - È possibile avviare il file .jar anche eseguendo il seguente comando sul cmd ⚠️Attenzione, bisogna essere nella stessa directory del file jar affinchè il comando funzioni: 
+    ```bash
+    java -jar Briscola.jar
+    ```
+- Altrimenti è possibile clonare questa repository tramite il seguente comando (per eseguire il comando c'è bisogno di installare [git](https://git-scm.com/downloads) altrimenti usare la procedura standar ovvero cliccare su code e poi download file zip ed estrarre il contenuto): 
 ```bash
 git clone https://github.com/profumato4/Briscola.git
 ```
-
 - Fare attenzione ad avere la cartella `res` e il file `Briscola.jar` nella stessa cartella 
 
 - Bene adesso è possibile avviare JBriscola avviando il file Briscola.jar facendo doppio click sopra oppure eseguendo il comando sul terminale: 
@@ -279,22 +285,27 @@ JBriscola is built using a variety of modern technologies to deliver a smooth an
 - __RAM__: At least 512 MB of RAM
 
 # Installation
-To be able to play JBriscola you need these simple steps:
+To be able to play JBriscola you need these simple steps: 
 
-- Install java on your PC if it is not already installed follow this [link](https://www.java.com/it/download/help/windows_manual_download.html)
+- Install java on your PC if it is not already installed, follow this [link](https://www.java.com/it/download/help/windows_manual_download.html)
 
-- Clone this repository using the following command (to execute the command you need to install [git](https://git-scm.com/downloads) otherwise use the standard procedure or click on code and then download zip file and extract the contents):
-    ```bash
-    git clone https://github.com/profumato4/Briscola.git
-    ```
-
-- Be careful to have the `res` folder and the `Briscola.jar` file in the same folder
-
-- Well now it is possible to start JBriscola by starting the Briscola.jar file by double clicking on it or by executing the command on the terminal:
+- Install the latest [reales here](https://github.com/profumato4/Briscola/releases) 
+    - Once the zip file has been downloaded, extract the contents.
+    - After extraction you will have a .jar file and a folder, double click on the .jar file and it will start to open JBriscola
+    - You can also start the .jar file by running the following command on cmd ⚠️Attention, you must be in the same directory as the jar file for the command to work: 
     ```bash
     java -jar Briscola.jar
     ```
+- Otherwise it is possible to clone this repository using the following command (to execute the command you need to install [git](https://git-scm.com/downloads) otherwise use the standard procedure or click on code and then download zip file and extract the contents): 
+```bash
+git clone https://github.com/profumato4/Briscola.git
+```
+- Be careful to have the `res` folder and the `Briscola.jar` file in the same folder 
 
+- Well now it is possible to start JBriscola by starting the Briscola.jar file by double clicking on it or by executing the command on the terminal: 
+```bash
+java -jar Briscola.jar
+```
 # How to get started
 Welcome to JBriscola! To start playing, follow these simple steps:
 
