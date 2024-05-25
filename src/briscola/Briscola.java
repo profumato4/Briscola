@@ -1,10 +1,11 @@
 package briscola;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
  */
 
 public class Briscola {
+
+	private static final Logger logger = LoggerFactory.getLogger(Briscola.class);
+
 
 	private static JFrame frame;
 	private JPanel panel;
@@ -35,7 +39,9 @@ public class Briscola {
 	 */
 
 	public Briscola() {
+		LogbackConfigurator.configure("res/logs/logback.xml");
 		initialize();
+		logger.info("Application started");
 	}
 
 	/**
@@ -73,6 +79,7 @@ public class Briscola {
                     db.loginUser(db.getUsername(), db.getPassword());
 					login.setLogged(true);
                 } catch (SQLException e) {
+					logger.error("Database login failed", e);
                     throw new RuntimeException(e);
                 }
             }
@@ -84,15 +91,16 @@ public class Briscola {
 			m.game().addActionListener(e -> {
 				if (login.isLogged()) {
 					carte = m.getCarteType();
-					System.out.println(carte);
+					logger.info("User is logged in. CarteType: {}", carte);
 					game();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
 							JOptionPane.INFORMATION_MESSAGE);
+					logger.warn("Attempt to start game without login");
 				}
 			});
 		} else {
-
+			logger.warn("Frame is not visible");
 		}
 	}
 
@@ -109,7 +117,13 @@ public class Briscola {
 		
 		panel.add(bp, BorderLayout.CENTER);
 
-		JLabel mazzo = new JLabel(new ImageIcon("res/Cards/back.png"));
+		JLabel mazzo = new JLabel();
+		try{
+			ImageIcon back = new ImageIcon("res/Cards/back.png");
+			mazzo.setIcon(back);
+		}catch(Exception e){
+			logger.error("Error loading card back.png", e);
+		}
 		mazzo.setBounds(80, 155, 139, 168);
 		
 
@@ -123,7 +137,6 @@ public class Briscola {
 		bp.setComponentZOrder(mazzo, 1);
 		bp.setComponentZOrder(carteRimanenti, 0);
 
-		System.out.println(carteRimanenti.getX() + System.lineSeparator() + carteRimanenti.getY());
 
 		panel.repaint();
 		bp.repaint();

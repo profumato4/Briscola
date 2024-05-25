@@ -1,5 +1,8 @@
 package briscola;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,6 +17,7 @@ import javax.swing.JPanel;
 
 public class BackgroundPanel extends JPanel {
 
+	private static final Logger logger = LoggerFactory.getLogger(BackgroundPanel.class);
 
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +31,9 @@ public class BackgroundPanel extends JPanel {
 	 */
 
 	public BackgroundPanel(String path ) {
+
+		LogbackConfigurator.configure("res/logs/logback.xml");
+
 		// Set the background image path
 		this.path = path;
 
@@ -53,7 +60,13 @@ public class BackgroundPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// Draw the background image
-		g.drawImage(new ImageIcon(path).getImage(), 0, 0, null);
+		try{
+			ImageIcon background = new ImageIcon(path);
+			g.drawImage(background.getImage(), 0, 0, null);
+		}catch(Exception e){
+			logger.error("Error loading background image", e);
+		}
+
 	}
 	
 }

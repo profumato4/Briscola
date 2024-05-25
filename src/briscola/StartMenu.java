@@ -1,5 +1,8 @@
 package briscola;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,6 +40,8 @@ import java.io.FileInputStream;
  */
 public class StartMenu {
 
+	private static final Logger logger = LoggerFactory.getLogger(CustomDialog.class);
+
 	private FileManager fm = new FileManager("res/ThemeSong/play.txt");
 	private boolean play = checkPlay();
 	private Clip clip;
@@ -59,6 +64,9 @@ public class StartMenu {
 	 */
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
+
+		LogbackConfigurator.configure("res/logs/logback.xml");
+
 		initialize(frame, panel, login1, register);
 		pp = new PodioPanel(login1.getDb(), panel);
 		pp.setVisible(false);
@@ -79,7 +87,6 @@ public class StartMenu {
 
 		bp = new BackgroundPanel("res/Background/background4.png");
 		panel.add(bp, BorderLayout.CENTER);
-		System.out.println(play);
 
 		frame.setBounds(100, 100, 1178, 861);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,8 +130,7 @@ public class StartMenu {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					carte = card.getCarteType();
-					System.out.println("Valore di carte dopo il dialogo: " + carte);
-					System.out.println(getCarteType());
+					logger.info("Selected deck: " + carte);
 				}
 			});
 			card.setVisible(true);
@@ -166,23 +172,7 @@ public class StartMenu {
 		login.setFont(new Font("Tahoma", Font.BOLD, 20));
 		login.setBounds(420, 300, 340, 27);
 		login.setBorderPainted(true);
-		login.setFocusPainted(false);
-		login.setBackground(Color.white);
-
-		login.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				login.setBackground(color);
-				login.repaint();
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				login.setBackground(Color.white);
-				login.repaint();
-			}
-
-		});
+		CustomDialog.g(login, color);
 
 		login.addActionListener(e -> {
 			if (login1.isLogged()) {
@@ -201,22 +191,7 @@ public class StartMenu {
 		register.setFont(new Font("Tahoma", Font.BOLD, 20));
 		register.setBounds(420, 355, 340, 27);
 		register.setBorderPainted(true);
-		register.setFocusPainted(false);
-		register.setBackground(Color.white);
-		register.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				register.setBackground(color);
-				register.repaint();
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				register.setBackground(Color.white);
-				register.repaint();
-			}
-
-		});
+		CustomDialog.g(register, color);
 
 		register.addActionListener(e -> {
 			register1.getFrame().setVisible(true);
@@ -230,22 +205,7 @@ public class StartMenu {
 		game.setFont(new Font("Tahoma", Font.BOLD, 20));
 		game.setBounds(420, 410, 340, 27);
 		game.setBorderPainted(true);
-		game.setFocusPainted(false);
-		game.setBackground(Color.white);
-		game.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				game.setBackground(color);
-				game.repaint();
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				game.setBackground(Color.white);
-				game.repaint();
-			}
-
-		});
+		CustomDialog.g(game, color);
 
 		bp.add(game);
 		bp.setComponentZOrder(game, 0);
@@ -254,22 +214,7 @@ public class StartMenu {
 		logout.setFont(new Font("Tahoma", Font.BOLD, 20));
 		logout.setBounds(420, 465, 340, 27);
 		logout.setBorderPainted(true);
-		logout.setFocusPainted(false);
-		logout.setBackground(Color.white);
-		logout.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				logout.setBackground(color);
-				logout.repaint();
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				logout.setBackground(Color.white);
-				logout.repaint();
-			}
-
-		});
+		CustomDialog.g(logout, color);
 
 		logout.addActionListener(e -> {
 			if (login1.isLogged()) {
@@ -340,7 +285,6 @@ public class StartMenu {
 			clip.start();
 			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
 			audio.repaint();
-			System.out.println(play);
 		}
 	}
 
@@ -380,8 +324,6 @@ public class StartMenu {
 		int x = (size.width - labelSize.width) / 2;
 		int y = 160;
 		label.setBounds(x, y, labelSize.width, labelSize.height);
-
-		System.out.println(x + " " + y + " " + labelSize.width + " " + labelSize.height);
 
 		return label;
 	}

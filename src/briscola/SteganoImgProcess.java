@@ -78,8 +78,7 @@ public class SteganoImgProcess {
 		}
 		
 		String length = new String(decodedMsg);
-		System.out.println("length is " + Integer.parseInt(length));
-		
+
 		return Integer.parseInt(length);
 	} //end of getEncodedLength() method
 	

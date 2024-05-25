@@ -123,7 +123,6 @@ public class Login {
 						Briscola.getFrame().repaint();
 						Briscola.getFrame().revalidate();
 						frame.setVisible(false);
-						System.out.println(isLogged());
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);

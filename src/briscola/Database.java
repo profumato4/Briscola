@@ -81,7 +81,6 @@ public class Database {
 				statement.executeUpdate();
 				JOptionPane.showMessageDialog(frame, "Utente registrato con successo", "Register",
 						JOptionPane.INFORMATION_MESSAGE);
-				System.out.println("Utente registrato con successo.");
 			} catch (SQLIntegrityConstraintViolationException e) {
 				JOptionPane.showMessageDialog(frame, "Utente già registrato", "Register",
 						JOptionPane.INFORMATION_MESSAGE);

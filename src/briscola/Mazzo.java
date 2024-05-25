@@ -408,7 +408,6 @@ public class Mazzo {
 			}
 
 			if (turno == 20) {
-				System.out.println("ok");
 				if (punteggio.get() + punteggio2.get() == 120) {
 					g = new GameOverPanel(b);
 					if (punteggio.get() == punteggio2.get()) {

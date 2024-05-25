@@ -45,7 +45,6 @@ public class Crypt {
 		String s = sip.decode(img, img.getWidth(), img.getHeight());
 		s += sip.decode(img2, img2.getWidth(), img2.getHeight());
 		str = s.split("\\n");	
-		System.out.println(str.length);
 	}
 	
 	
