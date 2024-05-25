@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -31,9 +30,10 @@ class CustomDialog extends JDialog {
 	private Color color = Color.decode("#7fc7c2");
 	private FileManager fm = new FileManager("res/CardsType/cardsType.txt");
 	private JLabel text;
+	private ImageLoader imgLoad = new ImageLoader();
 	
 	public CustomDialog() {
-		
+		LogbackConfigurator.configure("res/logs/logback.xml");
 	}
 
 	/**
@@ -58,7 +58,7 @@ class CustomDialog extends JDialog {
 
 		// image label setup
 
-		JLabel imageLabel = new JLabel(new ImageIcon("res/Cards/card2.jpg"));
+		JLabel imageLabel = new JLabel(imgLoad.loadImage("res/Cards/card2.jpg"));
 		imageLabel.setBounds(200, 200, 100, 172);
 
 		updateImageLabel(imageLabel, readCardType());
@@ -115,12 +115,8 @@ class CustomDialog extends JDialog {
 				return;
 		}
 
-		try {
-			ImageIcon img = new ImageIcon(imagePath);
-			imageLabel.setIcon(img);
-		} catch (Exception e) {
-			logger.error("Error loading " + imagePath, e);
-		}
+		imageLabel.setIcon(imgLoad.loadImage(imagePath));
+
 	}
 
 	/**
@@ -131,13 +127,9 @@ class CustomDialog extends JDialog {
 	 */
 
 	private void loadImageToButton(JButton button, String path){
-		try{
-			ImageIcon img = new ImageIcon(path);
-			button.setIcon(img);
-		}catch (Exception e){
-			// Handles any exception that occurs while loading the image
-			logger.error("Error loading " + path, e);
-		}
+
+		button.setIcon(imgLoad.loadImage(path));
+
 	}
 
 	/**
@@ -148,13 +140,9 @@ class CustomDialog extends JDialog {
 	 */
 
 	private void loadImageToLabel(JLabel label, String path){
-		try{
-			ImageIcon img = new ImageIcon(path);
-			label.setIcon(img);
-		}catch (Exception e){
-			// Handles any exception that occurs while loading the image
-			logger.error("Error loading " + path, e);
-		}
+
+		label.setIcon(imgLoad.loadImage(path));
+
 	}
 
 	/**

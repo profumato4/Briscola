@@ -37,6 +37,7 @@ public class Mazzo {
     private Database db;
     private Briscola b;
     private Timer timer;
+    private ImageLoader imgLoad = new ImageLoader();
 
     /**
      * Constructs a new Mazzo object.
@@ -135,13 +136,13 @@ public class Mazzo {
             g2.getMano().add(this.mazzo.get(this.indice++));
         }
 
-        JButton card0 = new JButton(new ImageIcon("res/Cards/back.png"));
-        JButton card1 = new JButton(new ImageIcon("res/Cards/back.png"));
-        JButton card2 = new JButton(new ImageIcon("res/Cards/back.png"));
+        JButton card0 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
+        JButton card1 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
+        JButton card2 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
 
-        JButton back0 = new JButton(new ImageIcon("res/Cards/back.png"));
-        JButton back1 = new JButton(new ImageIcon("res/Cards/back.png"));
-        JButton back2 = new JButton(new ImageIcon("res/Cards/back.png"));
+        JButton back0 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
+        JButton back1 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
+        JButton back2 = new JButton(imgLoad.loadImage("res/Cards/back.png"));
 
         animation.distribuisciAnimation(card0, g1.getMano().get(0).getImg(), 418);
         animation.distribuisciAnimation(card1, g1.getMano().get(1).getImg(), 548);
@@ -448,7 +449,7 @@ public class Mazzo {
 
     private void azioniGiocatore1(JButton card, Giocatore g1, Giocatore g2, int n) {
     	calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, true);
-        animation.presaAnimation(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+        animation.presaAnimation(card, backs.get(r), imgLoad.loadImage("res/Cards/Rotate/back.png"), panel);
         if(indice <= 40){
             pescata(card, g1, r, g2, n);
         }
@@ -467,7 +468,7 @@ public class Mazzo {
 
 	private void azioniBack(JButton card, Giocatore g1, Giocatore g2, int n) {
 		calcoloPunteggio(g1, g2, n, punteggio2, punteggio, punti1, punti2, false);
-		animation.presaAnimationBack(card, backs.get(r), new ImageIcon("res/Cards/Rotate/back.png"), panel);
+		animation.presaAnimationBack(card, backs.get(r), imgLoad.loadImage("res/Cards/Rotate/back.png"), panel);
 		if (indice <= 40) {
 			pescataBack(card, g1, r, g2, n);
 		}

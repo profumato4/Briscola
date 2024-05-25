@@ -1,10 +1,12 @@
 package splashScreen;
 
+import briscola.ImageLoader;
+import briscola.LogbackConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  * Utility class for loading and displaying images asynchronously.
@@ -15,6 +17,13 @@ import javax.imageio.ImageIO;
  */
 
 public class ImageLoading {
+
+    private static final Logger logger = LoggerFactory.getLogger(ImageLoading.class);
+    private ImageLoader imgLoad = new ImageLoader();
+
+    public ImageLoading(){
+        LogbackConfigurator.configure("res/logs/logback.xml");
+    }
 
     /**
      * Loads an image from a file and displays it on the specified JLabel.
@@ -30,13 +39,23 @@ public class ImageLoading {
 
                 // Read the full image from file
 
-                BufferedImage fullImage = ImageIO.read(new File("res/logo.png"));
+                BufferedImage fullImage = null;
+                
+                try{
+                    fullImage = imgLoad.loadBufferedImage("res/logo/logo.png");
+                }catch (Exception e){
+                    logger.error("Failed to load image from file: res/logo/logo.png", e);
+                }
+                
                 int width = fullImage.getWidth();
                 int height = fullImage.getHeight();
 
                 // Display the full image on the JLabel
 
-                SwingUtilities.invokeLater(() -> jLabel1.setIcon(new ImageIcon(fullImage)));
+                BufferedImage finalFullImage = fullImage;
+                SwingUtilities.invokeLater(() -> {
+                    jLabel1.setIcon(new ImageIcon(finalFullImage));
+                });
 
                 // Split the full image into 11 parts and display each part sequentially
 
@@ -55,7 +74,7 @@ public class ImageLoading {
 
                     Thread.sleep(1000);
                 }
-            } catch (IOException | InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();

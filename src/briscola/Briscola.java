@@ -5,9 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -33,6 +34,7 @@ public class Briscola {
 	private BackgroundPanel bp;
 	private Database db;
 	private int n = 0;
+	private ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new instance of the Briscola class and initializes the game.
@@ -54,7 +56,7 @@ public class Briscola {
 		centerFrame(frame);
 		frame.setVisible(false);
 		frame.setResizable(false);
-		frame.setIconImage(new ImageIcon("res/logo.png").getImage());
+		frame.setIconImage(imgLoad.loadImage("res/logo/logo.png").getImage());
 		frame.setTitle("JBriscola");
 		panel = new JPanel();
 		panel.setSize(1178, 861);
@@ -117,13 +119,7 @@ public class Briscola {
 		
 		panel.add(bp, BorderLayout.CENTER);
 
-		JLabel mazzo = new JLabel();
-		try{
-			ImageIcon back = new ImageIcon("res/Cards/back.png");
-			mazzo.setIcon(back);
-		}catch(Exception e){
-			logger.error("Error loading card back.png", e);
-		}
+		JLabel mazzo = new JLabel(imgLoad.loadImage("res/Cards/back.png"));
 		mazzo.setBounds(80, 155, 139, 168);
 		
 

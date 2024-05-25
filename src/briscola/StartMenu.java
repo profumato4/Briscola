@@ -7,8 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
@@ -19,7 +17,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,6 +49,7 @@ public class StartMenu {
 	private PodioPanel pp;
 	private BackgroundPanel bp;
 	private Color color = Color.decode("#7fc7c2");
+	private ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new StartMenu object.
@@ -103,7 +101,7 @@ public class StartMenu {
 		copyright.setForeground(new Color(51, 51, 51));
 		panel.add(copyright);
 */
-		this.audio = new JButton(new ImageIcon("res/AudioSymbols/audio_on50.png"));
+		this.audio = new JButton(imgLoad.loadImage("res/AudioSymbols/audio_on50.png"));
 		this.audio.setBounds(550, 600, 50, 50);
 		this.audio.setBorderPainted(false);
 		this.audio.setContentAreaFilled(false);
@@ -117,28 +115,11 @@ public class StartMenu {
 		bp.add(this.audio);
 
 
-		JButton cards = new JButton(new ImageIcon("res/background/output.png"));
-		cards.setBounds(640, 585, 90, 80);
-		cards.setBorderPainted(false);
-		cards.setContentAreaFilled(false);
-		cards.setFocusPainted(false);
-
-		cards.addActionListener(e -> {
-
-			card = new CustomDialog(frame);
-			card.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosed(WindowEvent e) {
-					carte = card.getCarteType();
-					logger.info("Selected deck: " + carte);
-				}
-			});
-			card.setVisible(true);
-		});
+		JButton cards = getCardsButton(frame);
 
 		bp.add(cards);
 
-		JButton podio = new JButton(new ImageIcon("res/PODIO-ITALIA.png"));
+		JButton podio = new JButton(imgLoad.loadImage("res/leaderboard/podio.png"));
 		podio.setBounds(400, 570, 120, 93);
 		podio.setBorderPainted(false);
 		podio.setContentAreaFilled(false);
@@ -178,6 +159,7 @@ public class StartMenu {
 			if (login1.isLogged()) {
 				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
 						JOptionPane.INFORMATION_MESSAGE);
+				logger.info("the user is already logged in");
 			} else {
 				login1.getFrame().setVisible(true);
 				frame.setVisible(false);
@@ -221,16 +203,23 @@ public class StartMenu {
 				int conferma = JOptionPane.showConfirmDialog(frame, "Vuoi eseguire il logout?", "Conferma",
 						JOptionPane.YES_NO_OPTION);
 				if (conferma == JOptionPane.YES_OPTION) {
+
 					login1.setLogged(false);
+
+					logger.info("you have logged out");
 
 					login1.getFm().append(false);
 
+					logger.info(false + " was written to the file: " + login1.getFm().getPath());
+
 				} else {
 					login1.setLogged(true);
+					logger.info("you have not logged out");
 				}
 			} else {
 				JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
 						JOptionPane.INFORMATION_MESSAGE);
+				logger.info("You were not logged out because you are not logged in");
 			}
 		});
 
@@ -243,6 +232,28 @@ public class StartMenu {
 
 	}
 
+	private JButton getCardsButton(JFrame frame) {
+		JButton cards = new JButton(imgLoad.loadImage("res/background/output.png"));
+		cards.setBounds(640, 585, 90, 80);
+		cards.setBorderPainted(false);
+		cards.setContentAreaFilled(false);
+		cards.setFocusPainted(false);
+
+		cards.addActionListener(e -> {
+
+			card = new CustomDialog(frame);
+			card.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosed(WindowEvent e) {
+					carte = card.getCarteType();
+					logger.info("Selected deck: " + carte);
+				}
+			});
+			card.setVisible(true);
+		});
+		return cards;
+	}
+
 	/**
 	 * Writes the current state of the audio playback (true or false) to a text file.
 	 * This method appends the boolean value of the 'play' variable to the specified file.
@@ -251,7 +262,7 @@ public class StartMenu {
 	private void writePlay() {
 
 		fm.append(play);
-
+		logger.info(play + " was written to the file: " + fm.getPath());
 	}
 
 	/**
@@ -275,16 +286,11 @@ public class StartMenu {
 		if (play) {
 			play = false;
 			writePlay();
-			clip.stop();
-			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
-			audio.repaint();
-			System.out.println(play);
+			audioOff();
 		} else {
 			play = true;
 			writePlay();
-			clip.start();
-			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-			audio.repaint();
+			audioOn();
 		}
 	}
 
@@ -297,15 +303,29 @@ public class StartMenu {
 	private void checkPlayButton2() {
 		if (!play) {
 			play = false;
-			clip.stop();
-			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_off50.png"));
-			audio.repaint();
+			audioOff();
 		} else {
 			play = true;
-			clip.start();
-			audio.setIcon(new ImageIcon("res/AudioSymbols/audio_on50.png"));
-			audio.repaint();
+			audioOn();
 		}
+	}
+
+	private void audioOn() {
+		clip.start();
+
+		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_on50.png"));
+		audio.repaint();
+
+		logger.info("play has been set to: " + play);
+	}
+
+	private void audioOff() {
+		clip.stop();
+
+		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_off50.png"));
+		audio.repaint();
+
+		logger.info("play has been set to: " + play);
 	}
 
 	/**
@@ -343,7 +363,7 @@ public class StartMenu {
 			clip.open(ais);
 			return clip;
 		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e1) {
-			e1.printStackTrace();
+			logger.error("Failed to prepare clip for audio file: " + audioFile, e1);
 		}
 		return null;
 	}
@@ -361,6 +381,8 @@ public class StartMenu {
 			if (clip != null) {
 				clip.loop(-1);
 				checkPlayButton2();
+			}else{
+				logger.error("Failed to prepare clip for path: " + path);
 			}
 		});
 		thread.start();
@@ -368,7 +390,7 @@ public class StartMenu {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error("Thread interrupted while playing music from path: " + path, e);
 		}
 	}
 

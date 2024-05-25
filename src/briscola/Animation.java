@@ -16,8 +16,9 @@ public class Animation {
     private Timer timerPresaBack;
     private Timer timerPescata;
     private Timer timerPescataBack;
-    private JLabel label = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
-    private JLabel label2 = new JLabel(new ImageIcon("res/Cards/Rotate/back.png"));
+    private ImageLoader imgLoad = new ImageLoader();
+    private JLabel label = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
+    private JLabel label2 = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
 
     /**
      * Constructs an Animation object.
@@ -287,7 +288,7 @@ public class Animation {
             public void actionPerformed(ActionEvent e) {
 
                 if (y == 90 && x == 158) {
-                    card.setIcon(new ImageIcon("res/Cards/back.png"));
+                    card.setIcon(imgLoad.loadImage("res/Cards/back.png"));
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }
@@ -333,7 +334,7 @@ public class Animation {
             public void actionPerformed(ActionEvent e) {
 
                 if (y == 90 && x == 158) {
-                    card.setIcon(new ImageIcon("res/Cards/back.png"));
+                    card.setIcon(imgLoad.loadImage("res/Cards/back.png"));
                     card.setBounds(x, y, 89, 168);
                     card.repaint();
                 }

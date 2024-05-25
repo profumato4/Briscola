@@ -12,3 +12,151 @@
 2024-05-25 15:04:29 INFO  briscola.Briscola - Application started
 2024-05-25 15:04:53 INFO  briscola.CustomDialog - Selected deck: Piacentine
 2024-05-25 15:04:57 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 22:18:39 INFO  briscola.Briscola - Application started
+2024-05-25 22:18:52 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:18:56 INFO  briscola.CustomDialog - true was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:18:56 INFO  briscola.CustomDialog - play has been set to: true
+2024-05-25 22:18:57 INFO  briscola.CustomDialog - false was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:18:57 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:19:01 INFO  briscola.CustomDialog - true was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:19:01 INFO  briscola.CustomDialog - play has been set to: true
+2024-05-25 22:19:02 INFO  briscola.CustomDialog - false was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:19:02 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:19:05 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 22:19:10 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 22:20:34 INFO  briscola.Briscola - Application started
+2024-05-25 22:20:47 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:20:56 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 22:22:01 ERROR briscola.Briscola - Failed to load image from file: res/logo/logo.png
+java.io.IOException: Image file could not be loaded.
+	at briscola.Briscola.initialize(Briscola.java:61)
+	at briscola.Briscola.<init>(Briscola.java:44)
+	at main.Main.lambda$main$0(Main.java:37)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2024-05-25 22:22:01 INFO  briscola.Briscola - Application started
+2024-05-25 22:22:13 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:22:29 INFO  briscola.Briscola - Application started
+2024-05-25 22:32:49 INFO  briscola.Briscola - Application started
+2024-05-25 22:33:02 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:33:06 INFO  briscola.CustomDialog - true was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:33:06 INFO  briscola.CustomDialog - play has been set to: true
+2024-05-25 22:33:07 INFO  briscola.CustomDialog - false was written to the file: res/ThemeSong/play.txt
+2024-05-25 22:33:07 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:33:13 WARN  briscola.Briscola - Attempt to start game without login
+2024-05-25 22:33:19 INFO  briscola.Briscola - User is logged in. CarteType: Piacentine
+2024-05-25 22:37:22 INFO  briscola.Briscola - Application started
+2024-05-25 22:37:35 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 22:37:39 INFO  briscola.CustomDialog - Selected deck: Siciliane
+2024-05-25 22:37:39 ERROR briscola.ImageLoader - Failed to load image from file: res/Cards/card9.jpg
+java.io.IOException: Image file could not be loaded.
+	at briscola.ImageLoader.loadImage(ImageLoader.java:22)
+	at briscola.CustomDialog.updateImageLabel(CustomDialog.java:119)
+	at briscola.CustomDialog.<init>(CustomDialog.java:65)
+	at briscola.StartMenu.lambda$getCardsButton$5(StartMenu.java:244)
+	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
+	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2314)
+	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:407)
+	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
+	at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
+	at java.desktop/java.awt.Component.processMouseEvent(Component.java:6621)
+	at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3398)
+	at java.desktop/java.awt.Component.processEvent(Component.java:6386)
+	at java.desktop/java.awt.Container.processEvent(Container.java:2266)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
+	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
+	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2024-05-25 22:37:41 INFO  briscola.CustomDialog - Selected deck: Siciliane
+2024-05-25 22:37:53 ERROR briscola.ImageLoader - Failed to load image from file: res/Cards/card9.jpg
+java.io.IOException: Image file could not be loaded.
+	at briscola.ImageLoader.loadImage(ImageLoader.java:22)
+	at briscola.CustomDialog.updateImageLabel(CustomDialog.java:119)
+	at briscola.CustomDialog.<init>(CustomDialog.java:65)
+	at briscola.StartMenu.lambda$getCardsButton$5(StartMenu.java:244)
+	at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
+	at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2314)
+	at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:407)
+	at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
+	at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
+	at java.desktop/java.awt.Component.processMouseEvent(Component.java:6621)
+	at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3398)
+	at java.desktop/java.awt.Component.processEvent(Component.java:6386)
+	at java.desktop/java.awt.Container.processEvent(Container.java:2266)
+	at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4996)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
+	at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
+	at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
+	at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
+	at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
+	at java.desktop/java.awt.Component.dispatchEvent(Component.java:4828)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:98)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
+	at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2024-05-25 22:37:55 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 23:26:23 INFO  briscola.Briscola - Application started
+2024-05-25 23:26:36 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 23:27:25 INFO  briscola.CustomDialog - Selected deck: Piacentine
+2024-05-25 23:30:05 INFO  briscola.Briscola - Application started
+2024-05-25 23:37:15 INFO  briscola.Briscola - Application started
+2024-05-25 23:37:28 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 23:38:04 INFO  briscola.CustomDialog - true was written to the file: res/ThemeSong/play.txt
+2024-05-25 23:38:04 INFO  briscola.CustomDialog - play has been set to: true
+2024-05-25 23:38:05 INFO  briscola.CustomDialog - false was written to the file: res/ThemeSong/play.txt
+2024-05-25 23:38:05 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 23:40:31 INFO  briscola.Briscola - Application started
+2024-05-25 23:40:44 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 23:40:54 INFO  briscola.CustomDialog - true was written to the file: res/ThemeSong/play.txt
+2024-05-25 23:40:54 INFO  briscola.CustomDialog - play has been set to: true
+2024-05-25 23:40:58 INFO  briscola.CustomDialog - false was written to the file: res/ThemeSong/play.txt
+2024-05-25 23:40:58 INFO  briscola.CustomDialog - play has been set to: false
+2024-05-25 23:41:00 INFO  briscola.CustomDialog - Selected deck: Piacentine

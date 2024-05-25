@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +26,7 @@ public class Register {
 	private boolean hide = true;
 	private boolean hide2 = true;
 	private Database db;
+	private ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new Register object.
@@ -50,47 +50,15 @@ public class Register {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JButton eye1 = new JButton(new ImageIcon("res/Login/hide2.png"));
-		eye1.setBorderPainted(false);
-		eye1.setContentAreaFilled(false);
-		eye1.setFocusPainted(false);
-		eye1.addActionListener(e -> {
-            if (hide) {
-                eye1.setIcon(new ImageIcon("res/Login/view2.png"));
-                eye1.repaint();
-                textField.setEchoChar((char) 0);
-                hide = false;
-            } else {
-                eye1.setIcon(new ImageIcon("res/Login/hide2.png"));
-                eye1.repaint();
-                textField.setEchoChar('\u2022');
-                hide = true;
-            }
-
-        });
+		JButton eye1 = new JButton(imgLoad.loadImage("res/Login/hide2.png"));
+		eye(eye1);
 		eye1.setBounds(280, 190, 20, 20);
 		frame.getContentPane().add(eye1);
 		frame.getContentPane().setComponentZOrder(eye1, 0);
 
-		JButton eye2 = new JButton(new ImageIcon("res/Login/hide2.png"));
-		eye2.addActionListener(e -> {
-            if (hide2) {
-                eye2.setIcon(new ImageIcon("res/Login/view2.png"));
-                eye2.repaint();
-                textField_1.setEchoChar((char) 0);
-                hide2 = false;
-            } else {
-                eye2.setIcon(new ImageIcon("res/Login/hide2.png"));
-                eye2.repaint();
-                textField_1.setEchoChar('\u2022');
-                hide2 = true;
-            }
-
-        });
+		JButton eye2 = new JButton(imgLoad.loadImage("res/Login/hide2.png"));
+		eye(eye2);
 		eye2.setBounds(280, 245, 20, 20);
-		eye2.setBorderPainted(false);
-		eye2.setContentAreaFilled(false);
-		eye2.setFocusPainted(false);
 		frame.getContentPane().add(eye2);
 		frame.getContentPane().setComponentZOrder(eye2, 0);
 
@@ -191,6 +159,26 @@ public class Register {
 	 * Retrieves the frame associated with the registration interface.
 	 * @return The JFrame instance representing the registration interface.
 	 */
+
+	private void eye(JButton eye){
+		eye.setBorderPainted(false);
+		eye.setContentAreaFilled(false);
+		eye.setFocusPainted(false);
+		eye.addActionListener(e -> {
+			if (hide) {
+				eye.setIcon(imgLoad.loadImage("res/Login/view2.png"));
+				eye.repaint();
+				textField.setEchoChar((char) 0);
+				hide = false;
+			} else {
+				eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
+				eye.repaint();
+				textField.setEchoChar('\u2022');
+				hide = true;
+			}
+
+		});
+	}
 
 	public JFrame getFrame() {
 		return frame;

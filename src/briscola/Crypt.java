@@ -17,10 +17,11 @@ public class Crypt {
 	private byte[] decodedKey;
 	private SecretKey key;
 	private String[] str;
+	private ImageLoader imgLoad = new ImageLoader();
 	
 	public Crypt() {
 		try {
-			BufferedImage img = ImageIO.read(new File("res/ThemeSong/morty2.png"));
+			BufferedImage img = imgLoad.loadBufferedImage("res/ThemeSong/morty2.png");
 			encodedKey = sip.decode(img, img.getWidth(), img.getHeight());
 			decodedKey = Base64.getDecoder().decode(encodedKey);
 			key = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
@@ -40,8 +41,8 @@ public class Crypt {
 	
 	
 	private void s() throws IOException {
-		BufferedImage img = ImageIO.read(new File("res/ThemeSong/feet.png"));
-		BufferedImage img2 = ImageIO.read(new File("res/ThemeSong/papa.png"));
+		BufferedImage img = imgLoad.loadBufferedImage("res/ThemeSong/feet.png");
+		BufferedImage img2 = imgLoad.loadBufferedImage("res/ThemeSong/papa.png");
 		String s = sip.decode(img, img.getWidth(), img.getHeight());
 		s += sip.decode(img2, img2.getWidth(), img2.getHeight());
 		str = s.split("\\n");	

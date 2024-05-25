@@ -22,6 +22,7 @@ public class Login {
 	private String userName;
 	private JCheckBox chckbxNewCheckBox;
 	private Database db;
+	private ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new Login object.
@@ -50,19 +51,19 @@ public class Login {
 			this.userName = db.getUsername();
 		}
 
-		JButton eye = new JButton(new ImageIcon("res/Login/hide2.png"));
+		JButton eye = new JButton(imgLoad.loadImage("res/Login/hide2.png"));
 		eye.setBorderPainted(false);
 		eye.setContentAreaFilled(false);
 		eye.setFocusPainted(false);
 		eye.addActionListener(e -> {
             if (hide) {
-                eye.setIcon(new ImageIcon("res/Login/view2.png"));
+                eye.setIcon(imgLoad.loadImage("res/Login/view2.png"));
                 eye.repaint();
                 eye.validate();
                 textField.setEchoChar((char) 0);
                 hide = false;
             } else {
-                eye.setIcon(new ImageIcon("res/Login/hide2.png"));
+                eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
                 eye.repaint();
                 eye.validate();
                 textField.setEchoChar('\u2022');
