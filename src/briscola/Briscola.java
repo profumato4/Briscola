@@ -77,13 +77,8 @@ public class Briscola {
 			register = new Register(login, login.getDb());
 
 			if(n == 10){
-                try {
-                    db.loginUser(db.getUsername(), db.getPassword());
-					login.setLogged(true);
-                } catch (SQLException e) {
-					logger.error("Database login failed", e);
-                    throw new RuntimeException(e);
-                }
+                db.loginUser(db.getUsername(), db.getPassword());
+                login.setLogged(true);
             }
 
 			//panel.setBounds(0, 0, 1040, 667);

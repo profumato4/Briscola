@@ -117,16 +117,12 @@ public class Login {
 				char[] chars = textField.getPassword();
 				String password = new String(chars);
 
-                try {
-                    if(db.loginUser(username, password)){
-						logged = true;
-						Briscola.getFrame().setVisible(true);
-						Briscola.getFrame().repaint();
-						Briscola.getFrame().revalidate();
-						frame.setVisible(false);
-                    }
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                if(db.loginUser(username, password)){
+                    logged = true;
+                    Briscola.getFrame().setVisible(true);
+                    Briscola.getFrame().repaint();
+                    Briscola.getFrame().revalidate();
+                    frame.setVisible(false);
                 }
 
                 if (!logged) {

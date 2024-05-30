@@ -1,5 +1,8 @@
 package briscola;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 
 public class Database {
+
+	private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
 	private Crypt c = new Crypt();
 	
@@ -43,18 +48,41 @@ public class Database {
 	 * @throws Exception If an error occurs while connecting to the database
 	 */
 
-	public Database(JFrame frame) throws Exception {
+	public Database(JFrame frame) {
 		this.frame = frame;
-		
-		
-		this.password = c.decrypt(str[2]);
-		this.hostname = c.decrypt(str[3]);
-		this.username = c.decrypt(str[4]);
 
-		this.url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
+		LogbackConfigurator.configure("logs/logback.xml");
 
-		Class.forName(Database.driver);
-		conn = DriverManager.getConnection(this.url, this.username, this.password);
+
+        try {
+
+			logger.info("Decrypting database credentials...");
+
+            this.password = c.decrypt(str[2]);
+			this.hostname = c.decrypt(str[3]);
+			this.username = c.decrypt(str[4]);
+			this.url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
+
+			try {
+				logger.info("Loading database driver...");
+				Class.forName(Database.driver);
+				logger.info("Database driver loaded successfully.");
+			} catch (ClassNotFoundException e) {
+				logger.error("Database driver not found", e);
+				throw new RuntimeException("Database driver not found", e);
+			}
+
+			logger.info("Establishing database connection...");
+
+			conn = DriverManager.getConnection(this.url, this.username, this.password);
+
+			logger.info("Database connection established successfully.");
+
+        } catch (Exception e) {
+			logger.error("Error decrypting the host, password and username", e);
+			throw new RuntimeException("Error initializing database connection", e);
+        }
+
 	}
 
 	/**
@@ -65,13 +93,13 @@ public class Database {
 	 * @throws SQLException If an error occurs during database operation
 	 */
 
-	public void registerUser(String username, String password) throws SQLException {
+	public void registerUser(String username, String password) {
 		String sql = "";
 		
 		try {
 			sql = c.decrypt(str[5]);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error decrypting the sql query", e);
 		}
 		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -81,12 +109,16 @@ public class Database {
 				statement.executeUpdate();
 				JOptionPane.showMessageDialog(frame, "Utente registrato con successo", "Register",
 						JOptionPane.INFORMATION_MESSAGE);
+				logger.info("User {} registered successfully", username);
 			} catch (SQLIntegrityConstraintViolationException e) {
 				JOptionPane.showMessageDialog(frame, "Utente già registrato", "Register",
 						JOptionPane.INFORMATION_MESSAGE);
+				logger.info("Already registered user: {}", username);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			logger.error("SQL error during user registration for user: {}", username, e);
+			JOptionPane.showMessageDialog(frame, "Errore durante la registrazione. Riprova più tardi.", "Errore",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -99,13 +131,13 @@ public class Database {
 	 * @throws SQLException If an error occurs during database operation
 	 */
 
-	public boolean loginUser(String username, String password) throws SQLException {
+	public boolean loginUser(String username, String password) {
 		String sql = "";
 		
 		try {
 			sql = c.decrypt(str[6]);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error decrypting the sql query", e);
 		}
 		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -114,8 +146,17 @@ public class Database {
 			ResultSet resultSet = statement.executeQuery();
 			nomeUtente = username;
 			userPassword = password;
-			return resultSet.next();
+			boolean loggedIn = resultSet.next();
+			if (loggedIn) {
+				logger.info("User {} logged in successfully", username);
+			} else {
+				logger.info("Failed login attempt for user {}", username);
+			}
+			return loggedIn;
+		} catch (SQLException e) {
+			logger.error("SQL error during login for user: {}", username, e);
 		}
+		return false;
 	}
 
 	/**
@@ -123,17 +164,8 @@ public class Database {
 	 */
 
 	public void vittoria() {
-		
-		String sqlSelect = "";
-		String sqlUpdate = "";
-		try {
-			sqlSelect = c.decrypt(str[7]);
-			sqlUpdate = c.decrypt(str[8]);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		updateGameStatistics(sqlSelect, sqlUpdate);
+		updateGameStatistics(str[7], str[8], "victory");
 	}
 
 	/**
@@ -141,17 +173,8 @@ public class Database {
 	 */
 
 	public void pareggio() {
-		String sqlSelect = "";
-		String sqlUpdate = "";
-		try {
-			sqlSelect = c.decrypt(str[9]);
-			sqlUpdate = c.decrypt(str[10]);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-
-		updateGameStatistics(sqlSelect, sqlUpdate);
+		updateGameStatistics(str[9], str[10], "draw");
 	}
 
 	/**
@@ -159,49 +182,49 @@ public class Database {
 	 */
 
 	public void sconfitta() {
-		
-		String sqlSelect = "";
-		String sqlUpdate = "";
-		try {
-			sqlSelect = c.decrypt(str[11]);
-			sqlUpdate = c.decrypt(str[12]);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		updateGameStatistics(sqlSelect, sqlUpdate);
+		updateGameStatistics(str[11], str[12], "defeat");
 	}
+
 
 	/**
 	 * Updates user statistics for a game based on the provided SQL queries.
 	 *
 	 * @param sqlSelect The SQL query for selecting user statistics
 	 * @param sqlUpdate The SQL query for updating user statistics
+	 * @param gameResult The result of the game ("victory", "draw", or "defeat")
 	 */
-	private void updateGameStatistics(String sqlSelect, String sqlUpdate) {
-		try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
-			 PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
+	private void updateGameStatistics(String sqlSelect, String sqlUpdate, String gameResult) {
+		try {
+			logger.info("Decrypting SQL queries for {}", gameResult);
+			sqlSelect = c.decrypt(sqlSelect);
+			sqlUpdate = c.decrypt(sqlUpdate);
 
-			// Set the username parameter for the select statement
-			selectStatement.setString(1, nomeUtente);
+			try (PreparedStatement selectStatement = conn.prepareStatement(sqlSelect);
+				 PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
 
-			// Execute the select statement to retrieve user statistics
-			ResultSet resultSet = selectStatement.executeQuery();
+				// Set the username parameter for the select statement
+				selectStatement.setString(1, nomeUtente);
 
-			// If the user statistics exist
-			if (resultSet.next()) {
-				// Update the user statistics with the username parameter
-				updateStatement.setString(1, nomeUtente);
-				updateStatement.executeUpdate();
-				System.out.println("User's game statistics updated for " + nomeUtente);
-			} else {
-				// If no user statistics found for the provided username
-				System.out.println("No user found with the specified credentials");
+				// Execute the select statement to retrieve user statistics
+				ResultSet resultSet = selectStatement.executeQuery();
+
+				// If the user statistics exist
+				if (resultSet.next()) {
+					// Update the user statistics with the username parameter
+					updateStatement.setString(1, nomeUtente);
+					updateStatement.executeUpdate();
+					logger.info("User's game statistics updated for {} after {}", nomeUtente, gameResult);
+				} else {
+					// If no user statistics found for the provided username
+					logger.warn("No user found with the specified credentials for {}", nomeUtente);
+				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("Error updating game statistics for user: {}", nomeUtente, e);
 		}
 	}
+
 
 
 	/**
@@ -214,31 +237,27 @@ public class Database {
 	    HashMap<String, PlayerStats> playerStats = new HashMap<>();
 	    String sql = "";
 	    try {
+			logger.info("Decrypting SQL query for retrieving top players");
 	        sql = c.decrypt(str[13]);
 	    } catch (Exception e) {
-	        e.printStackTrace();
+			logger.error("Error decrypting the SQL query for top players", e);
 	    }
 
-	    PreparedStatement statement;
-	    try {
-	        statement = conn.prepareStatement(sql);
-	        ResultSet resultSet = statement.executeQuery();
+		try (PreparedStatement statement = conn.prepareStatement(sql);
+			 ResultSet resultSet = statement.executeQuery()) {
 
-	        while (resultSet.next()) {
-	            String username = resultSet.getString("nomeUtente");
-	            if (!username.equals("admin")) {
-	                int gamesWon = resultSet.getInt("partiteVinte");
-	                int gamesLost = resultSet.getInt("partitePerse");
-	                playerStats.put(username, new PlayerStats(gamesWon, gamesLost));
-	            }
-	        }
-
-	        resultSet.close();
-	        statement.close();
-	    } catch (SQLException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    }
+			while (resultSet.next()) {
+				String username = resultSet.getString("nomeUtente");
+				if (!username.equals("admin")) {
+					int gamesWon = resultSet.getInt("partiteVinte");
+					int gamesLost = resultSet.getInt("partitePerse");
+					playerStats.put(username, new PlayerStats(gamesWon, gamesLost));
+					logger.info("Retrieved stats for player: {}", username);
+				}
+			}
+        } catch (SQLException e) {
+			logger.error("SQL error while retrieving top players", e);
+		}
 
 	    return playerStats;
 	}
