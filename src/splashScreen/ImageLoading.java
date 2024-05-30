@@ -22,7 +22,7 @@ public class ImageLoading {
     private ImageLoader imgLoad = new ImageLoader();
 
     public ImageLoading(){
-        LogbackConfigurator.configure("res/logs/logback.xml");
+        LogbackConfigurator.configure("logs/logback.xml");
     }
 
     /**

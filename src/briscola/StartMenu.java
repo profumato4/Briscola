@@ -63,7 +63,7 @@ public class StartMenu {
 
 	public StartMenu(JFrame frame, JPanel panel, Login login1, Register register) {
 
-		LogbackConfigurator.configure("res/logs/logback.xml");
+		LogbackConfigurator.configure("logs/logback.xml");
 
 		initialize(frame, panel, login1, register);
 		pp = new PodioPanel(login1.getDb(), panel);

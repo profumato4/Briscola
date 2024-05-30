@@ -16,7 +16,7 @@ public class ImageLoader {
     private static final Logger logger = LoggerFactory.getLogger(ImageLoader.class);
 
     public ImageLoader(){
-        LogbackConfigurator.configure("res/logs/logback.xml");
+        LogbackConfigurator.configure("logs/logback.xml");
     }
 
     public ImageIcon loadImage(@NotNull String path){

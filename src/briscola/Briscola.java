@@ -41,7 +41,7 @@ public class Briscola {
 	 */
 
 	public Briscola() {
-		LogbackConfigurator.configure("res/logs/logback.xml");
+		LogbackConfigurator.configure("logs/logback.xml");
 		initialize();
 		logger.info("Application started");
 	}

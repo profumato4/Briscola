@@ -33,7 +33,7 @@ class CustomDialog extends JDialog {
 	private ImageLoader imgLoad = new ImageLoader();
 	
 	public CustomDialog() {
-		LogbackConfigurator.configure("res/logs/logback.xml");
+		LogbackConfigurator.configure("logs/logback.xml");
 	}
 
 	/**
@@ -44,7 +44,7 @@ class CustomDialog extends JDialog {
 	public CustomDialog(JFrame parent) {
 		super(parent, true);
 
-		LogbackConfigurator.configure("res/logs/logback.xml");
+		LogbackConfigurator.configure("logs/logback.xml");
 
 		// panel setup
 
