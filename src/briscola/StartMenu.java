@@ -312,8 +312,8 @@ public class StartMenu {
 
 		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_on50.png"));
 		audio.repaint();
+		log.audioInfo(play);
 
-		log.info("play has been set to: " + play);
 	}
 
 	private void audioOff() {
@@ -322,7 +322,7 @@ public class StartMenu {
 		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_off50.png"));
 		audio.repaint();
 
-		log.info("play has been set to: " + play);
+		log.audioInfo(play);
 	}
 
 	/**
