@@ -12,8 +12,8 @@ public class SteganoImgProcess {
 		
 		int msgLength = getEncodedLength(input, width, height);
 				
-		StringBuffer decodedMsg = new StringBuffer();
-		Deque<Integer> listChar = new ArrayDeque<Integer>();
+		StringBuilder decodedMsg = new StringBuilder();
+		Deque<Integer> listChar = new ArrayDeque<>();
 		
 		int pixel, temp, charOut, ignore = 0, count = 0;
 		loop: for(int i = 0; i < width; i++) {
@@ -39,17 +39,15 @@ public class SteganoImgProcess {
 			}
 			
 		}
-		
-		String outputMsg = new String(decodedMsg); //generate extracted message
-		
-		return outputMsg;
+
+        return new String(decodedMsg);
 	} //end of decode()
 	
 	
 	public int getEncodedLength(BufferedImage input, int width, int height) { //method to get actual length of message encoded
 		
-		StringBuffer decodedMsg = new StringBuffer();
-		Deque<Integer> listChar = new ArrayDeque<Integer>();
+		StringBuilder decodedMsg = new StringBuilder();
+		Deque<Integer> listChar = new ArrayDeque<>();
 		
 		int pixel, temp, charOut, count = 0;
 		loop: for(int i = 0; i < width; i++) {

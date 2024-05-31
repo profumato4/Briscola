@@ -23,11 +23,10 @@ import javax.swing.KeyStroke;
 public class PodioPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private Database db;
-	HashMap<String, Integer> nomi;
+	private final Database db;
 	private int y = 200;
-	private JPanel panel;
-	private BackgroundPanel bp;
+	private final JPanel panel;
+	private final BackgroundPanel bp;
 
 	/**
 	 * Constructs a PodioPanel with the specified database and parent panel.

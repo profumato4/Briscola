@@ -60,9 +60,9 @@ public class ColorLogger {
 
     public void audioInfo(boolean play){
         if (play){
-            logger.info( ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.BLUE.getCode() + play + ColorUtility.Color.WHITE.getCode());
+            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.BLUE.getCode() + true + ColorUtility.Color.WHITE.getCode());
         }else{
-            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.RED.getCode() + play + ColorUtility.Color.WHITE.getCode());
+            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.RED.getCode() + false + ColorUtility.Color.WHITE.getCode());
         }
     }
 

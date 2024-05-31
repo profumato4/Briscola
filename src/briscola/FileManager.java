@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class FileManager {
 
+	private final ColorLogger log = new ColorLogger(Briscola.class);
+
 	private String path; // File path
 	private FileWriter fw = null; // FileWriter object for file writing
 	private BufferedReader br = null; // BufferedReader object for file reading
@@ -40,13 +42,16 @@ public class FileManager {
 		try {
 			fw = new FileWriter(path, false);
 			fw.append(String.valueOf(value));
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(IOException e) {
+			log.error("Error appending to file " + path);
+			throw new RuntimeException("Error appending to file " + path, e);
 		}finally {
 			try {
-				fw.close();
+				if(fw != null){
+					fw.close();
+				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error("Error closing FileWriter");
 			}
 		}
 	}
@@ -61,13 +66,16 @@ public class FileManager {
 		try {
 			fw = new FileWriter(path, false);
 			fw.append(value);
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(IOException e) {
+			log.error("Error appending to file " + path);
+			throw new RuntimeException("Error appending to file " + path, e);
 		}finally {
 			try {
-				fw.close();
+				if (fw != null){
+					fw.close();
+				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error("Error closing FileWriter");
 			}
 		}
 	}
@@ -85,16 +93,19 @@ public class FileManager {
 			String str;
 
 			if((str = br.readLine()) != null) {
-				return Boolean.valueOf(str);
+				return Boolean.parseBoolean(str);
 			}
 
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(IOException e) {
+			log.error("Error reading from file " + path);
+			throw new RuntimeException("Error reading from file " + path, e);
 		}finally {
 			try {
-				br.close();
+				if (br != null){
+					br.close();
+				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error("Error closing BufferedReader");
 			}
 		}
 
@@ -118,13 +129,16 @@ public class FileManager {
 				return str;
 			}
 
-		}catch(Exception e) {
-			e.printStackTrace();
+		}catch(IOException e) {
+			log.error("Error reading from file " + path);
+			throw new RuntimeException("Error reading from file " + path, e);
 		}finally {
 			try {
-				br.close();
+				if(br != null){
+					br.close();
+				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error("Error closing BufferedReader");
 			}
 		}
 
@@ -137,11 +151,13 @@ public class FileManager {
 	 *
 	 * @param path The new file path
 	 */
+
 	public void setPath(String path) {
 		if(path != null) {
 			this.path = path;
 		}
 	}
+
 	/**
 	 * Gets the file path.
 	 *

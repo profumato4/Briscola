@@ -6,8 +6,8 @@ package briscola;
 
 public class PlayerStats {
 
-	private int gamesWon;
-	private int gamesLost;
+	private final int gamesWon;
+	private final int gamesLost;
 
 	/**
 	 * Constructs a PlayerStats object with the specified number of games won and lost.

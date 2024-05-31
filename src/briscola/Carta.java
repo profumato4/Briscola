@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
 public class Carta {
 
 	private String seme; // The suit of the card
-	private String nome; // The name of the card
-	private int valore; // The value of the card
+	private final String nome; // The name of the card
+	private final int valore; // The value of the card
 	private ImageIcon img; // The image representing the card
 
 	/**
@@ -76,9 +76,7 @@ public class Carta {
 				// If both cards are briscola and their value is 0
         	}else if(c1.getValore() == 0  && c2.getValore() == 0) {
 				// Then compare their names
-        		if(Integer.valueOf(c1.getNome()) > Integer.valueOf(c2.getNome())) {
-        			return true;
-        		}
+                return Integer.parseInt(c1.getNome()) > Integer.parseInt(c2.getNome());
         	}
 			// If the first card is a briscola but the second is not, the first card wins
         }else if(c1.isBriscola(briscola) && !c2.isBriscola(briscola)){
@@ -94,14 +92,11 @@ public class Carta {
 				// If both cards have a value of 0
         	}else if(c1.getValore() == 0  && c2.getValore() == 0) {
 				// Then compare their names
-        		if(Integer.valueOf(c1.getNome()) > Integer.valueOf(c2.getNome())) {
-        			return true;
-        		}
+                return Integer.parseInt(c1.getNome()) > Integer.parseInt(c2.getNome());
         	}
 			// If the two cards have different suits and neither is a briscola, the first card thrown wins
-        }else if(!(c1.getSeme().equals(c2.getSeme())) && !(c1.isBriscola(briscola) && c2.isBriscola(briscola))) {
-        	return true;
-        }
+        }else return !(c1.getSeme().equals(c2.getSeme())) && !(c1.isBriscola(briscola) && c2.isBriscola(briscola));
+
     	return false;
       }
 

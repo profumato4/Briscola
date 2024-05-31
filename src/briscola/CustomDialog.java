@@ -1,7 +1,5 @@
 package briscola;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,14 +21,13 @@ import javax.swing.JPanel;
 
 class CustomDialog extends JDialog {
 
-	private static final Logger logger = LoggerFactory.getLogger(CustomDialog.class);
 
 	private static final long serialVersionUID = 1L;
 	private String carte;
-	private Color color = Color.decode("#7fc7c2");
-	private FileManager fm = new FileManager("res/CardsType/cardsType.txt");
+	private final Color color = Color.decode("#7fc7c2");
+	private final FileManager fm = new FileManager("res/CardsType/cardsType.txt");
 	private JLabel text;
-	private ImageLoader imgLoad = new ImageLoader();
+	private final ImageLoader imgLoad = new ImageLoader();
 	
 	public CustomDialog() {
 		LogbackConfigurator.configure("logs/logback.xml");
@@ -96,7 +93,7 @@ class CustomDialog extends JDialog {
 	 * @param cardType The selected card type.
 	 */
 	private void updateImageLabel(JLabel imageLabel, String cardType) {
-		String imagePath = "";
+		String imagePath;
 		switch (cardType) {
 			case "Napoletane":
 				text.setText("Napoletane");

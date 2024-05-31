@@ -19,7 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * The StartMenu class represents the initial menu of the JBriscola game.
@@ -34,19 +35,18 @@ import java.io.FileInputStream;
  */
 public class StartMenu {
 
-	private ColorLogger log = new ColorLogger(StartMenu.class);
+	private final ColorLogger log = new ColorLogger(StartMenu.class);
 
-	private FileManager fm = new FileManager("res/ThemeSong/play.txt");
+	private final FileManager fm = new FileManager("res/ThemeSong/play.txt");
 	private boolean play = checkPlay();
 	private Clip clip;
 	private JButton game;
 	private String carte;
 	private CustomDialog card;
 	private JButton audio;
-	private PodioPanel pp;
-	private BackgroundPanel bp;
-	private Color color = Color.decode("#7fc7c2");
-	private ImageLoader imgLoad = new ImageLoader();
+	private final PodioPanel pp;
+    private final Color color = Color.decode("#7fc7c2");
+	private final ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new StartMenu object.
@@ -80,7 +80,7 @@ public class StartMenu {
 	private void initialize(JFrame frame, JPanel panel, Login login1, Register register1) {
 		panel.removeAll();
 
-		bp = new BackgroundPanel("res/Background/background4.png");
+        BackgroundPanel bp = new BackgroundPanel("res/Background/background4.png");
 		panel.add(bp, BorderLayout.CENTER);
 
 		frame.setBounds(100, 100, 1178, 861);
@@ -104,10 +104,7 @@ public class StartMenu {
 		this.audio.setContentAreaFilled(false);
 		this.audio.setFocusPainted(false);
 
-		this.audio.addActionListener(e -> {
-			checkPlayButton();
-
-		});
+		this.audio.addActionListener(e -> checkPlayButton());
 
 		bp.add(this.audio);
 
@@ -216,7 +213,7 @@ public class StartMenu {
 			} else {
 				JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
 						JOptionPane.INFORMATION_MESSAGE);
-				log.info("You were not logged out because you are not logged in");
+				log.warn("You were not logged out because you are not logged in");
 			}
 		});
 
@@ -299,11 +296,9 @@ public class StartMenu {
 
 	private void checkPlayButton2() {
 		if (!play) {
-			play = false;
-			audioOff();
+            audioOff();
 		} else {
-			play = true;
-			audioOn();
+            audioOn();
 		}
 	}
 
@@ -355,7 +350,7 @@ public class StartMenu {
 	private Clip prepareClip(String audioFile) {
 
 		try (AudioInputStream ais = AudioSystem
-				.getAudioInputStream(new BufferedInputStream(new FileInputStream(audioFile)))) {
+				.getAudioInputStream(new BufferedInputStream(Files.newInputStream(Paths.get(audioFile))))) {
 			Clip clip = AudioSystem.getClip();
 			clip.open(ais);
 			return clip;

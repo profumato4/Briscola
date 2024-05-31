@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ImageLoader {
 
-    private ColorLogger log = new ColorLogger(ImageLoader.class);
+    private final ColorLogger log = new ColorLogger(ImageLoader.class);
 
 
     public ImageIcon loadImage(@NotNull String path){

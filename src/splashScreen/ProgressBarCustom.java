@@ -24,12 +24,12 @@ public class ProgressBarCustom extends JProgressBar {
         return colorString;
     }
 
+
     /**
      * Set the color of the progress string.
-     * @param colorString The color to set for the progress string.
      */
 
-    private Color colorString = new Color(0, 0, 0);
+    private final Color colorString = new Color(0, 0, 0);
 
     /**
      * Constructs a new ProgressBarCustom with default settings.

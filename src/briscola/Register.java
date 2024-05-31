@@ -2,7 +2,6 @@ package briscola;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,8 +24,8 @@ public class Register {
 	private JPasswordField textField_1;
 	private boolean hide = true;
 	private boolean hide2 = true;
-	private Database db;
-	private ImageLoader imgLoad = new ImageLoader();
+	private final Database db;
+	private final ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new Register object.
@@ -151,30 +150,47 @@ public class Register {
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 	}
 
-	/**
-	 * Retrieves the frame associated with the registration interface.
-	 * @return The JFrame instance representing the registration interface.
-	 */
 
 	private void eye(JButton eye){
 		eye.setBorderPainted(false);
 		eye.setContentAreaFilled(false);
 		eye.setFocusPainted(false);
 		eye.addActionListener(e -> {
-			if (hide) {
-				eye.setIcon(imgLoad.loadImage("res/Login/view2.png"));
-				eye.repaint();
-				textField.setEchoChar((char) 0);
-				hide = false;
-			} else {
-				eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
-				eye.repaint();
-				textField.setEchoChar('\u2022');
-				hide = true;
-			}
+
+			if (eye.getBounds().getY() == 190){
+				if (hide) {
+					eye.setIcon(imgLoad.loadImage("res/Login/view2.png"));
+					eye.repaint();
+					textField.setEchoChar((char) 0);
+					hide = false;
+				} else {
+					eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
+					eye.repaint();
+					textField.setEchoChar('•');
+					hide = true;
+				}
+			} else if (eye.getBounds().getY() == 245) {
+                if (!hide2) {
+                    eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
+                    eye.repaint();
+                    textField_1.setEchoChar('•');
+                    hide2 = true;
+                } else {
+                    eye.setIcon(imgLoad.loadImage("res/Login/view2.png"));
+                    eye.repaint();
+                    textField_1.setEchoChar((char) 0);
+                    hide2 = false;
+                }
+            }
+
 
 		});
 	}
+
+	/**
+	 * Retrieves the frame associated with the registration interface.
+	 * @return The JFrame instance representing the registration interface.
+	 */
 
 	public JFrame getFrame() {
 		return frame;

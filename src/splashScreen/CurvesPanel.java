@@ -26,9 +26,9 @@
     public class CurvesPanel extends GradientPanel {
 
         private static final long serialVersionUID = 1L;
-        private RenderingHints hints;
+        private final RenderingHints hints;
         private int counter = 0;
-        private Timer timer = new Timer(20, ae -> repaint());
+        private final Timer timer = new Timer(20, ae -> repaint());
 
         /**
          * Starts the animation.

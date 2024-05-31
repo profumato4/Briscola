@@ -2,7 +2,6 @@ package splashScreen;
 
 import briscola.ColorLogger;
 import briscola.ImageLoader;
-import briscola.LogbackConfigurator;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -17,8 +16,8 @@ import java.awt.image.BufferedImage;
 
 public class ImageLoading {
 
-    private ColorLogger log = new ColorLogger(ImageLoading.class);
-    private ImageLoader imgLoad = new ImageLoader();
+    private final ColorLogger log = new ColorLogger(ImageLoading.class);
+    private final ImageLoader imgLoad = new ImageLoader();
 
 
     /**
@@ -35,7 +34,7 @@ public class ImageLoading {
 
                 // Read the full image from file
 
-                BufferedImage fullImage = null;
+                BufferedImage fullImage;
                 
                 try{
                     fullImage = imgLoad.loadBufferedImage("res/logo/logo.png");
@@ -50,9 +49,7 @@ public class ImageLoading {
                 // Display the full image on the JLabel
 
                 BufferedImage finalFullImage = fullImage;
-                SwingUtilities.invokeLater(() -> {
-                    jLabel1.setIcon(new ImageIcon(finalFullImage));
-                });
+                SwingUtilities.invokeLater(() -> jLabel1.setIcon(new ImageIcon(finalFullImage)));
 
                 // Split the full image into 11 parts and display each part sequentially
 
@@ -72,7 +69,8 @@ public class ImageLoading {
                     Thread.sleep(1000);
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("Error loading and displaying image ");
+                throw new RuntimeException("Error loading and displaying image", e);
             }
         }).start();
     }

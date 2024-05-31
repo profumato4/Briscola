@@ -14,24 +14,22 @@ import java.awt.event.KeyEvent;
 
 public class Briscola {
 
-	private ColorLogger log = new ColorLogger(Briscola.class);
+	private final ColorLogger log = new ColorLogger(Briscola.class);
 
 
 	private static JFrame frame;
 	private JPanel panel;
 	private Login login;
-	private Register register;
-	private String carte;
+    private String carte;
 	private CerchioLabel carteRimanenti;
 	private byte temp = 0;
 	private MenuPanel menu;
-	private Mazzo mazzo1;
-	private JButton[] cardButtons = new JButton[3];
-	private Briscola b = this;
+    private JButton[] cardButtons = new JButton[3];
+	private final Briscola b = this;
 	private BackgroundPanel bp;
 	private Database db;
 	private int n = 0;
-	private ImageLoader imgLoad = new ImageLoader();
+	private final ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new instance of the Briscola class and initializes the game.
@@ -70,7 +68,7 @@ public class Briscola {
 			
 			this.db = db;
 			login = new Login(this, db);
-			register = new Register(login, login.getDb());
+            Register register = new Register(login, login.getDb());
 
 			if(n == 10){
                 db.loginUser(db.getUsername(), db.getPassword());
@@ -140,7 +138,7 @@ public class Briscola {
 		log.info("Game started");
 		temp = 0;
 		setBackground();
-		mazzo1 = new Mazzo(bp, carte, carteRimanenti, login.getDb(), b);
+        Mazzo mazzo1 = new Mazzo(bp, carte, carteRimanenti, login.getDb(), b);
 		Giocatore giocatore = new Giocatore(login.getDb().getUsername());
 		log.info(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();

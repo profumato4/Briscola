@@ -1,7 +1,6 @@
 package briscola;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -9,25 +8,19 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Crypt {
-	
-	private SteganoImgProcess sip = new SteganoImgProcess();
-	private String encodedKey;
-	private byte[] decodedKey;
-	private SecretKey key;
+
+	private final SteganoImgProcess sip = new SteganoImgProcess();
+    private final SecretKey key;
 	private String[] str;
-	private ImageLoader imgLoad = new ImageLoader();
+	private final ImageLoader imgLoad = new ImageLoader();
 	
 	public Crypt() {
-		try {
-			BufferedImage img = imgLoad.loadBufferedImage("res/ThemeSong/morty2.png");
-			encodedKey = sip.decode(img, img.getWidth(), img.getHeight());
-			decodedKey = Base64.getDecoder().decode(encodedKey);
-			key = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-			s();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        BufferedImage img = imgLoad.loadBufferedImage("res/ThemeSong/morty2.png");
+        String encodedKey = sip.decode(img, img.getWidth(), img.getHeight());
+        byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+        key = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+        s();
+    }
 
 	public String decrypt(String encryptedPassword) throws Exception {
 		Cipher cipher = Cipher.getInstance("AES");
@@ -38,7 +31,7 @@ public class Crypt {
 	}
 	
 	
-	private void s() throws IOException {
+	private void s(){
 		BufferedImage img = imgLoad.loadBufferedImage("res/ThemeSong/feet.png");
 		BufferedImage img2 = imgLoad.loadBufferedImage("res/ThemeSong/papa.png");
 		String s = sip.decode(img, img.getWidth(), img.getHeight());

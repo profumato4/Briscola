@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 
 public class BackgroundPanel extends JPanel {
 
-	private ImageLoader imgLoad = new ImageLoader();
+	private final ImageLoader imgLoad = new ImageLoader();
 	private static final long serialVersionUID = 1L;
-	private String path;
+	private final String path;
 
 
 	/**

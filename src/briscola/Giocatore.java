@@ -14,7 +14,7 @@ import javax.swing.Timer;
 public class Giocatore {
 
 	private final String nickName; // The nickname of the player
-	private ArrayList<Carta> mano; // The player's hand of cards
+	private final ArrayList<Carta> mano; // The player's hand of cards
 	private int punteggio; // The player's score
 	private boolean lanciata = false; // Flag indicating whether the player has thrown a card
 

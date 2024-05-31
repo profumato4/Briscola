@@ -3,7 +3,6 @@ package briscola;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.sql.SQLException;
 
 /**
  * The Login class represents the user login interface.
@@ -13,15 +12,15 @@ import java.sql.SQLException;
 public class Login {
 
 	private JFrame frame;
-	private FileManager fm = new FileManager("res/Login/remember.txt");
+	private final FileManager fm = new FileManager("res/Login/remember.txt");
 	private JTextField txtCcc;
 	private JPasswordField textField;
 	private boolean logged = checkLogin();
 	Register register;
 	private boolean hide = true;
 	private JCheckBox chckbxNewCheckBox;
-	private Database db;
-	private ImageLoader imgLoad = new ImageLoader();
+	private final Database db;
+	private final ImageLoader imgLoad = new ImageLoader();
 
 	/**
 	 * Constructs a new Login object.
@@ -61,7 +60,7 @@ public class Login {
                 eye.setIcon(imgLoad.loadImage("res/Login/hide2.png"));
                 eye.repaint();
                 eye.validate();
-                textField.setEchoChar('\u2022');
+                textField.setEchoChar('•');
                 hide = true;
             }
 
@@ -135,13 +134,7 @@ public class Login {
 				frame.setVisible(false);
 			}
 
-			if (chckbxNewCheckBox.isSelected()) {
-				
-				writeLogin(true);
-				
-			}else {
-				writeLogin(false);
-			}
+            writeLogin(chckbxNewCheckBox.isSelected());
 		});
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));

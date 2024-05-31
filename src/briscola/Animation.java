@@ -10,17 +10,11 @@ import java.awt.event.ActionListener;
 
 public class Animation {
 
-    private ColorLogger log = new ColorLogger(Animation.class);
+    private final ColorLogger log = new ColorLogger(Animation.class);
 
-    private Timer timerDistribuisci;
-    private Timer timerDistribuisciBack;
-    private Timer timerPresa;
-    private Timer timerPresaBack;
-    private Timer timerPescata;
-    private Timer timerPescataBack;
-    private ImageLoader imgLoad = new ImageLoader();
-    private JLabel label = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
-    private JLabel label2 = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
+    private final ImageLoader imgLoad = new ImageLoader();
+    private final JLabel label = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
+    private final JLabel label2 = new JLabel(imgLoad.loadImage("res/Cards/Rotate/back.png"));
 
     /**
      * Constructs an Animation object.
@@ -43,7 +37,7 @@ public class Animation {
 
         log.info("Start of the card dealing animation..");
 
-        timerDistribuisci = new Timer(5, new ActionListener() {
+        Timer timerDistribuisci = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -85,7 +79,7 @@ public class Animation {
 
         log.info("Start of the card dealing animation for the CPU..");
 
-        timerDistribuisciBack = new Timer(5, new ActionListener() {
+        Timer timerDistribuisciBack = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -132,7 +126,7 @@ public class Animation {
 
         log.info("Start of the card taking animation for the CPU..");
 
-        timerPresaBack = new Timer(10, new ActionListener() {
+        Timer timerPresaBack = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -192,7 +186,7 @@ public class Animation {
                 }
 
 
-                if(x1 == 950 && y1 == 215 && x2 == 950 && y2 == 215 && j == 1 && i == 1){
+                if (x1 == 950 && y1 == 215 && x2 == 950 && y2 == 215 && j == 1 && i == 1) {
                     log.info("The card taking animation for the CPU is finished");
                     ((Timer) e.getSource()).stop();
                 }
@@ -220,7 +214,7 @@ public class Animation {
 
         log.info("Start of the card taking animation..");
 
-        timerPresa = new Timer(10, new ActionListener() {
+        Timer timerPresa = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
             private int y2 = card2.getLocation().y;
@@ -280,7 +274,7 @@ public class Animation {
                 }
 
 
-                if (x1 == 950 && y1 == 430 && x2 == 950 && y2 == 430 && m == 1 && n == 1){
+                if (x1 == 950 && y1 == 430 && x2 == 950 && y2 == 430 && m == 1 && n == 1) {
                     log.info("The card taking animation is finished");
                     ((Timer) e.getSource()).stop();
                 }
@@ -307,7 +301,7 @@ public class Animation {
 
         log.info("The card drawing animation is starting..");
 
-        timerPescata = new Timer(10, new ActionListener() {
+        Timer timerPescata = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -360,7 +354,7 @@ public class Animation {
 
         log.info("The card drawing animation for the CPU is starting..");
 
-        timerPescataBack = new Timer(10, new ActionListener() {
+        Timer timerPescataBack = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
 
@@ -386,7 +380,7 @@ public class Animation {
                     card.repaint();
                 }
 
-                if( y == 0 && x == x1){
+                if (y == 0 && x == x1) {
                     log.info("The card drawing animation for the CPU is over");
                     ((Timer) e.getSource()).stop();
                 }

@@ -20,10 +20,8 @@ public class SplashScreen extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private CurvesPanel curvesPanel1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbStatus;
     private ProgressBarCustom pro;
-    private ImageLoading il;
 
     /**
      * Creates a new instance of SplashScreen.
@@ -31,12 +29,9 @@ public class SplashScreen extends javax.swing.JDialog {
      * @param parent The parent frame.
      * @param modal  Indicates whether the dialog should be modal.
      * @throws UnsupportedLookAndFeelException If the look and feel is not supported.
-     * @throws ClassNotFoundException        If the class of a serialized object cannot be found.
-     * @throws InstantiationException        If an application tries to create an instance of a class using the newInstance method in class Class, but the specified class object cannot be instantiated.
-     * @throws IllegalAccessException        If the currently executing method does not have access to the definition of the specified class, field, method, or constructor.
      */
 
-    public SplashScreen(java.awt.Frame parent, boolean modal) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public SplashScreen(java.awt.Frame parent, boolean modal) throws UnsupportedLookAndFeelException {
         super(parent, modal);
         
         FlatLightLaf.setup();
@@ -60,8 +55,8 @@ public class SplashScreen extends javax.swing.JDialog {
     private void initComponents() {
 
         curvesPanel1 = new CurvesPanel();
-        jLabel1 = new javax.swing.JLabel();
-        il = new ImageLoading();
+        JLabel jLabel1 = new JLabel();
+        ImageLoading il = new ImageLoading();
         pro = new ProgressBarCustom();
         lbStatus = new javax.swing.JLabel();
 
@@ -69,7 +64,7 @@ public class SplashScreen extends javax.swing.JDialog {
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+                formWindowOpened();
             }
         });
 
@@ -127,10 +122,9 @@ public class SplashScreen extends javax.swing.JDialog {
     /**
      * Executed when the window is opened. Initiates the loading tasks.
      *
-     * @param evt The window event.
      */
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowOpened() {//GEN-FIRST:event_formWindowOpened
         new Thread(() -> {
             try {
                 doTask("Connect To Database ...", 10);
