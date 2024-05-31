@@ -1,7 +1,5 @@
 package briscola;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,22 +18,16 @@ import javax.swing.JOptionPane;
 
 public class Database {
 
-	private static final Logger logger = LoggerFactory.getLogger(Database.class);
+	private final ColorLogger log = new ColorLogger(Database.class);
 
-	private Crypt c = new Crypt();
+	private final Crypt c = new Crypt();
 	
-	private String[] str = c.getStr();
+	private final String[] str = c.getStr();
 	
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
-	private final String username;
-	private final String password;
-	private final String hostname;
-	private final String port = str[0];
-	private final String database = str[1];
-	private final String url;
-	
-	
-	private final Connection conn;
+
+
+    private final Connection conn;
 	private final JFrame frame;
 	private String nomeUtente;
 	private String userPassword;
@@ -45,41 +37,40 @@ public class Database {
 	 * Initializes the database connection.
 	 *
 	 * @param frame The JFrame used for displaying dialog messages
-	 * @throws Exception If an error occurs while connecting to the database
 	 */
 
 	public Database(JFrame frame) {
 		this.frame = frame;
 
-		LogbackConfigurator.configure("logs/logback.xml");
-
 
         try {
 
-			logger.info("Decrypting database credentials...");
+			log.info("Decrypting database credentials...");
 
-            this.password = c.decrypt(str[2]);
-			this.hostname = c.decrypt(str[3]);
-			this.username = c.decrypt(str[4]);
-			this.url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
+            String password = c.decrypt(str[2]);
+            String hostname = c.decrypt(str[3]);
+            String username = c.decrypt(str[4]);
+            String port = str[0];
+            String database = str[1];
+            String url = String.format("jdbc:mysql://%s:%s/%s", hostname, port, database);
 
 			try {
-				logger.info("Loading database driver...");
+				log.info("Loading database driver...");
 				Class.forName(Database.driver);
-				logger.info("Database driver loaded successfully.");
+				log.info("Database driver loaded successfully.");
 			} catch (ClassNotFoundException e) {
-				logger.error("Database driver not found", e);
+				log.error("Database driver not found");
 				throw new RuntimeException("Database driver not found", e);
 			}
 
-			logger.info("Establishing database connection...");
+			log.info("Establishing database connection...");
 
-			conn = DriverManager.getConnection(this.url, this.username, this.password);
+			conn = DriverManager.getConnection(url, username, password);
 
-			logger.info("Database connection established successfully.");
+			log.info("Database connection established successfully.");
 
         } catch (Exception e) {
-			logger.error("Error decrypting the host, password and username", e);
+			log.error("Error decrypting the host, password and username");
 			throw new RuntimeException("Error initializing database connection", e);
         }
 
@@ -90,16 +81,16 @@ public class Database {
 	 *
 	 * @param username The username of the user
 	 * @param password The password of the user
-	 * @throws SQLException If an error occurs during database operation
 	 */
 
 	public void registerUser(String username, String password) {
-		String sql = "";
+		String sql;
 		
 		try {
 			sql = c.decrypt(str[5]);
 		} catch (Exception e) {
-			logger.error("Error decrypting the sql query", e);
+			log.error("Error decrypting the sql query");
+			throw new RuntimeException("Error decrypting the sql query", e);
 		}
 		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -109,16 +100,17 @@ public class Database {
 				statement.executeUpdate();
 				JOptionPane.showMessageDialog(frame, "Utente registrato con successo", "Register",
 						JOptionPane.INFORMATION_MESSAGE);
-				logger.info("User {} registered successfully", username);
+				log.info("User " + username + " registered successfully");
 			} catch (SQLIntegrityConstraintViolationException e) {
 				JOptionPane.showMessageDialog(frame, "Utente già registrato", "Register",
 						JOptionPane.INFORMATION_MESSAGE);
-				logger.info("Already registered user: {}", username);
+				log.info("Already registered user: " + username);
 			}
 		} catch (SQLException e) {
-			logger.error("SQL error during user registration for user: {}", username, e);
+			log.error("SQL error during user registration for user: " + username);
 			JOptionPane.showMessageDialog(frame, "Errore durante la registrazione. Riprova più tardi.", "Errore",
 					JOptionPane.ERROR_MESSAGE);
+			throw new RuntimeException("SQL error during user registration for user " + username, e);
 		}
 	}
 
@@ -128,16 +120,16 @@ public class Database {
 	 * @param username The username of the user
 	 * @param password The password of the user
 	 * @return True if login is successful, false otherwise
-	 * @throws SQLException If an error occurs during database operation
 	 */
 
 	public boolean loginUser(String username, String password) {
-		String sql = "";
+		String sql;
 		
 		try {
 			sql = c.decrypt(str[6]);
 		} catch (Exception e) {
-			logger.error("Error decrypting the sql query", e);
+			log.error("Error decrypting the sql query");
+			throw new RuntimeException("Error decrypting the sql query", e);
 		}
 		
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -148,16 +140,16 @@ public class Database {
 			userPassword = password;
 			boolean loggedIn = resultSet.next();
 			if (loggedIn) {
-				logger.info("User {} logged in successfully", username);
+				log.info("User " + username + " logged in successfully");
 			} else {
-				logger.info("Failed login attempt for user {}", username);
+				log.info("Failed login attempt for user " + username);
 			}
 			return loggedIn;
 		} catch (SQLException e) {
-			logger.error("SQL error during login for user: {}", username, e);
+			log.error("SQL error during login for user: " + username);
+			throw new RuntimeException("SQL error during login for user: " + username, e);
 		}
-		return false;
-	}
+    }
 
 	/**
 	 * Updates user statistics for a won game.
@@ -196,7 +188,7 @@ public class Database {
 	 */
 	private void updateGameStatistics(String sqlSelect, String sqlUpdate, String gameResult) {
 		try {
-			logger.info("Decrypting SQL queries for {}", gameResult);
+			log.info("Decrypting SQL queries for " + gameResult);
 			sqlSelect = c.decrypt(sqlSelect);
 			sqlUpdate = c.decrypt(sqlUpdate);
 
@@ -214,14 +206,15 @@ public class Database {
 					// Update the user statistics with the username parameter
 					updateStatement.setString(1, nomeUtente);
 					updateStatement.executeUpdate();
-					logger.info("User's game statistics updated for {} after {}", nomeUtente, gameResult);
+					log.info("User's game statistics updated for " + nomeUtente + " after " + gameResult);
 				} else {
 					// If no user statistics found for the provided username
-					logger.warn("No user found with the specified credentials for {}", nomeUtente);
+					log.warn("No user found with the specified credentials for " + nomeUtente);
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Error updating game statistics for user: {}", nomeUtente, e);
+			log.error("Error updating game statistics for user: " + nomeUtente);
+			throw new RuntimeException("Error updating game statistics for user: " + nomeUtente , e);
 		}
 	}
 
@@ -235,12 +228,13 @@ public class Database {
 
 	public HashMap<String, PlayerStats> topPlayers() {
 	    HashMap<String, PlayerStats> playerStats = new HashMap<>();
-	    String sql = "";
+	    String sql;
 	    try {
-			logger.info("Decrypting SQL query for retrieving top players");
+			log.info("Decrypting SQL query for retrieving top players");
 	        sql = c.decrypt(str[13]);
 	    } catch (Exception e) {
-			logger.error("Error decrypting the SQL query for top players", e);
+			log.error("Error decrypting the SQL query for top players");
+			throw new RuntimeException("Error decrypting the SQL query for top players", e);
 	    }
 
 		try (PreparedStatement statement = conn.prepareStatement(sql);
@@ -252,11 +246,12 @@ public class Database {
 					int gamesWon = resultSet.getInt("partiteVinte");
 					int gamesLost = resultSet.getInt("partitePerse");
 					playerStats.put(username, new PlayerStats(gamesWon, gamesLost));
-					logger.info("Retrieved stats for player: {}", username);
+					log.info("Retrieved stats for player: " + username);
 				}
 			}
         } catch (SQLException e) {
-			logger.error("SQL error while retrieving top players", e);
+			log.error("SQL error while retrieving top players");
+			throw new RuntimeException("SQL error while retrieving top players", e);
 		}
 
 	    return playerStats;

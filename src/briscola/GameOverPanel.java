@@ -1,5 +1,6 @@
 package briscola;
 
+
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -28,11 +29,13 @@ public class GameOverPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// Remove all components from the main panel
+				b.setN(10);
 				b.getPanel().removeAll();
 				// Initialize the game again
 				b.inizialize2(b.getDb());
 				// Repaint the main panel
 				b.getPanel().repaint();
+
 			}
 		});
 		setSize(1178, 861);

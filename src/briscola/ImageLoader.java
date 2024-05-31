@@ -1,8 +1,6 @@
 package briscola;
 
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,7 +11,7 @@ import java.io.IOException;
 
 public class ImageLoader {
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageLoader.class);
+    private ColorLogger log = new ColorLogger(ImageLoader.class);
 
     public ImageLoader(){
         LogbackConfigurator.configure("logs/logback.xml");
@@ -27,9 +25,9 @@ public class ImageLoader {
             }
             return img;
         }catch (Exception e){
-            logger.error("Failed to load image from file: " + path, e);
+            log.error("Failed to load image from file: " + path);
+            throw new RuntimeException("Failed to load image from file: " + path, e);
         }
-        return  null;
     }
 
     public BufferedImage loadBufferedImage(@NotNull String path){
@@ -41,9 +39,9 @@ public class ImageLoader {
             }
             return image;
         } catch (IOException e) {
-            logger.error("Failed to read image file: " + path, e);
+            log.error("Failed to read image file: " + path);
+            throw new RuntimeException("Failed to read image file: " + path, e);
         }
-        return  null;
     }
 
 }

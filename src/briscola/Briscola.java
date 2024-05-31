@@ -1,15 +1,12 @@
 package briscola;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * The main class responsible for managing the Briscola game application.
@@ -17,7 +14,7 @@ import java.sql.SQLException;
 
 public class Briscola {
 
-	private static final Logger logger = LoggerFactory.getLogger(Briscola.class);
+	private ColorLogger log = new ColorLogger(Briscola.class);
 
 
 	private static JFrame frame;
@@ -41,9 +38,9 @@ public class Briscola {
 	 */
 
 	public Briscola() {
-		LogbackConfigurator.configure("logs/logback.xml");
 		initialize();
-		logger.info("Application started");
+		log.info("Application started");
+
 	}
 
 	/**
@@ -77,8 +74,10 @@ public class Briscola {
 			register = new Register(login, login.getDb());
 
 			if(n == 10){
+				System.out.println(""+ this.n);
                 db.loginUser(db.getUsername(), db.getPassword());
                 login.setLogged(true);
+				System.out.println(login.isLogged());
             }
 
 			//panel.setBounds(0, 0, 1040, 667);
@@ -88,16 +87,16 @@ public class Briscola {
 			m.game().addActionListener(e -> {
 				if (login.isLogged()) {
 					carte = m.getCarteType();
-					logger.info("User is logged in. CarteType: {}", carte);
+					log.info("User is logged in. CarteType: " + carte);
 					game();
 				} else {
 					JOptionPane.showMessageDialog(frame, "Utente non loggato", "Login",
 							JOptionPane.INFORMATION_MESSAGE);
-					logger.warn("Attempt to start game without login");
+					log.warn("Attempt to start game without login");
 				}
 			});
 		} else {
-			logger.warn("Frame is not visible");
+			log.warn("Frame is not visible");
 		}
 	}
 
@@ -141,15 +140,16 @@ public class Briscola {
 	 */
 
 	public void game() {
+		log.info("Game started");
 		temp = 0;
 		setBackground();
 		mazzo1 = new Mazzo(bp, carte, carteRimanenti, login.getDb(), b);
 		Giocatore giocatore = new Giocatore(login.getUserName());
-		System.out.println(giocatore.getNickName());
+		log.info(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
 		mazzo1.distribuisci(giocatore, giocatore2);
-		System.out.println(giocatore.getMano());
-		System.out.println(giocatore2.getMano());
+		log.info(giocatore.getMano().toString());
+		log.info(giocatore2.getMano().toString());
 		carteRimanenti.setNumero(40 - (mazzo1.getIndice() - 1));
 		cardButtons = mazzo1.getCardButtons();
 		InputMap inputMap = panel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
@@ -166,14 +166,7 @@ public class Briscola {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (temp == 0) {
-					menu = new MenuPanel(cardButtons, new ResumeButtonListener() {
-
-						@Override
-						public void onResumeClicked(byte value) {
-							temp = (byte) value;
-						}
-
-					}, b);
+					menu = new MenuPanel(cardButtons, value -> temp = value, b);
 					panel.add(menu, BorderLayout.CENTER);
 					panel.setComponentZOrder(menu, 0);
 					for (JButton card : cardButtons) {
@@ -199,7 +192,7 @@ public class Briscola {
 	 * @param f The JFrame to be centered.
 	 */
 
-	private void centerFrame(JFrame f) {
+	private void centerFrame(@NotNull JFrame f) {
 		f.setLocationRelativeTo(null);
 	}
 

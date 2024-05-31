@@ -19,10 +19,9 @@ public class Main extends javax.swing.JFrame {
      * The main entry point for the application.
      *
      * @param args The command-line arguments.
-     * @throws InterruptedException If the sleep operation is interrupted.
      */
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         // Set up the FlatLight Look and Feel for the UI.
 

@@ -1,8 +1,5 @@
 package briscola;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,7 +34,7 @@ import java.io.FileInputStream;
  */
 public class StartMenu {
 
-	private static final Logger logger = LoggerFactory.getLogger(CustomDialog.class);
+	private ColorLogger log = new ColorLogger(StartMenu.class);
 
 	private FileManager fm = new FileManager("res/ThemeSong/play.txt");
 	private boolean play = checkPlay();
@@ -159,7 +156,7 @@ public class StartMenu {
 			if (login1.isLogged()) {
 				JOptionPane.showMessageDialog(frame, "Utente già loggato", "Login",
 						JOptionPane.INFORMATION_MESSAGE);
-				logger.info("the user is already logged in");
+				log.info("the user is already logged in");
 			} else {
 				login1.getFrame().setVisible(true);
 				frame.setVisible(false);
@@ -206,20 +203,20 @@ public class StartMenu {
 
 					login1.setLogged(false);
 
-					logger.info("you have logged out");
+					log.info("You have logged out");
 
 					login1.getFm().append(false);
 
-					logger.info(false + " was written to the file: " + login1.getFm().getPath());
+					log.info(false + " was written to the file: " + login1.getFm().getPath());
 
 				} else {
 					login1.setLogged(true);
-					logger.info("you have not logged out");
+					log.info("You have not logged out");
 				}
 			} else {
 				JOptionPane.showMessageDialog(frame, "Non sei loggato, non puoi fare il logout", "Logout",
 						JOptionPane.INFORMATION_MESSAGE);
-				logger.info("You were not logged out because you are not logged in");
+				log.info("You were not logged out because you are not logged in");
 			}
 		});
 
@@ -246,7 +243,7 @@ public class StartMenu {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					carte = card.getCarteType();
-					logger.info("Selected deck: " + carte);
+					log.info("Selected deck: " + carte);
 				}
 			});
 			card.setVisible(true);
@@ -262,7 +259,7 @@ public class StartMenu {
 	private void writePlay() {
 
 		fm.append(play);
-		logger.info(play + " was written to the file: " + fm.getPath());
+		log.info(play + " was written to the file: " + fm.getPath());
 	}
 
 	/**
@@ -316,7 +313,7 @@ public class StartMenu {
 		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_on50.png"));
 		audio.repaint();
 
-		logger.info("play has been set to: " + play);
+		log.info("play has been set to: " + play);
 	}
 
 	private void audioOff() {
@@ -325,7 +322,7 @@ public class StartMenu {
 		audio.setIcon(imgLoad.loadImage("res/AudioSymbols/audio_off50.png"));
 		audio.repaint();
 
-		logger.info("play has been set to: " + play);
+		log.info("play has been set to: " + play);
 	}
 
 	/**
@@ -363,9 +360,9 @@ public class StartMenu {
 			clip.open(ais);
 			return clip;
 		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e1) {
-			logger.error("Failed to prepare clip for audio file: " + audioFile, e1);
+			log.error("Failed to prepare clip for audio file: " + audioFile);
+			throw new RuntimeException("Failed to prepare clip for audio file: " + audioFile, e1);
 		}
-		return null;
 	}
 
 	/**
@@ -382,7 +379,7 @@ public class StartMenu {
 				clip.loop(-1);
 				checkPlayButton2();
 			}else{
-				logger.error("Failed to prepare clip for path: " + path);
+				log.error("Failed to prepare clip for path: " + path);
 			}
 		});
 		thread.start();
@@ -390,7 +387,8 @@ public class StartMenu {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			logger.error("Thread interrupted while playing music from path: " + path, e);
+			log.error("Thread interrupted while playing music from path: " + path);
+			throw new RuntimeException("Thread interrupted while playing music from path: " + path, e);
 		}
 	}
 

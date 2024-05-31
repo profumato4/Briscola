@@ -1,9 +1,8 @@
 package splashScreen;
 
+import briscola.ColorLogger;
 import briscola.ImageLoader;
 import briscola.LogbackConfigurator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -18,7 +17,7 @@ import java.awt.image.BufferedImage;
 
 public class ImageLoading {
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageLoading.class);
+    private ColorLogger log = new ColorLogger(ImageLoading.class);
     private ImageLoader imgLoad = new ImageLoader();
 
     public ImageLoading(){
@@ -44,7 +43,8 @@ public class ImageLoading {
                 try{
                     fullImage = imgLoad.loadBufferedImage("res/logo/logo.png");
                 }catch (Exception e){
-                    logger.error("Failed to load image from file: res/logo/logo.png", e);
+                    log.error("Failed to load image from file: res/logo/logo.png");
+                    throw new RuntimeException("Failed to load image from file: res/logo/logo.png",e);
                 }
                 
                 int width = fullImage.getWidth();

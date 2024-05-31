@@ -1,5 +1,6 @@
 package briscola;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class Mazzo {
+
+    private ColorLogger log = new ColorLogger(Mazzo.class);
 
     private final MyArrayList<Carta> mazzo = new MyArrayList<>();
     private JLabel carta;
@@ -49,6 +52,9 @@ public class Mazzo {
      */
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db, Briscola b) {
+
+        LogbackConfigurator.configure("logs/logback.xml");
+
         this.panel = panel;
         this.carteRimanenti = carteRimanenti;
         this.cartaType = cartaType;
@@ -58,7 +64,9 @@ public class Mazzo {
         addCarte(cartaType);
         mescola();
         briscola(panel, cartaType);
-        System.out.println(mazzo);
+
+        log.info("\n" + mazzo);
+
     }
 
     /**
