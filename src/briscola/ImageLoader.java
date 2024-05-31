@@ -13,9 +13,6 @@ public class ImageLoader {
 
     private ColorLogger log = new ColorLogger(ImageLoader.class);
 
-    public ImageLoader(){
-        LogbackConfigurator.configure("logs/logback.xml");
-    }
 
     public ImageIcon loadImage(@NotNull String path){
         try{

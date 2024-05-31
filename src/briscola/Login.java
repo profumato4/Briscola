@@ -19,7 +19,6 @@ public class Login {
 	private boolean logged = checkLogin();
 	Register register;
 	private boolean hide = true;
-	private String userName;
 	private JCheckBox chckbxNewCheckBox;
 	private Database db;
 	private ImageLoader imgLoad = new ImageLoader();
@@ -46,10 +45,6 @@ public class Login {
 		frame.setBounds(100, 100, 416, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		if(logged) {
-			this.userName = db.getUsername();
-		}
 
 		JButton eye = new JButton(imgLoad.loadImage("res/Login/hide2.png"));
 		eye.setBorderPainted(false);
@@ -200,14 +195,6 @@ public class Login {
 		return Briscola.getFrame();
 	}
 
-	/**
-	 * Retrieves the username of the currently logged in user.
-	 * @return The username of the currently logged in user.
-	 */
-
-	public String getUserName() {
-		return userName;
-	}
 
 	/**
 	 * Checks if the user was previously logged in.

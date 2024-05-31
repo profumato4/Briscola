@@ -45,6 +45,7 @@ public class Main extends javax.swing.JFrame {
 
                 // Show the splash screen.
                 SplashScreen splashScreen = new SplashScreen(null, true);
+                splashScreen.setAlwaysOnTop(true);
                 splashScreen.setVisible(true);
                 // Add a listener to detect when the splash screen is closed.
                 splashScreen.addWindowListener(new java.awt.event.WindowAdapter() {

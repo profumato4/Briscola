@@ -1,6 +1,8 @@
 package briscola;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,32 +17,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Mazzo {
 
-    private ColorLogger log = new ColorLogger(Mazzo.class);
+    private final ColorLogger log = new ColorLogger(Mazzo.class);
 
     private final MyArrayList<Carta> mazzo = new MyArrayList<>();
     private JLabel carta;
-    private JPanel panel;
+    private final JPanel panel;
     private int indice = 1; // indice carte da pescare
-    private ArrayList<JButton> backs = new ArrayList<>(); // carte avversario
+    private final ArrayList<JButton> backs = new ArrayList<>(); // carte avversario
     private String briscola;
-    private CerchioLabel carteRimanenti;
-    private Animation animation = new Animation();
+    private final CerchioLabel carteRimanenti;
+    private final Animation animation = new Animation();
 
-    private AtomicInteger punteggio = new AtomicInteger(0);
-    private AtomicInteger punteggio2 = new AtomicInteger(0);
-    private CerchioLabel punti1 = new CerchioLabel();
-    private CerchioLabel punti2 = new CerchioLabel();
-    private boolean flags[] = new boolean[3];
+    private final AtomicInteger punteggio = new AtomicInteger(0);
+    private final AtomicInteger punteggio2 = new AtomicInteger(0);
+    private final CerchioLabel punti1 = new CerchioLabel();
+    private final CerchioLabel punti2 = new CerchioLabel();
+    private final boolean[] flags = new boolean[3];
     private int r = new Random().nextInt(2);
-    private String cartaType;
-    private MazzoManager setup = new MazzoManager();
-    private JButton [] cardsButton = new JButton[3];
+    private final String cartaType;
+    private final MazzoManager setup = new MazzoManager();
+    private final JButton [] cardsButton = new JButton[3];
     private GameOverPanel g;
     private int turno = 0;
-    private Database db;
-    private Briscola b;
+    private final Database db;
+    private final Briscola b;
     private Timer timer;
-    private ImageLoader imgLoad = new ImageLoader();
+    private final ImageLoader imgLoad = new ImageLoader();
 
     /**
      * Constructs a new Mazzo object.
@@ -53,7 +55,6 @@ public class Mazzo {
 
     public Mazzo(JPanel panel, String cartaType, CerchioLabel carteRimanenti, Database db, Briscola b) {
 
-        LogbackConfigurator.configure("logs/logback.xml");
 
         this.panel = panel;
         this.carteRimanenti = carteRimanenti;
@@ -77,7 +78,7 @@ public class Mazzo {
     private void addCarte(String str) {
 
         setup.setup(str, mazzo);
-
+        log.info("The cards have been added to the deck");
     }
 
     /**
@@ -86,6 +87,7 @@ public class Mazzo {
 
     public void mescola() {
         Collections.shuffle(this.mazzo);
+        log.info("The cards have been shuffled");
     }
 
     /**
@@ -95,13 +97,16 @@ public class Mazzo {
      * @return The Briscola card.
      */
 
-    public Carta briscola(JPanel panel, String cartaType) {
+    public Carta briscola(@NotNull JPanel panel, String cartaType) {
         Collections.swap(mazzo, 0, 39);
         carta = new JLabel(rotateCarta(this.mazzo.get(0), cartaType).getImg());
         carta.setBounds(105, 155, 200, 168);
         panel.add(carta);
         panel.setComponentZOrder(carta, 3);
         this.briscola = this.mazzo.get(0).getSeme();
+
+        log.info("The briscola of this match has been decided : " + this.mazzo.get(0).toString());
+
         return this.mazzo.get(0);
     }
 
@@ -257,7 +262,6 @@ public class Mazzo {
 
     /**
      * Distributes the last drawn card to a player's hand.
-     *
      * This method selects the last card from the deck and assigns it to the player's hand at the specified index.
      * If the deck index is at its maximum (40), the method replaces the card with the rotated briscola card,
      * updates the index, updates the remaining cards label, and removes the deck's visual representation.
@@ -302,7 +306,6 @@ public class Mazzo {
      */
 
     private void pescaUltimaCarta(Giocatore g, int r) {
-        System.out.println(indice);
         if (indice == 40) {
             g.getMano().set(r, rotateBriscola(this.mazzo.get(0), cartaType));
             this.indice++;
@@ -324,7 +327,7 @@ public class Mazzo {
      * @param button The button to be set up.
      */
 
-    private void setUpButton(JButton button) {
+    private void setUpButton(@NotNull JButton button) {
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
@@ -338,7 +341,7 @@ public class Mazzo {
      * @return A randomly selected index within the range of the player's hand size.
      */
 
-    private int selectCard(Giocatore g2) {
+    private int selectCard(@NotNull Giocatore g2) {
         return new Random().nextInt(g2.getMano().size());
     }
 
@@ -359,7 +362,7 @@ public class Mazzo {
      * @param n The index of the card in the first player's hand.
      */
 
-    private void cardActionListner(JButton card, Giocatore g1, Giocatore g2, int n) {
+    private void cardActionListner(@NotNull JButton card, Giocatore g1, Giocatore g2, int n) {
         card.addActionListener(e -> {
         	if(!g1.isLanciata() || g2.getMano().size() < 3) {
         		g1.lancia(card, g1, g1.getMano().get(n).getCarta());
@@ -368,7 +371,7 @@ public class Mazzo {
 
                 azioniPartita(card, g1, g2, n);
         	}else {
-        		System.out.println("Aspetta la fine dell'animazione");
+        		log.warn("Wait for the animation to end");
         	}
             
         });
@@ -389,11 +392,8 @@ public class Mazzo {
 
 	private void azioniPartita(JButton card, Giocatore g1, Giocatore g2, int n) {
 		timer = new Timer(1500, actionEvent -> {
-			System.out.println("Il valore di r: " + r);
-			System.out.println("g1 size: " + g1.getMano().size());
-			System.out.println("g2 size: " + g2.getMano().size());
+
 			turno++;
-			System.out.println(turno);
 
 			if (!flags[0] && !flags[1] && !flags[2]) {
 				if (g1.getMano().get(n).getCarta().comparaCarte(g1.getMano().get(n).getCarta(),
@@ -422,15 +422,12 @@ public class Mazzo {
 					if (punteggio.get() == punteggio2.get()) {
 						g.tie();
 						db.pareggio();
-						System.out.println("pareggio");
 					} else if (punteggio.get() < punteggio2.get()) {
 						g.lose();
 						db.sconfitta();
-						System.out.println("perso");
 					} else if (punteggio.get() > punteggio2.get()) {
 						g.wins();
 						db.vittoria();
-						System.out.println("vinto");
 					}
 					panel.add(g, BorderLayout.CENTER);
 					panel.setComponentZOrder(g, 0);
@@ -483,7 +480,7 @@ public class Mazzo {
 		if (indice > 40) {
 			removeCard(g2);
 		}
-		if(g2.getMano().size() > 0) {
+		if(!g2.getMano().isEmpty()) {
 			r = selectCard(g2);
 			Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
 			t.setRepeats(false);
@@ -520,6 +517,7 @@ public class Mazzo {
             panel.setComponentZOrder(punti1, 0);
             panel.repaint();
             punti1.repaint();
+            log.info("Score updated successfully [" + g1.getNickName() + ": " + punteggio.get() + "]");
         } else {
             punteggio2.addAndGet(g2.getMano().get(r).getCarta().getValore());
             punteggio2.addAndGet(g1.getMano().get(n).getCarta().getValore());
@@ -531,6 +529,7 @@ public class Mazzo {
             panel.setComponentZOrder(punti2, 0);
             panel.repaint();
             punti2.repaint();
+            log.info("Score updated successfully [" + g2.getNickName() + ": " + punteggio2.get() + "]");
         }
         
     }
@@ -566,7 +565,6 @@ public class Mazzo {
 
         if (x == 0) {
             r = selectCard(g2);
-            System.out.println(r);
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
         }
 
@@ -598,7 +596,6 @@ public class Mazzo {
 
     private void removeComponent(Component component){
         if (component instanceof JLabel) {
-            System.out.println("Component found: JLabel");
             panel.remove(component);
             panel.revalidate();
             panel.repaint();
@@ -610,8 +607,7 @@ public class Mazzo {
      * @param g2 The second player.
      */
 
-    private void removeCard(Giocatore g2){
-        System.out.println(g2.getMano());
+    private void removeCard(@NotNull Giocatore g2){
         g2.getMano().remove(r);
         backs.remove(r);
     }

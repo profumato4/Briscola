@@ -40,7 +40,6 @@ public class Briscola {
 	public Briscola() {
 		initialize();
 		log.info("Application started");
-
 	}
 
 	/**
@@ -74,10 +73,8 @@ public class Briscola {
 			register = new Register(login, login.getDb());
 
 			if(n == 10){
-				System.out.println(""+ this.n);
                 db.loginUser(db.getUsername(), db.getPassword());
                 login.setLogged(true);
-				System.out.println(login.isLogged());
             }
 
 			//panel.setBounds(0, 0, 1040, 667);
@@ -144,7 +141,7 @@ public class Briscola {
 		temp = 0;
 		setBackground();
 		mazzo1 = new Mazzo(bp, carte, carteRimanenti, login.getDb(), b);
-		Giocatore giocatore = new Giocatore(login.getUserName());
+		Giocatore giocatore = new Giocatore(login.getDb().getUsername());
 		log.info(giocatore.getNickName());
 		Giocatore giocatore2 = new CPU();
 		mazzo1.distribuisci(giocatore, giocatore2);

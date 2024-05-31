@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 
 public class Animation {
 
+    private ColorLogger log = new ColorLogger(Animation.class);
+
     private Timer timerDistribuisci;
     private Timer timerDistribuisciBack;
     private Timer timerPresa;
@@ -38,6 +40,9 @@ public class Animation {
      */
 
     public void distribuisciAnimation(JButton card, ImageIcon img, int x1) {
+
+        log.info("Start of the card dealing animation..");
+
         timerDistribuisci = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
@@ -46,6 +51,7 @@ public class Animation {
             public void actionPerformed(ActionEvent e) {
                 if (x == x1 && y == 600) {
                     card.setIcon(img);
+                    log.info("The card dealing animation is finished");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -65,7 +71,7 @@ public class Animation {
         });
 
         timerDistribuisci.start();
-
+        log.info("The card dealing animation has started");
     }
 
     /**
@@ -76,6 +82,9 @@ public class Animation {
      */
 
     public void distribuisciAnimationBack(JButton card, int x1) {
+
+        log.info("Start of the card dealing animation for the CPU..");
+
         timerDistribuisciBack = new Timer(5, new ActionListener() {
             private int y = 90;
             private int x = 158;
@@ -97,6 +106,7 @@ public class Animation {
                 }
 
                 if (y == 0 && x == x1) {
+                    log.info("The card dealing animation for the CPU is finished");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -104,6 +114,8 @@ public class Animation {
         });
 
         timerDistribuisciBack.start();
+
+        log.info("The card dealing animation has started for the CPU");
 
     }
 
@@ -118,6 +130,7 @@ public class Animation {
 
     public void presaAnimationBack(JButton card, JButton card2, ImageIcon img, JPanel panel) {
 
+        log.info("Start of the card taking animation for the CPU..");
 
         timerPresaBack = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
@@ -180,6 +193,7 @@ public class Animation {
 
 
                 if(x1 == 950 && y1 == 215 && x2 == 950 && y2 == 215 && j == 1 && i == 1){
+                    log.info("The card taking animation for the CPU is finished");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -188,6 +202,9 @@ public class Animation {
         });
 
         timerPresaBack.start();
+
+        log.info("The card taking animation for the CPU has started");
+
     }
 
     /**
@@ -200,6 +217,9 @@ public class Animation {
      */
 
     public void presaAnimation(JButton card, JButton card2, ImageIcon img, JPanel panel) {
+
+        log.info("Start of the card taking animation..");
+
         timerPresa = new Timer(10, new ActionListener() {
             private int y1 = card.getLocation().y;
             private int x1 = card.getLocation().x;
@@ -261,6 +281,7 @@ public class Animation {
 
 
                 if (x1 == 950 && y1 == 430 && x2 == 950 && y2 == 430 && m == 1 && n == 1){
+                    log.info("The card taking animation is finished");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -268,6 +289,9 @@ public class Animation {
         });
 
         timerPresa.start();
+
+        log.info("The card taking animation for the CPU has started");
+
     }
 
     /**
@@ -280,6 +304,9 @@ public class Animation {
      */
 
     public void pescataAnimation(JButton card, Carta carta, int x1, Giocatore g1) {
+
+        log.info("The card drawing animation is starting..");
+
         timerPescata = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
@@ -296,6 +323,7 @@ public class Animation {
                 if (x == x1 && y == 600) {
                     card.setIcon(carta.getImg());
                     g1.setLanciata(false);
+                    log.info("The card drawing animation is over");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -315,6 +343,9 @@ public class Animation {
         });
 
         timerPescata.start();
+
+        log.info("The card drawing animation has started");
+
     }
 
     /**
@@ -326,6 +357,9 @@ public class Animation {
      */
 
     public void pescataAnimationBack(JButton card, Carta carta, int x1) {
+
+        log.info("The card drawing animation for the CPU is starting..");
+
         timerPescataBack = new Timer(10, new ActionListener() {
             private int y = 90;
             private int x = 158;
@@ -353,6 +387,7 @@ public class Animation {
                 }
 
                 if( y == 0 && x == x1){
+                    log.info("The card drawing animation for the CPU is over");
                     ((Timer) e.getSource()).stop();
                 }
 
@@ -360,6 +395,9 @@ public class Animation {
         });
 
         timerPescataBack.start();
+
+        log.info("The card drawing animation for the CPU has started");
+
     }
 
     /**

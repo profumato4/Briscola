@@ -20,9 +20,6 @@ public class ImageLoading {
     private ColorLogger log = new ColorLogger(ImageLoading.class);
     private ImageLoader imgLoad = new ImageLoader();
 
-    public ImageLoading(){
-        LogbackConfigurator.configure("logs/logback.xml");
-    }
 
     /**
      * Loads an image from a file and displays it on the specified JLabel.
