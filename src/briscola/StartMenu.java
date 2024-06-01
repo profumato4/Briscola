@@ -256,7 +256,7 @@ public class StartMenu {
 	private void writePlay() {
 
 		fm.append(play);
-		log.info(play + " was written to the file: " + fm.getPath());
+		log.audioWrite(play, fm.getPath());
 	}
 
 	/**

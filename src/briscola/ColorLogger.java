@@ -60,9 +60,17 @@ public class ColorLogger {
 
     public void audioInfo(boolean play){
         if (play){
-            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.BLUE.getCode() + true + ColorUtility.Color.WHITE.getCode());
+            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.BLUE.getCode() + true + ColorUtility.Color.DEFAULT.getCode());
         }else{
-            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.RED.getCode() + false + ColorUtility.Color.WHITE.getCode());
+            logger.info(ColorUtility.Color.CYAN.getCode() + "Play has been set to: " + ColorUtility.Color.RED.getCode() + false + ColorUtility.Color.DEFAULT.getCode());
+        }
+    }
+
+    public void audioWrite(boolean play, String path){
+        if (!play){
+            logger.info(ColorUtility.Color.RED.getCode() + false + ColorUtility.Color.CYAN.getCode() + " was written to the file: " + path + ColorUtility.Color.DEFAULT.getCode());
+        }else {
+            logger.info(ColorUtility.Color.BLUE.getCode() + true + ColorUtility.Color.CYAN.getCode() + " was written to the file: " + path + ColorUtility.Color.DEFAULT.getCode());
         }
     }
 
