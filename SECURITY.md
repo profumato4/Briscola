@@ -6,7 +6,25 @@
 [![CI](https://github.com/profumato4/Briscola/actions/workflows/blank.yml/badge.svg)](https://github.com/profumato4/Briscola/actions/workflows/blank.yml)
 
 
-## Supported Versions
+# Index
+1. **[English](#)**
+    - **[Supported Versions](#supported-versions)**
+    - **[Reporting a Vulnerability](#reporting-a-vulnerability)**
+    - **[Our Response](#our-response)**
+    - **[Security Measures](#security-measures)**
+    - **[Dependencies](#dependencies)**
+    - **[Conclusion](#conclusion)**
+2. **[Italiano](#)**
+    - **[Versione Supportate](#versioni-supportate)**
+    - **[Segnalazione di una Vulnerabilità](#Segnalazione-di-una-Vulnerabilità)**
+    - **[La nostra Risposta](#la-nostra-risposta)**
+    - **[Misure di Sicurezza](#misure-di-sicurezza)**
+    - **[Dipendenze](#dipendenze)**
+    - **[Conclusioni](#conclusioni)**
+
+# 🇬🇧
+
+# Supported Versions
 
 We release updates and patches for the latest major version of JBriscola. Here is a list of the versions we currently support with security updates:
 
@@ -15,8 +33,7 @@ We release updates and patches for the latest major version of JBriscola. Here i
 | 0.0.x   | :white_check_mark: |
 
 
-
-## Reporting a Vulnerability
+# Reporting a Vulnerability
 
 If you discover a security vulnerability in JBriscola, please report it to us immediately. We take all security vulnerabilities seriously and will address them promptly.
 
@@ -58,3 +75,57 @@ We rely on several third-party libraries and frameworks to build JBriscola. We m
 
 # Conclusion
 We are committed to ensuring the security and privacy of our users. If you have any questions or concerns about our security policy or practices, please open a [discussion here](https://github.com/profumato4/Briscola/discussions)
+
+
+# 🇮🇹 
+
+# Versioni Supportate
+
+Rilasciamo aggiornamenti e patch per l'ultima versione principale di JBriscola. Ecco un elenco delle versioni attualmente supportate con gli aggiornamenti di sicurezza:
+
+| Versione | Supportata         |
+| -------  | ------------------ |
+| 0.0.x    | :white_check_mark: |
+
+
+# Segnalazione di una vulnerabilità
+
+Se scopri una vulnerabilità di sicurezza in JBriscola, segnalacelo immediatamente. Prendiamo sul serio tutte le vulnerabilità della sicurezza e le affronteremo tempestivamente.
+
+Per segnalare un problema di sicurezza, procedi nel seguente modo:
+
+- utilizzare la sezione [problemi](https://github.com/profumato4/Briscola/issues)
+- Fornire dettagli: includere le seguenti informazioni:
+  - Descrizione della vulnerabilità.
+  - Passaggi per riprodurre il problema.
+  - Impatto potenziale della vulnerabilità.
+  - Qualsiasi prova di concetto o screenshot.
+- Riservatezza: si prega di mantenere riservati i dettagli della vulnerabilità finché non avremo avuto la possibilità di indagare e risolverla.
+
+# La nostra risposta
+Dopo aver ricevuto la tua segnalazione, provvederemo a:
+
+- Confermare la ricezione del rapporto entro 2 giorni lavorativi.
+- Investigare e verificare la vulnerabilità.
+- Lavorare per risolvere la vulnerabilità il più rapidamente possibile.
+- Fornire una tempistica stimata per la correzione.
+- Avvisarti quando il problema è stato risolto.
+
+# Misure di sicurezza
+Utilizziamo diverse misure di sicurezza per proteggere JBriscola e i suoi utenti:
+- Pratiche di codifica sicure: il nostro codice è scritto seguendo le migliori pratiche del settore per ridurre al minimo il rischio di vulnerabilità.
+- Verifiche regolari: eseguiamo regolari controlli di sicurezza e revisioni del codice per identificare e risolvere potenziali problemi di sicurezza.
+- Sicurezza del database: i dati dell'utente vengono archiviati in un database MySQL sicuro con backup regolari e accesso limitato.
+- Crittografia: i dati sensibili, come le password, vengono crittografati utilizzando algoritmi di crittografia standard del settore.
+
+# Dipendenze
+Facciamo affidamento su diverse librerie e framework di terze parti per creare JBriscola. Monitoriamo queste dipendenze per gli aggiornamenti di sicurezza e applichiamo le patch secondo necessità. Le nostre dipendenze chiave includono:
+
+- Java SE
+- Altalena Java
+- FlatLaf
+-MySQL
+- JDBC
+
+# Conclusione
+Ci impegniamo a garantire la sicurezza e la privacy dei nostri utenti. Se hai domande o dubbi sulla nostra politica o pratiche di sicurezza, apri una [discussione qui](https://github.com/profumato4/Briscola/discussions)
