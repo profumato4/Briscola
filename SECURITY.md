@@ -14,7 +14,7 @@
     - **[Security Measures](#security-measures)**
     - **[Dependencies](#dependencies)**
     - **[Conclusion](#conclusion)**
-2. **[Italiano](#)**
+2. **[Italiano](#-1)**
     - **[Versione Supportate](#versioni-supportate)**
     - **[Segnalazione di una Vulnerabilità](#Segnalazione-di-una-Vulnerabilità)**
     - **[La nostra Risposta](#la-nostra-risposta)**
