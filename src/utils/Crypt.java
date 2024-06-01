@@ -1,4 +1,7 @@
-package briscola;
+package utils;
+
+import utils.ImageLoader;
+import utils.SteganoImgProcess;
 
 import java.awt.image.BufferedImage;
 import java.util.Base64;

@@ -1,6 +1,10 @@
 package briscola;
 
 
+import log.LogbackConfigurator;
+import utils.FileManager;
+import utils.ImageLoader;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;

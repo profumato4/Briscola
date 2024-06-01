@@ -8,7 +8,7 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/logs.log</file>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="briscola.CustomPatternLayout"/>
+            <layout class="log.CustomPatternLayout"/>
         </encoder>
     </appender>
 

@@ -1,4 +1,4 @@
-package briscola;
+package log;
 
 /**
  * Utility class for defining ANSI color codes.

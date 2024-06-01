@@ -1,7 +1,7 @@
 package splashScreen;
 
-import briscola.ColorLogger;
-import briscola.ImageLoader;
+import log.ColorLogger;
+import utils.ImageLoader;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;

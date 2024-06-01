@@ -1,5 +1,7 @@
 package briscola;
 
+import utils.ImageLoader;
+
 import java.awt.Color;
 import java.awt.Font;
 

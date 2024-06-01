@@ -1,7 +1,7 @@
 
 package main;
 
-import briscola.ColorLogger;
+import log.ColorLogger;
 import splashScreen.SplashScreen;
 
 import javax.swing.*;

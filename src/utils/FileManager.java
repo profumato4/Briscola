@@ -1,4 +1,7 @@
-package briscola;
+package utils;
+
+import briscola.Briscola;
+import log.ColorLogger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

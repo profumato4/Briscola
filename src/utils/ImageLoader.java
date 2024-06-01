@@ -1,5 +1,6 @@
-package briscola;
+package utils;
 
+import log.ColorLogger;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;

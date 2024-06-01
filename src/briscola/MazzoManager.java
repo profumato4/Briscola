@@ -1,6 +1,8 @@
 package briscola;
 
 
+import utils.ImageLoader;
+
 /**
  * The MazzoManager class manages the setup and rotation of cards in Italian regional card decks.
  */
