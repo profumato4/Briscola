@@ -3,7 +3,7 @@
 [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue)](https://github.com/profumato4/Briscola/blob/master/LICENSE.md)
 [![Download](https://img.shields.io/github/downloads/profumato4/Briscola/total)](https://github.com/profumato4/Briscola/releases)
 [![Stars](https://img.shields.io/github/stars/profumato4/Briscola?logo=github)](https://github.com/profumato4/Briscola)
-[![CodeQL](https://github.com/profumato4/Briscola/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/profumato4/Briscola/actions/workflows/github-code-scanning/codeql)
+[![CodeQL](https://github.com/profumato4/Briscola/actions/workflows/codeql.yml/badge.svg)](https://github.com/profumato4/Briscola/actions/workflows/codeql.yml)
 [![CI](https://github.com/profumato4/Briscola/actions/workflows/blank.yml/badge.svg)](https://github.com/profumato4/Briscola/actions/workflows/blank.yml)
 
 
