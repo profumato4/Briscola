@@ -3,7 +3,6 @@ name: "💉 Failing Test"
 about: "Report failing tests or CI jobs."
 title: "[Test] "
 labels: "Type: Test"
-assignees: Josee9988
 
 ---
 
