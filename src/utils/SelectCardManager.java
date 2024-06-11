@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class SelectCardManager {
 
-    private String briscola;
-    private JButton[] cardsButtons;
+    private final String briscola;
+    private final JButton[] cardsButtons;
 
     public SelectCardManager(String briscola, JButton[] cardsButtons) {
         this.cardsButtons = cardsButtons;
