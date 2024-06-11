@@ -4,6 +4,7 @@ package briscola;
 import log.ColorLogger;
 import org.jetbrains.annotations.NotNull;
 import utils.ImageLoader;
+import utils.SelectCardManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,6 +46,7 @@ public class Mazzo {
     private final Briscola b;
     private Timer timer;
     private final ImageLoader imgLoad = new ImageLoader();
+    private SelectCardManager scm;
 
     /**
      * Constructs a new Mazzo object.
@@ -335,6 +337,9 @@ public class Mazzo {
         button.setFocusPainted(false);
         panel.add(button);
         panel.setComponentZOrder(button, 0);
+
+        scm = new SelectCardManager(briscola, cardsButton);
+
     }
 
     /**
@@ -343,10 +348,42 @@ public class Mazzo {
      * @return A randomly selected index within the range of the player's hand size.
      */
 
-    private int selectCard(@NotNull Giocatore g2) {
-        return new Random().nextInt(g2.getMano().size());
+    private int selectCard(@NotNull Giocatore g2, Giocatore g1) {
+        return scm.selectCard(g2,g1);
     }
 
+   /* private int selectCard(@NotNull Giocatore g2, Giocatore g1) {
+
+        ArrayList<Integer> punti = new ArrayList<>();
+        punti.add(0);
+        punti.add(0);
+        punti.add(0);
+
+        if(g1.isLanciata()){
+            for(int i = 0;i < cardsButton.length;i++){
+                if(cardsButton[i].getLocation().x == 548 && cardsButton[i].getLocation().y == 300){
+                    if (g1.getMano().get(i).getCarta().comparaCarte(g2.getMano().get(0).getCarta(), g1.getMano().get(i).getCarta(), briscola)){
+                        punti.set(0, g2.getMano().get(0).getCarta().getValore() + g1.getMano().get(i).getCarta().getValore());
+                    } else if (g1.getMano().get(i).getCarta().comparaCarte(g2.getMano().get(1).getCarta(), g1.getMano().get(i).getCarta(), briscola)) {
+                        punti.set(0, g2.getMano().get(1).getCarta().getValore() + g1.getMano().get(i).getCarta().getValore());
+                    } else if (g1.getMano().get(i).getCarta().comparaCarte(g2.getMano().get(2).getCarta(), g1.getMano().get(i).getCarta(), briscola)) {
+                        punti.set(2, g2.getMano().get(2).getCarta().getValore() + g1.getMano().get(i).getCarta().getValore());
+                    }else {
+                        int min = Collections.min(punti);
+
+                        return punti.indexOf(min);
+                    }
+                }
+            }
+        }else{
+            return new Random().nextInt(g2.getMano().size());
+        }
+
+        int max = Collections.max(punti);
+
+        return punti.indexOf(max);
+    }
+*/
     /**
      * Retrieves the current index of the deck.
      * @return The current index of the deck.
@@ -367,11 +404,12 @@ public class Mazzo {
     private void cardActionListner(@NotNull JButton card, Giocatore g1, Giocatore g2, int n) {
         card.addActionListener(e -> {
         	if(!g1.isLanciata() || g2.getMano().size() < 3) {
-        		g1.lancia(card, g1, g1.getMano().get(n).getCarta());
+        		g1.lanciaCallBack(card, g1, g1.getMano().get(n).getCarta(), () -> {
+                    lancioBack(g2, g1);
+                    azioniPartita(card, g1, g2, n);
+                });
 
-                lancioBack(g2);
 
-                azioniPartita(card, g1, g2, n);
         	}else {
         		log.warn("Wait for the animation to end");
         	}
@@ -483,7 +521,7 @@ public class Mazzo {
 			removeCard(g2);
 		}
 		if(!g2.getMano().isEmpty()) {
-			r = selectCard(g2);
+			r = selectCard(g2, g1);
 			Timer t = new Timer(1500, actionEvent1 -> g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta()));
 			t.setRepeats(false);
 			t.start();
@@ -545,7 +583,7 @@ public class Mazzo {
      * @param g2 The second player.
      */
 
-    private void lancioBack(Giocatore g2) {
+    private void lancioBack(Giocatore g2, Giocatore g1) {
         int i = 0;
         int x = 0;
 
@@ -566,7 +604,7 @@ public class Mazzo {
         }
 
         if (x == 0) {
-            r = selectCard(g2);
+            r = selectCard(g2, g1);
             g2.lancia(backs.get(r), g2, g2.getMano().get(r).getCarta());
         }
 

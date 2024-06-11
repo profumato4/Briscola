@@ -107,6 +107,60 @@ public class Giocatore {
 		timer.start(); // Start the Timer to animate the card throwing action
 	}
 
+	public void lanciaCallBack(JButton button, Giocatore giocatore, Carta carta, Runnable callback) {
+		// Create a Timer to animate the card throwing action
+		Timer timer = new Timer(10, new ActionListener() {
+			// Initialize the initial position of the card
+			private int y = button.getLocation().y;
+			private int x = button.getLocation().x;
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Mark the card as thrown
+				lanciata = true;
+
+				// If the card is above the desired position
+
+				if (y > 300) {
+					// Move the card upwards
+					y -= 20;
+					button.setBounds(x, y, 89, 168);
+					button.repaint();
+				}
+
+				// If the card reaches the desired vertical position
+				if(y == 300) {
+					// If the card is to the right of the desired position
+					if (button.getLocation().x > 548) {
+						// Move the card to the left
+						x -= 10;
+						button.setBounds(x, y, 89, 168);
+						button.repaint();
+						// If the card is to the left of the desired position
+					} else if (button.getLocation().x < 548) {
+						// Move the card to the right
+						x += 10;
+						button.setBounds(x, y, 89, 168);
+						button.repaint();
+						// If the card reaches the desired position (both horizontally and vertically)
+					} else if (button.getLocation().x == 548 && button.getLocation().y == 300) {
+						((Timer) e.getSource()).stop(); // Stop the Timer
+
+						// Call the callback function
+						if (callback != null) {
+							callback.run();
+						}
+
+					}
+				}
+
+			}
+		});
+
+		timer.start(); // Start the Timer to animate the card throwing action
+	}
+
 	/**
 	 * Sets the player's score.
 	 *
